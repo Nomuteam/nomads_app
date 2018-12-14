@@ -38,7 +38,14 @@ $colors: (
   secondary:  #32db64,
   danger:     #f53d3d,
   light:      #f4f4f4,
-  dark:       #222
+  dark:       #222,
+  black1:      #0C0C0C,
+  gray:      #DFDFDF,
+  rose:     #FF6B84,
+  purple:   #7D29FB,
+  green:    #229B86,
+  aqua:     #8BC4C0,
+  mustard:  #FFCC9A
 );
 
 
@@ -86,3 +93,4 @@ $colors: (
 
 @import "roboto";
 @import "noto-sans";
+@import url('https://fonts.googleapis.com/css?family=Raleway:300,400,700');

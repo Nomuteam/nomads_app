@@ -1,0 +1,83 @@
+page-login {
+  .login-page{
+    background-color: #0C0C0C;
+    background-image: url('../../assets/img/bg_1.png');
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    // width: 100vw;
+    // height: 100vh;
+    .logo-welcome{
+      display: block;
+      margin: 0 auto;
+      width: 55vw;
+      margin-top: 15vh;
+    }
+
+    .container-datos{
+      font-family: 'Raleway', sans-serif;
+      display: block;
+      margin: 0 auto;
+      //border: 1px solid white;
+      height: 50vh;
+      margin-top: 10vh;
+      width: 90vw;
+      .title-container{
+        font-weight: 700;
+        font-size: 110%;
+        color: white;
+        padding-left: 5%;
+      }
+      .card-container{
+        background-color: rgba(255, 255, 255, .2);
+        width: 90%;
+        margin-left: 5%;
+        height: 90%;
+        border-radius: 10px;
+
+        .input-group{
+          padding-left: 5%;
+          padding-top: 2%;
+          .input-title{
+            font-size: 90%;
+            color: rgba(255, 255, 255, .5);
+          }
+          .input-field{
+            margin-top: -5%;
+            color: white;
+            background-color: transparent;
+            border: none!important;
+            border-bottom: 1px solid rgba(255, 255, 255, .7)!important;
+            width: 95%;
+          }
+        }
+      }
+
+    }
+
+    .pw-forgot{
+      font-family: 'Raleway', sans-serif;
+      font-size: 80%;
+      color: white;
+      width: 60vw;
+      margin-left: 30vw;
+    }
+
+
+    .login-btn{
+      width: 40vw;
+      height: 7vh;
+      border-radius: 20px;
+      background-color: #229B86;
+
+      font-family: 'Raleway', sans-serif;
+      font-size: 100%;
+      color: white;
+
+      position: absolute;
+      bottom: 8vh;
+      right: 5vw;
+    }
+
+  }
+}

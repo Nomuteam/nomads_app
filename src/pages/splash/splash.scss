@@ -1,0 +1,59 @@
+page-splash{
+  .contenedor{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100vw;
+    height: 100vh;
+    .div1{
+      width: 70vw;
+      height: 70vw;
+      border-radius: 50%;
+      background-color: rgba(125, 41, 251, .25);
+      animation-name: loading;
+      animation-duration: 1s;
+      animation-delay: .25s;
+      position: absolute;
+      animation-iteration-count: infinite;
+    }
+    .div2{
+      width: 53.76vw;
+      height: 53.76vw;
+      border-radius: 50%;
+      background-color: rgba(125, 41, 251, .5);
+      animation-name: loading;
+      animation-duration: 1s;
+      animation-delay: .45s;
+      position: absolute;
+      animation-iteration-count: infinite;
+    }
+    .div3{
+      width: 37.52vw;
+      height: 37.52vw;
+      border-radius: 50%;
+      background-color: rgba(125, 41, 251, .75);
+      animation-name: loading;
+      animation-duration: 1s;
+      animation-delay: .65s;
+      position: absolute;
+      animation-iteration-count: infinite;
+    }
+    .div4{
+      width: 20vw;
+      height: 20vw;
+      border-radius: 50%;
+      background-color: rgba(125, 41, 251, 1);
+      animation-name: loading;
+      animation-duration: 1s;
+      animation-delay: .85s;
+      position: absolute;
+      animation-iteration-count: infinite;
+    }
+  }
+
+  @keyframes loading{
+    0% {}
+    50% { transform: scale(1.2);}
+    100% { transform: scale(1); }
+  }
+}
