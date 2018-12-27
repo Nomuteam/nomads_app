@@ -3,7 +3,7 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { LoginPage } from '../login/login';
 
 /**
- * Generated class for the RecoveryPage page.
+ * Generated class for the CirclesPage page.
  *
  * See https://ionicframework.com/docs/components/#navigation for more info on
  * Ionic pages and navigation.
@@ -11,20 +11,23 @@ import { LoginPage } from '../login/login';
 
 @IonicPage()
 @Component({
-  selector: 'page-recovery',
-  templateUrl: 'recovery.html',
+  selector: 'page-circles',
+  templateUrl: 'circles.html',
 })
-export class RecoveryPage {
+export class CirclesPage {
 
   constructor(public navCtrl: NavController, public navParams: NavParams) {
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad RecoveryPage');
+    console.log('ionViewDidLoad CirclesPage');
+    setTimeout(()=>{
+      this.openLogin();
+    }, 4000);
   }
 
   openLogin(){
-    this.navCtrl.push(LoginPage, {'User': 'nomads'});
+    this.navCtrl.setRoot(LoginPage, {'User': 'allies'});
   }
 
 }

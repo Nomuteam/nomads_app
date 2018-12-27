@@ -15,7 +15,7 @@
     </ion-slide>
   </ion-slides>
 
-  <button type="button" name="button" class="login-btn">Log In</button>
-  <button type="button" name="button" class="register-btn">Sign Up</button>
-  <p class="allies-btn">Allies</p>
+  <button (click)="openLogin()" type="button" name="button" class="login-btn">Log In</button>
+  <button (click)="openRegister()" type="button" name="button" class="register-btn">Sign Up</button>
+  <p (click)="openCircles()" class="allies-btn">Allies</p>
 </ion-content>

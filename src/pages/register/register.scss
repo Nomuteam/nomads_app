@@ -1,3 +1,190 @@
 page-register {
+  .register-page{
+    background-color: #0C0C0C;
+    background-image: url('../../assets/img/bg_1.png');
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    // width: 100vw;
+    // height: 100vh;
+    .logo-welcome{
+      display: block;
+      margin: 0 auto;
+      width: 55vw;
+      margin-top: 15vh;
+    }
 
+    .ally{
+        margin-top: 7vh!important;
+    }
+
+    .container-datos{
+      font-family: 'Raleway', sans-serif;
+      display: block;
+      margin: 0 auto;
+      //border: 1px solid white;
+      height: 45vh;
+      margin-top: 14vh;
+      width: 90vw;
+      .title-container{
+        font-weight: 700;
+        font-size: 110%;
+        color: white;
+        padding-left: 5%;
+      }
+      .card-container{
+        background-color: rgba(255, 255, 255, .2);
+        width: 90%;
+        margin-left: 5%;
+        height: auto;
+        border-radius: 10px;
+        position: relative;
+        .input-group{
+          padding-left: 5%;
+          padding-top: 2%;
+          .input-title{
+            font-size: 90%;
+            color: rgba(255, 255, 255, .5);
+          }
+          .input-field{
+            margin-top: -5%;
+            color: white;
+            background-color: transparent;
+            border: none!important;
+            border-bottom: 1px solid rgba(255, 255, 255, .7)!important;
+            width: 95%;
+          }
+        }
+
+        .container {
+          display: block;
+          position: relative;
+          padding-left: 5%;
+          padding-bottom: 5%;
+          cursor: pointer;
+          font-family: 'Raleway', sans-serif;
+          font-size: 80%;
+          p{
+            margin-left: 5vw;
+            margin-top: 3vh;
+            padding-top: 1vh;
+          }
+          color: white;
+          -webkit-user-select: none;
+          -moz-user-select: none;
+          -ms-user-select: none;
+          user-select: none;
+         }
+
+       .container input {
+         position: absolute;
+         opacity: 0;
+         cursor: pointer;
+         height: 0;
+         width: 0;
+       }
+
+/* Create a custom checkbox */
+        .checkmark {
+          position: absolute;
+          top: 20%;
+          left: 5%;
+          height: 3vw;
+          width: 3vw;
+          background-color: transparent;
+          border: 1px solid white;
+        }
+
+/* On mouse-over, add a grey background color */
+.container:hover input ~ .checkmark {
+  background-color: transparent;
+}
+
+/* When the checkbox is checked, add a blue background */
+.container input:checked ~ .checkmark {
+  background-color: transparent;
+}
+
+/* Create the checkmark/indicator (hidden when not checked) */
+.checkmark:after {
+  content: "";
+  // position: absolute;
+  // display: none;
+}
+
+/* Show the checkmark when checked */
+.container input:checked ~ .checkmark:after {
+  display: block;
+}
+
+/* Style the checkmark/indicator */
+.container .checkmark:after {
+  top: 0%;
+  left: 5%;
+  width: 5px;
+  height: 10px;
+  border: solid white;
+  border-width: 0 3px 3px 0;
+  -webkit-transform: rotate(45deg);
+  -ms-transform: rotate(45deg);
+  transform: rotate(45deg);
+}
+
+        .pw-forgot{
+          font-family: 'Raleway', sans-serif;
+          font-size: 80%;
+          color: white;
+          width: 60vw;
+          margin-left: 30vw;
+        }
+
+        .register-btn{
+          font-family: 'Raleway', sans-serif;
+          font-size: 90%;
+          color: white;
+          margin-left: 5%;
+          padding-bottom: 5%;
+        }
+      }
+
+    }
+
+
+
+    .login-btn{
+      width: 40vw;
+      height: 7vh;
+      border-radius: 20px;
+      background-color: #229B86;
+
+      font-family: 'Raleway', sans-serif;
+      font-size: 100%;
+      color: white;
+
+      position: absolute;
+      bottom: 8vh;
+      right: 7vw;
+    }
+
+    .sign-btn{
+      width: 40vw;
+      height: 7vh;
+      border-radius: 20px;
+      background-color: transparent;
+      border: 1px solid white;
+
+      font-family: 'Raleway', sans-serif;
+      font-size: 100%;
+      color: white;
+
+      position: absolute;
+      bottom: 8vh;
+      left: 7vw;
+    }
+
+    .rose{
+      background-color: #FF6B84!important;
+    }
+
+  }
 }

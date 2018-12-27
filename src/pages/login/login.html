@@ -9,7 +9,8 @@
   <img src="assets/img/logo_1.png" class="logo-welcome">
 
    <div class="container-datos">
-    <p class="title-container">Sign In</p>
+    <p *ngIf="user_type == 'nomads'" class="title-container">Sign In</p>
+      <p *ngIf="user_type == 'allies'" class="title-container">Welcome back</p>
     <div class="card-container">
       <div class="input-group">
         <p class="input-title">Email</p>
@@ -19,10 +20,15 @@
         <p class="input-title">Password</p>
         <input type="password" class="input-field">
       </div>
-      <p class="pw-forgot">Forgot your password? <b> Click Here </b></p>
+      <p (click)="openRecovery()" class="pw-forgot">Forgot your password? <b> Click Here </b></p>
+      <p *ngIf="user_type == 'nomads'" (click)="openRegister()" class="register-btn">Don't have an account? <br> <b> Create one </b></p>
+      <p *ngIf="user_type == 'allies'" (click)="openRegister()" class="register-btn">Don't have an account? <br> <b> Apply for one </b></p>
     </div>
    </div>
 
-  <button type="button" name="button" class="login-btn">Log In</button>
+  <button *ngIf="user_type == 'nomads'" type="button" name="button" class="login-btn">Log In</button>
+  <button *ngIf="user_type == 'allies'" type="button" name="button" class="login-btn rose">Log In</button>
+
+  <button *ngIf="user_type == 'allies'" (click)="openNomads()" type="button" name="button" class="sign-btn">Home</button>
 
 </ion-content>

@@ -19,8 +19,8 @@ page-login {
       display: block;
       margin: 0 auto;
       //border: 1px solid white;
-      height: 50vh;
-      margin-top: 10vh;
+      height: 45vh;
+      margin-top: 14vh;
       width: 90vw;
       .title-container{
         font-weight: 700;
@@ -32,9 +32,9 @@ page-login {
         background-color: rgba(255, 255, 255, .2);
         width: 90%;
         margin-left: 5%;
-        height: 90%;
+        height: auto;
         border-radius: 10px;
-
+        position: relative;
         .input-group{
           padding-left: 5%;
           padding-top: 2%;
@@ -51,17 +51,27 @@ page-login {
             width: 95%;
           }
         }
+
+        .pw-forgot{
+          font-family: 'Raleway', sans-serif;
+          font-size: 80%;
+          color: white;
+          width: 60vw;
+          margin-left: 30vw;
+        }
+
+        .register-btn{
+          font-family: 'Raleway', sans-serif;
+          font-size: 90%;
+          color: white;
+          margin-left: 5%;
+          padding-bottom: 5%;
+          margin-top: 5vh;
+        }
       }
 
     }
 
-    .pw-forgot{
-      font-family: 'Raleway', sans-serif;
-      font-size: 80%;
-      color: white;
-      width: 60vw;
-      margin-left: 30vw;
-    }
 
 
     .login-btn{
@@ -76,7 +86,27 @@ page-login {
 
       position: absolute;
       bottom: 8vh;
-      right: 5vw;
+      right: 7vw;
+    }
+
+    .sign-btn{
+      width: 40vw;
+      height: 7vh;
+      border-radius: 20px;
+      background-color: transparent;
+      border: 1px solid white;
+
+      font-family: 'Raleway', sans-serif;
+      font-size: 100%;
+      color: white;
+
+      position: absolute;
+      bottom: 8vh;
+      left: 7vw;
+    }
+
+    .rose{
+      background-color: #FF6B84!important;
     }
 
   }

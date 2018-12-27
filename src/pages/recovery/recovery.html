@@ -4,15 +4,21 @@
   See http://ionicframework.com/docs/components/#navigation for more info on
   Ionic pages and navigation.
 -->
-<ion-header>
+<ion-content class="recovery-page">
 
-  <ion-navbar>
-    <ion-title>recovery</ion-title>
-  </ion-navbar>
+  <img src="assets/img/logo_1.png" class="logo-welcome">
 
-</ion-header>
+   <div class="container-datos">
+    <p class="title-container">Password Recovery</p>
+    <div class="card-container">
+      <div class="input-group">
+        <p class="input-title">Email</p>
+        <input type="text" class="input-field">
+      </div>
+    </div>
+   </div>
 
-
-<ion-content padding>
+  <button type="button" name="button" class="login-btn">Send Email</button>
+  <button (click)="openLogin()" type="button" name="button" class="sign-btn">Sign In</button>
 
 </ion-content>
