@@ -9,7 +9,8 @@ page-circles {
       width: 70vw;
       height: 70vw;
       border-radius: 50%;
-      background-color: rgba(255, 107, 132, .25);
+      background-color: rgba(255, 107, 132, 1);
+      opacity: .25;
       animation-name: loading;
       animation-duration: 1s;
       animation-delay: .25s;
@@ -20,7 +21,8 @@ page-circles {
       width: 53.76vw;
       height: 53.76vw;
       border-radius: 50%;
-      background-color: rgba(255, 107, 132, .5);
+      background-color: rgba(255, 107, 132, 1);
+      opacity: .5;
       animation-name: loading;
       animation-duration: 1s;
       animation-delay: .45s;
@@ -31,7 +33,8 @@ page-circles {
       width: 37.52vw;
       height: 37.52vw;
       border-radius: 50%;
-      background-color: rgba(255, 107, 132, .75);
+      background-color: rgba(255, 107, 132, 1);
+      opacity: .75;
       animation-name: loading;
       animation-duration: 1s;
       animation-delay: .65s;
@@ -48,6 +51,9 @@ page-circles {
       animation-delay: .85s;
       position: absolute;
       animation-iteration-count: infinite;
+    }
+    .green{
+      background-color: rgba(94, 248, 213, 1);
     }
   }
 

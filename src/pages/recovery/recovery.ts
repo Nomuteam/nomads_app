@@ -15,8 +15,10 @@ import { LoginPage } from '../login/login';
   templateUrl: 'recovery.html',
 })
 export class RecoveryPage {
+public user_type: any;
 
   constructor(public navCtrl: NavController, public navParams: NavParams) {
+    this.user_type = this.navParams.get('User');
   }
 
   ionViewDidLoad() {
@@ -24,7 +26,7 @@ export class RecoveryPage {
   }
 
   openLogin(){
-    this.navCtrl.push(LoginPage, {'User': 'nomads'});
+    this.navCtrl.push(LoginPage, {'User': this.user_type});
   }
 
 }

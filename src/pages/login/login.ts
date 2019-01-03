@@ -35,7 +35,7 @@ public password: any;
   }
 
   openRecovery(){
-    this.navCtrl.push(RecoveryPage);
+    this.navCtrl.push(RecoveryPage, {'User': this.user_type});
   }
 
 

@@ -18,7 +18,8 @@
     </div>
    </div>
 
-  <button type="button" name="button" class="login-btn">Send Email</button>
-  <button (click)="openLogin()" type="button" name="button" class="sign-btn">Sign In</button>
+  <button *ngIf="user_type == 'nomads'" type="button" name="button" class="login-btn">Send Email</button>
+  <button *ngIf="user_type == 'allies'" type="button" name="button" class="login-btn rose">Send Email</button>
+  <button  (click)="openLogin()" type="button" name="button" class="sign-btn">Sign In</button>
 
 </ion-content>

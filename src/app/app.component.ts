@@ -10,6 +10,8 @@ import { LoginPage } from '../pages/login/login';
 import { RecoveryPage } from '../pages/recovery/recovery';
 import { RegisterPage } from '../pages/register/register';
 import { CirclesPage } from '../pages/circles/circles';
+import { WalkPage } from '../pages/walk/walk';
+import { TermsPage } from '../pages/terms/terms';
 
 @Component({
   templateUrl: 'app.html'

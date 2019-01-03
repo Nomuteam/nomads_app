@@ -15,6 +15,8 @@ import { LoginPage } from '../pages/login/login';
 import { RecoveryPage } from '../pages/recovery/recovery';
 import { RegisterPage } from '../pages/register/register';
 import { CirclesPage } from '../pages/circles/circles';
+import { WalkPage } from '../pages/walk/walk';
+import { TermsPage } from '../pages/terms/terms';
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
@@ -31,7 +33,9 @@ import { SplashScreen } from '@ionic-native/splash-screen';
     LoginPage,
     RecoveryPage,
     RegisterPage,
-    CirclesPage
+    CirclesPage,
+    WalkPage,
+    TermsPage
   ],
   imports: [
     BrowserModule,
@@ -49,7 +53,9 @@ import { SplashScreen } from '@ionic-native/splash-screen';
     LoginPage,
     RecoveryPage,
     RegisterPage,
-    CirclesPage
+    CirclesPage,
+    WalkPage,
+    TermsPage
   ],
   providers: [
     StatusBar,

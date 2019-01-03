@@ -1,0 +1,61 @@
+page-terms {
+  .terms-page{
+    background-color: #0C0C0C;
+    background-image: url('../../assets/img/bg_1.png');
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    // width: 100vw;
+    // height: 100vh;
+    .logo-welcome{
+      display: block;
+      margin: 0 auto;
+      width: 55vw;
+      margin-top: 8vh;
+    }
+
+
+    .terms-container{
+      width: 80vw;
+      margin-left: 10vw;
+      margin-top: 6vh;
+      height: 70vh;
+      overflow: scroll;
+      background-color: white;
+      border-radius: 5px 5px;
+      position: relative;
+
+      .terms-title{
+        font-family: 'Raleway', sans-serif;
+        padding-left: 5%;
+        font-weight: 700!important;
+      }
+
+      .text-container{
+        font-family: 'Raleway', sans-serif;
+        font-size: 90%;
+        opacity: .8;
+        width: 90%;
+        margin-left: 5%;
+        text-align: justify;
+        height: 70%;
+        //border: 1px solid red;
+      }
+
+      .continue-btn{
+        height: 7vh;
+        width: 50vw;
+        border-radius: 20px;
+        background-color: #229B86;
+
+        font-family: 'Raleway', sans-serif;
+        font-size: 100%;
+        color: white;
+
+        position: absolute;
+        bottom: 3vh;
+        right: 20%;
+      }
+    }
+  }
+}

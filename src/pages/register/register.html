@@ -36,8 +36,8 @@
     </div>
    </div>
 
-  <button *ngIf="user_type == 'nomads'" type="button" name="button" class="login-btn">Sign Up</button>
-  <button *ngIf="user_type == 'allies'" type="button" name="button" class="login-btn rose">Sign Up</button>
+  <button (click)="openCircles()" *ngIf="user_type == 'nomads'" type="button" name="button" class="login-btn">Sign Up</button>
+  <button (click)="openCircles()" *ngIf="user_type == 'allies'" type="button" name="button" class="login-btn rose">Sign Up</button>
   <button (click)="openLogin()" type="button" name="button" class="sign-btn">Sign In</button>
 
 </ion-content>

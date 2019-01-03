@@ -1,0 +1,101 @@
+<!--
+  Generated template for the WalkPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+
+<ion-content class="walk-page">
+<h3 class="walk-title">Welcome</h3>
+<div class="status-container">
+  <div class="{{getClass(1)}}"></div>
+  <div class="{{getClass(2)}}"></div>
+  <div class="{{getClass(3)}}"></div>
+</div>
+<p class="walk-message">{{this.message}}</p>
+
+<div *ngIf="this.current_index == 1" class="container-datos w3-animate-right">
+ <p class="title-container">About You</p>
+ <div class="card-container">
+   <div class="input-group">
+     <p class="input-title">First Name</p>
+     <input type="text" class="input-field" [(ngModel)]="name">
+   </div>
+   <div class="input-group">
+     <p class="input-title">Last Name</p>
+     <input type="text" class="input-field" [(ngModel)]="last">
+   </div>
+   <div class="input-group">
+     <p class="input-title">Birthdate</p>
+     <input type="date" class="input-field" [(ngModel)]="birthdate">
+   </div>
+   <div class="input-group">
+     <p class="input-title">Country</p>
+     <input type="text" class="input-field" [(ngModel)]="country">
+   </div>
+ </div>
+</div>
+
+<div *ngIf="this.current_index == 2" class="container-datos w3-animate-right">
+ <p class="title-container">Payment</p>
+ <div class="card-container">
+   <div class="input-group">
+     <p class="input-title">Card Holder</p>
+     <input type="text" class="input-field" [(ngModel)]="cardholder">
+   </div>
+   <div class="input-group">
+     <p class="input-title">Card Number</p>
+     <input type="text" class="input-field" [(ngModel)]="cardnumber">
+   </div>
+   <ion-grid>
+     <ion-row>
+       <ion-col col-6>
+         <div class="input-group">
+           <p class="input-title">Expiry Date</p>
+           <input type="month" class="input-field" [(ngModel)]="expiry" value="2022-06">
+         </div>
+       </ion-col>
+       <ion-col col-6>
+         <div class="input-group">
+           <p class="input-title">CCV</p>
+           <input type="text" class="input-field" [(ngModel)]="ccv">
+         </div>
+       </ion-col>
+      </ion-row>
+    </ion-grid>
+   <div class="input-group">
+     <p class="input-title">Billing Address</p>
+     <input type="text" class="input-field" [(ngModel)]="billing">
+   </div>
+ </div>
+</div>
+
+<div *ngIf="this.current_index == 3" class="container-datos w3-animate-right">
+ <p class="title-container">Categories</p>
+ <div class="likes-container">
+     <div *ngFor="let c of this.example_cats; let in=index" (click)="addCategorie(in)" class="{{getCategorie(in)}}">{{c.name}}</div>
+     <!-- <div class="likes-element">Gym</div>
+     <div class="likes-element selected">Instructors</div>
+     <div class="likes-element">Adventures</div>
+     <div class="likes-element">Studios</div>
+     <div class="likes-element">Superhumans</div> -->
+
+
+ </div>
+
+ <p class="title-container">Level</p>
+ <div class="likes-container" style="flex-wrap: nowrap!important">
+   <div (click)="selectLevel('b')" class="{{getLevel('b')}}">Begginer</div>
+   <div (click)="selectLevel('i')" class="{{getLevel('i')}}">Intermediate</div>
+   <div (click)="selectLevel('e')" class="{{getLevel('e')}}">Expert</div>
+ </div>
+
+ <p class="title-container">Distance</p>
+ <ion-range color="green" min="1" max="10" pin="true" [(ngModel)]="distance"></ion-range>
+</div>
+
+
+<button [disabled]="!this.canAdvance()" (click)="next()" type="button" name="button" class="{{btnClass('next')}}">Next</button>
+
+<button [disabled]="this.current_index == 1" (click)="back()" type="button" name="button" class="back-btn">Back</button>
+</ion-content>

@@ -34,7 +34,7 @@ export class WelcomePage {
   }
 
   openCircles(){
-    this.navCtrl.push(CirclesPage);
+    this.navCtrl.push(CirclesPage, {'Color': 'purple'});
   }
 
 }
