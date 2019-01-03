@@ -1,0 +1,111 @@
+page-browse {
+
+  .segment-container{
+    display: flex;
+    justify-content: center;
+    //border: 1px solid red;
+    margin-top: -6%!important;
+    .segment-element{
+      font-family: 'Raleway', sans-serif;
+      font-size: 110%;
+      font-weight: 700!important;
+      color: rgba(255, 255, 255, .3);
+      border-bottom: 2px solid rgba(255, 255, 255, .3);
+      margin-left: 8%;
+    }
+    .selected{
+      color: white;
+      border-bottom: 2px solid #229B86;
+    }
+  }
+
+  .overflowing{
+    //border: 1px solid red;
+    height: 45vh;
+    overflow: scroll;
+  }
+
+  ion-grid{
+    ion-row{
+      ion-col{
+        .act-element{
+          border: 1px solid rgba( 255, 255, 255, .3);
+          border-radius: 30px;
+          display: flex;
+          justify-content: space-between;
+          padding-left: 10%;
+          padding-right: 10%;
+          padding-top: 0!important;
+         .act-title{
+           font-family: 'Raleway', sans-serif;
+           font-size: 100%;
+           color: white;
+         }
+         .act-number{
+           font-family: 'Raleway', sans-serif;
+           font-size: 100%;
+           color: white;
+           opacity: .5;
+         }
+        }
+        .act-type{
+          border: 1px solid #229B86;
+          border-radius: 30px;
+          text-align: center;
+          .type-title{
+            font-family: 'Raleway', sans-serif;
+            font-size: 100%;
+            color: white;
+          }
+        }
+        .event-type{
+          border: 1px solid #FF6B84;
+          border-radius: 30px;
+          text-align: center;
+          .etype-title{
+            font-family: 'Raleway', sans-serif;
+            font-size: 100%;
+            color: white;
+          }
+        }
+        .rose{
+          background-color: #FF6B84;
+        }
+        .selected{
+          background-color: #229B86;
+        }
+      }
+    }
+  }
+
+  .bottom{
+    position: absolute;
+    bottom: 0!important;
+    width: 90%;
+  }
+
+  .event-element{
+    border: 1px solid rgba( 255, 255, 255, .3);
+    border-radius: 30px;
+    display: flex;
+    justify-content: space-between;
+    padding-left: 10%;
+    padding-right: 10%;
+    margin-bottom: 3%;
+    .event-title{
+      font-family: 'Raleway', sans-serif;
+      font-size: 90%;
+      color: white;
+    }
+    .event-number{
+      font-family: 'Raleway', sans-serif;
+      font-size: 90%;
+      color: white;
+      opacity: .5;
+    }
+  }
+
+
+
+
+}

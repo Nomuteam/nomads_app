@@ -12,12 +12,15 @@ import { RegisterPage } from '../pages/register/register';
 import { CirclesPage } from '../pages/circles/circles';
 import { WalkPage } from '../pages/walk/walk';
 import { TermsPage } from '../pages/terms/terms';
+import { BrowsePage } from '../pages/browse/browse';
+import { FilteredPage } from '../pages/filtered/filtered';
+import { FiltersPage } from '../pages/filters/filters';
 
 @Component({
   templateUrl: 'app.html'
 })
 export class MyApp {
-  rootPage:any = TabsPage;
+  rootPage:any = FiltersPage;
 
   constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen, modalCtrl: ModalController) {
     platform.ready().then(() => {

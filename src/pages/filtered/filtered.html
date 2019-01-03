@@ -1,0 +1,72 @@
+<!--
+  Generated template for the FilteredPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+  <ion-navbar color="black1">
+    <ion-buttons start style="margin-left: 3%!important;">
+     <div class="circles-noms">
+       <div class="div1"></div>
+       <div class="div2"></div>
+       <div class="div3"></div></div>
+     <p class="noms-hint">Noms</p>
+     <p class="noms-qty">120</p>
+    </ion-buttons>
+    <ion-buttons end>
+     <div class="filters-noms">
+       <div class="div1"></div>
+       <div class="div2"></div>
+       <div class="div3"></div>
+     </div>
+    </ion-buttons>
+    <p class="title">Title</p>
+  </ion-navbar>
+</ion-header>
+
+
+<ion-content padding>
+
+<div *ngIf="this.type=='activities'">
+<p class="title-page">15 activities</p>
+<ion-grid>
+  <ion-row>
+    <ion-col col-6 *ngFor="let a of this.activitites_example">
+      <div class="img-slide"></div>
+      <p class="act-title">{{a.title}}</p>
+      <p class="act-distance">{{a.distance}}</p>
+      <div class="noms-coins">
+        <p>{{a.cost}}</p>
+        <div class="circles-noms">
+          <div class="div1"></div>
+          <div class="div2"></div>
+          <div class="div3"></div></div>
+      </div>
+    </ion-col>
+  </ion-row>
+</ion-grid>
+</div>
+
+<div *ngIf="this.type=='events'">
+<p class="title-page">2 events</p>
+<div class="event-element" *ngFor="let a of this.activitites_example">
+ <div class="event-img"></div>
+ <div class="event-info">
+  <p class="event-title">{{a.title}}</p>
+  <p class="event-desc">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+ </div>
+ <div class="event-cost">
+   <div class="noms-coins">
+     <p>{{a.cost}}</p>
+     <div class="circles-noms">
+       <div class="div1"></div>
+       <div class="div2"></div>
+       <div class="div3"></div></div>
+   </div>
+ </div>
+</div>
+</div>
+
+
+</ion-content>

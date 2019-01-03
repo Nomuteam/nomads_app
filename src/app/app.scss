@@ -118,6 +118,17 @@ ion-navbar{
   }
 }
 
+ion-list{
+  background-color: #0C0C0C!important;
+  ion-item{
+    background-color: #0C0C0C!important;
+    h2{
+      font-family: 'Raleway', sans-serif;
+      color: white;
+    }
+  }
+}
+
 ion-content{
   background-color: #0C0C0C!important;
 }

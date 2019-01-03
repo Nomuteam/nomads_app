@@ -1,0 +1,100 @@
+<!--
+  Generated template for the BrowsePage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+  <ion-navbar color="black1">
+    <ion-buttons start style="margin-left: 3%!important;">
+     <div class="circles-noms">
+       <div class="div1"></div>
+       <div class="div2"></div>
+       <div class="div3"></div></div>
+     <p class="noms-hint">Noms</p>
+     <p class="noms-qty">120</p>
+    </ion-buttons>
+    <ion-buttons end>
+     <div class="filters-noms">
+       <div class="div1"></div>
+       <div class="div2"></div>
+       <div class="div3"></div>
+     </div>
+    </ion-buttons>
+    <p class="title">All</p>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+  <div class="segment-container">
+   <p (click)="changeSegment('activities')" class="{{getSegment('activities')}}" style="margin-left: 0!important;">Activities</p>
+   <p (click)="changeSegment('events')" class="{{getSegment('events')}}">Events</p>
+  </div>
+
+ <div *ngIf="this.segment == 'activities'">
+   <div class="overflowing">
+     <ion-grid>
+       <ion-row>
+         <ion-col col-6 *ngFor="let a of this.activitites_example">
+          <div (click)="openFiltered('activities')" class="act-element">
+            <p class="act-title">{{a.title}}</p>
+            <p class="act-number">{{a.number}}</p>
+          </div>
+         </ion-col>
+       </ion-row>
+     </ion-grid>
+   </div>
+
+
+ <div class="bottom">
+   <ion-grid>
+     <ion-row>
+       <ion-col col-4 *ngFor="let a of this.activities_types; let in=index">
+        <div (click)="change(in)" class="{{getClass(a.selected)}}">
+          <p class="type-title">{{a.title}}</p>
+        </div>
+       </ion-col>
+     </ion-row>
+   </ion-grid>
+ </div>
+ </div>
+
+ <div *ngIf="this.segment == 'events'">
+   <div class="overflowing">
+     <div *ngFor="let a of this.activitites_example">
+       <div (click)="openFiltered('events')" class="event-element">
+         <p class="event-title">{{a.title}}</p>
+         <p class="event-number">{{a.number}}</p>
+       </div>
+     </div>
+   </div>
+
+
+   <div class="bottom">
+     <ion-grid>
+       <ion-row>
+         <ion-col col-4>
+          <div (click)="changeType('public')" class="{{getType('public')}}">
+            <p class="etype-title">Public</p>
+          </div>
+         </ion-col>
+         <ion-col col-4>
+          <div (click)="changeType('cost')" class="{{getType('cost')}}">
+            <p class="etype-title">Cost</p>
+          </div>
+         </ion-col>
+         <ion-col col-4>
+          <div (click)="changeType('clan')" class="{{getType('clan')}}">
+            <p class="etype-title">Clan</p>
+          </div>
+         </ion-col>
+       </ion-row>
+     </ion-grid>
+   </div>
+
+ </div>
+
+
+
+
+</ion-content>

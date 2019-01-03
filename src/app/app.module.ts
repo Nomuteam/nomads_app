@@ -17,6 +17,9 @@ import { RegisterPage } from '../pages/register/register';
 import { CirclesPage } from '../pages/circles/circles';
 import { WalkPage } from '../pages/walk/walk';
 import { TermsPage } from '../pages/terms/terms';
+import { BrowsePage } from '../pages/browse/browse';
+import { FilteredPage } from '../pages/filtered/filtered';
+import { FiltersPage } from '../pages/filters/filters';
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
@@ -35,7 +38,10 @@ import { SplashScreen } from '@ionic-native/splash-screen';
     RegisterPage,
     CirclesPage,
     WalkPage,
-    TermsPage
+    TermsPage,
+    BrowsePage,
+    FilteredPage,
+    FiltersPage
   ],
   imports: [
     BrowserModule,
@@ -55,7 +61,10 @@ import { SplashScreen } from '@ionic-native/splash-screen';
     RegisterPage,
     CirclesPage,
     WalkPage,
-    TermsPage
+    TermsPage,
+    BrowsePage,
+    FilteredPage,
+    FiltersPage
   ],
   providers: [
     StatusBar,

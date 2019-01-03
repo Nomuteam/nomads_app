@@ -1,0 +1,57 @@
+<!--
+  Generated template for the FiltersPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+  <ion-navbar color="black1">
+    <ion-buttons start style="margin-left: 3%!important;">
+     <div class="circles-noms">
+       <div class="div1"></div>
+       <div class="div2"></div>
+       <div class="div3"></div></div>
+     <p class="noms-hint">Noms</p>
+     <p class="noms-qty">120</p>
+    </ion-buttons>
+    <ion-buttons end>
+     <div class="filters-noms">
+       <div class="div1"></div>
+       <div class="div2"></div>
+       <div class="div3"></div>
+     </div>
+    </ion-buttons>
+    <p class="title">Search Preferences</p>
+  </ion-navbar>
+</ion-header>
+
+
+<ion-content padding>
+  <div class="segment-container">
+   <p (click)="changeSegment('daytime')" class="{{getSegment('daytime')}}" style="margin-left: 0!important;">Daytime</p>
+   <p (click)="changeSegment('categories')" class="{{getSegment('categories')}}">Categories</p>
+   <p (click)="changeSegment('others')" class="{{getSegment('others')}}">Others</p>
+  </div>
+
+  <div *ngIf="this.segment == 'daytime'">
+    <p class="title-container">Main Category</p>
+    <div class="likes-container">
+        <div *ngFor="let c of this.example_cats; let in=index" (click)="addCategorie(in)" class="{{getSelected(c.selected)}}">{{c.name}}</div>
+    </div>
+
+    <p class="title-container">Type of Activity</p>
+    <div class="likes-container">
+        <div *ngFor="let c of this.example_cats; let in=index" (click)="addCategorie(in)" class="{{getSelected(c.selected)}}">{{c.name}}</div>
+    </div>
+
+    <p class="title-container">Workout form</p>
+    <div class="likes-container">
+        <div *ngFor="let c of this.example_cats; let in=index" (click)="addCategorie(in)" class="{{getSelected(c.selected)}}">{{c.name}}</div>
+    </div>
+  </div>
+
+  <div *ngIf="this.segment == 'categories'">
+  <p class="title-container">Days</p>
+  <div class="likes-container"><div *ngFor="let c of this.example_days; let in=index" (click)="selectDay(in)" class="{{getSelected(c.selected)}}">{{c.day}}</div></div>
+  </div>
+</ion-content>
