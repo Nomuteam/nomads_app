@@ -1,17 +1,359 @@
 <ion-header>
-  <ion-navbar>
-    <ion-title>Home</ion-title>
+  <ion-navbar color="black1">
+    <ion-buttons start style="margin-left: 3%!important;">
+     <div class="circles-noms">
+       <div class="div1"></div>
+       <div class="div2"></div>
+       <div class="div3"></div></div>
+     <p class="noms-hint">Noms</p>
+     <p class="noms-qty">120</p>
+    </ion-buttons>
+    <ion-buttons end>
+     <div class="filters-noms">
+       <div class="div1"></div>
+       <div class="div2"></div>
+       <div class="div3"></div>
+     </div>
+    </ion-buttons>
+    <p class="title">Home</p>
   </ion-navbar>
 </ion-header>
 
 <ion-content padding>
-  <h2>Welcome to Ionic!</h2>
-  <p>
-    This starter project comes with simple tabs-based layout for apps
-    that are going to primarily use a Tabbed UI.
-  </p>
-  <p>
-    Take a look at the <code>src/pages/</code> directory to add or change tabs,
-    update any existing page or create new pages.
-  </p>
+
+  <div class="search-container">
+   <input type="text" placeholder="Search in all activities" class="input-search">
+   <button type="button" name="button" class="green-btn">Browse all</button>
+  </div>
+
+  <div class="category-container">
+   <div class="category-title blue">Don't miss it!</div>
+   <p class="category-suggestions">We have this suggestions for you</p>
+   <ion-slides slidesPerView="2.5">
+    <ion-slide>
+      <div class="img-slide"></div>
+      <p class="act-title">Relaxing Hike</p>
+      <p class="act-distance">4.5 km</p>
+      <div class="noms-coins">
+        <p>15</p>
+        <div class="circles-noms">
+          <div class="div1"></div>
+          <div class="div2"></div>
+          <div class="div3"></div></div>
+      </div>
+    </ion-slide>
+    <ion-slide>
+      <div class="img-slide"></div>
+      <p class="act-title">Relaxing Hike</p>
+      <p class="act-distance">4.5 km</p>
+      <div class="noms-coins">
+        <p>15</p>
+        <div class="circles-noms">
+          <div class="div1"></div>
+          <div class="div2"></div>
+          <div class="div3"></div></div>
+      </div>
+    </ion-slide>
+    <ion-slide>
+      <div class="img-slide"></div>
+      <p class="act-title">Relaxing Hike</p>
+      <p class="act-distance">4.5 km</p>
+      <div class="noms-coins">
+        <p>15</p>
+        <div class="circles-noms">
+          <div class="div1"></div>
+          <div class="div2"></div>
+          <div class="div3"></div></div>
+      </div>
+    </ion-slide>
+    <ion-slide>
+      <div class="img-slide"></div>
+      <p class="act-title">Relaxing Hike</p>
+      <p class="act-distance">4.5 km</p>
+      <div class="noms-coins">
+        <p>15</p>
+        <div class="circles-noms">
+          <div class="div1"></div>
+          <div class="div2"></div>
+          <div class="div3"></div></div>
+      </div>
+    </ion-slide>
+  </ion-slides>
+  </div>
+
+  <div class="category-container">
+   <div class="category-title rose">Your Favorites</div>
+   <p class="category-suggestions">We have this suggestions for you</p>
+   <ion-slides slidesPerView="2.5">
+    <ion-slide>
+      <div class="img-slide"></div>
+      <p class="act-title">Relaxing Hike</p>
+      <p class="act-distance">4.5 km</p>
+      <div class="noms-coins">
+        <p>15</p>
+        <div class="circles-noms">
+          <div class="div1"></div>
+          <div class="div2"></div>
+          <div class="div3"></div></div>
+      </div>
+    </ion-slide>
+    <ion-slide>
+      <div class="img-slide"></div>
+      <p class="act-title">Relaxing Hike</p>
+      <p class="act-distance">4.5 km</p>
+      <div class="noms-coins">
+        <p>15</p>
+        <div class="circles-noms">
+          <div class="div1"></div>
+          <div class="div2"></div>
+          <div class="div3"></div></div>
+      </div>
+    </ion-slide>
+    <ion-slide>
+      <div class="img-slide"></div>
+      <p class="act-title">Relaxing Hike</p>
+      <p class="act-distance">4.5 km</p>
+      <div class="noms-coins">
+        <p>15</p>
+        <div class="circles-noms">
+          <div class="div1"></div>
+          <div class="div2"></div>
+          <div class="div3"></div></div>
+      </div>
+    </ion-slide>
+    <ion-slide>
+      <div class="img-slide"></div>
+      <p class="act-title">Relaxing Hike</p>
+      <p class="act-distance">4.5 km</p>
+      <div class="noms-coins">
+        <p>15</p>
+        <div class="circles-noms">
+          <div class="div1"></div>
+          <div class="div2"></div>
+          <div class="div3"></div></div>
+      </div>
+    </ion-slide>
+  </ion-slides>
+  </div>
+
+  <div class="category-container">
+   <div class="category-title green">Featured</div>
+   <p class="category-suggestions">We have this suggestions for you</p>
+   <ion-slides slidesPerView="2.5">
+    <ion-slide>
+      <div class="img-slide"></div>
+      <p class="act-title">Relaxing Hike</p>
+      <p class="act-distance">4.5 km</p>
+      <div class="noms-coins">
+        <p>15</p>
+        <div class="circles-noms">
+          <div class="div1"></div>
+          <div class="div2"></div>
+          <div class="div3"></div></div>
+      </div>
+    </ion-slide>
+    <ion-slide>
+      <div class="img-slide"></div>
+      <p class="act-title">Relaxing Hike</p>
+      <p class="act-distance">4.5 km</p>
+      <div class="noms-coins">
+        <p>15</p>
+        <div class="circles-noms">
+          <div class="div1"></div>
+          <div class="div2"></div>
+          <div class="div3"></div></div>
+      </div>
+    </ion-slide>
+    <ion-slide>
+      <div class="img-slide"></div>
+      <p class="act-title">Relaxing Hike</p>
+      <p class="act-distance">4.5 km</p>
+      <div class="noms-coins">
+        <p>15</p>
+        <div class="circles-noms">
+          <div class="div1"></div>
+          <div class="div2"></div>
+          <div class="div3"></div></div>
+      </div>
+    </ion-slide>
+    <ion-slide>
+      <div class="img-slide"></div>
+      <p class="act-title">Relaxing Hike</p>
+      <p class="act-distance">4.5 km</p>
+      <div class="noms-coins">
+        <p>15</p>
+        <div class="circles-noms">
+          <div class="div1"></div>
+          <div class="div2"></div>
+          <div class="div3"></div></div>
+      </div>
+    </ion-slide>
+  </ion-slides>
+  </div>
+
+  <div class="category-container">
+   <div class="category-title green">Trending</div>
+   <p class="category-suggestions">We have this suggestions for you</p>
+   <ion-slides slidesPerView="2.5">
+    <ion-slide>
+      <div class="img-slide"></div>
+      <p class="act-title">Relaxing Hike</p>
+      <p class="act-distance">4.5 km</p>
+      <div class="noms-coins">
+        <p>15</p>
+        <div class="circles-noms">
+          <div class="div1"></div>
+          <div class="div2"></div>
+          <div class="div3"></div></div>
+      </div>
+    </ion-slide>
+    <ion-slide>
+      <div class="img-slide"></div>
+      <p class="act-title">Relaxing Hike</p>
+      <p class="act-distance">4.5 km</p>
+      <div class="noms-coins">
+        <p>15</p>
+        <div class="circles-noms">
+          <div class="div1"></div>
+          <div class="div2"></div>
+          <div class="div3"></div></div>
+      </div>
+    </ion-slide>
+    <ion-slide>
+      <div class="img-slide"></div>
+      <p class="act-title">Relaxing Hike</p>
+      <p class="act-distance">4.5 km</p>
+      <div class="noms-coins">
+        <p>15</p>
+        <div class="circles-noms">
+          <div class="div1"></div>
+          <div class="div2"></div>
+          <div class="div3"></div></div>
+      </div>
+    </ion-slide>
+    <ion-slide>
+      <div class="img-slide"></div>
+      <p class="act-title">Relaxing Hike</p>
+      <p class="act-distance">4.5 km</p>
+      <div class="noms-coins">
+        <p>15</p>
+        <div class="circles-noms">
+          <div class="div1"></div>
+          <div class="div2"></div>
+          <div class="div3"></div></div>
+      </div>
+    </ion-slide>
+  </ion-slides>
+  </div>
+
+  <div class="category-container">
+   <div class="category-title green">Top Activities</div>
+   <p class="category-suggestions">We have this suggestions for you</p>
+   <ion-slides slidesPerView="2.5">
+    <ion-slide>
+      <div class="img-slide"></div>
+      <p class="act-title">Relaxing Hike</p>
+      <p class="act-distance">4.5 km</p>
+      <div class="noms-coins">
+        <p>15</p>
+        <div class="circles-noms">
+          <div class="div1"></div>
+          <div class="div2"></div>
+          <div class="div3"></div></div>
+      </div>
+    </ion-slide>
+    <ion-slide>
+      <div class="img-slide"></div>
+      <p class="act-title">Relaxing Hike</p>
+      <p class="act-distance">4.5 km</p>
+      <div class="noms-coins">
+        <p>15</p>
+        <div class="circles-noms">
+          <div class="div1"></div>
+          <div class="div2"></div>
+          <div class="div3"></div></div>
+      </div>
+    </ion-slide>
+    <ion-slide>
+      <div class="img-slide"></div>
+      <p class="act-title">Relaxing Hike</p>
+      <p class="act-distance">4.5 km</p>
+      <div class="noms-coins">
+        <p>15</p>
+        <div class="circles-noms">
+          <div class="div1"></div>
+          <div class="div2"></div>
+          <div class="div3"></div></div>
+      </div>
+    </ion-slide>
+    <ion-slide>
+      <div class="img-slide"></div>
+      <p class="act-title">Relaxing Hike</p>
+      <p class="act-distance">4.5 km</p>
+      <div class="noms-coins">
+        <p>15</p>
+        <div class="circles-noms">
+          <div class="div1"></div>
+          <div class="div2"></div>
+          <div class="div3"></div></div>
+      </div>
+    </ion-slide>
+  </ion-slides>
+  </div>
+
+  <div class="category-container">
+   <div class="category-title purple">Events</div>
+   <p class="category-suggestions">We have this suggestions for you</p>
+   <ion-slides slidesPerView="2.5">
+    <ion-slide>
+      <div class="img-slide"></div>
+      <p class="act-title">Relaxing Hike</p>
+      <p class="act-distance">4.5 km</p>
+      <div class="noms-coins">
+        <p>15</p>
+        <div class="circles-noms">
+          <div class="div1"></div>
+          <div class="div2"></div>
+          <div class="div3"></div></div>
+      </div>
+    </ion-slide>
+    <ion-slide>
+      <div class="img-slide"></div>
+      <p class="act-title">Relaxing Hike</p>
+      <p class="act-distance">4.5 km</p>
+      <div class="noms-coins">
+        <p>15</p>
+        <div class="circles-noms">
+          <div class="div1"></div>
+          <div class="div2"></div>
+          <div class="div3"></div></div>
+      </div>
+    </ion-slide>
+    <ion-slide>
+      <div class="img-slide"></div>
+      <p class="act-title">Relaxing Hike</p>
+      <p class="act-distance">4.5 km</p>
+      <div class="noms-coins">
+        <p>15</p>
+        <div class="circles-noms">
+          <div class="div1"></div>
+          <div class="div2"></div>
+          <div class="div3"></div></div>
+      </div>
+    </ion-slide>
+    <ion-slide>
+      <div class="img-slide"></div>
+      <p class="act-title">Relaxing Hike</p>
+      <p class="act-distance">4.5 km</p>
+      <div class="noms-coins">
+        <p>15</p>
+        <div class="circles-noms">
+          <div class="div1"></div>
+          <div class="div2"></div>
+          <div class="div3"></div></div>
+      </div>
+    </ion-slide>
+  </ion-slides>
+  </div>
+
 </ion-content>

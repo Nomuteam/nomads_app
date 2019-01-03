@@ -22,3 +22,190 @@
     top: 0;
     left: 0;
 }
+
+ion-navbar{
+  .title{
+    color: white;
+    text-align: center;
+    font-family: 'Raleway', sans-serif;
+    font-weight: 400!important;
+  }
+  ion-buttons{
+    //border: 1px solid red;
+    .noms-hint{
+      position: absolute;
+      top: -5%;
+      left: 100%;
+      margin-top: 0%;
+      color: white;
+      font-family: 'Raleway', sans-serif;
+      font-weight: 300!important;
+      font-size: 60%;
+    }
+    .noms-qty{
+      position: absolute;
+      top: 20%;
+      left: 100%;
+      margin-top: 0%;
+      color: white;
+      font-family: 'Raleway', sans-serif;
+      font-weight: 700!important;
+      font-size: 100%;
+    }
+    .filters-noms{
+      width: 8vw;
+      position: relative;
+      height: 3vh;
+      .div1{
+        position: absolute;
+        top: 0%;
+        left: 10%;
+        height: 7%;
+        border: 1px solid #FFCC9A;
+        width: 80%;
+        border-radius: 5px;
+      }
+      .div2{
+        position: absolute;
+        top: 30%;
+        left: 20%;
+        height: 7%;
+        border: 1px solid #FFCC9A;
+        width: 60%;
+        border-radius: 5px;
+      }
+      .div3{
+        position: absolute;
+        top: 60%;
+        left: 30%;
+        height: 7%;
+        border: 1px solid #FFCC9A;
+        width: 40%;
+        border-radius: 5px;
+      }
+    }
+    .circles-noms{
+      width: 8vw;
+      position: relative;
+      height: 3vh;
+      .div1{
+        position: absolute;
+        top: 15%;
+        left: 25%;
+        height: 70%;
+        border: 1px solid #229B86;
+        width: 50%;
+        border-radius: 50%;
+      }
+      .div2{
+        position: absolute;
+        top: 7.5%;
+        left: 17.5%;
+        height: 85%;
+        border: 1px solid #229B86;
+        width: 65%;
+        border-radius: 50%;
+      }
+      .div3{
+        position: absolute;
+        left: 12.5%;
+        height: 100%;
+        border: 1px solid #229B86;
+        width: 75%;
+        border-radius: 50%;
+      }
+    }
+  }
+}
+
+ion-content{
+  background-color: #0C0C0C!important;
+}
+
+@import url('https://fonts.googleapis.com/css?family=Raleway:300,400,700');
+
+.tabbar {
+  background-color: #0C0C0C!important;
+  border-top: none!important;
+  padding: 2.5%!important;
+	a.tab-button[aria-selected=true]:nth-of-type(1) {
+		color: rgba(255, 255, 255, 1);
+		font-family: 'Raleway', sans-serif;
+		font-weight: normal;
+		.tab-button-icon {
+			color: rgba(255, 255, 255, 1);
+		}
+	}
+	a.tab-button[aria-selected=true]:nth-of-type(2) {
+		color: rgba(255, 255, 255, 1);
+		font-family: 'Raleway', sans-serif;
+		font-weight: normal;
+		.tab-button-icon {
+			color: rgba(255, 255, 255, 1);
+		}
+	}
+	a.tab-button[aria-selected=true]:nth-of-type(3) {
+		color: rgba(255, 255, 255, 1);
+		font-family: 'Raleway', sans-serif;
+		font-weight: normal;
+		.tab-button-icon {
+			color: rgba(255, 255, 255, 1);
+		}
+	}
+  a.tab-button[aria-selected=true]:nth-of-type(4) {
+		color: rgba(255, 255, 255, 1);
+		font-family: 'Raleway', sans-serif;
+		font-weight: normal;
+		.tab-button-icon {
+			color: rgba(255, 255, 255, 1);
+		}
+	}
+	a.tab-button[aria-selected=true]:nth-of-type(5) {
+		color: rgba(255, 255, 255, 1);
+		font-family: 'Raleway', sans-serif;
+		font-weight: normal;
+		.tab-button-icon {
+			color: rgba(255, 255, 255, 1);
+		}
+	}
+  a.tab-button[aria-selected=false]:nth-of-type(1) {
+		color: rgba(74, 74, 74, 1);
+		font-family: 'Raleway', sans-serif;
+		font-weight: normal;
+		.tab-button-icon {
+			color: rgba(74, 74, 74, 1);
+		}
+	}
+	a.tab-button[aria-selected=false]:nth-of-type(2) {
+		color: rgba(74, 74, 74, 1);
+		font-family: 'Raleway', sans-serif;
+		font-weight: normal;
+		.tab-button-icon {
+			color: rgba(74, 74, 74, 1);
+		}
+	}
+	a.tab-button[aria-selected=false]:nth-of-type(3) {
+		color: rgba(74, 74, 74, 1);
+		font-family: 'Raleway', sans-serif;
+		font-weight: normal;
+		.tab-button-icon {
+			color: rgba(74, 74, 74, 1);
+		}
+	}
+  a.tab-button[aria-selected=false]:nth-of-type(4) {
+		color: rgba(74, 74, 74, 1);
+		font-family: 'Raleway', sans-serif;
+		font-weight: normal;
+		.tab-button-icon {
+			color: rgba(74, 74, 74, 1);
+		}
+	}
+	a.tab-button[aria-selected=false]:nth-of-type(5) {
+		color: rgba(74, 74, 74, 1);
+		font-family: 'Raleway', sans-serif;
+		font-weight: normal;
+		.tab-button-icon {
+			color: rgba(74, 74, 74, 1);
+		}
+	}
+}
