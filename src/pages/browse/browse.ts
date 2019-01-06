@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { FilteredPage } from '../filtered/filtered';
+import { FiltersPage } from '../filters/filters';
 
 /**
  * Generated class for the BrowsePage page.
@@ -92,6 +93,10 @@ public event_type: any = '';
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad BrowsePage');
+  }
+
+  openFilters(){
+    this.navCtrl.push(FiltersPage);
   }
 
   openFiltered(tipo){

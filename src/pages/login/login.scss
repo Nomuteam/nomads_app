@@ -1,10 +1,12 @@
 page-login {
+
   .login-page{
     background-color: #0C0C0C;
     background-image: url('../../assets/img/bg_1.png');
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
+    overflow: hidden;
     // width: 100vw;
     // height: 100vh;
     .logo-welcome{
@@ -79,6 +81,7 @@ page-login {
       height: 7vh;
       border-radius: 20px;
       background-color: #229B86;
+
 
       font-family: 'Raleway', sans-serif;
       font-size: 100%;

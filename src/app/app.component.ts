@@ -15,16 +15,27 @@ import { TermsPage } from '../pages/terms/terms';
 import { BrowsePage } from '../pages/browse/browse';
 import { FilteredPage } from '../pages/filtered/filtered';
 import { FiltersPage } from '../pages/filters/filters';
+import { ClanfPage } from '../pages/clanf/clanf';
+import { ClanshPage } from '../pages/clansh/clansh';
+import { ChatsPage } from '../pages/chats/chats';
+import { WalletPage } from '../pages/wallet/wallet';
+import { MyeventsPage } from '../pages/myevents/myevents';
+import { NotificationsPage } from '../pages/notifications/notifications';
+import { FriendsPage } from '../pages/friends/friends';
+import { HistoryPage } from '../pages/history/history';
+
+import { Keyboard } from '@ionic-native/keyboard';
 
 @Component({
   templateUrl: 'app.html'
 })
 export class MyApp {
-  rootPage:any = FiltersPage;
+  rootPage:any = TabsPage;
 
-  constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen, modalCtrl: ModalController) {
+  constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen, modalCtrl: ModalController, keyboard: Keyboard) {
     platform.ready().then(() => {
 
+      //keyboard.disableScroll(true);
       statusBar.styleDefault();
       let splash = modalCtrl.create(SplashPage);
       splash.present();

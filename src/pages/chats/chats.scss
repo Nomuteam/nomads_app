@@ -1,0 +1,66 @@
+page-chats {
+  .segment-container{
+    display: flex;
+    justify-content: center;
+    //border: 1px solid red;
+    margin-top: -6%!important;
+    .segment-element{
+      font-family: 'Raleway', sans-serif;
+      font-size: 110%;
+      font-weight: 700!important;
+      color: rgba(255, 255, 255, .3);
+      border-bottom: 2px solid rgba(255, 255, 255, .3);
+      margin-left: 8%;
+    }
+    .selected{
+      color: white;
+      border-bottom: 2px solid #229B86;
+    }
+  }
+
+
+  .chat-element{
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    height: 12vh;
+    padding-left: 5%;
+    border-bottom: 1px solid rgba(255, 255, 255, .3);
+    .user-img{
+      width: 15%;
+      height: 50%;
+      border-radius: 50%;
+      padding-left: 5%;
+      //border: 1px solid red;
+      background-image: url('../../assets/img/imanol.png');
+      background-repeat: no-repeat;
+      background-size: cover;
+      background-position: center;
+    }
+    .chat-texts{
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      //border: 1px solid red;
+      height: 50%;
+      padding-left: 5%;
+      .chat-sender{
+        font-family: 'Raleway', sans-serif;
+        font-size: 100%;
+        color: white;
+        display: inline-block;
+        overflow: hidden;
+      }
+      .chat-hint{
+        font-family: 'Raleway', sans-serif;
+        font-size: 100%;
+        color: white;
+        display: inline-block;
+        overflow: hidden;
+      }
+      .chat-hint:after{
+        content: '...'
+      }
+    }
+  }
+}

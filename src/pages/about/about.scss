@@ -1,3 +1,126 @@
 page-about {
+  .btns-container{
+    display: flex;
+    justify-content: space-around;
+  }
+  .create-btn{
+    width: 40vw;
+    height: 6vh;
+    border-radius: 30px;
+    background-color: #FF6B84;
+
+    font-family: 'Raleway', sans-serif;
+    font-size: 100%;
+    font-weight: 700!important;
+    color: white;
+  }
+
+  .find-btn{
+    width: 40vw;
+    height: 6vh;
+    border-radius: 30px;
+    background-color: transparent;
+    border: 1px solid #FF6B84;
+
+    font-family: 'Raleway', sans-serif;
+    font-size: 100%;
+    font-weight: 700!important;
+    color: white;
+  }
+
+  .title-container{
+    font-family: 'Raleway', sans-serif;
+    font-weight: 400;
+    font-size: 100%;
+    color: white;
+    padding-left: 5%;
+  }
+
+
+    ion-grid{
+      ion-row{
+        ion-col{
+          padding: 3%;
+          position: relative;
+          .noms-coins{
+            //border: 1px solid red;
+            display: flex;
+            justify-content: flex-end;
+            margin-top: -23%!important;
+            p{
+              font-family: 'Raleway', sans-serif;
+              font-weight: 600!important;
+              font-size: 80%;
+              color: white;
+              padding: 0!important;
+              //border: 1px solid white;
+              margin-top: -1%!important;
+            }
+            .circles-noms{
+              float: right;
+              width: 15%;
+              position: relative;
+              height: 2vh;
+              //border: 1px solid yellow;
+              .div1{
+                position: absolute;
+                top: 15%;
+                left: 25%;
+                height: 70%;
+                border: 1px solid #229B86;
+                width: 50%;
+                border-radius: 50%;
+              }
+              .div2{
+                position: absolute;
+                top: 7.5%;
+                left: 20%;
+                height: 85%;
+                border: 1px solid #229B86;
+                width: 60%;
+                border-radius: 50%;
+              }
+              .div3{
+                position: absolute;
+                left: 15%;
+                height: 100%;
+                border: 1px solid #229B86;
+                width: 70%;
+                border-radius: 50%;
+              }
+            }
+          }
+          .img-slide{
+            height: 150px;
+            border-radius: 5px;
+            background-image: url('../../assets/img/clans_example.png');
+            background-repeat: no-repeat;
+            background-size: cover;
+            background-position: center;
+            filter: opacity(.8);
+          }
+          .act-title{
+            font-family: 'Raleway', sans-serif;
+            font-weight: 400!important;
+            font-size: 100%;
+            color: white;
+            //border: 1px solid red;
+            text-align: left;
+            padding-left: 2%;
+            margin-top: 5%;
+          }
+          .act-distance{
+            font-family: 'Raleway', sans-serif;
+            font-weight: 600!important;
+            font-size: 80%;
+            color: white;
+            //border: 1px solid red;
+            text-align: left;
+            padding-left: 2%;
+            margin-top: -10%;
+          }
+        }
+      }
+    }
 
 }

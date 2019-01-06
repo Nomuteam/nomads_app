@@ -1,0 +1,92 @@
+page-clansh {
+
+  ion-slides{
+    //border: 1px solid red;
+    height: 85vh;
+    ion-slide{
+       height: 85vh!important;
+      .clan-container{
+        background-color: rgba(216, 216, 216, .08);
+        //border: 1px solid white;
+        height: 85vh!important;
+        border-radius: 15px;
+        overflow: scroll;
+        .clan-img{
+          background-image: url('../../assets/img/clans_example.png');
+          background-repeat: no-repeat;
+          background-size: cover;
+          background-position: bottom;
+          height: 35%;
+          border-radius: 15px 15px 0 0;
+        }
+        .clan-title{
+          font-family: 'Raleway', sans-serif;
+          font-weight: 700!important;
+          font-size: 100%;
+          color: white;
+          //border: 1px solid red;
+          text-align: left;
+          padding-left: 5%;
+        }
+        .clan-cat{
+          font-family: 'Raleway', sans-serif;
+          font-weight: 400!important;
+          font-size: 80%;
+          color: #FF6B84;
+          //border: 1px solid red;
+          text-align: left;
+          padding-left: 5%;
+          margin-top: -6%;
+        }
+        .clan-members{
+          font-family: 'Raleway', sans-serif;
+          font-weight: 400!important;
+          font-size: 70%;
+          color: white;
+          //border: 1px solid red;
+          text-align: left;
+          padding-left: 5%;
+          margin-top: -4%;
+        }
+        .share-icon{
+          width: 5%;
+          margin-right: 5%;
+        }
+        .flex-containerc{
+          display: flex;
+          justify-content: space-between;
+        }
+        .element-title{
+          font-family: 'Raleway', sans-serif;
+          font-weight: 400!important;
+          font-size: 60%;
+          color: rgba(255, 255, 255, .8);
+          text-align: left;
+          padding-left: 5%;
+        }
+        .element-desc{
+          font-family: 'Raleway', sans-serif;
+          font-weight: 400!important;
+          font-size: 70%;
+          color: rgba(255, 255, 255, .9);
+          text-align: left;
+          padding-left: 5%;
+          margin-top: -2%!important;
+          max-height: 15%;
+          overflow: scroll;
+        }
+        .join-btn{
+          width: 40vw;
+          height: 6vh;
+          border-radius: 30px;
+          background-color: #FF6B84;
+
+          font-family: 'Raleway', sans-serif;
+          font-size: 90%;
+          font-weight: 700!important;
+          color: white;
+        }
+      }
+    }
+  }
+}

@@ -1,3 +1,19 @@
 page-contact {
-
+  .input-container{
+    //border: 1px solid red;
+    width: 100%;
+    background-color: rgba(12, 12, 12, .8);
+    padding: 2%;
+    .input-search{
+      background-color: rgba(74, 74, 74, 1);
+      border: 1px solid rgba(255, 255, 255, .5);
+      font-family: 'Raleway', sans-serif;
+      font-size: 100%;
+      padding: 2%;
+      width: 90%;
+      margin-left: 5%;
+      color: white;
+      border-radius: 8px;
+    }
+  }
 }

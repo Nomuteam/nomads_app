@@ -1,0 +1,197 @@
+page-wallet {
+  .circles-noms{
+    width: 8vw;
+    position: relative;
+    height: 3vh;
+    .div1{
+      position: absolute;
+      top: 15%;
+      left: 25%;
+      height: 70%;
+      border: 1px solid #229B86;
+      width: 50%;
+      border-radius: 50%;
+    }
+    .div2{
+      position: absolute;
+      top: 7.5%;
+      left: 17.5%;
+      height: 85%;
+      border: 1px solid #229B86;
+      width: 65%;
+      border-radius: 50%;
+    }
+    .div3{
+      position: absolute;
+      left: 12.5%;
+      height: 100%;
+      border: 1px solid #229B86;
+      width: 75%;
+      border-radius: 50%;
+    }
+  }
+
+  .card-container{
+    background-color: white;
+    border-radius: 8px;
+    //border: 1px solid red;
+    .card-top-container{
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      //border: 1px solid red;
+      .items-container{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        //border: 1px solid red;
+        .balance-hint{
+          font-family: 'Raleway', sans-serif;
+          font-size: 100%;
+          font-weight: 400!important;
+        }
+        .balance-container{
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          margin-top: -5%!important;
+          .number{
+            font-family: 'Raleway', sans-serif;
+            font-size: 300%;
+            font-weight: 700!important;
+          }
+        }
+      }
+    }
+    .card-btm-container{
+      background-color: #D8D8D8;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border-radius: 0 0 8px 8px;
+      .hint-avg{
+        font-family: 'Raleway', sans-serif;
+        font-size: 110%;
+        font-weight: 400!important;
+      }
+    }
+  }
+
+  .buy-hint{
+    font-family: 'Raleway', sans-serif;
+    font-size: 110%;
+    font-weight: 400!important;
+    color: white;
+    margin-top: 5%;
+  }
+
+  .amounts-container{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    padding: 3%;
+    padding-left: 0%!important;
+    //border: 1px solid red;
+    .amount-container{
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      width: 50%;
+      height: 100%;
+      padding-right: 2%;
+      .amount-hint{
+        font-family: 'Raleway', sans-serif;
+        font-size: 100%;
+        font-weight: 300!important;
+        color: rgba(255, 255, 255, .6);
+      }
+      .amount-text{
+        margin-top: 5%;
+        font-family: 'Raleway', sans-serif;
+        font-size: 120%;
+        font-weight: 700!important;
+        color: #50E3C2;
+        border: 1px solid rgba(255, 255, 255, .4);
+        border-radius: 8px;
+        padding: 5%;
+        text-align: center;
+      }
+    }
+  }
+
+  .booking-avg{
+    font-family: 'Raleway', sans-serif;
+    font-size: 120%;
+    font-weight: 700!important;
+    color: white;
+    text-align: center;
+    b{
+      color: #FF6B84;
+    }
+  }
+
+  .pay-btn{
+    width: 100%;
+    background-color: #229B86;
+    font-family: 'Raleway', sans-serif;
+    font-size: 120%;
+    font-weight: 700!important;
+    color: white;
+    border-radius: 20px;
+    margin-top: 5%;
+  }
+
+
+  ion-slides{
+    margin-top: 2%;
+    height: 22.5vh;
+    //border: 1px solid red;
+    ion-slide{
+      height: 22.5vh;
+      //border: 1px solid red;
+      padding-left: 2%;
+      padding-right: 2%;
+     .slide-card{
+       height: 22.5vh!important;
+       background-color: rgba(255, 255, 255, .39);
+       border-radius: 8px;
+       opacity: .3;
+       .top-slide{
+         height: 60%;
+         display: flex;
+         justify-content: center;
+         align-items: center;
+         border-bottom: 1px solid rgba(255, 255, 255, .1);
+         .qty-slide{
+           font-family: 'Raleway', sans-serif;
+           font-size: 150%;
+           font-weight: 700!important;
+           color: white;
+         }
+       }
+       .btm-slide{
+         height: 40%;
+         display: flex;
+         flex-direction: column;
+         justify-content: center;
+         align-items: center;
+         .bookings-avg{
+           font-family: 'Raleway', sans-serif;
+           font-size: 60%;
+           font-weight: 300!important;
+           color: rgba(255, 255, 255, .5);
+         }
+         .slide-price{
+           font-family: 'Raleway', sans-serif;
+           font-size: 70%;
+           font-weight: 700!important;
+           color: rgba(255, 255, 255, 1);
+         }
+       }
+     }
+     .selected{
+      opacity: 1;
+     }
+    }
+  }
+}

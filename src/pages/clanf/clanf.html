@@ -1,0 +1,42 @@
+<!--
+  Generated template for the ClanfPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+  <ion-navbar color="black1">
+    <ion-buttons start style="margin-left: 3%!important;">
+     <div class="circles-noms">
+       <div class="div1"></div>
+       <div class="div2"></div>
+       <div class="div3"></div></div>
+     <p class="noms-hint">Noms</p>
+     <p class="noms-qty">120</p>
+    </ion-buttons>
+    <ion-buttons (click)="openFilters()" end>
+     <div class="filters-noms">
+       <div class="div1"></div>
+       <div class="div2"></div>
+       <div class="div3"></div>
+     </div>
+    </ion-buttons>
+    <p class="title">Clans</p>
+  </ion-navbar>
+</ion-header>
+
+
+<ion-content padding>
+ <input type="text" placeholder="Search clan" class="clan-search">
+ <ion-grid>
+   <ion-row>
+     <ion-col (click)="openView()" col-6 *ngFor="let a of this.clans_example">
+       <div class="img-slide"></div>
+       <p class="{{returnStatus(a.status)}}">{{getStatus(a.status)}}</p>
+       <p class="act-title">{{a.title}}</p>
+       <p class="act-distance">{{a.members}} nomads</p>
+       <p class="act-location">{{a.location}}</p>
+     </ion-col>
+   </ion-row>
+ </ion-grid>
+</ion-content>

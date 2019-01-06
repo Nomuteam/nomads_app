@@ -18,12 +18,26 @@ page-filters {
     }
   }
 
+  .container-cool{
+    display: flex;
+    justify-content: space-between;
+  }
+
   .title-container{
     font-family: 'Raleway', sans-serif;
     font-weight: 400;
     font-size: 100%;
     color: white;
     padding-left: 5%;
+  }
+
+  .distance{
+    font-family: 'Raleway', sans-serif;
+    font-weight: 400;
+    font-size: 100%;
+    color: white;
+    opacity: .6;
+    padding-right: 5%;
   }
 
   .likes-container{
@@ -48,4 +62,27 @@ page-filters {
       background-color: #7D29FB;
     }
   }
+
+  .toggle-container{
+    //border: 1px solid red;
+    display: flex;
+    justify-content: space-between;
+    .toggle-title{
+      font-family: 'Raleway', sans-serif;
+      font-weight: 700!important;
+      color: white;
+      font-size: 100%;
+      padding-left: 5%;
+    }
+    ion-toggle{
+      margin-top: 2%!important;
+      padding-right: 3%;
+    }
+  }
+
+  ion-range{
+    padding-left: 5%!important;
+  }
+
+
 }

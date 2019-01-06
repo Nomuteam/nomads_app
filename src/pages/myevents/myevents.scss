@@ -1,0 +1,61 @@
+page-myevents {
+  .new-event{
+      width: 100%;
+      background-color: #229B86;
+      font-family: 'Raleway', sans-serif;
+      font-size: 120%;
+      font-weight: 700!important;
+      color: white;
+      border-radius: 20px;
+      margin-top: 5%;
+  }
+
+  .event-element{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 12vh;
+    padding-left: 5%;
+    border-bottom: 1px solid rgba(255, 255, 255, .3);
+    .user-img{
+      width: 15%;
+      height: 50%;
+      border-radius: 10px;
+      //border: 1px solid red;
+      background-image: url('../../assets/img/imanol.png');
+      background-repeat: no-repeat;
+      background-size: cover;
+      background-position: center;
+    }
+    .event-texts{
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      //border: 1px solid red;
+      height: 50%;
+      width: 65%;
+      .event-sender{
+        font-family: 'Raleway', sans-serif;
+        font-size: 100%;
+        font-weight: 700!important;
+        color: white;
+        display: inline-block;
+        overflow: hidden;
+      }
+      .event-hint{
+        font-family: 'Raleway', sans-serif;
+        font-size: 100%;
+        color: white;
+        display: inline-block;
+        overflow: hidden;
+      }
+    }
+    .stats-hint{
+      //border: 1px solid red;
+      font-family: 'Raleway', sans-serif;
+      font-size: 100%;
+      font-weight: 700!important;
+      color: #50E3C2;
+    }
+  }
+}

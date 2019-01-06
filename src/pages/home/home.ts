@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
 import { BrowsePage } from '../browse/browse';
+import { FiltersPage } from '../filters/filters';
 
 @Component({
   selector: 'page-home',
@@ -14,6 +15,10 @@ export class HomePage {
 
   openBrowse(){
     this.navCtrl.push(BrowsePage);
+  }
+
+  openFilters(){
+    this.navCtrl.push(FiltersPage);
   }
 
 }

@@ -90,8 +90,11 @@
    <div (click)="selectLevel('e')" class="{{getLevel('e')}}">Expert</div>
  </div>
 
- <p class="title-container">Distance</p>
- <ion-range color="green" min="1" max="10" pin="true" [(ngModel)]="distance"></ion-range>
+ <div class="container-cool">
+   <p class="title-container">Distance</p>
+   <p class="distance">{{this.distance}} km</p>
+ </div>
+ <ion-range mode="md" color="green" min="1" max="10" pin="true" [(ngModel)]="distance"></ion-range>
 </div>
 
 

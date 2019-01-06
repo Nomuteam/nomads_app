@@ -53,5 +53,31 @@
   <div *ngIf="this.segment == 'categories'">
   <p class="title-container">Days</p>
   <div class="likes-container"><div *ngFor="let c of this.example_days; let in=index" (click)="selectDay(in)" class="{{getSelected(c.selected)}}">{{c.day}}</div></div>
+
+    <p class="title-container">Prefered Time</p>
+    <div class="toggle-container">
+    <p class="toggle-title">All day</p>
+    <ion-toggle color="purple" [(ngModel)]="allday"></ion-toggle>
+    </div>
+
+    <p class="title-container">My Schedule</p>
+    <div class="likes-container"><div *ngFor="let c of this.example_schedule; let in=index" (click)="selectTime(in)" class="{{getSelected(c.selected)}}">{{c.time}}</div></div>
+  </div>
+
+  <div *ngIf="this.segment == 'others'">
+    <p class="title-container">Price</p>
+    <div class="likes-container"><div *ngFor="let c of this.example_price; let in=index" (click)="selectPrice(in)" class="{{getSelected(c.selected)}}">{{c.price}}</div></div>
+
+    <div class="container-cool">
+      <p class="title-container">Distance</p>
+      <p class="distance">{{this.distance}} km</p>
+    </div>
+
+    <ion-range mode="md" color="purple" min="1" max="50" pin="true" [(ngModel)]="distance"></ion-range>
+
+    <p class="title-container">Level</p>
+    <div class="likes-container"><div *ngFor="let c of this.example_level; let in=index" (click)="selectLevel(in)" class="{{getSelected(c.selected)}}">{{c.level}}</div></div>
+
+
   </div>
 </ion-content>

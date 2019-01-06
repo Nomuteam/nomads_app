@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { FiltersPage } from '../filters/filters';
 
 /**
  * Generated class for the FilteredPage page.
@@ -44,6 +45,10 @@ public type: any;
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad FilteredPage');
+  }
+
+  openFilters(){
+    this.navCtrl.push(FiltersPage);
   }
 
 }

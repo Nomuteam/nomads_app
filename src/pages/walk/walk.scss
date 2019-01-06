@@ -45,11 +45,24 @@ page-walk {
      margin-top: 2vh;
      width: 90vw;
 
+     .container-cool{
+       display: flex;
+       justify-content: space-between;
+     }
+
      .title-container{
        font-weight: 700;
        font-size: 100%;
        color: white;
        padding-left: 5%;
+     }
+     .distance{
+       font-family: 'Raleway', sans-serif;
+       font-weight: 400;
+       font-size: 100%;
+       color: white;
+       opacity: .6;
+       padding-right: 5%;
      }
      ion-range{
        width: 90%;

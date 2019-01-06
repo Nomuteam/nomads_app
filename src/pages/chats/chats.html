@@ -1,0 +1,56 @@
+<!--
+  Generated template for the ChatsPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+  <ion-navbar color="black1">
+    <ion-buttons start style="margin-left: 3%!important;">
+     <div class="circles-noms">
+       <div class="div1"></div>
+       <div class="div2"></div>
+       <div class="div3"></div></div>
+     <p class="noms-hint">Noms</p>
+     <p class="noms-qty">120</p>
+    </ion-buttons>
+    <ion-buttons (click)="openFilters()" end>
+     <div class="filters-noms">
+       <div class="div1"></div>
+       <div class="div2"></div>
+       <div class="div3"></div>
+     </div>
+    </ion-buttons>
+    <p class="title">Chats</p>
+  </ion-navbar>
+</ion-header>
+
+
+<ion-content padding>
+  <div class="segment-container">
+   <p (click)="changeSegment('instructors')" class="{{getSegment('instructors')}}" style="margin-left: 0!important;">Instructors</p>
+   <p (click)="changeSegment('clans')" class="{{getSegment('clans')}}">Clans</p>
+  </div>
+
+  <div *ngIf="this.segment == 'instructors'">
+
+   <div class="chat-element" *ngFor="let c of this.example_chats">
+     <div class="user-img"></div>
+     <div class="chat-texts">
+      <div class="chat-sender"><b>{{c.name}}</b> from <b>{{c.class}}</b> class:</div>
+      <div class="chat-hint">{{c.message}}</div>
+     </div>
+   </div>
+  </div>
+
+  <div *ngIf="this.segment == 'clans'">
+    <div class="chat-element" *ngFor="let c of this.example_chats">
+      <div class="user-img"></div>
+      <div class="chat-texts">
+       <div class="chat-sender"><b>{{c.name}}</b> from <b>{{c.class}}</b> class:</div>
+       <div class="chat-hint">{{c.message}}</div>
+      </div>
+    </div>
+  </div>
+
+</ion-content>

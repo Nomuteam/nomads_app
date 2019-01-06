@@ -1,0 +1,106 @@
+page-notifications {
+  .page-hint{
+    font-family: 'Raleway', sans-serif;
+    font-size: 90%;
+    font-weight: 400!important;
+    color: rgba(255, 255, 255, .7);
+    text-align: center;
+    margin-bottom: 3%;
+  }
+
+  .circles-noms{
+    width: 8vw;
+    position: relative;
+    height: 3vh;
+    .div1{
+      position: absolute;
+      top: 15%;
+      left: 25%;
+      height: 70%;
+      border: 1px solid #229B86;
+      width: 50%;
+      border-radius: 50%;
+    }
+    .div2{
+      position: absolute;
+      top: 7.5%;
+      left: 17.5%;
+      height: 85%;
+      border: 1px solid #229B86;
+      width: 65%;
+      border-radius: 50%;
+    }
+    .div3{
+      position: absolute;
+      left: 12.5%;
+      height: 100%;
+      border: 1px solid #229B86;
+      width: 75%;
+      border-radius: 50%;
+    }
+  }
+
+  .notif-container{
+    background-color: white;
+    border-radius: 8px;
+    margin-bottom: 3%;
+    .notif-title{
+      display: flex;
+      justify-content: flex-start;
+      align-items: center;
+      font-family: 'Raleway', sans-serif;
+      font-size: 100%;
+      font-weight: 700!important;
+      color: black;
+      padding-left: 3%;
+      .notif-img{
+
+      }
+      .title-text{
+        font-family: 'Raleway', sans-serif;
+        font-size: 90%;
+        font-weight: 700!important;
+        color: black;
+        padding-left: 3%;
+      }
+    }
+    .notif-body{
+      font-family: 'Raleway', sans-serif;
+      font-size: 90%;
+      font-weight: 400!important;
+      color: black;
+      .message{
+        font-family: 'Raleway', sans-serif;
+        font-size: 90%;
+        font-weight: 400!important;
+        color: black;
+      }
+      padding-top: 0!important;
+      padding-left: 5vw;
+    }
+
+    .notif-btm{
+      display: flex;
+      justify-content: flex-end;
+      padding-top: 0!important;
+      .btm-btn{
+        background-color: #00C263;
+        font-family: 'Raleway', sans-serif;
+        font-size: 80%;
+        font-weight: 700!important;
+        color: white;
+        border-radius: 20px;
+        margin-top: 5%;
+        display: inline-block;
+      }
+    }
+
+    .inverted{
+      color: white;
+    }
+    //border: 1px solid red;
+  }
+  .purple{
+    background-color: #200650;
+  }
+}

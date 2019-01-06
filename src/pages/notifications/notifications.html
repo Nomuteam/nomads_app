@@ -1,0 +1,59 @@
+<!--
+  Generated template for the NotificationsPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+  <ion-navbar color="black1">
+    <ion-buttons start style="margin-left: 3%!important;">
+     <div class="circles-noms">
+       <div class="div1"></div>
+       <div class="div2"></div>
+       <div class="div3"></div></div>
+     <p class="noms-hint">Noms</p>
+     <p class="noms-qty">120</p>
+    </ion-buttons>
+    <ion-buttons (click)="openFilters()" end>
+     <div class="filters-noms">
+       <div class="div1"></div>
+       <div class="div2"></div>
+       <div class="div3"></div>
+     </div>
+    </ion-buttons>
+    <p class="title">Notifications</p>
+  </ion-navbar>
+</ion-header>
+
+
+<ion-content padding>
+
+ <div class="page-hint">These are the latest notifications from your network</div>
+
+ <div class="{{isAdmin(n.isAdmin, 'general')}}" *ngFor="let n of this.example_notifs">
+   <div class="notif-title" padding>
+     <div class="notif-img">
+       <div class="circles-noms">
+         <div class="div1"></div>
+         <div class="div2"></div>
+         <div class="div3"></div></div>
+     </div>
+     <div class="{{isAdmin(n.isAdmin, 'notif-title')}}">
+       {{n.sender}}
+     </div>
+   </div>
+
+   <div class="notif-body" padding>
+     <div class="{{isAdmin(n.isAdmin, 'notif-body')}}">
+       {{n.message}}
+     </div>
+   </div>
+
+   <div *ngIf="n.isAdmin" class="notif-btm" padding>
+     <button type="button" class="btm-btn" padding>Read More</button>
+   </div>
+   <div *ngIf="n.relation == 'clan'" class="notif-btm" padding>
+     <button type="button" class="btm-btn" padding>Join</button>
+   </div>
+ </div>
+</ion-content>

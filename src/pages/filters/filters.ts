@@ -70,7 +70,107 @@ public example_days: any = [
     'day': 'S',
     'selected': false
   },
-]
+];
+public example_schedule: any = [
+  {
+    'time': '06:00',
+    'selected': false
+  },
+  {
+    'time': '07:00',
+    'selected': false
+  },
+  {
+    'time': '08:00',
+    'selected': false
+  },
+  {
+    'time': '09:00',
+    'selected': false
+  },
+  {
+    'time': '10:00',
+    'selected': false
+  },
+  {
+    'time': '11:00',
+    'selected': false
+  },
+  {
+    'time': '12:00',
+    'selected': false
+  },
+  {
+    'time': '13:00',
+    'selected': false
+  },
+  {
+    'time': '14:00',
+    'selected': false
+  },
+  {
+    'time': '15:00',
+    'selected': false
+  },
+  {
+    'time': '16:00',
+    'selected': false
+  },
+  {
+    'time': '17:00',
+    'selected': false
+  },
+  {
+    'time': '18:00',
+    'selected': false
+  },
+  {
+    'time': '19:00',
+    'selected': false
+  },
+  {
+    'time': '20:00',
+    'selected': false
+  },
+  {
+    'time': '21:00',
+    'selected': false
+  },
+  {
+    'time': '22:00',
+    'selected': false
+  },
+];
+public example_price: any = [
+  {
+    'price': '$',
+    'selected': false
+  },
+  {
+    'price': '$$',
+    'selected': false
+  },
+  {
+    'price': '$$$',
+    'selected': false
+  },
+];
+public example_level: any = [
+  {
+    'level': 'Beginner',
+    'selected': false
+  },
+  {
+    'level': 'Intermediate',
+    'selected': false
+  },
+  {
+    'level': 'Expert',
+    'selected': false
+  },
+];
+public allday: any = true;
+public distance: any = 0;
 
   constructor(public navCtrl: NavController, public navParams: NavParams) {
   }
@@ -85,6 +185,21 @@ public example_days: any = [
 
   getSegment(tipo){
     return this.segment == tipo ? 'segment-element selected' : 'segment-element';
+  }
+
+  selectLevel(indice){
+    let aux = this.example_level[indice].selected;
+    aux ? this.example_level[indice].selected = false : this.example_level[indice].selected = true;
+  }
+
+  selectPrice(indice){
+    let aux = this.example_price[indice].selected;
+    aux ? this.example_price[indice].selected = false : this.example_price[indice].selected = true;
+  }
+
+  selectTime(indice){
+    let aux = this.example_schedule[indice].selected;
+    aux ? this.example_schedule[indice].selected = false : this.example_schedule[indice].selected = true;
   }
 
   selectDay(indice){
