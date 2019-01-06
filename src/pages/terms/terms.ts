@@ -24,6 +24,7 @@ export class TermsPage {
   }
 
   openTabs(){
+    localStorage.setItem('Accepted', 'yes');
     this.navCtrl.setRoot(TabsPage);
   }
 

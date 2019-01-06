@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, LoadingController, AlertController } from 'ionic-angular';
 import { TermsPage } from '../terms/terms';
+import { AngularFireDatabase, AngularFireObject } from 'angularfire2/database';
+import firebase from 'firebase';
 
 /**
  * Generated class for the WalkPage page.
@@ -18,19 +20,6 @@ export class WalkPage {
 public current_index: any = 1;
 public user_type: any = '';
 public message: any = 'You are almost there, tell us more about you.';
-
-//First Form
-public name: any = '';
-public last: any = '';
-public birthdate: any = '';
-public country: any = '';
-
-//Second Form
-public cardholder: any = '';
-public cardnumber: any = '';
-public expiry: any = '';
-public ccv: any = '';
-public billing: any = '';
 
 //Third Form
 public categories: any = [];
@@ -62,10 +51,51 @@ public example_cats: any = [
     'name': 'Superhumans',
     'selected': false
   },
-]
+];
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+public user_data: any = {
+   'first_name': '',
+   'last_name': '',
+   'birthdate': '',
+   'country': '',
+   'payment':
+     {
+       'cardholder': '',
+       'cardnumber': '',
+       'card_expiry': '',
+       'card_ccv': '',
+       'card_address': ''
+     },
+    'preferences': {
+      'categories': [],
+      'level': '',
+      'distance': ''
+    },
+    'business': {
+      'business_name': '',
+      'legal_name': '',
+      'phone': '',
+      'billing_address': '',
+      'rfc': '',
+      'bank': '',
+      'clabe': ''
+    },
+    'info_complete': false
+  }
+
+
+  constructor(  public navCtrl: NavController,
+    public navParams: NavParams,
+    public af: AngularFireDatabase,
+    public loadingCtrl: LoadingController,
+    public alertCtrl: AlertController) {
+    localStorage.setItem('walk_progress', 'incomplete');
     this.user_type = this.navParams.get('User');
+    localStorage.setItem('user_type', this.user_type);
+    // this.alertCtrl.create({
+    //   title: this.user_data.payment.cardholder,
+    //   buttons:  ['Ok']
+    // }).present();
   }
 
   ionViewDidLoad() {
@@ -120,31 +150,40 @@ public example_cats: any = [
 
   canAdvance(){
     if(this.current_index == 1){
-      return (this.name != '' && this.last != '' && this.birthdate != '' && this.country != '');
+      return (this.user_data.first_name != '' && this.user_data.last_name != '' && this.user_data.birthdate != '' && this.user_data.country != '');
     }
     else if(this.current_index == 2){
-      return (this.cardholder != '' && this.cardnumber != '' && this.expiry != '' && this.ccv != '' && this.billing != '')
+      return (this.user_data.payment.cardholder != '' && this.user_data.payment.cardnumber != '' && this.user_data.payment.card_expiry != '' && this.user_data.payment.card_ccv != '' && this.user_data.payment.card_address != '')
     }
-    else{
-      return (this.example_cats.filter(value => value.selected === true).length > 0 && this.level != '' && this.distance != '');
+    else if(this.current_index == 3 && this.user_type == 'nomads'){
+      return (this.example_cats.filter(value => value.selected === true).length > 0 && this.level != '' && this.user_data.preferences.distance != '');
+    }
+    else if(this.current_index == 3 && this.user_type == 'allies'){
+      return (this.user_data.business.business_name != '' && this.user_data.business.legal_name != '' && this.user_data.business.phone != '' && this.user_data.business.billing_address != '' && this.user_data.business.rfc != '' && this.user_data.business.bank != '' && this.user_data.business.clabe != '')
     }
   }
 
   btnClass(type){
     let aux = type+'-btn';
     if(this.user_type == 'nomads'){
-      console.log('pp');
       return aux;
     }
     else{
-      console.log('kk');
       return aux+' selectedrose';
     }
   }
 
   next(){
     if(this.current_index == 3){
-      this.navCtrl.setRoot(TermsPage);
+       this.user_data.preferences.categories = this.example_cats.filter(cat => cat.selected);
+       this.user_data.preferences.level = this.level;
+       this.user_data.info_complete = true;
+       console.log(this.user_data);
+       this.af.list('/Users/').update(firebase.auth().currentUser.uid, this.user_data)
+       .then( () => {
+         localStorage.setItem('walk_progress', 'complete');
+         this.navCtrl.setRoot(TermsPage);
+       })
     }
     else{
       this.current_index++;

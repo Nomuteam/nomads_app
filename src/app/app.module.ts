@@ -30,10 +30,19 @@ import { MyeventsPage } from '../pages/myevents/myevents';
 import { NotificationsPage } from '../pages/notifications/notifications';
 import { FriendsPage } from '../pages/friends/friends';
 import { HistoryPage } from '../pages/history/history';
+import { ProfallyPage } from '../pages/profally/profally';
+import { MyactivitiesPage } from '../pages/myactivities/myactivities';
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { Keyboard } from '@ionic-native/keyboard';
+
+import { NgCalendarModule  } from 'ionic2-calendar';
+import { Geolocation } from '@ionic-native/geolocation';
+import { AngularFireModule } from 'angularfire2';
+import { AngularFireDatabaseModule } from 'angularfire2/database';
+import { AngularFireAuthModule } from 'angularfire2/auth';
+import { FIREBASE_CONFIG } from './firebase.credentials';
 
 @NgModule({
   declarations: [
@@ -62,16 +71,22 @@ import { Keyboard } from '@ionic-native/keyboard';
     MyeventsPage,
     NotificationsPage,
     FriendsPage,
-    HistoryPage
+    HistoryPage,
+    ProfallyPage,
+    MyactivitiesPage
   ],
   imports: [
+    NgCalendarModule,
     BrowserModule,
     IonicModule.forRoot(MyApp, {
       mode: 'ios',
-      scrollPadding: false,
-        scrollAssist: false,
-        autoFocusAssist: false
-    })
+      scrollPadding: true,
+      scrollAssist: true,
+      autoFocusAssist: true
+    }),
+    AngularFireModule.initializeApp(FIREBASE_CONFIG),
+    AngularFireDatabaseModule,
+    AngularFireAuthModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -100,12 +115,15 @@ import { Keyboard } from '@ionic-native/keyboard';
     MyeventsPage,
     NotificationsPage,
     FriendsPage,
-    HistoryPage
+    HistoryPage,
+    ProfallyPage,
+    MyactivitiesPage
   ],
   providers: [
     StatusBar,
     SplashScreen,
     Keyboard,
+    Geolocation,
     {provide: ErrorHandler, useClass: IonicErrorHandler}
   ]
 })

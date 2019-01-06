@@ -1,9 +1,8 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
-import { FiltersPage } from '../filters/filters';
 
 /**
- * Generated class for the FriendsPage page.
+ * Generated class for the MyactivitiesPage page.
  *
  * See https://ionicframework.com/docs/components/#navigation for more info on
  * Ionic pages and navigation.
@@ -11,20 +10,16 @@ import { FiltersPage } from '../filters/filters';
 
 @IonicPage()
 @Component({
-  selector: 'page-friends',
-  templateUrl: 'friends.html',
+  selector: 'page-myactivities',
+  templateUrl: 'myactivities.html',
 })
-export class FriendsPage {
+export class MyactivitiesPage {
 
   constructor(public navCtrl: NavController, public navParams: NavParams) {
   }
 
-  openFilters(){
-    this.navCtrl.push(FiltersPage);
-  }
-
   ionViewDidLoad() {
-    console.log('ionViewDidLoad FriendsPage');
+    console.log('ionViewDidLoad MyactivitiesPage');
   }
 
 }

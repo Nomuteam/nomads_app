@@ -8,36 +8,44 @@
 
   <img src="assets/img/logo_1.png" class="logo-welcome">
 
-   <div class="{{this.getClass()}}">
-    <p *ngIf="user_type == 'nomads'" class="title-container">Sign Up</p>
-      <p *ngIf="user_type == 'allies'" class="title-container">Register as an Ally</p>
-    <div class="card-container">
-      <div class="input-group">
-        <p class="input-title">Email</p>
-        <input type="text" class="input-field">
-      </div>
-      <div class="input-group">
-        <p class="input-title">Password</p>
-        <input type="text" class="input-field">
-      </div>
-      <div class="input-group">
-        <p class="input-title">Phone Number</p>
-        <input type="text" class="input-field">
-      </div>
-      <div *ngIf="user_type == 'allies'" class="input-group">
-        <p class="input-title">Invitation Code</p>
-        <input type="text" class="input-field">
-      </div>
-      <label class="container">
-        <p>I accept <b> Nomads' Terms and Conditions</b></p>
-        <input type="checkbox">
-        <span class="checkmark"></span>
-      </label>
+  <div class="test-container">
+    <div class="{{this.getClass()}}">
+     <p *ngIf="user_type == 'nomads'" class="title-container">Sign Up</p>
+       <p *ngIf="user_type == 'allies'" class="title-container">Register as an Ally</p>
+     <div class="card-container">
+       <div class="input-group">
+         <p class="input-title">Email</p>
+         <input type="text" class="input-field" [(ngModel)]="mail">
+       </div>
+       <div class="input-group">
+         <p class="input-title">Password</p>
+         <input type="password" class="input-field" [(ngModel)]="pw">
+       </div>
+       <div class="input-group">
+         <p class="input-title">Phone Number</p>
+         <input type="tel" class="input-field" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" [(ngModel)]="phone">
+       </div>
+       <div *ngIf="user_type == 'allies'" class="input-group">
+         <p class="input-title">Invitation Code</p>
+         <input type="text" class="input-field" [(ngModel)]="code">
+       </div>
+       <label class="container">
+         <p>I accept <b> Nomads' Terms and Conditions</b></p>
+         <input type="checkbox" [(ngModel)]="accepted">
+         <span class="checkmark"></span>
+       </label>
+     </div>
     </div>
-   </div>
 
-  <button (click)="openCircles()" *ngIf="user_type == 'nomads'" type="button" name="button" class="login-btn">Sign Up</button>
-  <button (click)="openCircles()" *ngIf="user_type == 'allies'" type="button" name="button" class="login-btn rose">Sign Up</button>
-  <button (click)="openLogin()" type="button" name="button" class="sign-btn">Sign In</button>
+    <div class="jc-container">
+      <button (click)="openLogin()" type="button" name="button" class="sign-btn">Sign In</button>
+      <button (click)="registerMail()" *ngIf="user_type == 'nomads'" type="button" name="button" class="login-btn">Sign Up</button>
+      <button (click)="registerMail()" *ngIf="user_type == 'allies'" type="button" name="button" class="login-btn rose">Sign Up</button>
+    </div>
+  </div>
+
+
+
+
 
 </ion-content>

@@ -1,9 +1,12 @@
 page-login {
+  .scroll-content {
+   padding-bottom: 0 !important;
+   }
 
   .login-page{
     background-color: #0C0C0C;
     background-image: url('../../assets/img/bg_1.png');
-    background-position: center;
+    //background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
     overflow: hidden;
@@ -21,9 +24,9 @@ page-login {
       display: block;
       margin: 0 auto;
       //border: 1px solid white;
-      height: 45vh;
       margin-top: 14vh;
       width: 90vw;
+      margin-bottom: 5%;
       .title-container{
         font-weight: 700;
         font-size: 110%;
@@ -74,11 +77,24 @@ page-login {
 
     }
 
+    .test-container{
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .jc-container{
+      display: flex;
+      justify-content: space-around;
+      margin-bottom: 5%;
+      //border: 1px solid red;
+    }
+
 
 
     .login-btn{
       width: 40vw;
-      height: 7vh;
+      height: 40px;
       border-radius: 20px;
       background-color: #229B86;
 
@@ -87,14 +103,14 @@ page-login {
       font-size: 100%;
       color: white;
 
-      position: absolute;
-      bottom: 3vh;
-      right: 7vw;
+      // position: fixed;
+      // bottom: 3vh;
+      // right: 7vw;
     }
 
     .sign-btn{
       width: 40vw;
-      height: 7vh;
+      height: 40px;
       border-radius: 20px;
       background-color: transparent;
       border: 1px solid white;
@@ -103,9 +119,9 @@ page-login {
       font-size: 100%;
       color: white;
 
-      position: absolute;
-      bottom: 3vh;
-      left: 7vw;
+      // position: absolute;
+      // bottom: 3vh;
+      // left: 7vw;
     }
 
     .rose{

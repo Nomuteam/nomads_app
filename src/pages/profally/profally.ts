@@ -6,10 +6,9 @@ import { MyeventsPage } from '../myevents/myevents';
 import { FriendsPage } from '../friends/friends';
 import { NotificationsPage } from '../notifications/notifications';
 import { HistoryPage } from '../history/history';
-import { FiltersPage } from '../filters/filters';
 
 /**
- * Generated class for the ProfilePage page.
+ * Generated class for the ProfallyPage page.
  *
  * See https://ionicframework.com/docs/components/#navigation for more info on
  * Ionic pages and navigation.
@@ -17,20 +16,16 @@ import { FiltersPage } from '../filters/filters';
 
 @IonicPage()
 @Component({
-  selector: 'page-profile',
-  templateUrl: 'profile.html',
+  selector: 'page-profally',
+  templateUrl: 'profally.html',
 })
-export class ProfilePage {
+export class ProfallyPage {
 
   constructor(public navCtrl: NavController, public navParams: NavParams) {
   }
 
-  openFilters(){
-    this.navCtrl.push(FiltersPage);
-  }
-
   ionViewDidLoad() {
-    console.log('ionViewDidLoad ProfilePage');
+    console.log('ionViewDidLoad ProfallyPage');
   }
 
   openPage(pagina){

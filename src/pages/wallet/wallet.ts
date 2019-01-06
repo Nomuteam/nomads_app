@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { FiltersPage } from '../filters/filters';
 
 /**
  * Generated class for the WalletPage page.
@@ -43,6 +44,10 @@ public example_packages: any = [
 public selected: any = 0;
 
   constructor(public navCtrl: NavController, public navParams: NavParams) {
+  }
+
+  openFilters(){
+    this.navCtrl.push(FiltersPage);
   }
 
   selectP(indice){

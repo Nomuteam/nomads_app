@@ -13,13 +13,13 @@
     <div class="card-container">
       <div class="input-group">
         <p class="input-title">Email</p>
-        <input type="text" class="input-field">
+        <input type="text" class="input-field" [(ngModel)]="mail">
       </div>
     </div>
    </div>
 
-  <button *ngIf="user_type == 'nomads'" type="button" name="button" class="login-btn">Send Email</button>
-  <button *ngIf="user_type == 'allies'" type="button" name="button" class="login-btn rose">Send Email</button>
+  <button [disabled]="!isCorrect()" (click)="pwForgot()" *ngIf="user_type == 'nomads'" type="button" name="button" class="login-btn">Send Email</button>
+  <button [disabled]="!isCorrect()" (click)="pwForgot()" *ngIf="user_type == 'allies'" type="button" name="button" class="login-btn rose">Send Email</button>
   <button  (click)="openLogin()" type="button" name="button" class="sign-btn">Sign In</button>
 
 </ion-content>

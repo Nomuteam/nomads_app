@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { FiltersPage } from '../filters/filters';
 
 /**
  * Generated class for the MyeventsPage page.
@@ -32,6 +33,10 @@ public example_events: any = [
   },
 ]
   constructor(public navCtrl: NavController, public navParams: NavParams) {
+  }
+
+  openFilters(){
+    this.navCtrl.push(FiltersPage);
   }
 
   ionViewDidLoad() {

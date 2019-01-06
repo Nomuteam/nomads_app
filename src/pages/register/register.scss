@@ -1,8 +1,12 @@
 page-register {
+  .scroll-content {
+   padding-bottom: 0 !important;
+   }
+
   .register-page{
     background-color: #0C0C0C;
     background-image: url('../../assets/img/bg_1.png');
-    background-position: center;
+    //ackground-position: center;
     background-repeat: no-repeat;
     background-size: cover;
     // width: 100vw;
@@ -26,6 +30,7 @@ page-register {
       //height: 45vh;
       margin-top: 10vh;
       width: 90vw;
+      margin-bottom: 5%;
       .title-container{
         font-weight: 700;
         font-size: 110%;
@@ -98,6 +103,7 @@ page-register {
 /* On mouse-over, add a grey background color */
 .container:hover input ~ .checkmark {
   background-color: transparent;
+  //opacity: 0;
 }
 
 /* When the checkbox is checked, add a blue background */
@@ -108,6 +114,7 @@ page-register {
 /* Create the checkmark/indicator (hidden when not checked) */
 .checkmark:after {
   content: "";
+  opacity: 0!important;
   // position: absolute;
   // display: none;
 }
@@ -115,12 +122,13 @@ page-register {
 /* Show the checkmark when checked */
 .container input:checked ~ .checkmark:after {
   display: block;
+  opacity: 1!important;
 }
 
 /* Style the checkmark/indicator */
 .container .checkmark:after {
   top: 0%;
-  left: 5%;
+  left: 50%;
   width: 5px;
   height: 10px;
   border: solid white;
@@ -149,11 +157,25 @@ page-register {
 
     }
 
+    .jc-container{
+      display: flex;
+      justify-content: space-around;
+      //border: 1px solid red;
+      margin-top: 5%;
+      margin-bottom: 5%;
+    }
+
+    .test-container{
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
 
 
     .login-btn{
       width: 40vw;
-      height: 7vh;
+      height: 40px;
       border-radius: 20px;
       background-color: #229B86;
 
@@ -161,14 +183,14 @@ page-register {
       font-size: 100%;
       color: white;
 
-      position: absolute;
-      bottom: 3vh;
-      right: 7vw;
+      // position: absolute;
+      // bottom: 40px;
+      // right: 7vw;
     }
 
     .sign-btn{
       width: 40vw;
-      height: 7vh;
+      height: 40px;
       border-radius: 20px;
       background-color: transparent;
       border: 1px solid white;
@@ -177,9 +199,9 @@ page-register {
       font-size: 100%;
       color: white;
 
-      position: absolute;
-      bottom: 3vh;
-      left: 7vw;
+      // position: absolute;
+      // bottom: 3vh;
+      // left: 7vw;
     }
 
     .rose{

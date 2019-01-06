@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { FiltersPage } from '../filters/filters';
 
 /**
  * Generated class for the HistoryPage page.
@@ -14,8 +15,28 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
   templateUrl: 'history.html',
 })
 export class HistoryPage {
-
+  public example_events: any = [
+    {
+      'title': 'Camping en Arteaga',
+      'members': 10,
+      'occupancy': 20
+    },
+    {
+      'title': 'Camping en SLP',
+      'members': 20,
+      'occupancy': 31
+    },
+    {
+      'title': 'Camping en Queretaro',
+      'members': 11,
+      'occupancy': 50
+    },
+  ]
   constructor(public navCtrl: NavController, public navParams: NavParams) {
+  }
+
+  openFilters(){
+    this.navCtrl.push(FiltersPage);
   }
 
   ionViewDidLoad() {

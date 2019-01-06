@@ -1,0 +1,60 @@
+<!--
+  Generated template for the ProfallyPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+  <ion-navbar color="black1">
+    <p class="title">Ally Profile</p>
+  </ion-navbar>
+</ion-header>
+
+
+<ion-content>
+ <div class="bg-img"></div>
+ <p class="user-name">Mean Calisthenics</p>
+ <div class="things-container">
+   <div class="info-container">
+     <div class="user-info">Monterrey, Nuevo León</div>
+   </div>
+ </div>
+
+ <div class="card-container">
+  <div class="row-container">
+   <div (click)="openPage('c')" class="element-container">
+     <img src="assets/img/chats_ally.png">
+     <div class="element-title">Chats</div>
+   </div>
+   <div (click)="openPage('w')" class="element-container">
+     <img src="assets/img/wallet_ally.png">
+     <div class="element-title">Wallet</div>
+   </div>
+   <div (click)="openPage('e')" class="element-container">
+     <img src="assets/img/event_ally.png">
+     <div class="element-title">My Events</div>
+   </div>
+  </div>
+  <hr>
+  <div class="row-container">
+   <div (click)="openPage('cl')" class="element-container">
+     <img src="assets/img/nomads_ally.png">
+     <div class="element-title">My Nomads</div>
+   </div>
+   <div (click)="openPage('n')" class="element-container">
+     <img src="assets/img/notif_ally.png">
+     <div class="element-title">Notification</div>
+   </div>
+  </div>
+ </div>
+
+
+ <div class="container-btns">
+   <button type="button" class="history-btn">Scanner</button>
+ </div>
+
+
+
+
+
+</ion-content>

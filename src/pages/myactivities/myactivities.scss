@@ -1,0 +1,20 @@
+page-myactivities {
+  ion-buttons{
+    padding-right: 5%;
+  }
+  .activity-container{
+    background-color: rgba(255, 255, 255, .11);
+    border-radius: 10px;
+    .activity-title{
+      font-family: 'Raleway', sans-serif;
+      font-size: 80%;
+      font-weight: 700!important;
+      color: white;
+    }
+    .activity-time{
+      font-family: 'Raleway', sans-serif;
+      font-size: 70%;
+      color: white;
+    }
+  }
+}

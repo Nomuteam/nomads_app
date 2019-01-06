@@ -41,7 +41,7 @@ page-walk {
      display: block;
      margin: 0 auto;
      //border: 1px solid white;
-     height: 45vh;
+     //height: 45vh;
      margin-top: 2vh;
      width: 90vw;
 
@@ -141,10 +141,18 @@ page-walk {
 
    }
 
+   .jc-container{
+     display: flex;
+     justify-content: space-around;
+     //border: 1px solid red;
+     margin-top: 5vh;
+     margin-bottom: 5%;
+   }
+
 
    .next-btn{
      width: 40vw;
-     height: 7vh;
+     height: 40px;
      border-radius: 20px;
      background-color: #229B86;
 
@@ -152,14 +160,14 @@ page-walk {
      font-size: 100%;
      color: white;
 
-     position: absolute;
-     bottom: 3vh;
-     right: 7vw;
+     // position: absolute;
+     // bottom: 3vh;
+     // right: 7vw;
    }
 
    .back-btn{
      width: 40vw;
-     height: 7vh;
+     height: 40px;
      border-radius: 20px;
      background-color: transparent;
      border: 1px solid white;
@@ -168,9 +176,9 @@ page-walk {
      font-size: 100%;
      color: white;
 
-     position: absolute;
-     bottom: 3vh;
-     left: 7vw;
+     // position: absolute;
+     // bottom: 3vh;
+     // left: 7vw;
    }
    .selectedrose{
      border: 1px solid #FF6B84;

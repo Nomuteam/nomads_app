@@ -30,11 +30,15 @@ import { Keyboard } from '@ionic-native/keyboard';
   templateUrl: 'app.html'
 })
 export class MyApp {
-  rootPage:any = TabsPage;
+  rootPage:any = WelcomePage;
 
   constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen, modalCtrl: ModalController, keyboard: Keyboard) {
     platform.ready().then(() => {
 
+      localStorage.setItem('Tipo', 'nomads');
+      if (localStorage.getItem('Accepted') == 'caca'){
+        this.rootPage = TabsPage;
+      }
       //keyboard.disableScroll(true);
       statusBar.styleDefault();
       let splash = modalCtrl.create(SplashPage);

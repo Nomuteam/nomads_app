@@ -1,3 +1,56 @@
 page-calendar {
+  .scroll-content{
+    overflow: hidden;
+  }
+  .page-hint{
+    font-family: 'Raleway', sans-serif;
+    font-size: 90%;
+    font-weight: 400!important;
+    color: rgba(255, 255, 255, .7);
+    text-align: center;
+    margin-bottom: 3%;
+  }
 
+  table{
+    font-family: 'Raleway', sans-serif;
+    color: white;
+    
+    border: 1px solid transparent!important;
+    thead{
+      border: 1px solid transparent!important;
+    }
+    tbody{
+      border: 1px solid transparent!important;
+    }
+  }
+
+  .monthview-current{
+    background-color: rgba(255, 255, 255, .3)!important;
+    border-radius: 50%;
+  }
+
+  .monthview-selected{
+    background-color: #FF6B84!important;
+    border-radius: 50%;
+  }
+
+  .text-muted{
+    border: none!important;
+  }
+
+  th{
+    border: none!important;
+  }
+
+  td{
+    border: none!important;
+  }
+
+  .swiper-container{
+
+
+  }
+  .calendar-nomads{
+    background-color: white!important;
+  }
 }

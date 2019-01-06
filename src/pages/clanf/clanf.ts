@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { ClanshPage } from '../clansh/clansh';
+import { FiltersPage } from '../filters/filters';
 
 /**
  * Generated class for the ClanfPage page.
@@ -42,6 +43,10 @@ export class ClanfPage {
     }
 ];
   constructor(public navCtrl: NavController, public navParams: NavParams) {
+  }
+
+  openFilters(){
+    this.navCtrl.push(FiltersPage);
   }
 
   openView(){
