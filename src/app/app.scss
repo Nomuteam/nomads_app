@@ -39,6 +39,12 @@ ion-navbar{
   }
   ion-buttons{
     //border: 1px solid red;
+    .cancel-hint{
+      font-family: 'Raleway', sans-serif;
+      font-weight: 700!important;
+      color: #FF6B84;
+      margin-left: 0%;
+    }
     .noms-hint{
       position: absolute;
       top: -5%;

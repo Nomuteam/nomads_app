@@ -32,6 +32,9 @@ import { FriendsPage } from '../pages/friends/friends';
 import { HistoryPage } from '../pages/history/history';
 import { ProfallyPage } from '../pages/profally/profally';
 import { MyactivitiesPage } from '../pages/myactivities/myactivities';
+import { MynomadsPage } from '../pages/mynomads/mynomads';
+import { NewactPage } from '../pages/newact/newact';
+import { ActivityPage } from '../pages/activity/activity';
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
@@ -73,7 +76,10 @@ import { FIREBASE_CONFIG } from './firebase.credentials';
     FriendsPage,
     HistoryPage,
     ProfallyPage,
-    MyactivitiesPage
+    MyactivitiesPage,
+    MynomadsPage,
+    NewactPage,
+    ActivityPage
   ],
   imports: [
     NgCalendarModule,
@@ -117,7 +123,10 @@ import { FIREBASE_CONFIG } from './firebase.credentials';
     FriendsPage,
     HistoryPage,
     ProfallyPage,
-    MyactivitiesPage
+    MyactivitiesPage,
+    MynomadsPage,
+    NewactPage,
+    ActivityPage
   ],
   providers: [
     StatusBar,

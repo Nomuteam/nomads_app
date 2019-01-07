@@ -28,12 +28,12 @@
 
 <ion-content>
  <div class="bg-img"></div>
- <div class="profile-img"></div>
- <p class="user-name">Imanol Daran Argueta</p>
+ <div class="profile-img">{{this.user_data.initial}}</div>
+ <p class="user-name">{{this.user_data.first_name}}</p>
  <div class="things-container">
    <div class="info-container">
-     <div class="user-info">Monterrey, Nuevo León</div>
-     <div class="user-info">26 years</div>
+     <div class="user-info">{{this.user_data.country}}</div>
+     <div class="user-info">{{this.user_data.birthdate}}</div>
    </div>
 
    <div class="container-noms">
@@ -73,10 +73,10 @@
      <img src="assets/img/clans_icon.png">
      <div class="element-title">Clans</div>
    </div>
-   <div (click)="openPage('f')" class="element-container">
+   <!-- <div (click)="openPage('f')" class="element-container">
      <img src="assets/img/friends_icon.png">
      <div class="element-title">Friends</div>
-   </div>
+   </div> -->
    <div (click)="openPage('n')" class="element-container">
      <img src="assets/img/notif_icon.png">
      <div class="element-title">Notification</div>

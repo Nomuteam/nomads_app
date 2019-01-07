@@ -43,10 +43,6 @@ public example_cats: any = [
 ];
 public example_days: any = [
   {
-    'day': 'D',
-    'selected': false
-  },
-  {
     'day': 'L',
     'selected': false
   },
@@ -68,6 +64,10 @@ public example_days: any = [
   },
   {
     'day': 'S',
+    'selected': false
+  },
+  {
+    'day': 'D',
     'selected': false
   },
 ];

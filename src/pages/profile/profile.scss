@@ -12,13 +12,19 @@ page-profile {
     width: 20%;
     height: 10vh;
     border-radius: 50%;
-    background-image: url('../../assets/img/imanol.png');
+    //background-image: url('../../assets/img/imanol.png');
+    background-color: #00B0FF;
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;
     margin-left: 5%;
     margin-top: -7%;
+    color: white;
     border: 1px solid rgba(255, 255, 255, .3);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 200%;
   }
   .user-name{
     font-family: 'Raleway', sans-serif;
@@ -34,8 +40,9 @@ page-profile {
     font-weight: 400!important;
     font-size: 70%;
     color: rgba(255, 255, 255, .6);
-    padding-left: 12%;
+    padding-left: 7%;
     display: inline-block!important;
+    width: 100%;
   }
 
   .things-container{
@@ -48,7 +55,8 @@ page-profile {
      display: flex;
      flex-direction: column;
      padding-left: 3%;
-     //border: 1px solid red;
+     width: 60%;
+
     }
     .container-noms{
       display: flex;

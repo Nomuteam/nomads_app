@@ -85,6 +85,33 @@ page-wallet {
     margin-top: 5%;
   }
 
+  .gold{
+    font-weight: 700!important;
+    color: #FFCC9A;
+    margin-bottom: 5%;
+  }
+
+  .activities-container{
+    border-radius: 8px;
+    border: 1px solid rgba(255, 255, 255, .8);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    margin-bottom: 3%;
+    .texts-container{
+      display: flex;
+      justify-content: space-around;
+      flex-direction: column;
+      font-family: 'Raleway', sans-serif;
+      color: white;
+      font-weight: 700;
+      .btm-text{
+        opacity: .5;
+      }
+    }
+  }
+
   .amounts-container{
     display: flex;
     justify-content: space-around;

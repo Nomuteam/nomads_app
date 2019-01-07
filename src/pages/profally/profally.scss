@@ -7,6 +7,7 @@ page-profally {
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;
+    margin-bottom: 2%;
   }
   .profile-img{
     width: 20%;
@@ -34,8 +35,7 @@ page-profally {
     font-weight: 400!important;
     font-size: 70%;
     color: rgba(255, 255, 255, .6);
-    padding-left: 12%;
-    display: inline-block!important;
+    padding-left: 7%;
   }
 
   .things-container{
@@ -45,9 +45,8 @@ page-profally {
     margin-bottom: 3%;
     //border:1px solid red;
     .info-container{
-     display: flex;
-     flex-direction: column;
-     padding-left: 3%;
+     padding-left: 6%;
+     display: inline!important;
      //border: 1px solid red;
     }
     .container-noms{

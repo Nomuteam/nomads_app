@@ -1,27 +1,7 @@
-page-chats {
-  .segment-container{
+page-mynomads {
+  .nomad-element{
     display: flex;
-    justify-content: center;
-    //border: 1px solid red;
-    margin-top: -6%!important;
-    .segment-element{
-      font-family: 'Raleway', sans-serif;
-      font-size: 110%;
-      font-weight: 700!important;
-      color: rgba(255, 255, 255, .3);
-      border-bottom: 2px solid rgba(255, 255, 255, .3);
-      margin-left: 8%;
-    }
-    .selected{
-      color: white;
-      border-bottom: 2px solid #229B86;
-    }
-  }
-
-
-  .chat-element{
-    display: flex;
-    justify-content: flex-start;
+    justify-content: space-between;
     align-items: center;
     height: 12vh;
     padding-left: 5%;
@@ -30,38 +10,48 @@ page-chats {
       width: 15%;
       height: 50%;
       border-radius: 50%;
-      padding-left: 5%;
       //border: 1px solid red;
       background-image: url('../../assets/img/imanol.png');
       background-repeat: no-repeat;
       background-size: cover;
       background-position: center;
     }
-    .chat-texts{
+    .nomad-texts{
       display: flex;
       flex-direction: column;
       justify-content: space-between;
       //border: 1px solid red;
       height: 50%;
-      padding-left: 5%;
-      .chat-sender{
+      width: 65%;
+      padding-left: 3%;
+      .nomad-name{
+        font-family: 'Raleway', sans-serif;
+        font-size: 100%;
+        font-weight: 700!important;
+        color: white;
+        display: inline-block;
+        overflow: hidden;
+      }
+      .nomad-hint{
         font-family: 'Raleway', sans-serif;
         font-size: 100%;
         color: white;
         display: inline-block;
         overflow: hidden;
-        height: 60%!important;
       }
-      .chat-hint{
-        font-family: 'Raleway', sans-serif;
-        font-size: 80%;
-        color: white;
-        display: inline-block;
-        overflow: hidden;
-      }
-      .chat-hint:after{
-        content: '...'
-      }
+    }
+    .nomad-chat{
+      //border: 1px solid red;
+      font-family: 'Raleway', sans-serif;
+      font-size: 100%;
+      font-weight: 700!important;
+      width: 10%;
+      height: 25%;
+      //color: #50E3C2;
+      background-image: url('../../assets/img/chats_icon.png');
+      background-size: contain;
+      background-repeat: no-repeat;
+      background-position: center;
     }
   }
 }

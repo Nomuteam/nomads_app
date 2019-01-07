@@ -23,6 +23,9 @@ import { MyeventsPage } from '../pages/myevents/myevents';
 import { NotificationsPage } from '../pages/notifications/notifications';
 import { FriendsPage } from '../pages/friends/friends';
 import { HistoryPage } from '../pages/history/history';
+import { MynomadsPage } from '../pages/mynomads/mynomads';
+import { NewactPage } from '../pages/newact/newact';
+import { ActivityPage } from '../pages/activity/activity';
 
 import { Keyboard } from '@ionic-native/keyboard';
 
@@ -30,6 +33,7 @@ import { Keyboard } from '@ionic-native/keyboard';
   templateUrl: 'app.html'
 })
 export class MyApp {
+
   rootPage:any = WelcomePage;
 
   constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen, modalCtrl: ModalController, keyboard: Keyboard) {

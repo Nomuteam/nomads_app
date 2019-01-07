@@ -1,11 +1,15 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, LoadingController, AlertController } from 'ionic-angular';
 import { ChatsPage } from '../chats/chats';
 import { WalletPage } from '../wallet/wallet';
 import { MyeventsPage } from '../myevents/myevents';
 import { FriendsPage } from '../friends/friends';
 import { NotificationsPage } from '../notifications/notifications';
 import { HistoryPage } from '../history/history';
+import { MynomadsPage } from '../mynomads/mynomads';
+
+import { AngularFireDatabase, AngularFireObject } from 'angularfire2/database';
+import firebase from 'firebase';
 
 /**
  * Generated class for the ProfallyPage page.
@@ -20,12 +24,33 @@ import { HistoryPage } from '../history/history';
   templateUrl: 'profally.html',
 })
 export class ProfallyPage {
+public alumno$: any;
+public user_data: any=[];
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  constructor(
+       public navCtrl: NavController,
+       public navParams: NavParams,
+       public af: AngularFireDatabase,
+       public loadingCtrl: LoadingController,
+       public alertCtrl: AlertController) {
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad ProfallyPage');
+    this.general_loader =  this.loadingCtrl.create({
+          spinner: 'bubbles',
+           content: 'Cargando...'
+          });
+    this.general_loader.present();
+    this.af.object('Users/'+firebase.auth().currentUser.uid).snapshotChanges().subscribe(action => {
+      this.alumno$ = action.payload.val();
+
+      this.user_data.first_name = this.alumno$.first_name;
+      this.user_data.last_name = this.alumno$.last_name;
+      this.user_data.email = this.alumno$.email;
+      this.user_data.phone = this.alumno$.phone;
+      this.general_loader.dismiss();
+    });
+    console.log(this.user_data);
   }
 
   openPage(pagina){
@@ -39,7 +64,7 @@ export class ProfallyPage {
       this.navCtrl.push(MyeventsPage);
     }
     else if(pagina == 'cl'){
-      this.navCtrl.parent.select(1);
+      this.navCtrl.push(MynomadsPage);
     }
     else if(pagina == 'f'){
       this.navCtrl.push(FriendsPage);

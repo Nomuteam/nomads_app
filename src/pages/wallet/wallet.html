@@ -6,7 +6,7 @@
 -->
 <ion-header>
   <ion-navbar color="black1">
-    <ion-buttons start style="margin-left: 3%!important;">
+    <ion-buttons *ngIf="this.user_type == 'nomads'" start style="margin-left: 3%!important;">
      <div class="circles-noms">
        <div class="div1"></div>
        <div class="div2"></div>
@@ -14,7 +14,7 @@
      <p class="noms-hint">Noms</p>
      <p class="noms-qty">120</p>
     </ion-buttons>
-    <ion-buttons (click)="openFilters()" end>
+    <ion-buttons *ngIf="this.user_type == 'nomads'" (click)="openFilters()" end>
      <div class="filters-noms">
        <div class="div1"></div>
        <div class="div2"></div>
@@ -42,42 +42,73 @@
    </div>
   </div>
   <div class="card-btm-container" padding>
-    <div class="hint-avg">20 booking average</div>
+    <div *ngIf="this.user_type == 'nomads'" class="hint-avg">20 booking average</div>
+    <div *ngIf="this.user_type == 'allies'" class="hint-avg">3 activities</div>
   </div>
  </div>
 
- <div class="buy-hint">Buy NOMS</div>
- <div class="amounts-container">
-   <div class="amount-container">
-     <div class="amount-hint">Amount of cash</div>
-     <div class="amount-text">$1,200</div>
+ <div *ngIf="this.user_type == 'nomads'">
+   <div class="buy-hint">Buy NOMS</div>
+   <div class="amounts-container">
+     <div class="amount-container">
+       <div class="amount-hint">Amount of cash</div>
+       <div class="amount-text">$1,200</div>
+     </div>
+     <div class="amount-container" style="margin-left: 3%;">
+       <div class="amount-hint">Amount of NOMS</div>
+       <div class="amount-text">95</div>
+     </div>
    </div>
-   <div class="amount-container" style="margin-left: 3%;">
-     <div class="amount-hint">Amount of NOMS</div>
-     <div class="amount-text">95</div>
-   </div>
+   <div class="booking-avg"><b>10</b> to <b>20</b> bookings</div>
+
+   <button type="button" class="pay-btn" padding>Pay NOMS</button>
+
+   <div class="buy-hint">Packages</div>
+
+   <ion-slides slidesPerView="2">
+     <ion-slide *ngFor="let s of this.example_packages; let in = index">
+      <div (click)="selectP(in)" class="{{isSelected(in)}}">
+        <div class="top-slide">
+          <div class="qty-slide">{{s.noms}}</div>
+          <div class="circles-noms">
+            <div class="div1"></div>
+            <div class="div2"></div>
+            <div class="div3"></div></div>
+        </div>
+        <div class="btm-slide">
+          <div class="bookings-avg">{{s.bookings_avg}} Bookings avg.</div>
+          <div class="slide-price">$ {{s.price}} MXN</div>
+        </div>
+      </div>
+     </ion-slide>
+   </ion-slides>
  </div>
- <div class="booking-avg"><b>10</b> to <b>20</b> bookings</div>
 
- <button type="button" class="pay-btn" padding>Pay NOMS</button>
+ <div *ngIf="this.user_type == 'allies'">
+   <div class="buy-hint gold">My Activities</div>
 
- <div class="buy-hint">Packages</div>
-
- <ion-slides slidesPerView="2">
-   <ion-slide *ngFor="let s of this.example_packages; let in = index">
-    <div (click)="selectP(in)" class="{{isSelected(in)}}">
-      <div class="top-slide">
-        <div class="qty-slide">{{s.noms}}</div>
-        <div class="circles-noms">
-          <div class="div1"></div>
-          <div class="div2"></div>
-          <div class="div3"></div></div>
-      </div>
-      <div class="btm-slide">
-        <div class="bookings-avg">{{s.bookings_avg}} Bookings avg.</div>
-        <div class="slide-price">$ {{s.price}} MXN</div>
-      </div>
+    <div class="activities-container" padding>
+     <div class="texts-container">
+       <div class="top-text">Yoga Class</div>
+       <div class="btm-text">8:00 am</div>
+     </div>
+     <div class="texts-container">
+       <div class="top-text">60 NOM</div>
+       <div class="btm-text">$6,542.00 MXN</div>
+     </div>
     </div>
-   </ion-slide>
- </ion-slides>
+
+    <div class="activities-container" padding>
+     <div class="texts-container">
+       <div class="top-text">Yoga Class</div>
+       <div class="btm-text">8:00 am</div>
+     </div>
+     <div class="texts-container">
+       <div class="top-text">60 NOM</div>
+       <div class="btm-text">$6,542.00 MXN</div>
+     </div>
+    </div>
+
+ </div>
+
 </ion-content>

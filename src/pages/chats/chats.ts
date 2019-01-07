@@ -16,6 +16,7 @@ import { FiltersPage } from '../filters/filters';
 })
 export class ChatsPage {
 public segment: any = 'instructors';
+public user_type: any = '';
 public example_chats: any = [
   {
     'name': 'Mónica',
@@ -34,6 +35,7 @@ public example_chats: any = [
   },
 ]
   constructor(public navCtrl: NavController, public navParams: NavParams) {
+    this.user_type = localStorage.getItem('Tipo');
   }
 
   openFilters(){

@@ -6,19 +6,20 @@
 -->
 <ion-header>
   <ion-navbar color="black1">
-    <p class="title">Ally Activities</p>
+    <p class="title">Your Activities</p>
   </ion-navbar>
 </ion-header>
 
 
 <ion-content padding>
-<div class="activity-container" padding>
-  <div class="activity-title">Yoga Class</div>
-  <div class="activity-time">8:00 am</div>
+
+<div *ngFor="let a of this.activities" (click)="openActivity(a)" class="activity-container" padding>
+  <div class="activity-title">{{a.title}}</div>
+  <div class="activity-time">{{a.schedule[0].start_time}}</div>
 </div>
 
-<ion-fab right bottom>
-    <button ion-fab color="green"><ion-icon name="add" color="black1"></ion-icon></button>
+<ion-fab (click)="openNew()" right bottom>
+    <button ion-fab color="green"><ion-icon name="add" color="white"></ion-icon></button>
 </ion-fab>
 
 </ion-content>

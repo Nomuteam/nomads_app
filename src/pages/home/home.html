@@ -30,48 +30,12 @@
    <div class="category-title blue">Don't miss it!</div>
    <p class="category-suggestions">We have this suggestions for you</p>
    <ion-slides slidesPerView="2.5">
-    <ion-slide>
+    <ion-slide (click)="openActivity(a)" *ngFor="let a of this.activities">
       <div class="img-slide"></div>
-      <p class="act-title">Relaxing Hike</p>
-      <p class="act-distance">4.5 km</p>
+      <p class="act-title">{{a.title}}</p>
+      <p class="act-distance"> - km</p>
       <div class="noms-coins">
-        <p>15</p>
-        <div class="circles-noms">
-          <div class="div1"></div>
-          <div class="div2"></div>
-          <div class="div3"></div></div>
-      </div>
-    </ion-slide>
-    <ion-slide>
-      <div class="img-slide"></div>
-      <p class="act-title">Relaxing Hike</p>
-      <p class="act-distance">4.5 km</p>
-      <div class="noms-coins">
-        <p>15</p>
-        <div class="circles-noms">
-          <div class="div1"></div>
-          <div class="div2"></div>
-          <div class="div3"></div></div>
-      </div>
-    </ion-slide>
-    <ion-slide>
-      <div class="img-slide"></div>
-      <p class="act-title">Relaxing Hike</p>
-      <p class="act-distance">4.5 km</p>
-      <div class="noms-coins">
-        <p>15</p>
-        <div class="circles-noms">
-          <div class="div1"></div>
-          <div class="div2"></div>
-          <div class="div3"></div></div>
-      </div>
-    </ion-slide>
-    <ion-slide>
-      <div class="img-slide"></div>
-      <p class="act-title">Relaxing Hike</p>
-      <p class="act-distance">4.5 km</p>
-      <div class="noms-coins">
-        <p>15</p>
+        <p>{{a.class_price}}</p>
         <div class="circles-noms">
           <div class="div1"></div>
           <div class="div2"></div>
@@ -83,50 +47,15 @@
 
   <div class="category-container">
    <div class="category-title rose">Your Favorites</div>
-   <p class="category-suggestions">We have this suggestions for you</p>
+   <p *ngIf="this.favorites.length > 0" class="category-suggestions">We have this suggestions for you</p>
+   <p *ngIf="this.favorites.length == 0" class="category-suggestions">You don't have favorites yet!</p>
    <ion-slides slidesPerView="2.5">
-    <ion-slide>
+    <ion-slide (click)="openActivity(a)"  *ngFor="let f of this.favorites">
       <div class="img-slide"></div>
-      <p class="act-title">Relaxing Hike</p>
-      <p class="act-distance">4.5 km</p>
+      <p class="act-title">{{f.title}}</p>
+      <p class="act-distance"> - km</p>
       <div class="noms-coins">
-        <p>15</p>
-        <div class="circles-noms">
-          <div class="div1"></div>
-          <div class="div2"></div>
-          <div class="div3"></div></div>
-      </div>
-    </ion-slide>
-    <ion-slide>
-      <div class="img-slide"></div>
-      <p class="act-title">Relaxing Hike</p>
-      <p class="act-distance">4.5 km</p>
-      <div class="noms-coins">
-        <p>15</p>
-        <div class="circles-noms">
-          <div class="div1"></div>
-          <div class="div2"></div>
-          <div class="div3"></div></div>
-      </div>
-    </ion-slide>
-    <ion-slide>
-      <div class="img-slide"></div>
-      <p class="act-title">Relaxing Hike</p>
-      <p class="act-distance">4.5 km</p>
-      <div class="noms-coins">
-        <p>15</p>
-        <div class="circles-noms">
-          <div class="div1"></div>
-          <div class="div2"></div>
-          <div class="div3"></div></div>
-      </div>
-    </ion-slide>
-    <ion-slide>
-      <div class="img-slide"></div>
-      <p class="act-title">Relaxing Hike</p>
-      <p class="act-distance">4.5 km</p>
-      <div class="noms-coins">
-        <p>15</p>
+        <p>{{f.class_price}}</p>
         <div class="circles-noms">
           <div class="div1"></div>
           <div class="div2"></div>
@@ -140,54 +69,18 @@
    <div class="category-title green">Featured</div>
    <p class="category-suggestions">We have this suggestions for you</p>
    <ion-slides slidesPerView="2.5">
-    <ion-slide>
-      <div class="img-slide"></div>
-      <p class="act-title">Relaxing Hike</p>
-      <p class="act-distance">4.5 km</p>
-      <div class="noms-coins">
-        <p>15</p>
-        <div class="circles-noms">
-          <div class="div1"></div>
-          <div class="div2"></div>
-          <div class="div3"></div></div>
-      </div>
-    </ion-slide>
-    <ion-slide>
-      <div class="img-slide"></div>
-      <p class="act-title">Relaxing Hike</p>
-      <p class="act-distance">4.5 km</p>
-      <div class="noms-coins">
-        <p>15</p>
-        <div class="circles-noms">
-          <div class="div1"></div>
-          <div class="div2"></div>
-          <div class="div3"></div></div>
-      </div>
-    </ion-slide>
-    <ion-slide>
-      <div class="img-slide"></div>
-      <p class="act-title">Relaxing Hike</p>
-      <p class="act-distance">4.5 km</p>
-      <div class="noms-coins">
-        <p>15</p>
-        <div class="circles-noms">
-          <div class="div1"></div>
-          <div class="div2"></div>
-          <div class="div3"></div></div>
-      </div>
-    </ion-slide>
-    <ion-slide>
-      <div class="img-slide"></div>
-      <p class="act-title">Relaxing Hike</p>
-      <p class="act-distance">4.5 km</p>
-      <div class="noms-coins">
-        <p>15</p>
-        <div class="circles-noms">
-          <div class="div1"></div>
-          <div class="div2"></div>
-          <div class="div3"></div></div>
-      </div>
-    </ion-slide>
+     <ion-slide (click)="openActivity(a)"  *ngFor="let a of this.activities">
+       <div class="img-slide"></div>
+       <p class="act-title">{{a.title}}</p>
+       <p class="act-distance"> - km</p>
+       <div class="noms-coins">
+         <p>{{a.class_price}}</p>
+         <div class="circles-noms">
+           <div class="div1"></div>
+           <div class="div2"></div>
+           <div class="div3"></div></div>
+       </div>
+     </ion-slide>
   </ion-slides>
   </div>
 
@@ -195,54 +88,18 @@
    <div class="category-title green">Trending</div>
    <p class="category-suggestions">We have this suggestions for you</p>
    <ion-slides slidesPerView="2.5">
-    <ion-slide>
-      <div class="img-slide"></div>
-      <p class="act-title">Relaxing Hike</p>
-      <p class="act-distance">4.5 km</p>
-      <div class="noms-coins">
-        <p>15</p>
-        <div class="circles-noms">
-          <div class="div1"></div>
-          <div class="div2"></div>
-          <div class="div3"></div></div>
-      </div>
-    </ion-slide>
-    <ion-slide>
-      <div class="img-slide"></div>
-      <p class="act-title">Relaxing Hike</p>
-      <p class="act-distance">4.5 km</p>
-      <div class="noms-coins">
-        <p>15</p>
-        <div class="circles-noms">
-          <div class="div1"></div>
-          <div class="div2"></div>
-          <div class="div3"></div></div>
-      </div>
-    </ion-slide>
-    <ion-slide>
-      <div class="img-slide"></div>
-      <p class="act-title">Relaxing Hike</p>
-      <p class="act-distance">4.5 km</p>
-      <div class="noms-coins">
-        <p>15</p>
-        <div class="circles-noms">
-          <div class="div1"></div>
-          <div class="div2"></div>
-          <div class="div3"></div></div>
-      </div>
-    </ion-slide>
-    <ion-slide>
-      <div class="img-slide"></div>
-      <p class="act-title">Relaxing Hike</p>
-      <p class="act-distance">4.5 km</p>
-      <div class="noms-coins">
-        <p>15</p>
-        <div class="circles-noms">
-          <div class="div1"></div>
-          <div class="div2"></div>
-          <div class="div3"></div></div>
-      </div>
-    </ion-slide>
+     <ion-slide (click)="openActivity(a)"  *ngFor="let a of this.activities">
+       <div class="img-slide"></div>
+       <p class="act-title">{{a.title}}</p>
+       <p class="act-distance"> - km</p>
+       <div class="noms-coins">
+         <p>{{a.class_price}}</p>
+         <div class="circles-noms">
+           <div class="div1"></div>
+           <div class="div2"></div>
+           <div class="div3"></div></div>
+       </div>
+     </ion-slide>
   </ion-slides>
   </div>
 
@@ -250,109 +107,38 @@
    <div class="category-title green">Top Activities</div>
    <p class="category-suggestions">We have this suggestions for you</p>
    <ion-slides slidesPerView="2.5">
-    <ion-slide>
-      <div class="img-slide"></div>
-      <p class="act-title">Relaxing Hike</p>
-      <p class="act-distance">4.5 km</p>
-      <div class="noms-coins">
-        <p>15</p>
-        <div class="circles-noms">
-          <div class="div1"></div>
-          <div class="div2"></div>
-          <div class="div3"></div></div>
-      </div>
-    </ion-slide>
-    <ion-slide>
-      <div class="img-slide"></div>
-      <p class="act-title">Relaxing Hike</p>
-      <p class="act-distance">4.5 km</p>
-      <div class="noms-coins">
-        <p>15</p>
-        <div class="circles-noms">
-          <div class="div1"></div>
-          <div class="div2"></div>
-          <div class="div3"></div></div>
-      </div>
-    </ion-slide>
-    <ion-slide>
-      <div class="img-slide"></div>
-      <p class="act-title">Relaxing Hike</p>
-      <p class="act-distance">4.5 km</p>
-      <div class="noms-coins">
-        <p>15</p>
-        <div class="circles-noms">
-          <div class="div1"></div>
-          <div class="div2"></div>
-          <div class="div3"></div></div>
-      </div>
-    </ion-slide>
-    <ion-slide>
-      <div class="img-slide"></div>
-      <p class="act-title">Relaxing Hike</p>
-      <p class="act-distance">4.5 km</p>
-      <div class="noms-coins">
-        <p>15</p>
-        <div class="circles-noms">
-          <div class="div1"></div>
-          <div class="div2"></div>
-          <div class="div3"></div></div>
-      </div>
-    </ion-slide>
+     <ion-slide (click)="openActivity(a)"  *ngFor="let a of this.activities">
+       <div class="img-slide"></div>
+       <p class="act-title">{{a.title}}</p>
+       <p class="act-distance"> - km</p>
+       <div class="noms-coins">
+         <p>{{a.class_price}}</p>
+         <div class="circles-noms">
+           <div class="div1"></div>
+           <div class="div2"></div>
+           <div class="div3"></div></div>
+       </div>
+     </ion-slide>
   </ion-slides>
   </div>
 
   <div class="category-container">
    <div class="category-title purple">Events</div>
-   <p class="category-suggestions">We have this suggestions for you</p>
+   <p *ngIf="this.events.length > 0" class="category-suggestions">We have this suggestions for you</p>
+   <p *ngIf="this.events.length == 0" class="category-suggestions">There are not any events created yet!</p>
    <ion-slides slidesPerView="2.5">
-    <ion-slide>
-      <div class="img-slide"></div>
-      <p class="act-title">Relaxing Hike</p>
-      <p class="act-distance">4.5 km</p>
-      <div class="noms-coins">
-        <p>15</p>
-        <div class="circles-noms">
-          <div class="div1"></div>
-          <div class="div2"></div>
-          <div class="div3"></div></div>
-      </div>
-    </ion-slide>
-    <ion-slide>
-      <div class="img-slide"></div>
-      <p class="act-title">Relaxing Hike</p>
-      <p class="act-distance">4.5 km</p>
-      <div class="noms-coins">
-        <p>15</p>
-        <div class="circles-noms">
-          <div class="div1"></div>
-          <div class="div2"></div>
-          <div class="div3"></div></div>
-      </div>
-    </ion-slide>
-    <ion-slide>
-      <div class="img-slide"></div>
-      <p class="act-title">Relaxing Hike</p>
-      <p class="act-distance">4.5 km</p>
-      <div class="noms-coins">
-        <p>15</p>
-        <div class="circles-noms">
-          <div class="div1"></div>
-          <div class="div2"></div>
-          <div class="div3"></div></div>
-      </div>
-    </ion-slide>
-    <ion-slide>
-      <div class="img-slide"></div>
-      <p class="act-title">Relaxing Hike</p>
-      <p class="act-distance">4.5 km</p>
-      <div class="noms-coins">
-        <p>15</p>
-        <div class="circles-noms">
-          <div class="div1"></div>
-          <div class="div2"></div>
-          <div class="div3"></div></div>
-      </div>
-    </ion-slide>
+     <ion-slide *ngFor="let e of this.events">
+       <div class="img-slide"></div>
+       <p class="act-title">{{e.title}}</p>
+       <p class="act-distance"> - km</p>
+       <div class="noms-coins">
+         <p>{{e.class_price}}</p>
+         <div class="circles-noms">
+           <div class="div1"></div>
+           <div class="div2"></div>
+           <div class="div3"></div></div>
+       </div>
+     </ion-slide>
   </ion-slides>
   </div>
 

@@ -15,6 +15,7 @@ import { FiltersPage } from '../filters/filters';
   templateUrl: 'wallet.html',
 })
 export class WalletPage {
+public user_type: any='';
 public example_packages: any = [
   {
     'noms': 100,
@@ -44,6 +45,7 @@ public example_packages: any = [
 public selected: any = 0;
 
   constructor(public navCtrl: NavController, public navParams: NavParams) {
+    this.user_type = localStorage.getItem('Tipo');
   }
 
   openFilters(){
