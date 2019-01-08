@@ -82,14 +82,14 @@
         <string>Para ubicar a los camiones</string>
     </edit-config>
     <edit-config file="*-Info.plist" mode="merge" target="NSCameraUsageDescription">
-      <string>Upload and take pictures for your profile</string>
-  </edit-config>
-  <edit-config file="*-Info.plist" mode="merge" target="NSPhotoLibraryAddUsageDescription">
-      <string>Upload and take pictures for your profile</string>
-  </edit-config>
-  <edit-config file="*-Info.plist" mode="merge" target="NSPhotoLibraryUsageDescription">
-      <string>Upload and take pictures for your profile</string>
-  </edit-config>
+        <string>Upload and take pictures for your profile</string>
+    </edit-config>
+    <edit-config file="*-Info.plist" mode="merge" target="NSPhotoLibraryAddUsageDescription">
+        <string>Upload and take pictures for your profile</string>
+    </edit-config>
+    <edit-config file="*-Info.plist" mode="merge" target="NSPhotoLibraryUsageDescription">
+        <string>Upload and take pictures for your profile</string>
+    </edit-config>
     <allow-navigation href="http://192.168.100.5:8100" />
     <allow-navigation href="http://192.168.1.73:8100" />
     <engine name="ios" spec="4.5.5" />
