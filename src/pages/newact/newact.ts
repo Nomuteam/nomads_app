@@ -275,7 +275,7 @@ export class NewactPage {
         this.general_loader.dismiss();
         this.alertCtrl.create({
           title: 'Activity Created',
-          content: 'Your activity was created succesfully',
+          message: 'Your activity was created succesfully',
           buttons: ['Ok']
         }).present();
         this.navCtrl.pop();
@@ -286,7 +286,7 @@ export class NewactPage {
     if(this.current_index == 4){
       this.general_loader = this.loadingCtrl.create({
         spinner: 'bubbles',
-        message: 'Creating...'
+        content: 'Creating...'
       });
       this.general_loader.present();
       this.doMagic();
