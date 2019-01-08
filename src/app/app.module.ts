@@ -35,6 +35,9 @@ import { MyactivitiesPage } from '../pages/myactivities/myactivities';
 import { MynomadsPage } from '../pages/mynomads/mynomads';
 import { NewactPage } from '../pages/newact/newact';
 import { ActivityPage } from '../pages/activity/activity';
+import { ClanPage } from '../pages/clan/clan';
+import { NewclanPage } from '../pages/newclan/newclan';
+import { MembersPage } from '../pages/members/members';
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
@@ -42,6 +45,7 @@ import { Keyboard } from '@ionic-native/keyboard';
 
 import { NgCalendarModule  } from 'ionic2-calendar';
 import { Geolocation } from '@ionic-native/geolocation';
+import { Camera } from '@ionic-native/camera';
 import { AngularFireModule } from 'angularfire2';
 import { AngularFireDatabaseModule } from 'angularfire2/database';
 import { AngularFireAuthModule } from 'angularfire2/auth';
@@ -79,7 +83,10 @@ import { FIREBASE_CONFIG } from './firebase.credentials';
     MyactivitiesPage,
     MynomadsPage,
     NewactPage,
-    ActivityPage
+    ActivityPage,
+    ClanPage,
+    NewclanPage,
+    MembersPage
   ],
   imports: [
     NgCalendarModule,
@@ -126,12 +133,16 @@ import { FIREBASE_CONFIG } from './firebase.credentials';
     MyactivitiesPage,
     MynomadsPage,
     NewactPage,
-    ActivityPage
+    ActivityPage,
+    ClanPage,
+    NewclanPage,
+    MembersPage
   ],
   providers: [
     StatusBar,
     SplashScreen,
     Keyboard,
+    Camera,
     Geolocation,
     {provide: ErrorHandler, useClass: IonicErrorHandler}
   ]

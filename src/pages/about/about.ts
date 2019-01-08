@@ -1,13 +1,21 @@
 import { Component } from '@angular/core';
-import { NavController } from 'ionic-angular';
+import { NavController, LoadingController, AlertController } from 'ionic-angular';
 import { ClanfPage } from '../clanf/clanf';
 import { FiltersPage } from '../filters/filters';
+import { ClanPage } from '../clan/clan';
+import { NewclanPage } from '../newclan/newclan';
+import { AngularFireDatabase, AngularFireObject } from 'angularfire2/database';
+import firebase from 'firebase';
+import { DomSanitizer } from '@angular/platform-browser';
 
 @Component({
   selector: 'page-about',
   templateUrl: 'about.html'
 })
 export class AboutPage {
+  public general_loader: any;
+  public response$: any;
+  public my_clans: any = [];
   public clans_example: any = [
     {
       'title': 'Tec de Mty',
@@ -19,8 +27,78 @@ export class AboutPage {
     }
 ];
 
-  constructor(public navCtrl: NavController) {
+  constructor(public navCtrl: NavController,
+  public af: AngularFireDatabase,
+  public loadingCtrl: LoadingController,
+  public alertCtrl: AlertController,
+  public sanitizer: DomSanitizer) {
 
+  }
+
+  sanitizeThis(image){
+    return this.sanitizer.bypassSecurityTrustStyle('url('+image+')');
+  }
+
+  isMember(miembros){
+    for(let key in miembros){
+      if(miembros[key].index == firebase.auth().currentUser.uid){
+        return true;
+      }
+    }
+    return false;
+  }
+
+  convertClans(){
+    let a = this.response$;
+    for(let key in a){
+      if(this.isMember(a[key].members)){
+        this.my_clans.push({
+          'name': a[key].name.substring(0, 10) + '..',
+          'name_complete': a[key].name,
+          'location': a[key].location,
+          'description':  a[key].description,
+          'owner':  a[key].owner,
+          'rules':  a[key].rules,
+          'type':  a[key].type,
+          'secret_code':  a[key].secret_code,
+          'members':  a[key].members,
+          'img':  a[key].img,
+          'index':  a[key].index
+        });
+      }
+    }
+    this.general_loader.dismiss();
+  }
+
+
+  getClans(){
+    this.af.object('Clans').snapshotChanges().subscribe(action => {
+      this.response$ = action.payload.val();
+      this.my_clans = [];
+      this.convertClans();
+    });
+  }
+
+  ionViewDidLoad() {
+    this.general_loader = this.loadingCtrl.create({
+      spinner: 'bubbles',
+      content: 'Loading...'
+    });
+    this.general_loader.present();
+    this.getClans();
+  }
+
+  getTextM(miembros){
+    return (miembros != '1' ? miembros.length+' nomads' : miembros.length+' nomads');
+  }
+
+
+  openCreate(){
+    this.navCtrl.push(NewclanPage);
+  }
+
+  openClan(clan){
+    this.navCtrl.push(ClanPage, {'Clan': clan});
   }
 
   openFind(){

@@ -1,0 +1,184 @@
+page-clan {
+
+ .clan-title{
+   ont-family: 'Raleway', sans-serif;
+   font-size: 100%;
+   font-weight: 700!important;
+   color: rgba(255, 255, 255, 1);
+   text-align: center;
+   margin-top: -3%!important;
+ }
+ .clan-maina{
+   ont-family: 'Raleway', sans-serif;
+   font-size: 80%;
+   font-weight: 400!important;
+   color: #FF6B84;
+   text-align: center;
+ }
+
+
+ .clan-container{
+   background-color: rgba(216, 216, 216, .08);
+   //border: 1px solid white;
+   border-radius: 15px;
+   overflow: scroll;
+   margin-bottom: 5%;
+   .clan-img{
+     background-image: url('../../assets/img/clans_example.png');
+     background-repeat: no-repeat;
+     background-size: cover;
+     background-position: bottom;
+     height: 25vh;
+     border-radius: 15px 15px 0 0;
+   }
+   .clan-title{
+     font-family: 'Raleway', sans-serif;
+     font-weight: 700!important;
+     font-size: 100%;
+     color: white;
+     //border: 1px solid red;
+     text-align: left;
+     padding-left: 5%;
+   }
+   .clan-cat{
+     font-family: 'Raleway', sans-serif;
+     font-weight: 400!important;
+     font-size: 80%;
+     color: #FF6B84;
+     //border: 1px solid red;
+     text-align: left;
+     padding-left: 5%;
+     margin-top: -6%;
+   }
+   .jc-topcontainer{
+     display: flex;
+     justify-content: space-between;
+     align-items: center;
+     margin-top: 3%;
+   }
+   .clan-members{
+     font-family: 'Raleway', sans-serif;
+     font-weight: 400!important;
+     font-size: 70%;
+     color: white;
+     //border: 1px solid red;
+     text-align: left;
+     padding-left: 5%;
+   }
+   .share-icon{
+     margin-right: 5%;
+   }
+   .flex-containerc{
+     display: flex;
+     justify-content: space-between;
+   }
+
+   .element-title{
+     font-family: 'Raleway', sans-serif;
+     font-weight: 700!important;
+     font-size: 70%;
+     color: rgba(255, 255, 255, .5);
+     text-align: left;
+     padding-left: 5%;
+   }
+   .element-desc{
+     font-family: 'Raleway', sans-serif;
+     font-weight: 400!important;
+     font-size: 70%;
+     color: rgba(255, 255, 255, 1);
+     text-align: left;
+     padding-left: 5%;
+     margin-top: -2%!important;
+     max-height: 15%;
+     overflow: scroll;
+   }
+   .join-btn{
+     width: 40vw;
+     height: 6vh;
+     border-radius: 30px;
+     background-color: #FF6B84;
+
+     font-family: 'Raleway', sans-serif;
+     font-size: 90%;
+     font-weight: 700!important;
+     color: white;
+   }
+ }
+
+ .section-title{
+   font-family: 'Raleway', sans-serif;
+   font-size: 90%;
+   font-weight: 700!important;
+   color: #FFCC9A;
+   margin-bottom: 3%;
+ }
+
+ .schedule-container{
+   margin-bottom: 10%;
+   .schedule-day{
+     font-family: 'Raleway', sans-serif;
+     font-size: 90%;
+     font-weight: 300!important;
+     color: rgba(255, 255, 255, .5);
+     margin-bottom: 2%;
+   }
+   .schedule-element{
+     display: flex;
+     justify-content: space-between;
+     align-items: center;
+     font-family: 'Raleway', sans-serif;
+     .schedule-left{
+       display: flex;
+       flex-direction: column;
+       justify-content: center;
+       align-items: center;
+       .schedule-nomad{
+         color: rgba(255, 255, 255, .8);
+         font-size: 90%;
+       }
+       .schedule-activity{
+         text-align: left;
+         color: rgba(255, 255, 255, .5);
+         font-size: 70%;
+       }
+     }
+     .schedule-right{
+       display: flex;
+       flex-direction: column;
+       justify-content: center;
+       align-items: center;
+       .schedule-spots{
+         color: #229B86;
+         font-size: 90%;
+       }
+       .schedule-time{
+         color: rgba(255, 255, 255, .5);
+         font-size: 70%;
+       }
+     }
+   }
+ }
+
+ .pink-btn{
+   display: block;
+   margin: 0 auto;
+   padding: 3%;
+   width: 100%;
+   font-family: 'Raleway', sans-serif;
+   font-weight: 700;
+   color: rgba(255, 255, 255, 1);
+   background-color: #FF6B84;
+   margin-bottom: 3%;
+   border-radius: 20px;
+ }
+
+ .leave-btn{
+   text-align: center;
+   font-family: 'Raleway', sans-serif;
+   font-weight: 700;
+   color: #FF6B84;
+   margin-top: 10%;
+   margin-bottom: 6%;
+ }
+
+}

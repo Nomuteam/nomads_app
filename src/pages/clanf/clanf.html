@@ -27,14 +27,15 @@
 
 
 <ion-content padding>
- <input type="text" placeholder="Search clan" class="clan-search">
+ <input type="text" placeholder="Search clan" class="clan-search" [(ngModel)]="search">
+ <p *ngIf="this.getFiltered().length == 0" class="message">There are no clans avaialable to be joined yet!</p>
  <ion-grid>
    <ion-row>
-     <ion-col (click)="openView()" col-6 *ngFor="let a of this.clans_example">
-       <div class="img-slide"></div>
-       <p class="{{returnStatus(a.status)}}">{{getStatus(a.status)}}</p>
-       <p class="act-title">{{a.title}}</p>
-       <p class="act-distance">{{a.members}} nomads</p>
+     <ion-col (click)="openView(in)" col-6 *ngFor="let a of this.getFiltered(); let in=index">
+       <div class="img-slide" [style.background-image]="sanitizeThis(a.img)"></div>
+       <p class="{{returnStatus(a.status)}}">{{getStatus(a.type)}}</p>
+       <p class="act-title">{{a.name}}</p>
+       <p class="act-distance">{{getTextM(a.members)}}</p>
        <p class="act-location">{{a.location}}</p>
      </ion-col>
    </ion-row>

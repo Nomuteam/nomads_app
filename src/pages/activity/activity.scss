@@ -39,6 +39,9 @@ page-activity {
      z-index: 90;
      height: 35vh;
      background-image: url('../../assets/img/example_act.png');
+     background-size: cover;
+     background-repeat: no-repeat;
+     background-position: center;
      border-radius: 15px 15px 0 0;
     }
     .main-info{

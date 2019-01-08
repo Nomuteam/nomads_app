@@ -1,0 +1,36 @@
+<!--
+  Generated template for the MembersPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+  <ion-navbar color="black1">
+    <ion-buttons start style="margin-left: 3%!important;">
+     <div class="circles-noms">
+       <div class="div1"></div>
+       <div class="div2"></div>
+       <div class="div3"></div></div>
+     <p class="noms-hint">Noms</p>
+     <p class="noms-qty">120</p>
+    </ion-buttons>
+    <ion-buttons (click)="openFilters()" end>
+     <div class="filters-noms">
+       <div class="div1"></div>
+       <div class="div2"></div>
+       <div class="div3"></div>
+     </div>
+    </ion-buttons>
+    <p class="title">Clan Members</p>
+  </ion-navbar>
+</ion-header>
+
+
+<ion-content padding>
+  <div *ngFor="let m of this.actual_members" class="nomad-element">
+      <div class="user-img">{{m.first_name.charAt(0)}}</div>
+      <div class="nomad-texts">
+       <div class="nomad-name">{{m.first_name}}</div>
+      </div>
+  </div>
+</ion-content>

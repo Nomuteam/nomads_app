@@ -26,6 +26,9 @@ import { HistoryPage } from '../pages/history/history';
 import { MynomadsPage } from '../pages/mynomads/mynomads';
 import { NewactPage } from '../pages/newact/newact';
 import { ActivityPage } from '../pages/activity/activity';
+import { ClanPage } from '../pages/clan/clan';
+import { NewclanPage } from '../pages/newclan/newclan';
+import { MembersPage } from '../pages/members/members';
 
 import { Keyboard } from '@ionic-native/keyboard';
 

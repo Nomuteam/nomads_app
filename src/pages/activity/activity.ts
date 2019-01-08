@@ -5,6 +5,7 @@ import { Geolocation } from '@ionic-native/geolocation';
 import { FiltersPage } from '../filters/filters';
 import { AngularFireDatabase, AngularFireObject } from 'angularfire2/database';
 import firebase from 'firebase';
+import { DomSanitizer } from '@angular/platform-browser';
 
 /**
  * Generated class for the ActivityPage page.
@@ -30,9 +31,14 @@ public activity_data: any =[];
     public af: AngularFireDatabase,
     public loadingCtrl: LoadingController,
     public alertCtrl: AlertController,
-    public geolocation: Geolocation) {
+    public geolocation: Geolocation,
+    public sanitizer: DomSanitizer) {
     this.activity_data = this.navParams.get('Activity');
     console.log(this.activity_data)
+  }
+
+  sanitizeThis(image){
+    return this.sanitizer.bypassSecurityTrustStyle('url('+image+')');
   }
 
   ionViewDidLoad(){

@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, LoadingController, AlertController } from 'ionic-angular';
+import { App, IonicPage, NavController, NavParams, LoadingController, AlertController } from 'ionic-angular';
 import { ChatsPage } from '../chats/chats';
 import { WalletPage } from '../wallet/wallet';
 import { MyeventsPage } from '../myevents/myevents';
@@ -9,6 +9,8 @@ import { HistoryPage } from '../history/history';
 import { FiltersPage } from '../filters/filters';
 import { AngularFireDatabase, AngularFireObject } from 'angularfire2/database';
 import firebase from 'firebase';
+import { AngularFireAuth } from 'angularfire2/auth';
+import { WelcomePage } from '../welcome/welcome';
 
 
 /**
@@ -22,6 +24,8 @@ import firebase from 'firebase';
 @Component({
   selector: 'page-profile',
   templateUrl: 'profile.html',
+  providers: [AngularFireAuth]
+
 })
 export class ProfilePage {
 public alumno$: any;
@@ -33,7 +37,9 @@ public user_data: any=[];
     public navParams: NavParams,
     public af: AngularFireDatabase,
     public loadingCtrl: LoadingController,
-    public alertCtrl: AlertController) {
+    public alertCtrl: AlertController,
+    public appCtrl: App,
+    public afAuth: AngularFireAuth) {
   }
 
   openFilters(){
@@ -84,5 +90,11 @@ public user_data: any=[];
       this.navCtrl.push(HistoryPage);
     }
   }
+
+  logOut(){
+    this.afAuth.auth.signOut();
+    this.appCtrl.getRootNav().setRoot(WelcomePage);
+  }
+
 
 }

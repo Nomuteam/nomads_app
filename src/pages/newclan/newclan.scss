@@ -1,0 +1,95 @@
+page-newclan {
+  .title-container{
+    font-weight: 400;
+    font-size: 100%;
+    color: white;
+    padding-left: 5%;
+  }
+
+  .card-container{
+    margin-left: 5%;
+    height: auto;
+    border-radius: 10px;
+    position: relative;
+    padding-bottom: 5vh;
+    margin-bottom: 5%;
+    .input-group{
+      padding-top: 1%;
+      .input-title{
+        font-size: 90%;
+        color: rgba(255, 255, 255, .5);
+      }
+      .input-field{
+        color: white;
+        background-color: transparent;
+        border: 1px solid rgba(255, 255, 255, .5)!important;
+        width: 95%;
+        padding: 2%;
+        border-radius: 5px!important;
+      }
+      .input-field:hover{
+        border: 1px solid #FFCC9A!important;
+      }
+      .add-btn{
+        width: 95%;
+        border-radius: 5px;
+        font-family: 'Raleway', sans-serif;
+        font-size: 70%;
+        color: white;
+        padding: 4%;
+        background-color: #229B86;
+      }
+      .types-container{
+        width: 95%;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        .type-element{
+          font-family: 'Raleway', sans-serif;
+          font-size: 70%;
+          color: white;
+          padding: 4%;
+          padding-left: 10%;
+          padding-right: 10%;
+          border-radius: 20px;
+          background-color: transparent;
+          border: 1px solid #229B86;
+        }
+        .selected{
+          background-color: #229B86;
+          font-weight: 700;
+        }
+      }
+    }
+
+    .pw-forgot{
+      font-family: 'Raleway', sans-serif;
+      font-size: 80%;
+      color: white;
+      width: 60vw;
+      margin-left: 30vw;
+    }
+
+    .register-btn{
+      font-family: 'Raleway', sans-serif;
+      font-size: 90%;
+      color: white;
+      margin-left: 5%;
+      padding-bottom: 5%;
+      margin-top: 5vh;
+    }
+  }
+
+  .pink-btn{
+    display: block;
+    margin: 0 auto;
+    padding: 3%;
+    width: 100%;
+    font-family: 'Raleway', sans-serif;
+    font-weight: 700;
+    color: rgba(255, 255, 255, 1);
+    background-color: #FF6B84;
+    margin-bottom: 3%;
+    border-radius: 20px;
+  }
+}

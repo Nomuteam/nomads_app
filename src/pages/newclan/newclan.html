@@ -1,0 +1,74 @@
+<!--
+  Generated template for the NewclanPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+  <ion-navbar color="black1">
+    <ion-buttons start style="margin-left: 3%!important;">
+     <div class="circles-noms">
+       <div class="div1"></div>
+       <div class="div2"></div>
+       <div class="div3"></div></div>
+     <p class="noms-hint">Noms</p>
+     <p class="noms-qty">120</p>
+    </ion-buttons>
+    <ion-buttons (click)="openFilters()" end>
+     <div class="filters-noms">
+       <div class="div1"></div>
+       <div class="div2"></div>
+       <div class="div3"></div>
+     </div>
+    </ion-buttons>
+    <p class="title">New Clan</p>
+  </ion-navbar>
+</ion-header>
+
+
+<ion-content padding>
+
+   <div class="card-container">
+     <div class="input-group">
+       <p class="input-title">Title</p>
+       <input type="text" class="input-field" [(ngModel)]="clan_data.name">
+     </div>
+
+     <div class="input-group">
+       <p class="input-title">Description</p>
+       <textarea rows="4" type="text" class="input-field" [(ngModel)]="clan_data.description"></textarea>
+     </div>
+
+     <div class="input-group">
+       <p class="input-title">Rules</p>
+       <textarea rows="4" type="text" class="input-field" [(ngModel)]="clan_data.rules"></textarea>
+     </div>
+
+     <div class="input-group">
+       <p class="input-title">Location</p>
+       <input type="text" class="input-field" [(ngModel)]="clan_data.location">
+     </div>
+
+     <div class="input-group">
+       <p class="input-title">Picture</p>
+       <button (click)="presentOptions()" type="button" class="add-btn">Select Picture</button>
+     </div>
+
+     <div class="input-group">
+       <p class="input-title">Type of Clan</p>
+       <div class="types-container">
+         <div (click)="changeType('public')" class="{{getType('public')}}">Public</div>
+         <div (click)="changeType('private')" class="{{getType('private')}}">Private</div>
+         <div (click)="changeType('secret')" class="{{getType('secret')}}">Secret</div>
+       </div>
+     </div>
+
+     <div class="input-group">
+       <p class="input-title">Secret Code</p>
+       <input [disabled]="this.clan_data.type == 'public'" type="text" class="input-field" [(ngModel)]="clan_data.secret_code">
+     </div>
+
+   </div>
+
+   <button [disabled]="!canCreate()" (click)="createClan()" type="button" class="pink-btn">Create Clan</button>
+</ion-content>

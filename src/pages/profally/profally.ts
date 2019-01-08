@@ -26,7 +26,7 @@ import firebase from 'firebase';
 export class ProfallyPage {
 public alumno$: any;
 public user_data: any=[];
-public general_: any;
+public general_loader: any;
 
   constructor(
        public navCtrl: NavController,

@@ -22,16 +22,17 @@
 <ion-content padding>
   <div class="btns-container">
     <button (click)="openFind()" type="button" class="create-btn">Find Clan</button>
-    <button type="button" class="create-btn">Create Clan</button>
+    <button (click)="openCreate()" type="button" class="create-btn">Create Clan</button>
   </div>
 
   <p class="title-container">My Clans</p>
+  <p *ngIf="this.my_clans.length == 0" class="no-clans">You are not part of any clan yet! Join one or create one.</p>
   <ion-grid>
     <ion-row>
-      <ion-col col-6 *ngFor="let a of this.clans_example">
-        <div class="img-slide"></div>
-        <p class="act-title">{{a.title}}</p>
-        <p class="act-distance">{{a.members}}</p>
+      <ion-col (click)="openClan(a)" col-6 *ngFor="let a of this.my_clans">
+        <div class="img-slide" [style.background-image]="sanitizeThis(a.img)"></div>
+        <p class="act-title">{{a.name}}</p>
+        <p class="act-distance">{{getTextM(a.members)}}</p>
       </ion-col>
     </ion-row>
   </ion-grid>

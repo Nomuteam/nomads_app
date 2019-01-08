@@ -1,7 +1,9 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, LoadingController, AlertController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, LoadingController, AlertController, ActionSheetController } from 'ionic-angular';
 import { AngularFireDatabase, AngularFireObject } from 'angularfire2/database';
 import firebase from 'firebase';
+import { Camera, CameraOptions } from '@ionic-native/camera';
+import { DomSanitizer } from '@angular/platform-browser';
 
 /**
  * Generated class for the NewactPage page.
@@ -147,12 +149,19 @@ export class NewactPage {
     public navParams: NavParams,
     public af: AngularFireDatabase,
     public loadingCtrl: LoadingController,
-    public alertCtrl: AlertController) {
+    public alertCtrl: AlertController,
+    public actionSheetCtrl: ActionSheetController,
+    public camera: Camera,
+    public sanitizer: DomSanitizer) {
 
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad NewactPage');
+  }
+
+  sanitizeThis(image){
+    return this.sanitizer.bypassSecurityTrustStyle('url('+image+')');
   }
 
   eraseSchedule(indice){
@@ -299,6 +308,89 @@ export class NewactPage {
   back(){
     this.current_index--;
   }
+
+  presentOptions() {
+     let actionSheet = this.actionSheetCtrl.create({
+       title: 'What would you like?',
+       buttons: [
+         {
+           text: 'Take a picture',
+           handler: () => {
+             this.tomarFoto();
+           }
+         },{
+           text: 'Select a picture',
+           handler: () => {
+             this.escogerFoto();
+           }
+         },{
+           text: 'Cancel',
+           role: 'cancel',
+           handler: () => {
+             console.log('Cancel clicked');
+           }
+         }
+       ]
+     });
+     actionSheet.present();
+
+   }
+  tomarFoto(){
+       this.general_loader = this.loadingCtrl.create({
+         spinner: 'bubbles',
+         content: 'Uploading Picture...'
+        });
+       const options: CameraOptions={
+        quality: 50,
+        destinationType: this.camera.DestinationType.DATA_URL,
+        encodingType: this.camera.EncodingType.JPEG,
+        correctOrientation: true
+       }
+
+       this.camera.getPicture(options).then(result => {
+         this.general_loader.present();
+         const image = `data:image/jpeg;base64,${result}`;
+
+         const pictures = firebase.storage().ref('/Activities/');
+         pictures.child('pictures').child('main').putString(image, 'data_url').then(kk=>{
+           kk.ref.getDownloadURL().then(url => {
+             this.general_loader.dismiss();
+             this.activity_data.media.push({
+               'url': url
+             });
+           })
+         });
+       });
+   }
+  escogerFoto(){
+    this.general_loader = this.loadingCtrl.create({
+      spinner: 'bubbles',
+      content: 'Uploading Picture...'
+     });
+
+      const options: CameraOptions={
+       quality: 50,
+       sourceType: this.camera.PictureSourceType.PHOTOLIBRARY,
+       destinationType: this.camera.DestinationType.DATA_URL,
+       encodingType: this.camera.EncodingType.JPEG,
+       correctOrientation: true
+      }
+
+      this.camera.getPicture(options).then(result => {
+        this.general_loader.present();
+        const image = `data:image/jpeg;base64,${result}`;
+
+        const pictures = firebase.storage().ref('/Activities/');
+        pictures.child('pictures').child('main').putString(image, 'data_url').then(kk=>{
+          kk.ref.getDownloadURL().then(url => {
+            this.general_loader.dismiss();
+            this.activity_data.media.push({
+              'url': url
+            });
+            //this.fotos[this.fotos.length] = url;
+          })
+        });
+      });}
 
   private generateUUID(): any {
     var d = new Date().getTime();

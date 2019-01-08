@@ -17,13 +17,13 @@
 <ion-content padding>
 
   <div class="main-card">
-    <div class="cover-gradient1"><div class="class-title">{{this.activity_data.title}}</div></div>
+    <div class="cover-gradient1"><div class="class-title">{{this.activity_data.title_complete}}</div></div>
     <div class="cover-gradient2"></div>
-    <div class="cover-img"></div>
+    <div class="cover-img" [style.background-image]="sanitizeThis(this.activity_data.img)"></div>
     <div class="main-info" padding>
       <div class="left-side">
         <div class="workout-text">
-          {{this.activity_data.categories.activity_type}}
+
         </div>
         <div class="activity-revies">
           4.5 (90)

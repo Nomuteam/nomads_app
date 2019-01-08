@@ -5,6 +5,7 @@ import { FiltersPage } from '../filters/filters';
 import { AngularFireDatabase, AngularFireObject } from 'angularfire2/database';
 import firebase from 'firebase';
 import { ActivityPage } from '../activity/activity';
+import { DomSanitizer } from '@angular/platform-browser';
 
 @Component({
   selector: 'page-home',
@@ -21,8 +22,13 @@ export class HomePage {
   public navParams: NavParams,
   public af: AngularFireDatabase,
   public loadingCtrl: LoadingController,
-  public alertCtrl: AlertController) {
+  public alertCtrl: AlertController,
+  public sanitizer: DomSanitizer) {
 
+  }
+
+  sanitizeThis(image){
+    return this.sanitizer.bypassSecurityTrustStyle('url('+image+')');
   }
 
   convertActivities(){
@@ -30,6 +36,7 @@ export class HomePage {
     for(let key in a){
       this.activities.push({
         'title': a[key].title.substring(0, 10) + '..',
+        'title_complete': a[key].title,
         'location': a[key].location,
         'description':  a[key].description,
         'cancelation_policy':  a[key].cancelation_policy,

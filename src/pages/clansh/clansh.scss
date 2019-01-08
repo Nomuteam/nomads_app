@@ -1,14 +1,10 @@
 page-clansh {
 
   ion-slides{
-    //border: 1px solid red;
-    height: 85vh;
     ion-slide{
-       height: 85vh!important;
+       padding: 3%;
       .clan-container{
         background-color: rgba(216, 216, 216, .08);
-        //border: 1px solid white;
-        height: 85vh!important;
         border-radius: 15px;
         overflow: scroll;
         .clan-img{
@@ -16,7 +12,7 @@ page-clansh {
           background-repeat: no-repeat;
           background-size: cover;
           background-position: bottom;
-          height: 35%;
+          height: 29vh;
           border-radius: 15px 15px 0 0;
         }
         .clan-title{
@@ -37,6 +33,7 @@ page-clansh {
           text-align: left;
           padding-left: 5%;
           margin-top: -6%;
+          width: 30%;
         }
         .clan-members{
           font-family: 'Raleway', sans-serif;
@@ -58,9 +55,9 @@ page-clansh {
         }
         .element-title{
           font-family: 'Raleway', sans-serif;
-          font-weight: 400!important;
-          font-size: 60%;
-          color: rgba(255, 255, 255, .8);
+          font-weight: 700!important;
+          font-size: 70%;
+          color: rgba(255, 255, 255, .5);
           text-align: left;
           padding-left: 5%;
         }
@@ -68,7 +65,7 @@ page-clansh {
           font-family: 'Raleway', sans-serif;
           font-weight: 400!important;
           font-size: 70%;
-          color: rgba(255, 255, 255, .9);
+          color: rgba(255, 255, 255, 1);
           text-align: left;
           padding-left: 5%;
           margin-top: -2%!important;
@@ -85,6 +82,7 @@ page-clansh {
           font-size: 90%;
           font-weight: 700!important;
           color: white;
+          margin-bottom: 5%;
         }
       }
     }
