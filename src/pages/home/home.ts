@@ -6,6 +6,7 @@ import { AngularFireDatabase, AngularFireObject } from 'angularfire2/database';
 import firebase from 'firebase';
 import { ActivityPage } from '../activity/activity';
 import { DomSanitizer } from '@angular/platform-browser';
+import { Stripe } from '@ionic-native/stripe';
 
 @Component({
   selector: 'page-home',
@@ -23,9 +24,39 @@ export class HomePage {
   public af: AngularFireDatabase,
   public loadingCtrl: LoadingController,
   public alertCtrl: AlertController,
-  public sanitizer: DomSanitizer) {
+  public sanitizer: DomSanitizer,
+  public stripe: Stripe ) {
+
+   this.stripe.setPublishableKey('pk_test_tRNrxhMhtRyPzotatGi5Mapm');
+
+   let card = {
+    number: '5579070085401951',
+    expMonth: 12,
+    expYear: 2022,
+    cvc: '997'
+   };
+
+   // let card = {
+   //  number: '4242424242424242',
+   //  expMonth: 12,
+   //  expYear: 2020,
+   //  cvc: '220'
+   // };
+
+   // this.stripe.createCardToken(card)
+   //    .then(token => {
+   //      this.af.list('Payments/'+firebase.auth().currentUser.uid).push({'token': token, 'amount': 500});
+   //      this.alertCtrl.create({title: 'exito', buttons: ['Ok']}).present();
+   //    })
+   //    .catch(error => {
+   //      this.alertCtrl.create({title: 'error', buttons: ['Ok']}).present();
+   //    });
 
   }
+
+
+
+
 
   sanitizeThis(image){
     return this.sanitizer.bypassSecurityTrustStyle('url('+image+')');

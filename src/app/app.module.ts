@@ -46,6 +46,8 @@ import { Keyboard } from '@ionic-native/keyboard';
 import { NgCalendarModule  } from 'ionic2-calendar';
 import { Geolocation } from '@ionic-native/geolocation';
 import { Camera } from '@ionic-native/camera';
+import { Stripe } from '@ionic-native/stripe';
+
 import { AngularFireModule } from 'angularfire2';
 import { AngularFireDatabaseModule } from 'angularfire2/database';
 import { AngularFireAuthModule } from 'angularfire2/auth';
@@ -143,6 +145,7 @@ import { FIREBASE_CONFIG } from './firebase.credentials';
     SplashScreen,
     Keyboard,
     Camera,
+    Stripe,
     Geolocation,
     {provide: ErrorHandler, useClass: IonicErrorHandler}
   ]
