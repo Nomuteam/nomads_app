@@ -10,6 +10,7 @@ import { MynomadsPage } from '../mynomads/mynomads';
 
 import { AngularFireDatabase, AngularFireObject } from 'angularfire2/database';
 import firebase from 'firebase';
+import * as moment from 'moment';
 
 /**
  * Generated class for the ProfallyPage page.
@@ -36,10 +37,14 @@ public general_loader: any;
        public alertCtrl: AlertController) {
   }
 
+  getBirthday(){
+    return moment(this.user_data.birthdate).fromNow();
+  }
+
   ionViewDidLoad() {
     this.general_loader =  this.loadingCtrl.create({
           spinner: 'bubbles',
-           content: 'Cargando...'
+           content: 'Loading...'
           });
     this.general_loader.present();
     this.af.object('Users/'+firebase.auth().currentUser.uid).snapshotChanges().subscribe(action => {
@@ -49,7 +54,7 @@ public general_loader: any;
       this.user_data.last_name = this.alumno$.last_name;
       this.user_data.email = this.alumno$.email;
       this.user_data.phone = this.alumno$.phone;
-      this.general_loader.dismiss();
+      if(this.general_loader) this.general_loader.dismiss();
     });
     console.log(this.user_data);
   }

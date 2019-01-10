@@ -1,11 +1,12 @@
 import { Component, ViewChild, ElementRef } from '@angular/core';
-import { IonicPage, NavController, NavParams, LoadingController, AlertController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, LoadingController, AlertController, ModalController } from 'ionic-angular';
 declare var google;
 import { Geolocation } from '@ionic-native/geolocation';
 import { FiltersPage } from '../filters/filters';
 import { AngularFireDatabase, AngularFireObject } from 'angularfire2/database';
 import firebase from 'firebase';
 import { DomSanitizer } from '@angular/platform-browser';
+import { BookPage } from '../book/book';
 
 /**
  * Generated class for the ActivityPage page.
@@ -22,6 +23,8 @@ import { DomSanitizer } from '@angular/platform-browser';
 export class ActivityPage {
 public general_loader: any;
 public activity_data: any =[];
+public users$: any;
+public noms_balance: any;
 
     @ViewChild('map') mapElement: ElementRef;
      map: any;
@@ -32,9 +35,27 @@ public activity_data: any =[];
     public loadingCtrl: LoadingController,
     public alertCtrl: AlertController,
     public geolocation: Geolocation,
-    public sanitizer: DomSanitizer) {
+    public sanitizer: DomSanitizer,
+    public modalCtrl: ModalController) {
     this.activity_data = this.navParams.get('Activity');
     console.log(this.activity_data)
+  }
+
+  openBook(){
+    if(parseInt(this.noms_balance) > parseInt(this.activity_data.class_price)){
+      let modal = this.modalCtrl.create(BookPage, {'Activity': this.activity_data});
+          modal.onDidDismiss( data => {
+            if(data && data.go) this.navCtrl.parent.select(3);
+          });
+       modal.present();
+    }
+    else{
+      this.alertCtrl.create({
+        title: 'Not enough Noms',
+        message: 'You need to buy more noms to join this activity.',
+        buttons: ['Ok']
+      }).present();
+    }
   }
 
   sanitizeThis(image){
@@ -47,6 +68,10 @@ public activity_data: any =[];
       content: 'Loading...'
     });
     this.general_loader.present();
+    this.af.object('Users/'+firebase.auth().currentUser.uid).snapshotChanges().subscribe(action => {
+      this.users$ = action.payload.val();
+      this.noms_balance = this.users$.noms;
+    });
 
     this.loadMap();
   }

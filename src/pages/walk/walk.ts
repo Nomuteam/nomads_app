@@ -81,7 +81,147 @@ public user_data: any = {
       'clabe': ''
     },
     'info_complete': false
-  }
+  };
+  public example_activities: any = [
+    {
+      'title': 'Yoga',
+      'selected': false
+    },
+    {
+      'title': 'Muay Thai',
+      'selected': false
+    },
+    {
+      'title': 'Calisthenics',
+      'selected': false
+    },
+    {
+      'title': 'HIIT',
+      'selected': false
+    },
+    {
+      'title': 'Hiking',
+      'selected': false
+    },
+  ];
+  public example_forms: any = [
+    {
+      'title': 'Aerobic',
+      'selected': false
+    },
+    {
+      'title': 'Strength',
+      'selected': false
+    },
+    {
+      'title': 'Agility',
+      'selected': false
+    },
+    {
+      'title': 'Endurance',
+      'selected': false
+    },
+  ];
+  public example_days: any = [
+    {
+      'day': 'L',
+      'selected': false
+    },
+    {
+      'day': 'M',
+      'selected': false
+    },
+    {
+      'day': 'M',
+      'selected': false
+    },
+    {
+      'day': 'J',
+      'selected': false
+    },
+    {
+      'day': 'V',
+      'selected': false
+    },
+    {
+      'day': 'S',
+      'selected': false
+    },
+    {
+      'day': 'D',
+      'selected': false
+    },
+  ];
+  public example_schedule: any = [
+    {
+      'time': '06:00',
+      'selected': false
+    },
+    {
+      'time': '07:00',
+      'selected': false
+    },
+    {
+      'time': '08:00',
+      'selected': false
+    },
+    {
+      'time': '09:00',
+      'selected': false
+    },
+    {
+      'time': '10:00',
+      'selected': false
+    },
+    {
+      'time': '11:00',
+      'selected': false
+    },
+    {
+      'time': '12:00',
+      'selected': false
+    },
+    {
+      'time': '13:00',
+      'selected': false
+    },
+    {
+      'time': '14:00',
+      'selected': false
+    },
+    {
+      'time': '15:00',
+      'selected': false
+    },
+    {
+      'time': '16:00',
+      'selected': false
+    },
+    {
+      'time': '17:00',
+      'selected': false
+    },
+    {
+      'time': '18:00',
+      'selected': false
+    },
+    {
+      'time': '19:00',
+      'selected': false
+    },
+    {
+      'time': '20:00',
+      'selected': false
+    },
+    {
+      'time': '21:00',
+      'selected': false
+    },
+    {
+      'time': '22:00',
+      'selected': false
+    },
+  ];
 
 
   constructor(  public navCtrl: NavController,
@@ -175,8 +315,12 @@ public user_data: any = {
 
   next(){
     if(this.current_index == 3){
-       this.user_data.preferences.categories = this.example_cats.filter(cat => cat.selected);
-       this.user_data.preferences.level = this.level;
+       this.user_data.preferences.categories = this.example_cats; //.filter(cat => cat.selected);
+       this.user_data.preferences.types = this.example_activities;
+       this.user_data.preferences.forms = this.example_forms;
+       this.user_data.preferences.schedule = this.example_schedule;
+       this.user_data.preferences.days = this.example_days;
+       
        this.user_data.info_complete = true;
        console.log(this.user_data);
        this.af.list('/Users/').update(firebase.auth().currentUser.uid, this.user_data)

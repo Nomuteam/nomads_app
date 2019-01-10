@@ -31,7 +31,7 @@
 
      <div class="input-group">
        <p class="input-title">Location</p>
-       <input type="text" class="input-field" [(ngModel)]="activity_data.location">
+       <input type="text" class="input-field" (blur)="seeCorrect()" [(ngModel)]="activity_data.location">
      </div>
 
      <div class="input-group">

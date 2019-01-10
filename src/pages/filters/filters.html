@@ -21,8 +21,8 @@
 
 <ion-content padding>
   <div class="segment-container">
-   <p (click)="changeSegment('daytime')" class="{{getSegment('daytime')}}" style="margin-left: 0!important;">Daytime</p>
-   <p (click)="changeSegment('categories')" class="{{getSegment('categories')}}">Categories</p>
+   <p (click)="changeSegment('daytime')" class="{{getSegment('daytime')}}" style="margin-left: 0!important;">Categories</p>
+   <p (click)="changeSegment('categories')" class="{{getSegment('categories')}}">Daytime</p>
    <p (click)="changeSegment('others')" class="{{getSegment('others')}}">Others</p>
   </div>
 
@@ -34,12 +34,12 @@
 
     <p class="title-container">Type of Activity</p>
     <div class="likes-container">
-        <div *ngFor="let c of this.example_cats; let in=index" (click)="addCategorie(in)" class="{{getSelected(c.selected)}}">{{c.name}}</div>
+        <div *ngFor="let c of this.example_activities; let in=index" (click)="addActivity(in)" class="{{getSelected(c.selected)}}">{{c.title}}</div>
     </div>
 
     <p class="title-container">Workout form</p>
     <div class="likes-container">
-        <div *ngFor="let c of this.example_cats; let in=index" (click)="addCategorie(in)" class="{{getSelected(c.selected)}}">{{c.name}}</div>
+        <div *ngFor="let c of this.example_forms; let in=index" (click)="addForm(in)" class="{{getSelected(c.selected)}}">{{c.title}}</div>
     </div>
   </div>
 
@@ -53,23 +53,23 @@
     <ion-toggle color="purple" [(ngModel)]="allday"></ion-toggle>
     </div>
 
-    <p class="title-container">My Schedule</p>
-    <div class="likes-container"><div *ngFor="let c of this.example_schedule; let in=index" (click)="selectTime(in)" class="{{getSelected(c.selected)}}">{{c.time}}</div></div>
+    <p *ngIf="!allday" class="title-container">My Schedule</p>
+    <div *ngIf="!allday" class="likes-container"><div *ngFor="let c of this.example_schedule; let in=index" (click)="selectTime(in)" class="{{getSelected(c.selected)}}">{{c.time}}</div></div>
   </div>
 
   <div *ngIf="this.segment == 'others'">
     <p class="title-container">Price</p>
-    <div class="likes-container"><div *ngFor="let c of this.example_price; let in=index" (click)="selectPrice(in)" class="{{getSelected(c.selected)}}">{{c.price}}</div></div>
+    <div class="likes-container"><div *ngFor="let c of this.example_price; let in=index" (click)="this.user_preferences.cost = c.price" class="{{isPrice(c.price)}}">{{c.price}}</div></div>
 
     <div class="container-cool">
       <p class="title-container">Distance</p>
-      <p class="distance">{{this.distance}} km</p>
+      <p class="distance">{{this.user_preferences.distance}} km</p>
     </div>
 
-    <ion-range mode="md" color="purple" min="1" max="50" pin="true" [(ngModel)]="distance"></ion-range>
+    <ion-range mode="md" color="purple" min="1" max="50" pin="true" [(ngModel)]="user_preferences.distance"></ion-range>
 
     <p class="title-container">Level</p>
-    <div class="likes-container"><div *ngFor="let c of this.example_level; let in=index" (click)="selectLevel(in)" class="{{getSelected(c.selected)}}">{{c.level}}</div></div>
+    <div class="likes-container"><div *ngFor="let c of this.example_level; let in=index" (click)="user_preferences.level = c.level" class="{{isLevel(c.level)}}">{{c.level}}</div></div>
 
 
   </div>

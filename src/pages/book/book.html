@@ -1,0 +1,129 @@
+<!--
+  Generated template for the BookPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+
+
+<div class="todo" navPop>
+
+</div>
+
+<div *ngIf="this.section == '1'" class="modal1" padding>
+  <div >
+  <div class="top-container">
+    <div class="top-title">Book Now</div>
+    <div navPop class="top-cancel">Cancel</div>
+  </div>
+
+  <div class="class-container">
+    <div class="left-side">
+      <div class="cover-gradient1"></div>
+      <div class="cover-gradient2"></div>
+      <div class="class-img"></div>
+      </div>
+      <div class="class-text">
+        <div class="class-title">{{this.activity_data.title_complete}}</div>
+        <div class="class-hint">{{this.activity_data.categories.activity_type}}</div>
+        <!-- <div class="class-distance">4.5 km</div> -->
+    </div>
+  </div>
+
+  <div class="section-title">Date and Time</div>
+  <div class="selector-containers">
+    <div (click)="selectDay()" class="selector">{{getDay()}}</div>
+    <div (click)="selectTime()" class="selector">{{getTime()}}</div>
+  </div>
+
+  <div class="section-title">Balance</div>
+
+  <div class="balance-container">
+    <div class="balance-row">
+      <div class="left-text">Current NOMS</div>
+      <div class="right-text">
+        <p class="noms-qty">{{this.noms_balance}}</p>
+        <div class="circles-noms">
+          <div class="div1"></div>
+          <div class="div2"></div>
+          <div class="div3"></div></div>
+      </div>
+    </div>
+    <div class="balance-row">
+      <div class="left-text">Activity Cost</div>
+      <div class="right-text">
+        <p class="noms-qty">{{this.activity_data.class_price}}</p>
+        <div class="circles-noms">
+          <div class="div1"></div>
+          <div class="div2"></div>
+          <div class="div3"></div></div>
+      </div>
+    </div>
+    <div class="balance-row">
+      <div class="left-text last">New Balance</div>
+      <div class="right-text">
+        <p class="noms-qty last">{{this.noms_balance - this.activity_data.class_price}}</p>
+        <div class="circles-noms">
+          <div class="div1"></div>
+          <div class="div2"></div>
+          <div class="div3"></div></div>
+      </div>
+    </div>
+  </div>
+
+  <button [disabled]="!canAdvance()" (click)="payNow()" type="button" class="pay-btn">
+   <div class="pay-container">
+     <div class="pay-hint">Pay Now</div>
+     <div class="pay-circles">
+       <p class="noms-qty">{{this.activity_data.class_price}}</p>
+       <div class="circles-noms">
+         <div class="div1"></div>
+         <div class="div2"></div>
+         <div class="div3"></div></div>
+     </div>
+   </div>
+  </button>
+</div>
+</div>
+
+<div *ngIf="this.section == '2'" class="modal1 w3-animate-right">
+
+  <div class="top-container">
+    <div class="top-title">You are all set!</div>
+  </div>
+
+  <div class="class-container">
+    <div class="left-side">
+      <div class="cover-gradient1"></div>
+      <div class="cover-gradient2"></div>
+      <div class="class-img"></div>
+      </div>
+      <div class="class-text">
+        <div class="class-title">{{this.activity_data.title_complete}}</div>
+        <div class="class-hint">{{this.activity_data.categories.activity_type}}</div>
+        <div class="class-hint">18 Dic</div>
+        <div class="class-hint">17:30 Hrs</div>
+    </div>
+  </div>
+
+  <div class="section-title">Share</div>
+
+  <div class="share-container">
+    <div class="share facebook"></div>
+    <div class="share nomads"></div>
+  </div>
+
+  <button navPop type="button" class="pay-btn rose" padding>
+   <div class="pay-container" padding>
+     <div class="pay-hint">Back</div>
+   </div>
+  </button>
+
+  <button (click)="openSchedule()" type="button" class="pay-btn" padding>
+   <div class="pay-container" padding>
+     <div class="pay-hint">Check my Schedule</div>
+   </div>
+  </button>
+
+
+</div>

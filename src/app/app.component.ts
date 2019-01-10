@@ -29,6 +29,10 @@ import { ActivityPage } from '../pages/activity/activity';
 import { ClanPage } from '../pages/clan/clan';
 import { NewclanPage } from '../pages/newclan/newclan';
 import { MembersPage } from '../pages/members/members';
+import { BookPage } from '../pages/book/book';
+import { NeweventPage } from '../pages/newevent/newevent';
+import { LocatePage } from '../pages/locate/locate';
+import { EventPage } from '../pages/event/event';
 
 import { Keyboard } from '@ionic-native/keyboard';
 

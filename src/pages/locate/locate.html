@@ -1,0 +1,32 @@
+<!--
+  Generated template for the LocatePage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<div class="todo">
+
+</div>
+
+<div class="modal1" padding>
+  <div >
+  <div class="top-container">
+    <div class="top-title">Is this correct?</div>
+  </div>
+
+  <div class="section-title">{{this.address}}</div>
+  <div #map id="map"></div>
+
+  <button (click)="goBack()" type="button" class="pay-btn rose" padding>
+   <div class="pay-container" padding>
+     <div class="pay-hint">Back</div>
+   </div>
+  </button>
+
+  <button (click)="confirmB()" type="button" class="pay-btn" padding>
+   <div class="pay-container" padding>
+     <div class="pay-hint">Confirm</div>
+   </div>
+  </button>
+</div>
+</div>

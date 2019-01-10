@@ -1,9 +1,10 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, LoadingController, AlertController, ActionSheetController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, LoadingController, AlertController, ActionSheetController, ModalController } from 'ionic-angular';
 import { AngularFireDatabase, AngularFireObject } from 'angularfire2/database';
 import firebase from 'firebase';
 import { Camera, CameraOptions } from '@ionic-native/camera';
 import { DomSanitizer } from '@angular/platform-browser';
+import { LocatePage } from '../locate/locate';
 
 /**
  * Generated class for the NewactPage page.
@@ -152,8 +153,19 @@ export class NewactPage {
     public alertCtrl: AlertController,
     public actionSheetCtrl: ActionSheetController,
     public camera: Camera,
-    public sanitizer: DomSanitizer) {
+    public sanitizer: DomSanitizer,
+    public modalCtrl: ModalController) {
 
+  }
+
+  seeCorrect(){
+    if(this.activity_data.location != ''){
+      let modal = this.modalCtrl.create(LocatePage, {'Address': this.activity_data.location});
+          modal.onDidDismiss( data => {
+            if(data && !data.correct) this.activity_data.location = '';
+          });
+       modal.present();
+    }
   }
 
   ionViewDidLoad() {

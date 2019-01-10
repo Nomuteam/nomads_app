@@ -1,0 +1,116 @@
+<!--
+  Generated template for the NeweventPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+  <ion-navbar color="black1">
+    <ion-buttons *ngIf="type == 'nomads'" start style="margin-left: 3%!important;">
+     <div class="circles-noms">
+       <div class="div1"></div>
+       <div class="div2"></div>
+       <div class="div3"></div></div>
+     <p class="noms-hint">Noms</p>
+     <p class="noms-qty">120</p>
+    </ion-buttons>
+    <ion-buttons *ngIf="type == 'nomads'" (click)="openFilters()" end>
+     <div class="filters-noms">
+       <div class="div1"></div>
+       <div class="div2"></div>
+       <div class="div3"></div>
+     </div>
+    </ion-buttons>
+    <p class="title">New Event</p>
+  </ion-navbar>
+</ion-header>
+
+
+<ion-content padding>
+  <div *ngIf="this.current_index == 1" class="container-datos w3-animate-right">
+
+     <div class="card-container">
+       <div class="input-group">
+         <p class="input-title">Event Name</p>
+         <input type="text" class="input-field" [(ngModel)]="event_data.title">
+       </div>
+
+       <div class="jc-container">
+         <div class="input-group">
+           <p class="input-title">Day</p>
+            <ion-item><ion-datetime displayFormat="MM/DD/YYYY" pickerFormat="MM DD YYYY" placeholder="Day/Month" [(ngModel)]="event_data.day"></ion-datetime></ion-item>
+         </div>
+
+         <div class="input-group">
+           <p class="input-title">Start Time</p>
+           <ion-item><ion-datetime displayFormat="h:mm A" pickerFormat="H mm" placeholder="06:00" [(ngModel)]="event_data.time"></ion-datetime></ion-item>
+         </div>
+       </div>
+
+       <div class="input-group">
+         <p class="input-title">Where?</p>
+         <input type="text" class="input-field" (blur)="seeCorrect()" [(ngModel)]="event_data.location">
+       </div>
+
+       <div class="input-group">
+         <p class="input-title">Difficulty</p>
+         <input type="text" class="input-field" [(ngModel)]="event_data.difficulty">
+       </div>
+
+       <div class="input-group">
+         <p class="input-title">Picture</p>
+         <button (click)="presentOptions()" type="button" class="add-btn">Select Picture</button>
+       </div>
+
+       <div class="input-group">
+         <p class="input-title">About the Event</p>
+         <textarea rows="4" type="text" class="input-field" [(ngModel)]="event_data.about_event"></textarea>
+       </div>
+
+       <div class="input-group">
+         <p class="input-title">Provided</p>
+         <textarea rows="4" type="text" class="input-field" [(ngModel)]="event_data.provided"></textarea>
+       </div>
+
+       <div class="input-group">
+         <p class="input-title">About you</p>
+         <textarea rows="4" type="text" class="input-field" [(ngModel)]="event_data.about_organizer"></textarea>
+       </div>
+
+       <div class="jc-container">
+         <div class="input-group">
+           <p class="input-title">Spaces Available</p>
+           <input type="tel" class="input-field" [(ngModel)]="event_data.spaces_available">
+         </div>
+
+         <div class="input-group">
+           <p class="input-title">Cost in NOMS</p>
+           <input type="tel" class="input-field" [(ngModel)]="event_data.cost">
+         </div>
+       </div>
+
+       <div class="input-group">
+         <p class="input-title">Type of Event</p>
+         <div class="types-container">
+           <div (click)="changeType('public')" class="{{getType('public')}}">Public</div>
+           <div (click)="changeType('private')" class="{{getType('private')}}">Private</div>
+         </div>
+       </div>
+
+     <button [disabled]="!canAdvance()" (click)="this.current_index = 2" type="button" class="next-btn">Next</button>
+     </div>
+
+  </div>
+
+  <div *ngIf="this.current_index == 2" class="container-datos w3-animate-right">
+  <p class="title-container">Upload Media</p>
+  <div class="media-img"></div>
+  <div *ngFor="let m of this.event_data.media" class="media-img" [style.background-image]="sanitizeThis(m.url)"></div>
+  <button type="button" class="add-btn" padding>+</button>
+
+  <button (click)="createEvent()" type="button" class="next-btn">Next</button>
+  <button (click)="this.current_index = 1" type="button" class="next-btn outline">Back</button>
+  </div>
+
+
+</ion-content>

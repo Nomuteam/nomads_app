@@ -1,4 +1,4 @@
-page-activity {
+page-event {
   .main-card{
     //height: 50vh;
     background-color: rgba(74, 74, 74, .3);
@@ -109,15 +109,13 @@ page-activity {
     }
     .ht-text{
       display: flex;
-      justify-content: space-between;
+      justify-content: center;
       align-items: center;
-      padding-left: 5%;
-      padding-right: 5%;
-      padding-bottom: 3%;
+      width: 100%;
       .hashtags{
         display: flex;
         justify-content: space-around;
-        width: 80%;
+        width: 100%;
         .hashtag{
           padding: 2%;
           opacity: .5;

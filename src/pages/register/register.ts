@@ -107,10 +107,11 @@ constructor(
         'code': this.code,
         'user_type': this.user_type,
         'created_at': new Date(),
-        'info_complete': false
+        'info_complete': false,
+        'noms': 0
       }).then( () => {
         this.general_loader.dismiss();
-        this.openCircles();
+        //this.openCircles();
       })
     }
 
