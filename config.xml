@@ -101,4 +101,7 @@
     <plugin name="cordova-plugin-ionic-keyboard" spec="^2.1.3" />
     <plugin name="cordova-plugin-camera" spec="^4.0.3" />
     <plugin name="cordova-plugin-stripe" spec="^1.5.3" />
+    <plugin name="cordova-plugin-geolocation" spec="^4.0.1">
+        <variable name="GEOLOCATION_USAGE_DESCRIPTION" value="To locate you" />
+    </plugin>
 </widget>
