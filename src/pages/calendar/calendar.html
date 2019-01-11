@@ -27,7 +27,7 @@
 
 <ion-content padding>
   <p class="page-hint"> {{ viewTitle }}</p>
-  <calendar [eventSource]="eventSource"
+  <calendar [eventSource]="activities_all"
          [calendarMode]="calendar.mode"
          [currentDate]="calendar.currentDate"
          (onEventSelected)="onEventSelected($event)"

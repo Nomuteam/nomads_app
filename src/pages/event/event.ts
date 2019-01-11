@@ -23,8 +23,6 @@ import * as moment from 'moment';
 export class EventPage {
 public general_loader: any;
 public event_data: any = [];
-public users$: any;
-public noms_balance: any;
 
 //For the user
 public users$: any;

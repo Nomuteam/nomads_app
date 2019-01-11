@@ -32,6 +32,7 @@ export class HomePage {
 
    this.stripe.setPublishableKey('pk_test_tRNrxhMhtRyPzotatGi5Mapm');
     let date = new Date();
+    console.log(date);
     date.setHours(9);
     date.setMinutes(8);
     console.log(moment('Monday', 'dddd').fromNow());
