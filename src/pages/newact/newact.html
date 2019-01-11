@@ -144,7 +144,7 @@
 <p class="title-container">Upload Media</p>
 <div class="media-img"></div>
 <div *ngFor="let m of this.activity_data.media" class="media-img" [style.background-image]="sanitizeThis(m.url)"></div>
-<button type="button" class="add-btn" padding>+</button>
+<button (click)="presentOptions()" type="button" class="add-btn" padding>+</button>
 </div>
 
 <div *ngIf="!isAdding" class="jc-container">

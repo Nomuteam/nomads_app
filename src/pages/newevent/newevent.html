@@ -106,7 +106,7 @@
   <p class="title-container">Upload Media</p>
   <div class="media-img"></div>
   <div *ngFor="let m of this.event_data.media" class="media-img" [style.background-image]="sanitizeThis(m.url)"></div>
-  <button type="button" class="add-btn" padding>+</button>
+  <button (click)="presentOptions()" type="button" class="add-btn" padding>+</button>
 
   <button (click)="createEvent()" type="button" class="next-btn">Next</button>
   <button (click)="this.current_index = 1" type="button" class="next-btn outline">Back</button>
