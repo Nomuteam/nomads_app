@@ -42,6 +42,7 @@ import { BookPage } from '../pages/book/book';
 import { NeweventPage } from '../pages/newevent/newevent';
 import { LocatePage } from '../pages/locate/locate';
 import { EventPage } from '../pages/event/event';
+import { ChatPage } from '../pages/chat/chat';
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
@@ -96,7 +97,8 @@ import { FIREBASE_CONFIG } from './firebase.credentials';
     BookPage,
     NeweventPage,
     LocatePage,
-    EventPage
+    EventPage,
+    ChatPage
   ],
   imports: [
     NgCalendarModule,
@@ -150,7 +152,8 @@ import { FIREBASE_CONFIG } from './firebase.credentials';
     BookPage,
     NeweventPage,
     LocatePage,
-    EventPage
+    EventPage,
+    ChatPage
   ],
   providers: [
     StatusBar,

@@ -34,7 +34,7 @@
 
   <div *ngIf="this.segment == 'instructors'">
 
-   <div class="chat-element" *ngFor="let c of this.example_chats">
+   <div (click)="openChat()" class="chat-element" *ngFor="let c of this.example_chats">
      <div class="user-img"></div>
      <div class="chat-texts">
       <div class="chat-sender"><b>{{c.name}}</b> from <b>{{c.class}}</b> class:</div>
@@ -44,13 +44,13 @@
   </div>
 
   <div *ngIf="this.segment == 'clans'">
-    <div class="chat-element" *ngFor="let c of this.example_chats">
+    <!-- <div (click)="openChat()" class="chat-element" *ngFor="let c of this.example_chats">
       <div class="user-img"></div>
       <div class="chat-texts">
        <div class="chat-sender"><b>{{c.name}}</b> from <b>{{c.class}}</b> class:</div>
        <div class="chat-hint">{{c.message}}</div>
       </div>
-    </div>
+    </div> -->
   </div>
 
 </ion-content>

@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { FiltersPage } from '../filters/filters';
+import { ChatPage } from '../chat/chat';
 
 /**
  * Generated class for the ChatsPage page.
@@ -19,23 +20,18 @@ public segment: any = 'instructors';
 public user_type: any = '';
 public example_chats: any = [
   {
-    'name': 'Mónica',
-    'class': 'Indoor Training',
-    'message': 'Hey! I got a message for you'
-  },
-  {
-    'name': 'Imanol',
-    'class': 'Calisthenics',
-    'message': 'When are you coming?'
-  },
-  {
-    'name': 'Osmar',
-    'class': 'MMA',
-    'message': 'Can i fight you next monday?'
+    'name': 'Chat UI',
+    'class': 'App Testing',
+    'message': 'Hey! Try me out!'
   },
 ]
   constructor(public navCtrl: NavController, public navParams: NavParams) {
     this.user_type = localStorage.getItem('Tipo');
+  }
+
+
+  openChat(){
+    this.navCtrl.push(ChatPage);
   }
 
   openFilters(){

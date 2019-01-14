@@ -1,0 +1,274 @@
+page-chat {
+  .scroll-content {
+  overflow-y: hidden !important;
+ }
+
+  .chat-page{
+    //border: 1px solid black;
+
+
+    .chat-area{
+    //border: 1px solid red;
+    width: 92%;
+    height: 75%;
+    margin-left: 4%;
+    overflow: scroll;
+    margin-top: -5%;
+    padding-bottom: 25%;
+  .inputmsg{
+    display: block;
+      margin: auto;
+      background-color: rgba(240, 240, 240, 1);
+      border:1px #BDBCC1;
+      color: rgba(0, 0, 0, .5);
+      font-weight: normal;
+      border-radius: 8px;
+      width: 65%;
+      height: 6%;
+      font-size: 15px;
+      background-repeat:no-repeat;
+      background-position:5%;  padding-left:15px;
+      animation-duration: 1s;
+      font-family: 'Raleway', sans-serif;
+  }
+  .inputmsg:hover{
+    background-color: rgba(228, 228, 228, 1);
+  }
+
+  .camerainput{
+    position: absolute;
+    left: 5%;
+  }
+
+  .msguser{
+    max-width: 60%;
+    margin-left: 40%;
+    margin-top: 5%;
+    margin-right: 0%;
+    border-radius: 9px 0 9px 9px;
+    color: white;
+    background: #229B86;
+    //border-radius: 8px 0 0 8px 8px;
+    font-family: 'Raleway', sans-serif;
+    color: #FFFFFF;
+    letter-spacing: 0;
+    font-weight: 700;
+    position: relative;
+    font-size: 85%;
+    //border: 2px solid black;
+/* Bitmap: */
+    p{
+      padding: 5%;
+    }
+    img{
+      padding: 5%;
+      display: block;
+      margin: 0 auto;
+    }
+    .userbuble{
+      position: absolute;
+      right: -20%;
+      top: -25%;
+      //border: 3px solid red;
+    }
+  }
+
+  .msgwhole{
+    animation-duration: 1.5s;
+    position: relative;
+    .sophiebuble{
+      position: absolute;
+      left: 1%;
+      width: 8%;
+    }
+  }
+
+  .msgsophie{
+    max-width: 60%;
+    //margin-right: 50%;
+    margin-top: 5%;
+    margin-left: 0%;
+    border-radius: 0 9px 9px 9px;
+    background-color: #FFFFFF;
+    box-shadow: 0 2px 9px 0 rgba(0,0,0,0.52);
+    //display: inline;
+
+    /* ¡Hola! Mi nombre es: */
+    font-family: 'Raleway', sans-serif;
+    font-size: 85%;
+    color: #000000;
+    letter-spacing: 0;
+    p{
+      padding: 5%;
+    }
+  }
+
+  .enviarbtn{
+    position: absolute;
+    right: 3%;
+    top: 30%;
+    background-color: transparent;
+    color: #F6A51F;
+  }
+}
+}
+
+
+.options{
+  //border: 1px solid red;
+  width: 95%;
+  display: block;
+  margin: auto;
+  //padding: 0%;
+  height: 7vh;
+  .option1{
+    background: #EF7F1C;
+    border-radius: 8px;
+    height: 30px;
+    //padding: 0%;
+    padding-top: .2%;
+     margin-top: 2%;
+    margin-left: 1%;
+    max-width: 40%;
+    //border: 2px solid black;
+    .content{
+      /* ¿Qué es ZipUp?: */
+      font-family: 'Raleway', sans-serif;
+      font-size: 100%;
+      font-weight: 700;
+      color: #FFFFFF;
+      letter-spacing: 0;
+      text-align: center;
+      margin-top: 3%;
+    }
+  }
+  .option2{
+    background: #EF7F1C;
+    border-radius: 8px;
+    height: 70%;
+    //padding: 0%;
+    padding-top: .2%;
+     margin-top: 2%;
+    margin-left: 1%;
+    max-width: 50%;
+    //border: 2px solid black;
+    .content{
+      /* ¿Qué es ZipUp?: */
+      font-family: 'Raleway', sans-serif;
+      font-size: 100%;
+      font-weight: 700;
+      color: #FFFFFF;
+      letter-spacing: 0;
+      text-align: center;
+      margin-top: 3%;
+    }
+  }
+}
+
+ion-grid{
+  //border: 1px solid red;
+  padding: 0!important;
+  width: 95%!important;
+  ion-row{
+    padding: 0!important;
+    //border: 1px solid red;
+    //height: 5vh;
+    ion-col{
+     //border: 1px solid red;
+     padding: 0!important;
+     //height: 100%;
+     .option-one{
+       background: #EF7F1C;
+       border-radius: 6px;
+       //margin-top: -5%;
+       //height: 4vh;
+       width: 95%;
+       margin-left: 2.5%;
+       p{
+         font-family: 'Raleway', sans-serif;
+         font-size: 90%;
+         font-weight: 700;
+         color: #FFFFFF;
+         letter-spacing: 0;
+         text-align: center;
+         //margin-top: 2%;
+         padding: 2%;
+       }
+     }
+     .option-two{
+       background: #EF7F1C;
+       border-radius: 8px;
+       //margin-top: -7%;
+       width: 95%;
+       margin-left: 2.5%;
+       p{
+         font-family: 'Raleway', sans-serif;
+         font-size: 90%;
+         font-weight: 700;
+         color: #FFFFFF;
+         letter-spacing: 0;
+         text-align: center;
+          padding: 2%;
+       }
+     }
+     .select{
+       //background: #4A90E2;
+       box-shadow: 0 0 15px #4A90E2;
+     }
+     .fb{
+       background-color: #3B5998;
+       // background-image: url('../assets/img/fb.png');
+       // background-repeat:no-repeat;
+       // background-size: 7px;
+       // background-position:4%;
+     }
+    }
+  }
+}
+
+.contenedor-input{
+ position: relative;
+ //border: 1px solid red;
+ padding-bottom: 3%;
+  .inputmsg{
+      display: block;
+      margin: auto;
+      background-color: transparent!important;
+      border:1px #BDBCC1;
+      color: white;
+      font-weight: 700;
+      width: 95%;
+      height: 35px;
+      font-size: 100%;
+      background-repeat:no-repeat;
+      background-position:5%;  padding-left:15px;
+      animation-duration: 1s;
+      padding-right: 18%;
+      font-family: 'Raleway', sans-serif;
+      background: #FFFFFF;
+      box-shadow: 0 0 1px 0 rgba(0,0,0,0.16);
+      border-radius: 4px;
+      margin-top: 0%;
+      border: 1px solid white;
+      border-radius: 15px;
+      padding-top: 5%;
+      //position: relative;
+  }
+
+
+  .enviarbtn{
+    position: absolute;
+    right: 5%;
+    top: 20%;
+    background-color: transparent;
+    color: #229B86;
+    z-index: 300;
+  }
+}
+
+
+.camerainput{
+  position: absolute;
+  left: 5%;
+}
+}
