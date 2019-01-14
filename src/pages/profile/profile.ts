@@ -32,6 +32,8 @@ export class ProfilePage {
 public alumno$: any;
 public general_loader: any;
 public user_data: any=[];
+public users$: any;
+public noms_balance: any;
 
   constructor(
     public navCtrl: NavController,
@@ -67,6 +69,7 @@ public user_data: any=[];
       this.user_data.birthdate = this.alumno$.birthdate;
       this.user_data.email = this.alumno$.email;
       this.user_data.phone = this.alumno$.phone;
+      this.noms_balance = this.alumno$.noms;
       if(this.general_loader) this.general_loader.dismiss();
     });
     console.log(this.user_data);

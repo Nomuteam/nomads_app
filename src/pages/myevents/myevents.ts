@@ -24,6 +24,8 @@ public general_loader: any;
 public type: any;
 public response$: any;
 public events: any = [];
+public users$: any;
+public noms_balance: any = '';
 public example_events: any = [
   {
     'title': 'Camping en Arteaga',
@@ -48,6 +50,27 @@ public example_events: any = [
   public alertCtrl: AlertController,
   public sanitizer: DomSanitizer) {
      this.type = localStorage.getItem('Tipo');
+  }
+
+  confirmEdit(act){
+    this.alertCtrl.create({
+      title: 'What would you like to do?',
+      message:  'You can edit this event or see how its displayed to others',
+      buttons: [
+        {
+          text: 'Edit',
+          handler: () => {
+
+          }
+        },
+        {
+          text: 'View',
+          handler: () => {
+            this.openEvent(act);
+          }
+        }
+      ]
+    }).present();
   }
 
   openNew(){
@@ -105,6 +128,10 @@ public example_events: any = [
       content: 'Loading...'
     });
     this.general_loader.present();
+    this.af.object('Users/'+firebase.auth().currentUser.uid).snapshotChanges().subscribe(action => {
+      this.users$ = action.payload.val();
+      this.noms_balance = this.users$.noms;
+    });
     this.getEvents();
   }
 

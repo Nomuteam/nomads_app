@@ -123,7 +123,7 @@ public clan_data: any = {
          const image = `data:image/jpeg;base64,${result}`;
 
          const pictures = firebase.storage().ref('/Clans/');
-         pictures.child('pictures').child('main').putString(image, 'data_url').then(kk=>{
+         pictures.child('pictures').child(this.generateUUID()).putString(image, 'data_url').then(kk=>{
            kk.ref.getDownloadURL().then(url => {
              vm.general_loader.dismiss();
              vm.clan_data.img = url;
@@ -151,7 +151,7 @@ public clan_data: any = {
         const image = `data:image/jpeg;base64,${result}`;
 
         const pictures = firebase.storage().ref('/Clans/');
-        pictures.child('pictures').child('main').putString(image, 'data_url').then(kk=>{
+        pictures.child('pictures').child(this.generateUUID()).putString(image, 'data_url').then(kk=>{
           kk.ref.getDownloadURL().then(url => {
             vm.general_loader.dismiss();
             vm.clan_data.img = url;

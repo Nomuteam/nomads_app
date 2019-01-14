@@ -12,7 +12,7 @@
        <div class="div2"></div>
        <div class="div3"></div></div>
      <p class="noms-hint">Noms</p>
-     <p class="noms-qty">120</p>
+     <p class="noms-qty">{{this.noms_balance}}</p>
     </ion-buttons>
     <ion-buttons *ngIf="this.user_type == 'nomads'" (click)="openFilters()" end>
      <div class="filters-noms">
@@ -33,7 +33,7 @@
    <div class="items-container">
      <div class="balance-hint">Current Balance</div>
     <div class="balance-container">
-     <div class="number">120</div>
+     <div class="number">{{this.noms_balance}}</div>
      <div class="circles-noms">
        <div class="div1"></div>
        <div class="div2"></div>
@@ -51,17 +51,25 @@
    <div class="buy-hint">Buy NOMS</div>
    <div class="amounts-container">
      <div class="amount-container">
-       <div class="amount-hint">Amount of cash</div>
-       <div class="amount-text">$1,200</div>
+       <div class="input-group">
+         <p class="input-title">Amount of Cash</p>
+         <input placeholder="$" type="text" class="input-field" [(ngModel)]="cash" (ngModelChange)="noms = cash/20">
+       </div>
+       <!-- <div class="amount-hint">Amount of cash</div>
+       <div class="amount-text" contenteditable="true">$0</div> -->
      </div>
      <div class="amount-container" style="margin-left: 3%;">
-       <div class="amount-hint">Amount of NOMS</div>
-       <div class="amount-text">95</div>
+       <div class="input-group">
+         <p class="input-title">Amount of Noms</p>
+         <input disabled type="text" class="input-field" [(ngModel)]="noms">
+       </div>
+       <!-- <div class="amount-hint">Amount of NOMS</div>
+       <div class="amount-text">{{95}}</div> -->
      </div>
    </div>
    <div class="booking-avg"><b>10</b> to <b>20</b> bookings</div>
 
-   <button type="button" class="pay-btn" padding>Pay NOMS</button>
+   <button (click)="confirmPay()" type="button" class="pay-btn" padding>Pay NOMS</button>
 
    <div class="buy-hint">Packages</div>
 
@@ -76,7 +84,7 @@
             <div class="div3"></div></div>
         </div>
         <div class="btm-slide">
-          <div class="bookings-avg">{{s.bookings_avg}} Bookings avg.</div>
+          <!-- <div class="bookings-avg">{{s.bookings_avg}} Bookings avg.</div> -->
           <div class="slide-price">$ {{s.price}} MXN</div>
         </div>
       </div>

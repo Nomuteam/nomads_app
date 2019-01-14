@@ -5,6 +5,7 @@ import { Geolocation } from '@ionic-native/geolocation';
 import { FiltersPage } from '../filters/filters';
 import { AngularFireDatabase, AngularFireObject } from 'angularfire2/database';
 import firebase from 'firebase';
+import { WalletPage } from '../wallet/wallet';
 
 @Component({
   selector: 'page-contact',
@@ -38,6 +39,11 @@ public auxiliar: any;
 
   openFilters(){
     this.navCtrl.push(FiltersPage);
+  }
+
+  testWallet(){
+   this.navCtrl.parent.select(4);
+   setTimeout(() => {this.navCtrl.parent.getSelected().push(WalletPage)}, 500);
   }
 
 
@@ -153,6 +159,10 @@ public auxiliar: any;
       content: 'Loading...'
     });
     this.general_loader.present();
+    this.af.object('Users/'+firebase.auth().currentUser.uid).snapshotChanges().subscribe(action => {
+      this.users$ = action.payload.val();
+      this.noms_balance = this.users$.noms;
+    });
     this.loadMap();
   }
 

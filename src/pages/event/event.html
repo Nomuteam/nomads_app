@@ -7,7 +7,7 @@
 <ion-header>
   <ion-navbar color="black1">
     <p class="title">Event</p>
-    <ion-buttons end>
+    <ion-buttons *ngIf="isOwner()" end>
       <ion-icon color="white" name="create-outline" style="margin-right: 5%;"></ion-icon>
     </ion-buttons>
   </ion-navbar>

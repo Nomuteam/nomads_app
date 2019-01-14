@@ -13,8 +13,8 @@
 
 <ion-content padding>
 
-<div *ngFor="let a of this.activities" (click)="openActivity(a)" class="activity-container" padding>
-  <div class="activity-title">{{a.title}}</div>
+<div *ngFor="let a of this.activities" (click)="confirmEdit(a)" class="activity-container" padding>
+  <div class="activity-title">{{a.title_complete}}</div>
   <div class="activity-time">{{a.schedule[0].start_time}}</div>
 </div>
 

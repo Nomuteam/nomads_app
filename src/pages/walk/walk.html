@@ -45,20 +45,20 @@
    </div>
    <div class="input-group">
      <p class="input-title">Card Number</p>
-     <input type="tel" class="input-field" [(ngModel)]="user_data.payment.cardnumber">
+     <input (blur)="getCardT()" type="tel" class="{{class_type}}" [(ngModel)]="user_data.payment.cardnumber">
    </div>
    <ion-grid>
      <ion-row>
        <ion-col col-6>
          <div class="input-group">
            <p class="input-title">Expiry Date</p>
-           <input type="month" class="input-field" [(ngModel)]="user_data.payment.card_expiry" value="2022-06">
+           <input (blur)="getDateT()" type="month" class="input-field" [(ngModel)]="user_data.payment.card_expiry" value="2022-06">
          </div>
        </ion-col>
        <ion-col col-6>
          <div class="input-group">
-           <p class="input-title">CCV</p>
-           <input type="tel" class="input-field" [(ngModel)]="user_data.payment.card_ccv">
+           <p class="input-title">CVC</p>
+           <input (blur)="getCardC()" type="tel" class="input-field" [(ngModel)]="user_data.payment.card_ccv">
          </div>
        </ion-col>
       </ion-row>

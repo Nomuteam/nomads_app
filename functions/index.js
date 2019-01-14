@@ -42,7 +42,7 @@ exports.stripeCharge = functions.database
                })
 
                .then(charge => {
-                 
+
                    admin.database()
                         .ref(`/Payments/${userId}/${paymentId}/charge`)
                         .set(charge);

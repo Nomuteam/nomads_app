@@ -21,6 +21,8 @@ public general_loader: any;
 public response$: any;
 public members: any = [];
 public actual_members: any = [];
+public users$: any;
+public  noms_balance: any = '';
 
   constructor(public navCtrl: NavController,
   public navParams: NavParams,
@@ -74,6 +76,10 @@ public actual_members: any = [];
       content: 'Loading...'
     });
     this.general_loader.present();
+    this.af.object('Users/'+firebase.auth().currentUser.uid).snapshotChanges().subscribe(action => {
+      this.users$ = action.payload.val();
+      this.noms_balance = this.users$.noms;
+    });
     this.getUsers();
   }
 

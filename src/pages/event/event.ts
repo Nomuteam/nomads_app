@@ -54,6 +54,10 @@ public nomads_joined: any = [];
       console.log(this.event_data);
   }
 
+  isOwner(){
+    return this.event_data.creator == firebase.auth().currentUser.uid;
+  }
+
   sanitizeThis(image){
     return this.sanitizer.bypassSecurityTrustStyle('url('+image+')');
   }

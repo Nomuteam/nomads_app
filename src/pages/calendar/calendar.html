@@ -6,13 +6,13 @@
 -->
 <ion-header>
   <ion-navbar color="black1">
-    <ion-buttons *ngIf="type == 'nomads'" start style="margin-left: 3%!important;">
+    <ion-buttons (click)="testWallet()" *ngIf="type == 'nomads'" start style="margin-left: 3%!important;">
      <div class="circles-noms">
        <div class="div1"></div>
        <div class="div2"></div>
        <div class="div3"></div></div>
      <p class="noms-hint">Noms</p>
-     <p class="noms-qty">120</p>
+     <p class="noms-qty">{{this.noms_balance}}</p>
     </ion-buttons>
     <ion-buttons *ngIf="type == 'nomads'" (click)="openFilters()" end>
      <div class="filters-noms">

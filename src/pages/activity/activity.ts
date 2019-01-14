@@ -26,6 +26,10 @@ public activity_data: any =[];
 public users$: any;
 public noms_balance: any;
 
+//For the activities
+public response$: any;
+public nomads_joined: any = [];
+
     @ViewChild('map') mapElement: ElementRef;
      map: any;
 
@@ -41,21 +45,57 @@ public noms_balance: any;
     console.log(this.activity_data)
   }
 
+  isOwner(){
+    return this.activity_data.creator == firebase.auth().currentUser.uid;
+  }
+
+  confirmEdit(){
+    console.log('clicked k');
+    this.alertCtrl.create({
+      title: 'Do you want to edit this activity?',
+      message:  'You can edit the info, schedule and location',
+      buttons: [
+        {
+          text: 'Cancel',
+          handler: () => {
+
+          }
+        },
+        {
+          text: 'Edit',
+          handler: () => {
+
+          }
+        }
+      ]
+    }).present();
+  }
+
   openBook(){
-    if(parseInt(this.noms_balance) > parseInt(this.activity_data.class_price)){
-      let modal = this.modalCtrl.create(BookPage, {'Activity': this.activity_data});
-          modal.onDidDismiss( data => {
-            if(data && data.go) this.navCtrl.parent.select(3);
-          });
-       modal.present();
+    if(this.activity_data.creator != firebase.auth().currentUser.uid){
+      if(parseInt(this.noms_balance) > parseInt(this.activity_data.class_price)){
+        let modal = this.modalCtrl.create(BookPage, {'Activity': this.activity_data});
+            modal.onDidDismiss( data => {
+              if(data && data.go) this.navCtrl.parent.select(3);
+            });
+         modal.present();
+      }
+      else{
+        this.alertCtrl.create({
+          title: 'Not enough Noms',
+          message: 'You need to buy more noms to join this activity.',
+          buttons: ['Ok']
+        }).present();
+      }
     }
     else{
       this.alertCtrl.create({
-        title: 'Not enough Noms',
-        message: 'You need to buy more noms to join this activity.',
+        title: 'Cant join',
+        message: 'It seems like you created this activity, you cant join as an attendant!',
         buttons: ['Ok']
       }).present();
     }
+
   }
 
   sanitizeThis(image){
@@ -72,8 +112,28 @@ public noms_balance: any;
       this.users$ = action.payload.val();
       this.noms_balance = this.users$.noms;
     });
+    this.af.object('Events/'+this.activity_data.index+'/nomads').snapshotChanges().subscribe(action => {
+      this.response$ = action.payload.val();
+
+      this.nomads_joined = [];
+      this.convertNomads();
+    });
 
     this.loadMap();
+  }
+
+  convertNomads(){
+    let a = this.response$;
+    for(let key in a){
+      if(a[key].index == firebase.auth().currentUser.uid){
+        this.nomads_joined.push({
+          'index': a[key].index,
+          'day': a[key].day,
+          'time': a[key].time,
+          'date': a[key].date
+        });
+      }
+    }
   }
 
   getEnd(inicio, dura){
@@ -102,6 +162,11 @@ public noms_balance: any;
       console.log(err);
     });
 
+  }
+
+  isAlready(){
+    let aux = this.nomads_joined.filter(a => a.date == this.activity_data.day && a.time == this.activity_data.time);
+    return aux.length > 0;
   }
 
   addMarker(){

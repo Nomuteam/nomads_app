@@ -135,7 +135,7 @@ export class NewactPage {
      'media': []
    };
 
-   public schedule: any = {
+  public schedule: any = {
      'start_time': '06:00',
      'duration': '',
      'spaces_available': '',
@@ -364,7 +364,7 @@ export class NewactPage {
          const image = `data:image/jpeg;base64,${result}`;
 
          const pictures = firebase.storage().ref('/Activities/');
-         pictures.child('pictures').child('main').putString(image, 'data_url').then(kk=>{
+         pictures.child('pictures').child(this.generateUUID()).putString(image, 'data_url').then(kk=>{
            kk.ref.getDownloadURL().then(url => {
              this.general_loader.dismiss();
              this.activity_data.media.push({
@@ -393,7 +393,7 @@ export class NewactPage {
         const image = `data:image/jpeg;base64,${result}`;
 
         const pictures = firebase.storage().ref('/Activities/');
-        pictures.child('pictures').child('main').putString(image, 'data_url').then(kk=>{
+        pictures.child('pictures').child(this.generateUUID()).putString(image, 'data_url').then(kk=>{
           kk.ref.getDownloadURL().then(url => {
             this.general_loader.dismiss();
             this.activity_data.media.push({

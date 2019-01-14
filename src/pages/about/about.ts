@@ -7,6 +7,7 @@ import { NewclanPage } from '../newclan/newclan';
 import { AngularFireDatabase, AngularFireObject } from 'angularfire2/database';
 import firebase from 'firebase';
 import { DomSanitizer } from '@angular/platform-browser';
+import { WalletPage } from '../wallet/wallet';
 
 @Component({
   selector: 'page-about',
@@ -16,6 +17,7 @@ export class AboutPage {
   public general_loader: any;
   public response$: any;
   public my_clans: any = [];
+  public users$: any;
   public clans_example: any = [
     {
       'title': 'Tec de Mty',
@@ -26,6 +28,7 @@ export class AboutPage {
       'members': '150'
     }
 ];
+public noms_balance: any = '';
 
   constructor(public navCtrl: NavController,
   public af: AngularFireDatabase,
@@ -33,6 +36,11 @@ export class AboutPage {
   public alertCtrl: AlertController,
   public sanitizer: DomSanitizer) {
 
+  }
+
+  testWallet(){
+   this.navCtrl.parent.select(4);
+   setTimeout(() => {this.navCtrl.parent.getSelected().push(WalletPage)}, 500);
   }
 
   sanitizeThis(image){
@@ -85,11 +93,20 @@ export class AboutPage {
       content: 'Loading...'
     });
     this.general_loader.present();
+    this.af.object('Users/'+firebase.auth().currentUser.uid).snapshotChanges().subscribe(action => {
+      this.users$ = action.payload.val();
+      this.noms_balance = this.users$.noms;
+    });
     this.getClans();
   }
 
   getTextM(miembros){
-    return (miembros != '1' ? miembros.length+' nomads' : miembros.length+' nomads');
+    let aux = 0;
+    for(let key in miembros){
+      aux++;
+      //console.log('where you from nigga');
+    }
+    return (aux > 1 ? aux+' nomads' : aux+' nomad');
   }
 
 

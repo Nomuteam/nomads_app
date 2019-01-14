@@ -24,6 +24,8 @@ export class ClanshPage {
   public general_loader: any;
   public response$: any;
   public my_clans: any = [];
+  public users$: any;
+  public noms_balance: any = '';
   public clans_example: any = [
     {
       'title': 'Tec de Mty',
@@ -124,6 +126,10 @@ export class ClanshPage {
       content: 'Loading...'
     });
     this.general_loader.present();
+    this.af.object('Users/'+firebase.auth().currentUser.uid).snapshotChanges().subscribe(action => {
+      this.users$ = action.payload.val();
+      this.noms_balance = this.users$.noms;
+    });
     this.getClans();
   }
 

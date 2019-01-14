@@ -9,6 +9,7 @@ import { EventPage } from '../event/event';
 import { DomSanitizer } from '@angular/platform-browser';
 import { Stripe } from '@ionic-native/stripe';
 import * as moment from 'moment';
+import { WalletPage } from '../wallet/wallet';
 
 @Component({
   selector: 'page-home',
@@ -19,6 +20,8 @@ export class HomePage {
   public activities: any = [];
   public favorites: any = [];
   public general_loader: any;
+  public users$: any;
+  public noms_balance: any = '';
   public e_response$: any;
   public events: any = [];
 
@@ -37,19 +40,19 @@ export class HomePage {
     date.setMinutes(8);
     console.log(moment('Monday', 'dddd').fromNow());
     console.log(moment('2019-01-11').add(3, 'days').format('L'));
-   let card = {
-    number: '5579070085401951',
-    expMonth: 12,
-    expYear: 2022,
-    cvc: '997'
-   };
-
    // let card = {
-   //  number: '4242424242424242',
+   //  number: '5579070085401951',
    //  expMonth: 12,
-   //  expYear: 2020,
-   //  cvc: '220'
+   //  expYear: 2022,
+   //  cvc: '997'
    // };
+
+   let card = {
+    number: '4242424242424242',
+    expMonth: 12,
+    expYear: 2020,
+    cvc: '220'
+   };
 
    // this.stripe.createCardToken(card)
    //    .then(token => {
@@ -122,6 +125,11 @@ export class HomePage {
     this.navCtrl.push(ActivityPage, {'Activity': actividad});
   }
 
+  testWallet(){
+   this.navCtrl.parent.select(4);
+   setTimeout(() => {this.navCtrl.parent.getSelected().push(WalletPage)}, 500);
+  }
+
   openEvent(event){
     this.navCtrl.push(EventPage, {'Event': event});
   }
@@ -146,6 +154,10 @@ export class HomePage {
       content: 'Loading...'
     });
     this.general_loader.present();
+    this.af.object('Users/'+firebase.auth().currentUser.uid).snapshotChanges().subscribe(action => {
+      this.users$ = action.payload.val();
+      this.noms_balance = this.users$.noms;
+    });
     this.getActivities();
   }
 

@@ -49,6 +49,9 @@ export class ClanfPage {
       'location': 'Monterrey, México'
     }
 ];
+public users$: any;
+public noms_balance: any = '';
+
   constructor(public navCtrl: NavController,
   public af: AngularFireDatabase,
   public loadingCtrl: LoadingController,
@@ -126,11 +129,20 @@ export class ClanfPage {
       content: 'Loading...'
     });
     this.general_loader.present();
+    this.af.object('Users/'+firebase.auth().currentUser.uid).snapshotChanges().subscribe(action => {
+      this.users$ = action.payload.val();
+      this.noms_balance = this.users$.noms;
+    });
     this.getClans();
   }
 
   getTextM(miembros){
-    return (miembros != '1' ? miembros.length+' nomads' : miembros.length+' nomads');
+    let aux = 0;
+    for(let key in miembros){
+      aux++;
+      //console.log('where you from nigga');
+    }
+    return (aux > 1 ? aux+' nomads' : aux+' nomad');
   }
 
 }

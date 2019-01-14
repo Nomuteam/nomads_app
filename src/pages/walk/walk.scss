@@ -119,6 +119,18 @@ page-walk {
            border-bottom: 1px solid rgba(255, 255, 255, .7)!important;
            width: 95%;
          }
+         .card{
+           background-image: url('../../assets/img/card.png');
+           text-indent: 13.5%!important;
+           background-repeat:no-repeat;
+           background-position:0%;  padding-left:10px;
+         }
+         .visa{
+           background-image: url('../../assets/img/visa.png');
+         }
+         .mastercard{
+           background-image: url('../../assets/img/mastercard.png');
+         }
        }
 
        .pw-forgot{

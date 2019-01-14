@@ -126,6 +126,27 @@ page-wallet {
       width: 50%;
       height: 100%;
       padding-right: 2%;
+      .input-group{
+        padding-top: 1%;
+        .input-title{
+          font-size: 90%;
+          color: rgba(255, 255, 255, .5);
+        }
+        .input-field{
+          color: white;
+          background-color: transparent;
+          border: 1px solid rgba(255, 255, 255, .5)!important;
+          width: 95%;
+          padding: 2%;
+          border-radius: 5px!important;
+          text-align: center;
+          color: #229B86;
+          font-weight: 700;
+        }
+        .input-field:hover{
+          border: 1px solid #FFCC9A!important;
+        }
+      }
       .amount-hint{
         font-family: 'Raleway', sans-serif;
         font-size: 100%;

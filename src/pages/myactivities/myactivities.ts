@@ -29,12 +29,35 @@ public general_loader: any;
   public alertCtrl: AlertController) {
   }
 
+  confirmEdit(act){
+    this.alertCtrl.create({
+      title: 'What would you like to do?',
+      message:  'You can edit this activity or see how its displayed to nomads',
+      buttons: [
+        {
+          text: 'Edit',
+          handler: () => {
+
+          }
+        },
+        {
+          text: 'View',
+          handler: () => {
+            this.openActivity(act);
+          }
+        }
+      ]
+    }).present();
+  }
+
+
 
   convertActivities(){
     let a = this.response$;
     for(let key in a){
       this.activities.push({
-        'title': a[key].title,
+        'title': a[key].title.substring(0, 10) + '..',
+        'title_complete': a[key].title,
         'location': a[key].location,
         'description':  a[key].description,
         'cancelation_policy':  a[key].cancelation_policy,
@@ -45,11 +68,13 @@ public general_loader: any;
         'media':  a[key].media,
         'img':  a[key].img,
         'creator':  a[key].creator,
-        'index':  a[key].index
+        'index':  a[key].index,
+        'isEvent': false
       });
     }
     this.activities = this.activities.filter( a => a.creator == firebase.auth().currentUser.uid);
     this.general_loader.dismiss();
+    console.log(this.activities);
   }
 
   openActivity(actividad){

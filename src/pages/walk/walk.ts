@@ -3,6 +3,7 @@ import { IonicPage, NavController, NavParams, LoadingController, AlertController
 import { TermsPage } from '../terms/terms';
 import { AngularFireDatabase, AngularFireObject } from 'angularfire2/database';
 import firebase from 'firebase';
+import { Stripe } from '@ionic-native/stripe';
 
 /**
  * Generated class for the WalkPage page.
@@ -17,7 +18,8 @@ import firebase from 'firebase';
   templateUrl: 'walk.html',
 })
 export class WalkPage {
-public current_index: any = 1;
+public general_loader: any;
+public current_index: any = 2;
 public user_type: any = '';
 public message: any = 'You are almost there, tell us more about you.';
 
@@ -222,13 +224,18 @@ public user_data: any = {
       'selected': false
     },
   ];
-
+public card: any = {
+ number: '5579070085401951'
+};
+public testing_1 = '55790700854019';
+public class_type = 'input-field card';
 
   constructor(  public navCtrl: NavController,
     public navParams: NavParams,
     public af: AngularFireDatabase,
     public loadingCtrl: LoadingController,
-    public alertCtrl: AlertController) {
+    public alertCtrl: AlertController,
+    public stripe: Stripe) {
     localStorage.setItem('walk_progress', 'incomplete');
     this.user_type = this.navParams.get('User');
     localStorage.setItem('user_type', this.user_type);
@@ -236,6 +243,75 @@ public user_data: any = {
     //   title: this.user_data.payment.cardholder,
     //   buttons:  ['Ok']
     // }).present();
+  }
+
+  getCardC(){
+    this.general_loader = this.loadingCtrl.create({
+      spinner: 'bubbles',
+      content: 'Validating...'
+    });
+    this.general_loader.present();
+
+    this.stripe.validateCVC(this.user_data.payment.card_ccv)
+    .then(token => {
+      this.general_loader.dismiss();
+      this.alertCtrl.create({title: 'Validated CVC', message: 'Looks like you entered a correct CVC', buttons: ['Ok']}).present();
+    })
+    .catch(error => {
+      this.general_loader.dismiss();
+      this.alertCtrl.create({title: 'Incorrect CVC', message: 'Looks like you entered an invalid CVC', buttons: ['Ok']}).present();
+      this.user_data.payment.card_ccv = '';
+    });
+  }
+
+  getDateT(){
+    this.general_loader = this.loadingCtrl.create({
+      spinner: 'bubbles',
+      content: 'Validating...'
+    });
+    this.general_loader.present();
+
+    let expMonth = this.user_data.payment.card_expiry.slice(5);
+    let expYear = this.user_data.payment.card_expiry.slice(0, 4);
+
+    this.stripe.validateExpiryDate(expMonth, expYear)
+    .then(token => {
+      this.general_loader.dismiss();
+      this.alertCtrl.create({title: 'Validated Expiry Date', message: 'Looks like you entered a correct expiry date', buttons: ['Ok']}).present();
+    })
+    .catch(error => {
+      this.general_loader.dismiss();
+      this.alertCtrl.create({title: 'Incorrect Expiry Date', message: 'Looks like you entered an invalid expiry date', buttons: ['Ok']}).present();
+      this.user_data.payment.card_expiry = '';
+    });
+  }
+
+  getCardT(){
+    this.general_loader = this.loadingCtrl.create({
+      spinner: 'bubbles',
+      content: 'Validating...'
+    });
+    this.general_loader.present();
+
+    this.stripe.validateCardNumber(this.user_data.payment.cardnumber)
+    .then(token => {
+      this.stripe.getCardType(this.user_data.payment.cardnumber)
+         .then(token => {
+           this.class_type = 'input-field card';
+           this.general_loader.dismiss();
+           this.class_type += ' '+token.toString().toLowerCase();
+         })
+         .catch(error => {
+           this.general_loader.dismiss();
+           this.alertCtrl.create({title: 'Server Error', message: 'We are experiencing some connection issues, try again later', buttons: ['Ok']}).present();
+         });
+    })
+    .catch(error => {
+      this.general_loader.dismiss();
+      this.alertCtrl.create({title: 'Incorrect Number', message: 'Looks like you entered an invalid card number', buttons: ['Ok']}).present();
+      this.user_data.payment.cardnumber = '';
+    });
+
   }
 
   ionViewDidLoad() {
@@ -320,7 +396,7 @@ public user_data: any = {
        this.user_data.preferences.forms = this.example_forms;
        this.user_data.preferences.schedule = this.example_schedule;
        this.user_data.preferences.days = this.example_days;
-       
+
        this.user_data.info_complete = true;
        console.log(this.user_data);
        this.af.list('/Users/').update(firebase.auth().currentUser.uid, this.user_data)

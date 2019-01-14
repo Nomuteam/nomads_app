@@ -18,6 +18,7 @@ import firebase from 'firebase';
 export class FiltersPage {
 public general_loader: any;
 public segment: any = 'daytime';
+public noms_balance: any = '';
 public example_cats: any = [
   // {
   //   'name': 'Classes',
@@ -227,6 +228,7 @@ public user_preferences: any = [];
     this.general_loader.present();
     this.af.object('Users/'+firebase.auth().currentUser.uid+'/preferences').snapshotChanges().subscribe(action => {
       this.response$ = action.payload.val();
+      this.noms_balance = this.response$.noms;
       this.user_preferences = this.response$;
       this.markSelected();
       if(this.general_loader) this.general_loader.dismiss();

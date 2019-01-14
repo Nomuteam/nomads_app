@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, LoadingController, AlertController } from 'ionic-angular';
+import { App, IonicPage, NavController, NavParams, LoadingController, AlertController } from 'ionic-angular';
 import { ChatsPage } from '../chats/chats';
 import { WalletPage } from '../wallet/wallet';
 import { MyeventsPage } from '../myevents/myevents';
@@ -7,10 +7,11 @@ import { FriendsPage } from '../friends/friends';
 import { NotificationsPage } from '../notifications/notifications';
 import { HistoryPage } from '../history/history';
 import { MynomadsPage } from '../mynomads/mynomads';
-
+import { AngularFireAuth } from 'angularfire2/auth';
 import { AngularFireDatabase, AngularFireObject } from 'angularfire2/database';
 import firebase from 'firebase';
 import * as moment from 'moment';
+import { WelcomePage } from '../welcome/welcome';
 
 /**
  * Generated class for the ProfallyPage page.
@@ -23,6 +24,7 @@ import * as moment from 'moment';
 @Component({
   selector: 'page-profally',
   templateUrl: 'profally.html',
+  providers: [AngularFireAuth]
 })
 export class ProfallyPage {
 public alumno$: any;
@@ -34,7 +36,9 @@ public general_loader: any;
        public navParams: NavParams,
        public af: AngularFireDatabase,
        public loadingCtrl: LoadingController,
-       public alertCtrl: AlertController) {
+       public alertCtrl: AlertController,
+       public afAuth: AngularFireAuth,
+       public appCtrl: App) {
   }
 
   getBirthday(){
@@ -81,6 +85,11 @@ public general_loader: any;
     else if(pagina == 'h'){
       this.navCtrl.push(HistoryPage);
     }
+  }
+
+  logOut(){
+    this.afAuth.auth.signOut();
+    this.appCtrl.getRootNav().setRoot(WelcomePage);
   }
 
 }
