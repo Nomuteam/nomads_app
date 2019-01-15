@@ -95,26 +95,15 @@
  <div *ngIf="this.user_type == 'allies'">
    <div class="buy-hint gold">My Activities</div>
 
-    <div class="activities-container" padding>
-     <div class="texts-container">
-       <div class="top-text">Yoga Class</div>
-       <div class="btm-text">8:00 am</div>
-     </div>
-     <div class="texts-container">
-       <div class="top-text">60 NOM</div>
-       <div class="btm-text">$6,542.00 MXN</div>
-     </div>
-    </div>
-
-    <div class="activities-container" padding>
-     <div class="texts-container">
-       <div class="top-text">Yoga Class</div>
-       <div class="btm-text">8:00 am</div>
-     </div>
-     <div class="texts-container">
-       <div class="top-text">60 NOM</div>
-       <div class="btm-text">$6,542.00 MXN</div>
-     </div>
+    <div *ngFor="let a of this.my_activities" class="activities-container" padding>
+        <div class="texts-container">
+          <div class="top-text">{{a.title}}</div>
+          <div class="btm-text">Lessons: {{a.schedule.length}}</div>
+        </div>
+        <div class="texts-container">
+          <div class="top-text">{{a.total_earned}} NOMS</div>
+          <div class="btm-text">${{a.total_earned * 20}} MXN</div>
+        </div>
     </div>
 
  </div>

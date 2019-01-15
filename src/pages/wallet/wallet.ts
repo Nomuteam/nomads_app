@@ -68,6 +68,13 @@ public response$: any;
 public transaction_status: any;
 public transaction_paid: any;
 
+public a_response$: any;
+public my_activities: any = [];
+public activities: any = [];
+
+public t_response$: any;
+public transactions: any = [];
+
   constructor(public navCtrl: NavController,
     public navParams: NavParams,
     public af: AngularFireDatabase,
@@ -295,6 +302,74 @@ public transaction_paid: any;
     return ( this.selected == indice ? 'slide-card selected' : 'slide-card');
   }
 
+  checkExistA(indice){
+    let a = this.activities;
+    for(let key in a){
+      if(a[key].index == indice){
+        return true;
+      }
+    }
+    return false;
+  }
+
+
+  getEarned(indice){
+    let amount = 0;
+    for(let i=0; i<this.transactions.length; i++){
+      if(this.transactions[i].activity_id == indice){
+        amount+= parseInt(this.transactions[i].amount);
+      }
+    }
+    return amount;
+  }
+
+  convertActivities(){
+    let a = this.a_response$;
+    for(let key in a){
+      if(this.checkExistA(a[key].index)){
+        this.my_activities.push({
+          'index': a[key].index,
+          'title': a[key].title,
+          'schedule': a[key].schedule,
+          'fee': a[key].fee,
+          'price': a[key].class_price,
+          'total_earned': this.getEarned(a[key].index)
+        });
+      }
+    }
+    console.log(this.my_activities);
+  }
+
+  getActivities(){
+    this.af.object('Activities').snapshotChanges().subscribe(action => {
+      this.a_response$ = action.payload.val();
+      this.my_activities = [];
+      this.convertActivities();
+    });
+  }
+
+  convertTransactions(){
+    let a = this.t_response$;
+    for(let key in a){
+      this.transactions.push({
+        'activity_id': (a[key].activity_id ? a[key].activity_id  : ''),
+        'amount': a[key].amount,
+        'index': a[key].index,
+        'receiver_id': a[key].receiver_id
+      });
+    }
+    this.transactions = this.transactions.filter(cat => cat.receiver_id == firebase.auth().currentUser.uid);
+    console.log(this.transactions);
+  }
+
+  getTransactions(){
+    this.af.object('transactions').snapshotChanges().subscribe(action => {
+      this.t_response$ = action.payload.val();
+      this.transactions = [];
+      this.convertTransactions();
+    });
+  }
+
   ionViewDidLoad(){
     this.general_loader = this.loadingCtrl.create({
       spinner: 'bubbles',
@@ -312,8 +387,14 @@ public transaction_paid: any;
         this.payment_data.card_address = this.users$.payment.card_address;
       }
 
+      if(this.users$.Activities_created){
+        this.activities = this.users$.Activities_created;
+      }
+
       if(this.general_loader) this.general_loader.dismiss();
     });
+    this.getTransactions();
+    if(this.activities != []) this.getActivities();
   }
 
   private generateUUID(): any {

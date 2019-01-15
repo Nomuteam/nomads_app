@@ -145,22 +145,30 @@ public nomads_joined: any = [];
 
   loadMap(){
 
-    this.geolocation.getCurrentPosition().then((position) => {
 
-      let latLng = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
+        let geocoder = new google.maps.Geocoder();
+        let address = 'Sebastian el Cano 100 Del Valle San Luis Potosi';
+        let vm = this;
 
-      let mapOptions = {
-        center: latLng,
-        zoom: 15,
-        mapTypeId: google.maps.MapTypeId.ROADMAP,
-        disableDefaultUI: true
-      }
+        geocoder.geocode( { 'address' : this.activity_data.location }, function( results, status ) {
+           if( status == google.maps.GeocoderStatus.OK ) {
 
-      this.map = new google.maps.Map(this.mapElement.nativeElement, mapOptions);
-      this.addMarker();
-    }, (err) => {
-      console.log(err);
-    });
+             let mapOptions = {
+               center: results[0].geometry.location,
+               zoom: 15,
+               mapTypeId: google.maps.MapTypeId.ROADMAP,
+               disableDefaultUI: true
+             }
+
+             vm.map = new google.maps.Map(vm.mapElement.nativeElement, mapOptions);
+             vm.addMarker();
+
+           } else {
+             vm.general_loader.dismiss();
+              //alert( 'Geocode was not successful for the following reason: ' + status );
+           }
+       } );
+
 
   }
 

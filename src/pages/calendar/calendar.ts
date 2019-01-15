@@ -55,6 +55,7 @@ export class CalendarPage {
 
     this.activities_all.push({
       'title_complete': 'Today',
+      'activity_id': '',
       'startTime': time,
       'endTime': time,
       'allDay': false
@@ -252,7 +253,6 @@ export class CalendarPage {
         });
     }
     console.log(this.nomad_schedule);
-    console.log(this.nomad_schedule[0].activity_id);
     this.getActivities();
     if(this.general_loader) this.general_loader.dismiss();
   }

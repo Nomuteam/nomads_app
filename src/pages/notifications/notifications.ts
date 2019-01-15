@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, LoadingController, AlertController } from 'ionic-angular';
 import { FiltersPage } from '../filters/filters';
+import { AngularFireDatabase, AngularFireObject } from 'angularfire2/database';
+import firebase from 'firebase';
 
 /**
  * Generated class for the NotificationsPage page.
@@ -15,6 +17,7 @@ import { FiltersPage } from '../filters/filters';
   templateUrl: 'notifications.html',
 })
 export class NotificationsPage {
+public general_loader: any;
 public example_notifs: any = [
   {
     'sender': 'Team Nomads',
@@ -34,8 +37,16 @@ public example_notifs: any = [
     'message': 'I just joined a Relaxing Hike class! Join Me!',
     'isAdmin': false
   }
-]
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+];
+//For the user
+public users$: any;
+public noms_balance: any = [];
+
+  constructor(public navCtrl: NavController,
+  public navParams: NavParams,
+  public af: AngularFireDatabase,
+  public loadingCtrl: LoadingController,
+  public alertCtrl: AlertController) {
   }
 
   openFilters(){
@@ -55,7 +66,18 @@ public example_notifs: any = [
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad NotificationsPage');
+    this.general_loader =  this.loadingCtrl.create({
+          spinner: 'bubbles',
+           content: 'Loading...'
+          });
+    this.general_loader.present();
+
+    this.af.object('Users/'+firebase.auth().currentUser.uid).snapshotChanges().subscribe(action => {
+      this.users$ = action.payload.val();
+
+      this.noms_balance = this.users$.noms;
+      if(this.general_loader) this.general_loader.dismiss();
+    });
   }
 
 }

@@ -11,10 +11,16 @@ page-mynomads {
       height: 50%;
       border-radius: 50%;
       //border: 1px solid red;
-      background-image: url('../../assets/img/imanol.png');
+      //background-image: url('../../assets/img/imanol.png');
+      background-color: #00B0FF;
       background-repeat: no-repeat;
       background-size: cover;
       background-position: center;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 150%;
+      color: white;
     }
     .nomad-texts{
       display: flex;

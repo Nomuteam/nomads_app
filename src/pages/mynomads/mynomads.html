@@ -12,11 +12,11 @@
 
 
 <ion-content padding>
-  <div class="nomad-element">
-      <div class="user-img"></div>
+  <div *ngFor="let n of this.my_nomads" class="nomad-element">
+      <div class="user-img">I</div>
       <div class="nomad-texts">
-       <div class="nomad-name">Mónica</div>
-       <div class="nomad-hint">5 estrellas</div>
+       <div class="nomad-name">{{n.first_name}} {{n.last_name}}</div>
+       <div class="nomad-hint">{{n.birthdate}}</div>
       </div>
 
     <div class="nomad-chat"></div>

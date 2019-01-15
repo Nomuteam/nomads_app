@@ -231,7 +231,7 @@ public activity_data: any;
         let t_id = this.generateUUID();
         let sender_data = {'index': firebase.auth().currentUser.uid, 'amount': this.activity_data.class_price, 'pre_balance': this.noms_balance, 'after_balance': parseInt(this.noms_balance) - parseInt(this.activity_data.class_price)};
         let receiver_data = {'index': this.activity_data.creator, 'amount': this.activity_data.class_price, 'pre_balance': this.ally_balance, 'after_balance': parseInt(this.ally_balance) + parseInt(this.activity_data.class_price)};
-        let transaction = {'date': new Date(), 'index': t_id, 'amount': this.activity_data.class_price, 'type': 'activity', 'sender_id': firebase.auth().currentUser.uid, 'receiver_id': this.activity_data.creator, 'sender': sender_data, 'receiver': receiver_data};
+        let transaction = {'date': new Date(), 'index': t_id, 'amount': this.activity_data.class_price, 'type': 'activity', 'sender_id': firebase.auth().currentUser.uid, 'receiver_id': this.activity_data.creator, 'sender': sender_data, 'receiver': receiver_data, 'activity_id': this.activity_data.index};
         this.af.list('transactions').update(t_id, transaction);
         //
         // //Save transaction id in ally db

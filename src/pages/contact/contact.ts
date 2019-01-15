@@ -6,6 +6,7 @@ import { FiltersPage } from '../filters/filters';
 import { AngularFireDatabase, AngularFireObject } from 'angularfire2/database';
 import firebase from 'firebase';
 import { WalletPage } from '../wallet/wallet';
+import { DomSanitizer } from '@angular/platform-browser';
 
 @Component({
   selector: 'page-contact',
@@ -24,6 +25,7 @@ public e_response$: any;
 public activities_all: any = [];
 
 public auxiliar: any;
+public class_slides: any= false;
 
   @ViewChild('map') mapElement: ElementRef;
    map: any;
@@ -33,8 +35,13 @@ public auxiliar: any;
     public af: AngularFireDatabase,
     public loadingCtrl: LoadingController,
     public alertCtrl: AlertController,
-    public geolocation: Geolocation) {
+    public geolocation: Geolocation,
+    public sanitizer: DomSanitizer) {
 
+  }
+
+  sanitizeThis(image){
+    return this.sanitizer.bypassSecurityTrustStyle('url('+image+')');
   }
 
   openFilters(){
@@ -53,6 +60,17 @@ public auxiliar: any;
 
  }
 
+ changePosition(){
+
+
+   if(this.class_slides){
+     this.class_slides = false;
+   }
+   else{
+     this.class_slides = true;
+   }
+ }
+
   populateMap(){
     let geocoder = new google.maps.Geocoder();
     let address = 'Sebastian el Cano 100 Del Valle San Luis Potosi';
@@ -66,9 +84,10 @@ public auxiliar: any;
            let marker = new google.maps.Marker({
              map: vm.map,
              animation: google.maps.Animation.DROP,
-             position: vm.auxiliar
+             position: results[0].geometry.location,
+             icon: 'https://firebasestorage.googleapis.com/v0/b/dev-nomads.appspot.com/o/pink-icon.png?alt=media&token=3448077b-ef8e-4925-a3fa-27274caee626'
            });
-           let content = "<h4>hola k </h4>";
+           let content = "<h4>"+vm.activities_all[i].title_complete+"</h4>";
 
            let infoWindow = new google.maps.InfoWindow({
              content: content
@@ -90,7 +109,34 @@ public auxiliar: any;
 
 
 
+  getDistance(){
+    let geocoder = new google.maps.Geocoder();
+    let vm = this;
+    let distance = new google.maps.DistanceMatrixService();
 
+    for(let i=0; i<this.activities_all.length; i++){
+
+      distance.getDistanceMatrix({
+         origins: [vm.map.getCenter()],
+         destinations: [vm.activities_all[i].location],
+         travelMode: google.maps.TravelMode.DRIVING,
+         unitSystem: google.maps.UnitSystem.METRIC,
+         durationInTraffic: true,
+         avoidHighways: false,
+         avoidTolls: false
+         },
+     function (response, status) {
+         // check status from google service call
+         if (status !== google.maps.DistanceMatrixStatus.OK) {
+             console.log('Error:', status);
+         } else {
+           console.log(response);
+              // vm.activities_all[i].distance = response.rows[0].elements[0].distance.value;
+             }
+     });
+    }
+   console.log(this.activities_all);
+  }
 
 
   convertActivities(){
@@ -110,7 +156,8 @@ public auxiliar: any;
         'creator':  a[key].creator,
         'index':  a[key].index,
         'media': a[key].media,
-        'isEvent': true
+        'isEvent': true,
+        'distance': 0
       });
   }
 
@@ -129,12 +176,14 @@ public auxiliar: any;
             'creator':  b[key].creator,
             'index':  b[key].index,
             'media': b[key].media,
-            'isEvent': false
+            'isEvent': false,
+            'distance': 0
           });
       }
 
    console.log(this.activities_all);
    this.populateMap();
+   this.getDistance();
   }
 
   getEvents(){
@@ -175,89 +224,9 @@ public auxiliar: any;
 
         let mapOptions = {
           center: latLng,
-          zoom: 15,
+          zoom: 12,
           mapTypeId: google.maps.MapTypeId.ROADMAP,
-          disableDefaultUI: true,
-          styles: [
-            {elementType: 'geometry', stylers: [{color: '#242f3e'}]},
-            {elementType: 'labels.text.stroke', stylers: [{color: '#242f3e'}]},
-            {elementType: 'labels.text.fill', stylers: [{color: '#746855'}]},
-            {
-              featureType: 'administrative.locality',
-              elementType: 'labels.text.fill',
-              stylers: [{color: '#d59563'}]
-            },
-            {
-              featureType: 'poi',
-              elementType: 'labels.text.fill',
-              stylers: [{color: '#d59563'}]
-            },
-            {
-              featureType: 'poi.park',
-              elementType: 'geometry',
-              stylers: [{color: '#263c3f'}]
-            },
-            {
-              featureType: 'poi.park',
-              elementType: 'labels.text.fill',
-              stylers: [{color: '#6b9a76'}]
-            },
-            {
-              featureType: 'road',
-              elementType: 'geometry',
-              stylers: [{color: '#38414e'}]
-            },
-            {
-              featureType: 'road',
-              elementType: 'geometry.stroke',
-              stylers: [{color: '#212a37'}]
-            },
-            {
-              featureType: 'road',
-              elementType: 'labels.text.fill',
-              stylers: [{color: '#9ca5b3'}]
-            },
-            {
-              featureType: 'road.highway',
-              elementType: 'geometry',
-              stylers: [{color: '#746855'}]
-            },
-            {
-              featureType: 'road.highway',
-              elementType: 'geometry.stroke',
-              stylers: [{color: '#1f2835'}]
-            },
-            {
-              featureType: 'road.highway',
-              elementType: 'labels.text.fill',
-              stylers: [{color: '#f3d19c'}]
-            },
-            {
-              featureType: 'transit',
-              elementType: 'geometry',
-              stylers: [{color: '#2f3948'}]
-            },
-            {
-              featureType: 'transit.station',
-              elementType: 'labels.text.fill',
-              stylers: [{color: '#d59563'}]
-            },
-            {
-              featureType: 'water',
-              elementType: 'geometry',
-              stylers: [{color: '#17263c'}]
-            },
-            {
-              featureType: 'water',
-              elementType: 'labels.text.fill',
-              stylers: [{color: '#515c6d'}]
-            },
-            {
-              featureType: 'water',
-              elementType: 'labels.text.stroke',
-              stylers: [{color: '#17263c'}]
-            }
-          ]
+          disableDefaultUI: true
         }
 
         this.map = new google.maps.Map(this.mapElement.nativeElement, mapOptions);
@@ -272,7 +241,8 @@ public auxiliar: any;
       let marker = new google.maps.Marker({
         map: this.map,
         animation: google.maps.Animation.DROP,
-        position: this.map.getCenter()
+        position: this.map.getCenter(),
+        icon: 'https://firebasestorage.googleapis.com/v0/b/dev-nomads.appspot.com/o/user.png?alt=media&token=fcd730d1-fdd7-4eae-b98f-070237331cee'
       });
 
       let content = "<h4>Here you are!</h4>";

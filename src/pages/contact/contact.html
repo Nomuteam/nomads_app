@@ -25,4 +25,32 @@
   </div>
 
   <div #map id="map"></div>
+
+  <div class="slides-cool" (click)="changePosition()">
+    <div class="top-container">
+      <div class="left-top">
+        <div class="text">Nearby and Upcoming</div>
+        <div class="text hint">Classes and Events</div>
+      </div>
+      <div class="number">{{this.activities_all.length}}</div>
+    </div>
+    <ion-slides [hidden]="this.class_slides" slidesPerView="2.5">
+     <ion-slide *ngFor="let a of this.activities_all">
+       <img src="{{a.img}}" class="img-slide">
+       <!-- <div class="img-slide" [style.background-image]="sanitizeThis(a.img)"></div> -->
+       <p class="act-title">{{a.title}}</p>
+       <p class="act-distance"> {{a.distance}} km</p>
+       <div class="noms-coins">
+         <p>{{a.class_price}}</p>
+         <div class="circles-noms">
+           <div class="div1"></div>
+           <div class="div2"></div>
+           <div class="div3"></div></div>
+       </div>
+     </ion-slide>
+    </ion-slides>
+  </div>
+
+
+
 </ion-content>
