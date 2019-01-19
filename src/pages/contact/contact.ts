@@ -7,6 +7,8 @@ import { AngularFireDatabase, AngularFireObject } from 'angularfire2/database';
 import firebase from 'firebase';
 import { WalletPage } from '../wallet/wallet';
 import { DomSanitizer } from '@angular/platform-browser';
+import { ActivityPage } from '../activity/activity';
+import { EventPage } from '../event/event';
 
 @Component({
   selector: 'page-contact',
@@ -60,6 +62,15 @@ public class_slides: any= false;
 
  }
 
+ seeDetails(a){
+   if(a.isEvent){
+     this.navCtrl.push(EventPage, {'Event': a});
+   }
+   else{
+     this.navCtrl.push(ActivityPage, {'Activity': a});
+   }
+ }
+
  changePosition(){
 
 
@@ -71,39 +82,48 @@ public class_slides: any= false;
    }
  }
 
-  populateMap(){
-    let geocoder = new google.maps.Geocoder();
-    let address = 'Sebastian el Cano 100 Del Valle San Luis Potosi';
-    let vm = this;
+ coordenadas(address, tit, fn){
+   let geocoder = new google.maps.Geocoder();
+   let vm = this;
+   geocoder.geocode( { 'address' : address}, function( results, status ) {
+      if( status == google.maps.GeocoderStatus.OK ) {
+        console.log(results);
+        fn(results[0].formatted_address);
+        let marker = new google.maps.Marker({
+          map: vm.map,
+          animation: google.maps.Animation.DROP,
+          position: results[0].geometry.location,
+          icon: 'https://firebasestorage.googleapis.com/v0/b/dev-nomads.appspot.com/o/pink-icon.png?alt=media&token=3448077b-ef8e-4925-a3fa-27274caee626'
+        });
+        let content = "<h4>"+tit+"</h4>";
 
+        let infoWindow = new google.maps.InfoWindow({
+          content: content
+        });
+
+        google.maps.event.addListener(marker, 'click', () => {
+          infoWindow.open(vm.map, marker);
+        });
+      } else {
+         alert( 'Geocode was not successful for the following reason: ' + status );
+      }
+  });
+ }
+
+  populateMap(){
+
+    let vm = this;
     for(let i=0; i<this.activities_all.length; i++){
 
+    this.coordenadas(this.activities_all[i].location, this.activities_all[i].title_complete,  function(location){
+        vm.activities_all[i].location = location;
+    });
 
-      geocoder.geocode( { 'address' : vm.activities_all[i].location }, function( results, status ) {
-         if( status == google.maps.GeocoderStatus.OK ) {
-           let marker = new google.maps.Marker({
-             map: vm.map,
-             animation: google.maps.Animation.DROP,
-             position: results[0].geometry.location,
-             icon: 'https://firebasestorage.googleapis.com/v0/b/dev-nomads.appspot.com/o/pink-icon.png?alt=media&token=3448077b-ef8e-4925-a3fa-27274caee626'
-           });
-           let content = "<h4>"+vm.activities_all[i].title_complete+"</h4>";
-
-           let infoWindow = new google.maps.InfoWindow({
-             content: content
-           });
-
-           google.maps.event.addListener(marker, 'click', () => {
-             infoWindow.open(vm.map, marker);
-           });
-         } else {
-            alert( 'Geocode was not successful for the following reason: ' + status );
-         }
-     });
     }
 
+    console.log(this.activities_all);
     this.general_loader.dismiss();
-
+    this.getDistance();
   }
 
 
@@ -113,17 +133,14 @@ public class_slides: any= false;
     let geocoder = new google.maps.Geocoder();
     let vm = this;
     let distance = new google.maps.DistanceMatrixService();
+    let address = 'Sebastian el Cano 200 Del Valle San Luis Potosi';
 
     for(let i=0; i<this.activities_all.length; i++){
-
+      console.log(vm.activities_all[i].location);
       distance.getDistanceMatrix({
          origins: [vm.map.getCenter()],
-         destinations: [vm.activities_all[i].location],
-         travelMode: google.maps.TravelMode.DRIVING,
-         unitSystem: google.maps.UnitSystem.METRIC,
-         durationInTraffic: true,
-         avoidHighways: false,
-         avoidTolls: false
+         destinations: [address],
+         travelMode: google.maps.TravelMode.DRIVING
          },
      function (response, status) {
          // check status from google service call
@@ -134,6 +151,7 @@ public class_slides: any= false;
               // vm.activities_all[i].distance = response.rows[0].elements[0].distance.value;
              }
      });
+
     }
    console.log(this.activities_all);
   }
@@ -183,7 +201,6 @@ public class_slides: any= false;
 
    console.log(this.activities_all);
    this.populateMap();
-   this.getDistance();
   }
 
   getEvents(){
