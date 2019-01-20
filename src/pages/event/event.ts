@@ -118,6 +118,19 @@ public nomads_joined: any = [];
         let attendant = {'index': firebase.auth().currentUser.uid, 'day': moment(this.event_data.day).format('dddd'), 'time': this.event_data.time, 'date': this.event_data.day};
         this.af.list('Events/'+this.event_data.index+'/nomads').push(attendant);
 
+        //Create a chat room with the owner of this activity
+        let chat_index = this.generateUUID();
+        let chat_members = [{'index': this.event_data.creator},{'index': firebase.auth().currentUser.uid}];
+        let chat_expires = moment(this.event_data.day).add(1, 'days').format('YYYY-MM-DD');
+        let messages = [{'senderId': 'admin', 'message': 'Welcome to your chat. Ask any question you need about this event!'}];
+        let chat_room = {'index': chat_index, 'createdAt': new Date(), 'type': 'other', 'members': chat_members, 'expireDay': chat_expires, 'messages': messages, 'lastMsg': 'Welcome to your chat. Ask any question you need about this event!', 'lastMsg_index': 'admin', 'clanName': '', 'activity_name': this.event_data.title};
+        this.af.list('Chats/').update(chat_index, chat_room);
+
+        //Update this chat room index in both the user and the owner object
+        let chat_ref = {'index': chat_index};
+        this.af.list('Users/'+this.event_data.creator+'/Chats').update(chat_index, chat_ref);
+        this.af.list('Users/'+firebase.auth().currentUser.uid+'/Chats').update(chat_index, chat_ref);
+
 
         // //Save a description of the transaction
         let t_id = this.generateUUID();
@@ -132,8 +145,9 @@ public nomads_joined: any = [];
         this.af.list('Users/'+this.event_data.creator+'/transactions').update(t_id, t_reference)
             .then(()=>{
               this.alertCtrl.create({
-                title: 'Event joined!',
-                message: 'You are all set!',
+                title: 'You are all set!',
+                subTitle: 'Some details..',
+                message: 'You can find a chat room in your profile between you and this NeweventPage creator in case of questions. It will expire after the event',
                 buttons: ['Ok']
               }).present();
               this.general_loader.dismiss();

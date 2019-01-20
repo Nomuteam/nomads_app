@@ -7,10 +7,10 @@
 <ion-header>
   <ion-navbar color="black1">
     <ion-buttons start style="margin-left: 3%!important;">
-     <div class="circles-noms">
+     <!-- <div class="circles-noms">
        <div class="div1"></div>
        <div class="div2"></div>
-       <div class="div3"></div></div>
+       <div class="div3"></div></div> -->
      <p class="noms-hint">Noms</p>
      <p class="noms-qty">{{this.noms_balance}}</p>
     </ion-buttons>
@@ -45,7 +45,7 @@
       <p class="element-title">Location</p>
       <p class="element-desc">{{a.location}}</p>
 
-      <button (click)="canJoin(a.index, a.type, a.secret_code)" type="button" class="join-btn">Join</button>
+      <button (click)="canJoin(a.index, a.type, a.secret_code, a.chat)" type="button" class="join-btn">Join</button>
     </div>
    </ion-slide>
   </ion-slides>

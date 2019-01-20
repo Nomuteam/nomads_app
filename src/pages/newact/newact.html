@@ -70,7 +70,7 @@
 
   <p class="title-container">Workout Form</p>
   <div class="likes-container">
-      <div *ngFor="let c of this.example_forms; let in=index" (click)="addForm(c.title)" class="{{getForm(c.title)}}">{{c.title}}</div>
+      <div *ngFor="let c of this.example_forms; let in=index" (click)="addForm(in)" class="{{getForm(in)}}">{{c.title}}</div>
   </div>
 </div>
 

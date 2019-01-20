@@ -112,7 +112,7 @@ public nomads_joined: any = [];
       this.users$ = action.payload.val();
       this.noms_balance = this.users$.noms;
     });
-    this.af.object('Events/'+this.activity_data.index+'/nomads').snapshotChanges().subscribe(action => {
+    this.af.object('Activities/'+this.activity_data.index+'/nomads').snapshotChanges().subscribe(action => {
       this.response$ = action.payload.val();
 
       this.nomads_joined = [];

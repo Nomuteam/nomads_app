@@ -3,6 +3,7 @@ import { IonicPage, NavController, NavParams, LoadingController, AlertController
 import { AngularFireDatabase, AngularFireObject } from 'angularfire2/database';
 import firebase from 'firebase';
 import { Camera, CameraOptions } from '@ionic-native/camera';
+import * as moment from 'moment';
 
 /**
  * Generated class for the NewclanPage page.
@@ -26,7 +27,8 @@ public clan_data: any = {
   'img': 'https://images.pexels.com/photos/1246953/pexels-photo-1246953.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260',
   'type': 'public',
   'secret_code': '',
-  'members': []
+  'members': [],
+  'chat': ''
 };
 
   constructor(  public navCtrl: NavController,
@@ -68,12 +70,32 @@ public clan_data: any = {
       'isOwner': true
     });
     this.clan_data.index = indice;
+    this.clan_data.chat = this.generateUUID();
+
+    //Create a chat room with the owner of this activity
+    let chat_members = [{'index': firebase.auth().currentUser.uid}];
+    let chat_expires = moment().add(20, 'years').format('YYYY-MM-DD');
+    let messages = [{'senderId': 'admin', 'message': 'Welcome to your clan chat!'}];
+    let chat_room = {'index': this.clan_data.chat, 'createdAt': new Date(), 'type': 'clan', 'members': chat_members, 'expireDay': chat_expires, 'messages': messages, 'lastMsg': 'Welcome to your clan chat!', 'lastMsg_index': 'admin', 'clanName': this.clan_data.name};
+    this.af.list('Chats/').update(this.clan_data.chat, chat_room);
+
+    //Update this chat room index in both the user and the owner object
+    let chat_ref = {'index': this.clan_data.chat};
+    this.af.list('Users/'+firebase.auth().currentUser.uid+'/Chats').update(this.clan_data.chat, chat_ref);
+
     this.af.list('Users/'+firebase.auth().currentUser.uid+'/Clans').update(indice, {
       'index': indice,
       'isOwner': true
     });
     this.af.list('Clans').update(indice, this.clan_data)
      .then(() =>{
+       this.alertCtrl.create({
+         title: 'Clan created!',
+         subTitle: 'Just so you know..',
+         message: 'You can find a clan chat room in your profile with all its members (once they join)',
+         buttons: ['Ok']
+       }).present();
+
        this.general_loader.dismiss();
        this.navCtrl.pop();
      });

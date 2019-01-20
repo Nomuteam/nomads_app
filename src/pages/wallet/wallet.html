@@ -7,10 +7,10 @@
 <ion-header>
   <ion-navbar color="black1">
     <ion-buttons *ngIf="this.user_type == 'nomads'" start style="margin-left: 3%!important;">
-     <div class="circles-noms">
+     <!-- <div class="circles-noms">
        <div class="div1"></div>
        <div class="div2"></div>
-       <div class="div3"></div></div>
+       <div class="div3"></div></div> -->
      <p class="noms-hint">Noms</p>
      <p class="noms-qty">{{this.noms_balance}}</p>
     </ion-buttons>
@@ -33,11 +33,10 @@
    <div class="items-container">
      <div class="balance-hint">Current Balance</div>
     <div class="balance-container">
-     <div class="number">{{this.noms_balance}}</div>
-     <div class="circles-noms">
-       <div class="div1"></div>
-       <div class="div2"></div>
-       <div class="div3"></div></div>
+     <div *ngIf="this.user_type == 'nomads'" class="number">{{this.noms_balance}}</div>
+     <div *ngIf="this.user_type != 'nomads'" class="number">${{this.noms_balance * 20}}</div>
+     <div *ngIf="this.user_type == 'nomads'" class="currency">NOMS</div>
+     <div *ngIf="this.user_type != 'nomads'" class="currency">MXN</div>
     </div>
    </div>
   </div>

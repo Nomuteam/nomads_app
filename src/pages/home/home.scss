@@ -46,6 +46,12 @@ page-home {
     height: 30px;
     padding: 1%;
     padding-left: 3%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    small{
+      padding-right: 5%;
+    }
   }
 
   .blue{

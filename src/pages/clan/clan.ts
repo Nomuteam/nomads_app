@@ -3,7 +3,7 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { FiltersPage } from '../filters/filters';
 import { DomSanitizer } from '@angular/platform-browser';
 import { MembersPage } from '../members/members';
-
+import { NeweventPage } from '../newevent/newevent';
 /**
  * Generated class for the ClanPage page.
  *
@@ -23,6 +23,10 @@ public clan: any = [];
   constructor(public navCtrl: NavController, public navParams: NavParams, public sanitizer: DomSanitizer) {
     this.type = localStorage.getItem('Tipo');
     this.clan = this.navParams.get('Clan');
+  }
+
+  openNew(){
+    this.navCtrl.push(NeweventPage);
   }
 
   sanitizeThis(image){

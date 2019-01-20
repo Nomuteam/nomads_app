@@ -27,7 +27,7 @@ page-clan {
      background-image: url('../../assets/img/clans_example.png');
      background-repeat: no-repeat;
      background-size: cover;
-     background-position: bottom;
+     background-position: center;
      height: 25vh;
      border-radius: 15px 15px 0 0;
    }
@@ -162,14 +162,18 @@ page-clan {
  .pink-btn{
    display: block;
    margin: 0 auto;
-   padding: 3%;
+   padding: 5%;
    width: 100%;
    font-family: 'Raleway', sans-serif;
    font-weight: 700;
    color: rgba(255, 255, 255, 1);
    background-color: #FF6B84;
    margin-bottom: 3%;
-   border-radius: 20px;
+   border-radius: 12px;
+ }
+
+ .green{
+   background-color: #229B86;
  }
 
  .leave-btn{

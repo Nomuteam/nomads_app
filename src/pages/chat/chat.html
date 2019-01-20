@@ -15,15 +15,19 @@
 
   <div class="chat-area">
     <div *ngFor="let m of Mensajes">
-      <div class="msguser w3-animate-right" *ngIf="m.Sophie == 'No'">
-       <p>{{m.Mensaje}}</p>
+      <div class="msg-container" *ngIf="m.isMe">
+        <div class="msguser w3-animate-right">
+         <p>{{m.message}}</p>
+        </div>
       </div>
-      <div class="msgwhole w3-animate-opacity" *ngIf="m.Sophie == 'Si'">
-       <div class="msgsophie">
-       <!-- <p [innerHtml]="this.contenido">{{m.Mensaje}}</p> -->
-       <p [innerHtml]="m.Mensaje"></p>
-       </div>
-       </div>
+      <div class="msg-container" *ngIf="!m.isMe">
+        <div class="sender-name">{{m.senderName}}: </div>
+        <div class="msgwhole w3-animate-opacity">
+         <div class="msgsophie">
+         <p [innerHtml]="m.message"></p>
+         </div>
+         </div>
+      </div>
     </div>
   </div>
 
@@ -33,8 +37,8 @@
 <ion-navbar hideBackButton color="black1">
 
 <div class="contenedor-input">
-  <input type="text" name="" class="inputmsg" placeholder="Type something..." [(ngModel)]="msgu">
-  <button type="button" name="button" class="enviarbtn" (click)="addMsg()">Send</button>
+  <textarea [(ngModel)]="msgu" (keyup.enter)="addMsg()" name="name" rows="2" cols="80" placeholder="Type something..." class="input-msg"></textarea>
+  <div (click)="addMsg()" class="send-text">Send</div>
 </div>
 
 </ion-navbar>

@@ -1,10 +1,10 @@
 <ion-header>
   <ion-navbar color="black1">
     <ion-buttons (click)="testWallet()" start style="margin-left: 3%!important;">
-     <div class="circles-noms">
+     <!-- <div class="circles-noms">
        <div class="div1"></div>
        <div class="div2"></div>
-       <div class="div3"></div></div>
+       <div class="div3"></div></div> -->
      <p class="noms-hint">Noms</p>
      <p class="noms-qty">{{this.noms_balance}}</p>
     </ion-buttons>
@@ -35,11 +35,11 @@
       <p class="act-title">{{a.title}}</p>
       <p class="act-distance"> - km</p>
       <div class="noms-coins">
-        <p>{{a.class_price}}</p>
-        <div class="circles-noms">
+        <p>{{a.class_price}} <small>noms</small></p>
+        <!-- <div class="circles-noms">
           <div class="div1"></div>
           <div class="div2"></div>
-          <div class="div3"></div></div>
+          <div class="div3"></div></div> -->
       </div>
     </ion-slide>
   </ion-slides>
@@ -123,9 +123,9 @@
   </div>
 
   <div class="category-container">
-   <div class="category-title purple">Events</div>
+   <div class="category-title purple">Events <small (click)="openNew()">Create one</small></div>
    <p *ngIf="this.events.length > 0" class="category-suggestions">We have this suggestions for you</p>
-   <p *ngIf="this.events.length == 0" class="category-suggestions">There are not any events created yet!</p>
+   <p *ngIf="this.events.length == 0" class="category-suggestions">There are not any events available now!</p>
    <ion-slides slidesPerView="2.5">
      <ion-slide (click)="openEvent(e)" *ngFor="let e of this.events">
        <div class="img-slide" [style.background-image]="sanitizeThis(e.img)"></div>

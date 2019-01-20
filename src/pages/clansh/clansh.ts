@@ -100,7 +100,8 @@ export class ClanshPage {
           'secret_code':  a[key].secret_code,
           'members':  a[key].members,
           'img':  a[key].img,
-          'index':  a[key].index
+          'index':  a[key].index,
+          'chat': (a[key].chat != undefined ? a[key].chat : '')
         });
       }
     }
@@ -137,9 +138,9 @@ export class ClanshPage {
     return (miembros != '1' ? miembros.length+' nomads' : miembros.length+' nomads');
   }
 
-  canJoin(indice, tipo, code){
+  canJoin(indice, tipo, code, chat){
     if(tipo == 'public'){
-      this.joinClan(indice);
+      this.joinClan(indice, chat);
     }
     else{
       const prompt = this.alertCtrl.create({
@@ -162,7 +163,7 @@ export class ClanshPage {
            text: 'Validate',
            handler: data => {
              if(data.codigo == code){
-               this.joinClan(indice);
+               this.joinClan(indice, chat);
              }
              else{
                this.alertCtrl.create({
@@ -179,11 +180,19 @@ export class ClanshPage {
     }
   }
 
-  joinClan(indice){
+  joinClan(indice, chat){
       this.general_loader = this.loadingCtrl.create({
         spinner: 'bubbles',
         content: 'Joining Clan...'
       });
+
+      //Update chat members
+      this.af.list('Chats/'+chat+'/members').push({'index': firebase.auth().currentUser.uid});
+
+      //Update this chat room index in the user
+      let chat_ref = {'index': chat};
+      this.af.list('Users/'+firebase.auth().currentUser.uid+'/Chats').update(chat, chat_ref);
+
       this.af.list('Users/'+firebase.auth().currentUser.uid+'/Clans').update(indice, {
         'index': indice,
         'isOwner': true

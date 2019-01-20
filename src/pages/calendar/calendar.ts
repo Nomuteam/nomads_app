@@ -176,37 +176,6 @@ export class CalendarPage {
       }
     }
 
-  //   for(let key in a){
-  //   if(this.checkExist(a[key].index)){
-  //     this.activities_all.push({
-  //       'title': a[key].title.substring(0, 10) + '..',
-  //       'title_complete': a[key].title,
-  //       'location': a[key].location,
-  //       'difficulty':  a[key].difficulty,
-  //       'img':  a[key].img,
-  //       'cost':  a[key].cost,
-  //       'type':  a[key].type,
-  //       'startTime': this.markStart(a[key].day, a[key].time),
-  //       'endTime': this.markEnd(a[key].day, a[key].time),
-  //       'allDay': false,
-  //       'time': a[key].time,
-  //       'creator':  a[key].creator,
-  //       'index':  a[key].index,
-  //       'media': a[key].media,
-  //       'isEvent': true
-  //     });
-  //   }
-  // }
-  //
-  //
-  //     for(let key in b){
-  //       if(this.checkExist(b[key].index)){
-  //         this.activities_all.push({
-  //
-  //         });
-  //       }
-  //     }
-
    console.log(this.activities_all);
   }
 

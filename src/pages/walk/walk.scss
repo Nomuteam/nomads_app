@@ -1,6 +1,6 @@
 page-walk {
   .walk-page{
-    background-color: #0C0C0C;
+    background-color: #2A2E43!important;
     //border: 2px solid white;
     .walk-title{
       font-family: 'Raleway', sans-serif;
@@ -97,7 +97,8 @@ page-walk {
        }
      }
      .card-container{
-       background-color: rgba(255, 255, 255, .2);
+       //background-color: rgba(255, 255, 255, .2);
+       background-color: #454F63;
        width: 90%;
        margin-left: 5%;
        height: auto;
@@ -159,13 +160,15 @@ page-walk {
      //border: 1px solid red;
      margin-top: 5vh;
      margin-bottom: 5%;
+     width: 90%;
+     margin-left: 5%;
    }
 
 
    .next-btn{
      width: 40vw;
      height: 40px;
-     border-radius: 20px;
+     border-radius: 12px;
      background-color: #229B86;
 
      font-family: 'Raleway', sans-serif;
@@ -180,7 +183,7 @@ page-walk {
    .back-btn{
      width: 40vw;
      height: 40px;
-     border-radius: 20px;
+     border-radius: 12px;
      background-color: transparent;
      border: 1px solid white;
 

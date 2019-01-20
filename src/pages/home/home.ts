@@ -10,6 +10,7 @@ import { DomSanitizer } from '@angular/platform-browser';
 import { Stripe } from '@ionic-native/stripe';
 import * as moment from 'moment';
 import { WalletPage } from '../wallet/wallet';
+import { NeweventPage } from '../newevent/newevent';
 
 @Component({
   selector: 'page-home',
@@ -66,7 +67,9 @@ export class HomePage {
   }
 
 
-
+  openNew(){
+    this.navCtrl.push(NeweventPage);
+  }
 
 
   sanitizeThis(image){
@@ -96,6 +99,9 @@ export class HomePage {
         'isEvent': true
       });
     }
+
+    let today  = moment();
+    this.events = this.events.filter( event => !moment(event.day).isBefore(today));
     if(this.general_loader) this.general_loader.dismiss();
   }
 

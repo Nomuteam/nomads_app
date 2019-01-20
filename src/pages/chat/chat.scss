@@ -9,11 +9,8 @@ page-chat {
 
     .chat-area{
     //border: 1px solid red;
-    width: 92%;
-    height: 75%;
-    margin-left: 4%;
+    height: calc(100vh - 210px);
     overflow: scroll;
-    margin-top: -5%;
     padding-bottom: 25%;
   .inputmsg{
     display: block;
@@ -40,10 +37,25 @@ page-chat {
     left: 5%;
   }
 
-  .msguser{
-    max-width: 60%;
-    margin-left: 40%;
+  .msg-container{
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
     margin-top: 5%;
+    //border: 1px solid red;
+    .sender-name{
+      font-family: 'Raleway', sans-serif;
+      color: white;
+      font-size: 80%;
+      padding-bottom: 2%;
+    }
+  }
+
+  .msguser{
+    //border: 1px solid red;
+    width: 60%;
+    margin-left: 40%;
     margin-right: 0%;
     border-radius: 9px 0 9px 9px;
     color: white;
@@ -86,7 +98,7 @@ page-chat {
   .msgsophie{
     max-width: 60%;
     //margin-right: 50%;
-    margin-top: 5%;
+    margin-top: -4%!important;
     margin-left: 0%;
     border-radius: 0 9px 9px 9px;
     background-color: #FFFFFF;
@@ -227,42 +239,23 @@ ion-grid{
 }
 
 .contenedor-input{
- position: relative;
+ display: flex;
+ justify-content: flex-start;
+ align-items: center;
  //border: 1px solid red;
- padding-bottom: 3%;
-  .inputmsg{
-      display: block;
-      margin: auto;
-      background-color: transparent!important;
-      border:1px #BDBCC1;
-      color: white;
-      font-weight: 700;
-      width: 95%;
-      height: 35px;
-      font-size: 100%;
-      background-repeat:no-repeat;
-      background-position:5%;  padding-left:15px;
-      animation-duration: 1s;
-      padding-right: 18%;
-      font-family: 'Raleway', sans-serif;
-      background: #FFFFFF;
-      box-shadow: 0 0 1px 0 rgba(0,0,0,0.16);
-      border-radius: 4px;
-      margin-top: 0%;
-      border: 1px solid white;
-      border-radius: 15px;
-      padding-top: 5%;
-      //position: relative;
+ padding: 2%;
+  .input-msg{
+    font-family: 'Raleway', sans-serif;
+    border-radius: 12px!important;
+    background-color: #323746;
+    color: white;
+    padding: 2%;
+    border: none!important;
   }
-
-
-  .enviarbtn{
-    position: absolute;
-    right: 5%;
-    top: 20%;
-    background-color: transparent;
-    color: #229B86;
-    z-index: 300;
+  .send-text{
+    font-weight: 700;
+    color: white;
+    padding: 2%;
   }
 }
 

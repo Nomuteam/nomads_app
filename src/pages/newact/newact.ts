@@ -19,7 +19,7 @@ import { LocatePage } from '../locate/locate';
   templateUrl: 'newact.html',
 })
 export class NewactPage {
-  public current_index: any = 1;
+  public current_index: any = 2;
   public user_type: any = '';
   public isAdding: any = false;
   public general_loader: any;
@@ -69,53 +69,64 @@ export class NewactPage {
   ];
   public example_forms: any = [
     {
-      'title': 'Aerobic'
+      'title': 'Aerobic',
+      'selected': false
     },
     {
-      'title': 'Strength'
+      'title': 'Strength',
+      'selected': false
     },
     {
-      'title': 'Agility'
+      'title': 'Agility',
+      'selected': false
     },
     {
-      'title': 'Endurance'
+      'title': 'Endurance',
+      'selected': false
     },
   ];
   public example_days: any = [
     {
       'day': 'L',
       'title': 'Monday',
-      'selected': false
+      'selected': false,
+      'order': 1
     },
     {
       'day': 'M',
       'title': 'Tuesday',
-      'selected': false
+      'selected': false,
+      'order': 2
     },
     {
       'day': 'M',
       'title': 'Wednesday',
-      'selected': false
+      'selected': false,
+      'order': 3
     },
     {
       'day': 'J',
       'title': 'Thursday',
-      'selected': false
+      'selected': false,
+      'order': 4
     },
     {
       'day': 'V',
       'title': 'Friday',
-      'selected': false
+      'selected': false,
+      'order': 5
     },
     {
       'day': 'S',
       'title': 'Saturday',
-      'selected': false
+      'selected': false,
+      'order': 6
     },
     {
       'day': 'D',
       'title': 'Sunday',
-      'selected': false
+      'selected': false,
+      'order': 7
     },
   ];
 
@@ -129,7 +140,7 @@ export class NewactPage {
      'categories': {
        'main_category': '',
        'activity_type': '',
-       'workout_form': '',
+       'workout_form': [],
      },
      'schedule': [],
      'media': []
@@ -198,20 +209,45 @@ export class NewactPage {
   withMagic(){
     let aux = this.example_days.filter(cat => cat.selected);
     let a = this.schedule;
+    let verify_switch = true;
+    this.isAdding = false;
 
     for(let i=0; i<aux.length; i++){
-      this.activity_data.schedule.push({
-       'day': aux[i].title,
-       'start_time': a.start_time,
-       'duration': a.duration,
-       'spaces_available': a.spaces_available,
-       'gender': a.gender,
-       'level': a.level,
-       'min_age': a.min_age,
-       'max_age': a.max_age
-      });
+      if(this.activity_data.schedule.filter( dia => aux[i].title == dia.day && dia.start_time == a.start_time).length > 0) verify_switch = false;
     }
-    this.isAdding = false;
+
+    if(verify_switch){
+      for(let i=0; i<aux.length; i++){
+        this.activity_data.schedule.push({
+         'day': aux[i].title,
+         'start_time': a.start_time,
+         'duration': a.duration,
+         'spaces_available': a.spaces_available,
+         'gender': a.gender,
+         'level': a.level,
+         'min_age': a.min_age,
+         'max_age': a.max_age,
+         'order': aux[i].order
+        });
+      }
+
+      this.activity_data.schedule = this.activity_data.schedule.sort(function(a, b){
+        var keyA = a.order,
+            keyB = b.order;
+         // Compare the 2 dates
+         if(keyA < keyB) return -1;
+         if(keyA > keyB) return 1;
+         return 0;
+      });
+
+    }
+    else{
+      this.alertCtrl.create({
+        title: 'Existing Schedule',
+        buttons: ['Ok']
+      }).present();
+    }
+
   }
 
   changeGender(){
@@ -226,12 +262,17 @@ export class NewactPage {
     }
   }
 
-  addForm(titulo){
-    this.activity_data.categories.workout_form = titulo;
+  addForm(indice){
+    if(!this.example_forms[indice].selected){
+        this.example_forms[indice].selected = true;
+    }
+    else{
+        this.example_forms[indice].selected = false;
+    }
   }
 
-  getForm(titulo){
-      return ( this.activity_data.categories.workout_form == titulo ? 'likes-element selectedrose' : 'likes-element');
+  getForm(indice){
+      return ( this.example_forms[indice].selected ? 'likes-element selectedrose' : 'likes-element');
   }
 
   getActivity(titulo){
@@ -286,6 +327,7 @@ export class NewactPage {
 
     let indice = this.generateUUID();
     this.activity_data.index = indice;
+    this.activity_data.categories.workout_form = this.example_forms.filter(form => form.selected);
     this.activity_data.creator = firebase.auth().currentUser.uid;
     this.af.list('Users/'+this.activity_data.creator+'/Activities_created').update(indice, {
       'index': indice,

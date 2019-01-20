@@ -123,6 +123,7 @@ public class_slides: any= false;
 
     console.log(this.activities_all);
     this.general_loader.dismiss();
+    setTimeout(() => {this.class_slides = true}, 100);
     this.getDistance();
   }
 
@@ -241,7 +242,7 @@ public class_slides: any= false;
 
         let mapOptions = {
           center: latLng,
-          zoom: 12,
+          zoom: 4,
           mapTypeId: google.maps.MapTypeId.ROADMAP,
           disableDefaultUI: true
         }

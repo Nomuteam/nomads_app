@@ -30,18 +30,25 @@ page-calendar {
   }
 
   .monthview-current{
+    width: 30px!important;
+    height: 30px!important;
     background-color: rgba(255, 255, 255, .3)!important;
-    border-radius: 50%;
+    border-radius: 70%;
   }
 
   .monthview-selected{
+    width: 30px!important;
+    height: 30px!important;
     background-color: #FF6B84!important;
-    border-radius: 50%;
+    border-radius: 70%;
   }
 
   .monthview-primary-with-event{
+    width: 20px!important;
+    height: 20px!important;
     background-color: #229B86!important;
-    border-radius: 50%!important;
+    border-radius: 70%!important;
+    //padding: 2%!important;
   }
 
   .text-muted{

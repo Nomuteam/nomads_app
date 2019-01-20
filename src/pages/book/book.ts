@@ -37,6 +37,7 @@ public response$: any;
 public nomads_joined: any = [];
 
 public activity_data: any;
+public schedule: any = [];
 
 
   constructor(public navCtrl: NavController,
@@ -47,6 +48,8 @@ public activity_data: any;
   public sanitizer: DomSanitizer,
   public viewCtrl: ViewController) {
     this.activity_data = this.navParams.get('Activity');
+    this.activity_data.schedule.map(x => this.schedule.filter(a => a.day == x.day).length > 0 ? null : this.schedule.push(x));
+    console.log(this.schedule);
   }
 
   ionViewDidLoad() {
@@ -222,6 +225,20 @@ public activity_data: any;
         let schedule_item = {'activity_id': this.activity_data.index, 'day': this.selected_day, 'time': this.selected_time, 'date': date};
         this.af.list('Users/'+firebase.auth().currentUser.uid+'/schedule').push(schedule_item);
 
+        //Create a chat room with the owner of this activity
+        let chat_index = this.generateUUID();
+        let chat_members = [{'index': this.activity_data.creator},{'index': firebase.auth().currentUser.uid}];
+        let chat_expires = moment(date).add(1, 'days').format('YYYY-MM-DD');
+        let messages = [{'senderId': 'admin', 'message': 'Welcome to your chat. Ask any question you need about this activity!'}];
+        let chat_room = {'index': chat_index, 'createdAt': new Date(), 'type': 'other', 'members': chat_members, 'expireDay': chat_expires, 'messages': messages, 'lastMsg': 'Welcome to your chat. Ask any question you need about this activity!', 'lastMsg_index': 'admin', 'clanName': '', 'activity_name': this.activity_data.title};
+        this.af.list('Chats/').update(chat_index, chat_room);
+
+        //Update this chat room index in both the user and the owner object
+        let chat_ref = {'index': chat_index};
+        this.af.list('Users/'+this.activity_data.creator+'/Chats').update(chat_index, chat_ref);
+        this.af.list('Users/'+firebase.auth().currentUser.uid+'/Chats').update(chat_index, chat_ref);
+
+
         //Update activities attendants with recently joined user
         let attendant = {'index': firebase.auth().currentUser.uid, 'day': this.selected_day, 'time': this.selected_time, 'date': date};
         this.af.list('Activities/'+this.activity_data.index+'/nomads').push(attendant);
@@ -239,6 +256,12 @@ public activity_data: any;
         this.af.list('Users/'+firebase.auth().currentUser.uid+'/transactions').update(t_id, t_reference);
         this.af.list('Users/'+this.activity_data.creator+'/transactions').update(t_id, t_reference)
             .then(()=>{
+              this.alertCtrl.create({
+                title: 'In case of questions...',
+                subTitle: 'We just created a chat',
+                message: 'You can find a chat room in your profile between you and this activity creator in case of questions. It will expire after the class',
+                buttons: ['Ok']
+              }).present();
               this.section = '2';
             });
         this.general_loader.dismiss();
@@ -290,11 +313,11 @@ public activity_data: any;
     let alert = this.alertCtrl.create();
     alert.setTitle('Select Day');
 
-    for(let key in this.activity_data.schedule){
+    for(let key in this.schedule){
       alert.addInput({
         type: 'radio',
-        label: this.activity_data.schedule[key].day,
-        value: this.activity_data.schedule[key].day
+        label: this.schedule[key].day,
+        value: this.schedule[key].day
       });
     }
 

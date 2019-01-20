@@ -26,16 +26,22 @@ page-chats {
     height: 12vh;
     padding-left: 5%;
     border-bottom: 1px solid rgba(255, 255, 255, .3);
+    position: relative;
     .user-img{
       width: 15%;
       height: 50%;
       border-radius: 50%;
-      padding-left: 5%;
       //border: 1px solid red;
-      background-image: url('../../assets/img/imanol.png');
+      //background-image: url('../../assets/img/imanol.png');
+      background-color: #00B0FF;
       background-repeat: no-repeat;
       background-size: cover;
       background-position: center;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 120%;
+      color: white;
     }
     .chat-texts{
       display: flex;
@@ -62,6 +68,14 @@ page-chats {
       .chat-hint:after{
         content: '...'
       }
+    }
+    .no-read{
+      position: absolute;
+      right: 10%;
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background-color: #9194FF;
     }
   }
 }

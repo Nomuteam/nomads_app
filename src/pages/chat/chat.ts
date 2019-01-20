@@ -1,5 +1,9 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, LoadingController, AlertController } from 'ionic-angular';
+import { AngularFireDatabase, AngularFireObject } from 'angularfire2/database';
+import firebase from 'firebase';
+import { DomSanitizer } from '@angular/platform-browser';
+import * as moment from 'moment';
 
 /**
  * Generated class for the ChatPage page.
@@ -14,21 +18,87 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
   templateUrl: 'chat.html',
 })
 export class ChatPage {
+  public general_loader: any;
+  public user_chats: any = [];
+  public response$: any;
+  public room_chats: any = [];
+  public users$: any;
+
   public Mensajes: any = [];
   public msgu: any;
+  public chat_room: any;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
-    setTimeout(() =>  this.Mensajes.push({'Mensaje': 'Welcome! 🏠 <br><br> This is the UI for the Nomads App. <br> Send a message!', 'Sophie': 'Si', 'Foto': 'No'}), 500);
+  constructor(public navCtrl: NavController,
+  public navParams: NavParams,
+  public af: AngularFireDatabase,
+  public loadingCtrl: LoadingController,
+  public alertCtrl: AlertController,
+  public sanitizer: DomSanitizer) {
+    //setTimeout(() =>  this.Mensajes.push({'Mensaje': 'Welcome! 🏠 <br><br> This is the UI for the Nomads App. <br> Send a message!', 'Sophie': 'Si', 'Foto': 'No'}), 500);
   }
 
   addMsg(){
     if(this.msgu != ''){
-      this.Mensajes.push({'Mensaje': this.msgu, 'Sophie': 'No', 'Foto': 'No'});
+      this.af.list('Chats/'+this.chat_room+'/messages').push({
+        'senderId': firebase.auth().currentUser.uid,
+        'message': this.msgu
+      });
+      this.msgu = '';
     }
   }
 
+  getName(indice){
+    let a = this.users$;
+    if(indice == 'admin'){
+      return 'Nomads Team';
+    }
+    for(let key in a){
+      if(a[key].index == indice){
+           return a[key].first_name;
+      }
+    }
+    return '';
+  }
+
+  getEqual(indice){
+    return indice == firebase.auth().currentUser.uid;
+  }
+
+  convertMensajes(){
+    let a = this.response$.messages;
+    for(let key in a){
+      this.Mensajes.push({
+        'senderId': a[key].senderId,
+        'message': a[key].message,
+        'senderName': this.getName(a[key].senderId),
+        'isMe': this.getEqual(a[key].senderId)
+      });
+    }
+    if(this.general_loader) this.general_loader.dismiss();
+  }
+
+  ionViewWillLeave(){
+    this.af.list('Chats/').update(this.chat_room, {
+      'lastMsg': this.Mensajes[this.Mensajes.length - 1].message,
+      'lastMsg_index': this.Mensajes[this.Mensajes.length - 1].senderId,
+    })
+  }
+
   ionViewDidLoad() {
-    console.log('ionViewDidLoad ChatPage');
+    this.general_loader =  this.loadingCtrl.create({
+          spinner: 'bubbles',
+           content: 'Loading...'
+          });
+    this.general_loader.present();
+    this.chat_room = this.navParams.get('chat-room');
+    this.af.object('Users/').snapshotChanges().subscribe(action => {
+       this.users$ = action.payload.val();
+    });
+    this.af.object('Chats/'+this.chat_room).snapshotChanges().subscribe(action => {
+       this.response$ = action.payload.val();
+       this.Mensajes = [];
+       this.convertMensajes();
+    });
   }
 
 }

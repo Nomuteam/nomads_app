@@ -3,21 +3,27 @@ page-contact {
   .scroll-content{
     overflow: hidden!important;
   }
+
+  ion-header{
+    border-radius: 0 0 12px 12px !important;
+    ion-navbar{
+      border-radius: 0 0 12px 12px !important;
+    }
+  }
   .input-container{
     //border: 1px solid red;
     width: 100%;
     background-color: rgba(12, 12, 12, .8);
     padding: 2%;
     .input-search{
-      background-color: rgba(74, 74, 74, 1);
-      border: 1px solid rgba(255, 255, 255, .5);
+      background-color: #323846;
       font-family: 'Raleway', sans-serif;
       font-size: 100%;
-      padding: 2%;
+      padding: 3%;
       width: 90%;
       margin-left: 5%;
       color: white;
-      border-radius: 8px;
+      border-radius: 12px!important;
     }
   }
 
@@ -39,11 +45,12 @@ page-contact {
     border-radius: 8px 8px 0 0!important;
     font-family: 'Raleway', sans-serif;
     .top-container{
-     padding: 5%;
+     padding: 2%;
+     padding-left: 5%;
+     padding-right: 5%;
      display: flex;
      justify-content: space-between;
      align-items: center;
-     border-bottom: 1px solid rgba(255, 255, 255, .3);
      .left-top{
        display: flex;
        flex-direction: column;

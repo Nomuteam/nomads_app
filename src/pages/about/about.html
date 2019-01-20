@@ -1,10 +1,10 @@
 <ion-header>
   <ion-navbar color="black1">
     <ion-buttons (click)="testWallet()" start style="margin-left: 3%!important;">
-     <div class="circles-noms">
+     <!-- <div class="circles-noms">
        <div class="div1"></div>
        <div class="div2"></div>
-       <div class="div3"></div></div>
+       <div class="div3"></div></div> -->
      <p class="noms-hint">Noms</p>
      <p class="noms-qty">{{this.noms_balance}}</p>
     </ion-buttons>
@@ -19,7 +19,7 @@
   </ion-navbar>
 </ion-header>
 
-<ion-content padding>
+<ion-content padding class="clans-page">
   <div class="btns-container">
     <button (click)="openFind()" type="button" class="create-btn">Find Clan</button>
     <button (click)="openCreate()" type="button" class="create-btn">Create Clan</button>

@@ -19,7 +19,7 @@ import { Stripe } from '@ionic-native/stripe';
 })
 export class WalkPage {
 public general_loader: any;
-public current_index: any = 2;
+public current_index: any = 1;
 public user_type: any = '';
 public message: any = 'You are almost there, tell us more about you.';
 

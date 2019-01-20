@@ -7,10 +7,10 @@
 <ion-header>
   <ion-navbar color="black1">
     <ion-buttons start style="margin-left: 3%!important;">
-     <div class="circles-noms">
+     <!-- <div class="circles-noms">
        <div class="div1"></div>
        <div class="div2"></div>
-       <div class="div3"></div></div>
+       <div class="div3"></div></div> -->
      <p class="noms-hint">Noms</p>
      <p class="noms-qty">120</p>
     </ion-buttons>
@@ -64,8 +64,9 @@
   <div *ngIf="!clan.schedule" class="schedule-day">There are no schedule activities yet!</div>
  </div>
 
+ <button (click)="openNew()" type="button" class="pink-btn green">Create Event</button>
  <button (click)="openMembers()" type="button" class="pink-btn">View Members</button>
- <button [disabled]="true" type="button" class="pink-btn">Invite through code</button>
+ <!-- <button [disabled]="true" type="button" class="pink-btn">Invite through code</button> -->
 
  <div class="leave-btn">Leave Clan</div>
 

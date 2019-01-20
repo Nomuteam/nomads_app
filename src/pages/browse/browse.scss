@@ -21,7 +21,7 @@ page-browse {
 
   .overflowing{
     //border: 1px solid red;
-    height: 45vh;
+    height: 65vh;
     overflow: scroll;
   }
 
@@ -82,6 +82,7 @@ page-browse {
     position: absolute;
     bottom: 0!important;
     width: 90%;
+    background-color: #0C0C0C;
   }
 
   .event-element{
