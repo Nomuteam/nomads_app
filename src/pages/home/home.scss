@@ -1,8 +1,81 @@
 page-home {
  .search-container{
-   background-color: rgba( 255, 255, 255, .3);
+   //background-color: rgba( 255, 255, 255, .3);
    border-radius: 10px;
    margin-bottom: 4vh;
+   display: flex;
+   justify-content: space-around;
+   align-items: center;
+   border: 1px solid rgba(255, 255, 255, .7);
+   padding: 3%;
+
+   .option-container{
+     display: flex;
+     flex-direction: column;
+     justify-content: center;
+     align-items: center;
+     .option-hint{
+        padding: 5%;
+        font-family: 'Raleway', sans-serif;
+        color: white;
+        font-size: 80%;
+     }
+   }
+
+   .activities-circle{
+     height: 70px;
+     width: 70px;
+     border-radius: 50%;
+     background: linear-gradient(#973EF0, #AB72FF);
+     display: flex;
+     justify-content: center;
+     align-items: center;
+     .filters-noms{
+       width: 50%;
+       position: relative;
+       height: 20px;
+       .div1{
+         position: absolute;
+         top: 0%;
+         left: 10%;
+         height: 7%;
+         border: 1px solid white;
+         width: 80%;
+         border-radius: 5px;
+       }
+       .div2{
+         position: absolute;
+         top: 30%;
+         left: 20%;
+         height: 7%;
+         border: 1px solid white;
+         width: 60%;
+         border-radius: 5px;
+       }
+       .div3{
+         position: absolute;
+         top: 60%;
+         left: 30%;
+         height: 7%;
+         border: 1px solid white;
+         width: 40%;
+         border-radius: 5px;
+       }
+       .div4{
+         position: absolute;
+         top: 90%;
+         left: 40%;
+         height: 7%;
+         border: 1px solid white;
+         width: 20%;
+         border-radius: 5px;
+       }
+     }
+   }
+
+   .events{
+     background: linear-gradient(#007C5B, #26B594);
+   }
    .input-search{
      width: 90%;
      margin-left: 5%;
@@ -38,13 +111,13 @@ page-home {
    margin-bottom: 5%;
   .category-title{
     border-radius: 5px;
-    background-color: gray;
+    //background-color: gray;
     font-family: 'Raleway', sans-serif;
     font-weight: 700!important;
     font-size: 110%;
     color: white;
-    height: 30px;
-    padding: 1%;
+    height: 40px;
+    padding: 3%;
     padding-left: 3%;
     display: flex;
     justify-content: space-between;
@@ -55,16 +128,20 @@ page-home {
   }
 
   .blue{
-    background-color: #5C77F6;
+    //background-color: #5C77F6;
+    background-image: linear-gradient(#973EF0, #007C5B)!important;
   }
   .rose{
-    background-color: #FF6B84;
+    //background-color: #FF6B84;
+    background-image: linear-gradient(#5E99B9, #274D61)!important;
   }
   .green{
-    background-color: #229B86;
+    //background-color: #229B86;
+    background-image: linear-gradient(#A53535, #8A15AD)!important;
   }
   .purple{
-    background-color: #7D29FB;
+    //background-color: #7D29FB;
+    background-image: linear-gradient(#CDF4FB, #007C6E 60%)!important;
   }
 
   .category-suggestions{
@@ -128,7 +205,7 @@ page-home {
         }
       }
       .img-slide{
-        height: 80px;
+        height: 100px;
         border-radius: 10px;
         background-image: url('../../assets/img/example.png');
         background-repeat: no-repeat;
@@ -136,15 +213,28 @@ page-home {
         background-position: center;
         filter: opacity(.8);
       }
-      .act-title{
+      .act-first{
         font-family: 'Raleway', sans-serif;
-        font-weight: 400!important;
+        font-weight: 600!important;
         font-size: 60%;
         color: white;
         //border: 1px solid red;
         text-align: left;
         padding-left: 2%;
-        margin-top: 5%;
+        margin-top: 3%;
+        text-transform: uppercase;
+        color: #55D1AC;
+        opacity: .6;
+      }
+      .act-title{
+        font-family: 'Raleway', sans-serif;
+        font-weight: 700!important;
+        font-size: 60%;
+        color: white;
+        //border: 1px solid red;
+        text-align: left;
+        padding-left: 2%;
+        margin-top: -10%;
       }
       .act-distance{
         font-family: 'Raleway', sans-serif;
@@ -155,6 +245,9 @@ page-home {
         text-align: left;
         padding-left: 2%;
         margin-top: -12%;
+        text-transform: uppercase;
+        color: #55D1AC;
+        opacity: .6;
       }
     }
   }

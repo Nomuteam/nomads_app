@@ -15,11 +15,14 @@
      <p class="noms-qty">{{this.noms_balance}}</p>
     </ion-buttons>
     <ion-buttons (click)="openFilters()" end>
-     <div class="filters-noms">
+     <!-- <div class="filters-noms">
        <div class="div1"></div>
        <div class="div2"></div>
        <div class="div3"></div>
-     </div>
+     </div> -->
+     <button ion-button icon-only>
+       <ion-icon name="ios-options" color="white"></ion-icon>
+     </button>
     </ion-buttons>
     <p class="title">My Profile</p>
   </ion-navbar>
@@ -55,22 +58,22 @@
  <div class="card-container">
   <div class="row-container">
    <div (click)="openPage('c')" class="element-container">
-     <img src="assets/img/chats_icon.png">
+     <img src="assets/img/chats_ally.png">
      <div class="element-title">Chats</div>
    </div>
    <div (click)="openPage('w')" class="element-container">
-     <img src="assets/img/wallet_icon.png">
+     <img src="assets/img/wallet_ally.png">
      <div class="element-title">Wallet</div>
    </div>
    <div (click)="openPage('e')" class="element-container">
-     <img src="assets/img/myevents_icon.png">
+     <img src="assets/img/event_ally.png">
      <div class="element-title">My Events</div>
    </div>
   </div>
   <hr>
   <div class="row-container">
    <div (click)="openPage('cl')" class="element-container">
-     <img src="assets/img/clans_icon.png">
+     <img src="assets/img/nomads_ally.png">
      <div class="element-title">Clans</div>
    </div>
    <!-- <div (click)="openPage('f')" class="element-container">
@@ -78,7 +81,7 @@
      <div class="element-title">Friends</div>
    </div> -->
    <div (click)="openPage('n')" class="element-container">
-     <img src="assets/img/notif_icon.png">
+     <img src="assets/img/notif_ally.png">
      <div class="element-title">Notification</div>
    </div>
   </div>

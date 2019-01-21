@@ -4,17 +4,12 @@ page-contact {
     overflow: hidden!important;
   }
 
-  ion-header{
-    border-radius: 0 0 12px 12px !important;
-    ion-navbar{
-      border-radius: 0 0 12px 12px !important;
-    }
-  }
   .input-container{
     //border: 1px solid red;
     width: 100%;
-    background-color: rgba(12, 12, 12, .8);
+    background-color: #1A1A1A!important;
     padding: 2%;
+    border-radius: 0 0 12px 12px!important;
     .input-search{
       background-color: #323846;
       font-family: 'Raleway', sans-serif;
@@ -24,7 +19,9 @@ page-contact {
       margin-left: 5%;
       color: white;
       border-radius: 12px!important;
+      border: none!important;
     }
+    z-index: 100!important;
   }
 
   .scroll {
@@ -44,6 +41,7 @@ page-contact {
     background-color: rgba(12, 12, 12, 1)!important;
     border-radius: 8px 8px 0 0!important;
     font-family: 'Raleway', sans-serif;
+    z-index: 100!important;
     .top-container{
      padding: 2%;
      padding-left: 5%;

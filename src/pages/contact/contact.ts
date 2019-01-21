@@ -9,6 +9,7 @@ import { WalletPage } from '../wallet/wallet';
 import { DomSanitizer } from '@angular/platform-browser';
 import { ActivityPage } from '../activity/activity';
 import { EventPage } from '../event/event';
+import * as moment from 'moment';
 
 @Component({
   selector: 'page-contact',
@@ -176,9 +177,13 @@ public class_slides: any= false;
         'index':  a[key].index,
         'media': a[key].media,
         'isEvent': true,
-        'distance': 0
+        'distance': 0,
+        'day': a[key].day
       });
   }
+
+  let today  = moment();
+  this.activities_all = this.activities_all.filter( event => !moment(event.day).isBefore(today));
 
     let b = this.response$;
       for(let key in b){

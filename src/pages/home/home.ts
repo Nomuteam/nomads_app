@@ -80,7 +80,7 @@ export class HomePage {
     let a = this.e_response$;
     for(let key in a){
       this.events.push({
-        'title': a[key].title.substring(0, 10) + '..',
+        'title': a[key].title.substring(0, 15) + '..',
         'title_complete': a[key].title,
         'location': a[key].location,
         'difficulty':  a[key].difficulty,
@@ -109,7 +109,7 @@ export class HomePage {
     let a = this.response$;
     for(let key in a){
       this.activities.push({
-        'title': a[key].title.substring(0, 10) + '..',
+        'title': a[key].title.substring(0, 15) + '..',
         'title_complete': a[key].title,
         'location': a[key].location,
         'description':  a[key].description,

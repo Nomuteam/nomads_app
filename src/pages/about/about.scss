@@ -1,5 +1,20 @@
 page-about {
 
+  ion-header{
+      border: none!important;
+    ion-navbar{
+      border: none!important;
+    }
+  }
+
+  .toolbar-background-ios{
+    border-style: none!important;
+  }
+
+  .clans-page{
+    background: linear-gradient(#A491CC, #0C0C0C 70%)!important;
+  }
+
   .btns-container{
     display: flex;
     justify-content: space-around;
@@ -53,6 +68,7 @@ page-about {
         ion-col{
           padding: 3%;
           position: relative;
+          border-radius: 12px;
           .noms-coins{
             //border: 1px solid red;
             display: flex;

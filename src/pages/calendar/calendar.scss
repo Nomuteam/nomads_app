@@ -11,6 +11,13 @@ page-calendar {
     margin-bottom: 3%;
   }
 
+  span{
+    font-family: 'Raleway', sans-serif;
+    font-size: 90%;
+    opacity: .6;
+    padding: 5%;
+  }
+
   ion-label{
     font-family: 'Raleway', sans-serif;
     color: white;
@@ -34,6 +41,21 @@ page-calendar {
     height: 30px!important;
     background-color: rgba(255, 255, 255, .3)!important;
     border-radius: 70%;
+  }
+
+  .list-ios > .item-block:last-child{
+    border: none!important;
+  }
+
+  .list-ios > .item-block:first-child{
+    border: none!important;
+  }
+
+  .no-events-label{
+    font-family: 'Raleway', sans-serif;
+    color: white;
+    font-size: 80%;
+    content: 'Select a highlighted day to see the schedule'!important;
   }
 
   .monthview-selected{
