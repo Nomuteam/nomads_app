@@ -167,8 +167,8 @@ export class HomePage {
     this.getActivities();
   }
 
-  openBrowse(){
-    this.navCtrl.push(BrowsePage);
+  openBrowse(segmento){
+    this.navCtrl.push(BrowsePage, {'segment': segmento});
   }
 
   openFilters(){

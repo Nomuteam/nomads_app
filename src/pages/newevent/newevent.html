@@ -87,8 +87,8 @@
          </div>
 
          <div class="input-group">
-           <p class="input-title">Cost in NOMS</p>
-           <input type="tel" class="input-field" [(ngModel)]="event_data.cost">
+           <p class="input-title">Cost</p>
+           <input (blur)="avisarNoms()" type="tel" class="input-field" [(ngModel)]="event_data.cost">
          </div>
        </div>
 

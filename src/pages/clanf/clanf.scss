@@ -1,15 +1,29 @@
 page-clanf {
+
+  ion-header{
+      border: none!important;
+    ion-navbar{
+      border: none!important;
+    }
+  }
+
+  .clanf{
+    background: linear-gradient(#A491CC, #0C0C0C 70%)!important;
+  }
+
  .clan-search{
    height: 40px;
    padding: 3%;
    font-family: 'Raleway', sans-serif;
    font-size: 100%;
    color: white;
-   border: 1px solid #FF6B84;
+   //border: 1px solid #9073CB;
+   border: none!important;
    border-radius: 12px!important;
    background-color: transparent;
    width: 95%;
    margin-left: 2.5%;
+   background-color: rgba(0, 0, 0, .3);
  }
 
  .message{
@@ -93,7 +107,7 @@ page-clanf {
          margin-top: 3%;
        }
        .rose{
-         color: #FF6B84;
+         color: #9073CB;
        }
        .act-title{
          font-family: 'Raleway', sans-serif;

@@ -1,4 +1,17 @@
 page-newclan {
+
+
+  ion-header{
+      border: none!important;
+    ion-navbar{
+      border: none!important;
+    }
+  }
+
+  .newclan{
+    background: linear-gradient(#A491CC, #0C0C0C 70%)!important;
+  }
+
   .title-container{
     font-weight: 400;
     font-size: 100%;
@@ -37,7 +50,7 @@ page-newclan {
         font-size: 70%;
         color: white;
         padding: 4%;
-        background-color: #229B86;
+        background-color: #9073CB;
       }
       .types-container{
         width: 95%;
@@ -53,10 +66,10 @@ page-newclan {
           padding-right: 10%;
           border-radius: 20px;
           background-color: transparent;
-          border: 1px solid #229B86;
+          border: 1px solid #9073CB;
         }
         .selected{
-          background-color: #229B86;
+          background-color: #9073CB;
           font-weight: 700;
         }
       }

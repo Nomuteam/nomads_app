@@ -25,7 +25,7 @@
 <ion-content padding>
 
   <div class="search-container">
-    <div (click)="openBrowse()" class="option-container">
+    <div (click)="openBrowse('activities')" class="option-container">
         <div class="activities-circle">
           <div class="filters-noms">
             <div class="div1"></div>
@@ -34,9 +34,9 @@
             <div class="div4"></div>
           </div>
         </div>
-        <div class="option-hint">Activities</div>
+        <h5 class="option-hint">Activities</h5>
     </div>
-    <div (click)="openBrowse()" class="option-container">
+    <div (click)="openBrowse('events')" class="option-container">
         <div class="activities-circle events">
           <div class="filters-noms">
             <div class="div1"></div>
@@ -45,7 +45,7 @@
             <div class="div4"></div>
           </div>
         </div>
-        <div class="option-hint">Events</div>
+        <h5 class="option-hint">Events</h5>
     </div>
    <!-- <input type="text" placeholder="Search in all activities" class="input-search">
    <button (click)="openBrowse()" type="button" name="button" class="green-btn">Browse all</button> -->
@@ -104,9 +104,9 @@
    <ion-slides slidesPerView="2.2">
      <ion-slide (click)="openEvent(e)" *ngFor="let e of this.events">
        <div class="img-slide" [style.background-image]="sanitizeThis(e.img)"></div>
-       <p class="act-first">{{e.categories.activity_type}}</p>
+       <p class="act-first">{{e.type}}</p>
        <p class="act-title">{{e.title}}</p>
-       <p class="act-distance">{{e.class_price}} noms</p>
+       <p class="act-distance">{{e.cost}} noms</p>
      </ion-slide>
   </ion-slides>
   </div>

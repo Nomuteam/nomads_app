@@ -30,6 +30,14 @@ ion-grid {
     left: 0;
 }
 
+ion-header{
+    border: none!important;
+  ion-navbar{
+    border: none!important;
+  }
+}
+
+
 ion-navbar{
   .title{
     color: white;

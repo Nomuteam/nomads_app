@@ -151,6 +151,25 @@ export class NeweventPage {
      actionSheet.present();
 
    }
+
+   avisarNoms(){
+     console.log('hi');
+     this.alertCtrl.create({
+       title: 'Cost in NOMS',
+       subTitle: 'Making the conversion',
+       message: 'The cost in noms is: '+(this.event_data.cost/20)+' noms since 1 NOM = $20 MXN',
+       buttons: [
+        {
+        text: 'Ok',
+        handler: () =>{
+          this.event_data.cost = this.event_data.cost / 20;
+        }
+        }
+         ]
+     }).present();
+   }
+
+
   tomarFoto(){
     let vm = this;
        this.general_loader = this.loadingCtrl.create({

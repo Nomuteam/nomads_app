@@ -18,6 +18,10 @@ import { FiltersPage } from '../filters/filters';
 export class BrowsePage {
 public activitites_example: any = [
   {
+    'title': 'Events',
+    'number': 15
+  },
+  {
     'title': 'Yoga',
     'number': 15
   },
@@ -89,6 +93,7 @@ public segment: any = 'activities';
 public event_type: any = '';
 
   constructor(public navCtrl: NavController, public navParams: NavParams) {
+    this.segment = this.navParams.get('segment');
   }
 
   ionViewDidLoad() {
