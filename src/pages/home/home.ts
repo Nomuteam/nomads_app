@@ -11,6 +11,7 @@ import { Stripe } from '@ionic-native/stripe';
 import * as moment from 'moment';
 import { WalletPage } from '../wallet/wallet';
 import { NeweventPage } from '../newevent/newevent';
+import { FilteredPage } from '../filtered/filtered';
 
 @Component({
   selector: 'page-home',
@@ -19,7 +20,7 @@ import { NeweventPage } from '../newevent/newevent';
 export class HomePage {
   public response$: any;
   public activities: any = [];
-  public favorites: any = [];
+  public favorites: any;
   public general_loader: any;
   public users$: any;
   public noms_balance: any = '';
@@ -64,6 +65,24 @@ export class HomePage {
    //      this.alertCtrl.create({title: 'error', buttons: ['Ok']}).present();
    //    });
 
+  }
+
+
+  openFiltered(tipo){
+    this.navCtrl.push(FilteredPage, {'Tipo': tipo});
+  }
+
+  getFavorites(){
+    let a = this.favorites;
+    let aux = [];
+    // if(a!=undefined){
+    //   for(let key in a){
+    //     if(a[key].type == 'activity') aux[aux.length] = this.activities.filter( act => act.index == a[key].index)[0];
+    //     //else aux[aux.length] = this.events.filter( act => act.index == a[key].index);
+    //   }
+    // }
+    // console.log(aux);
+    return aux;
   }
 
 
@@ -163,6 +182,7 @@ export class HomePage {
     this.af.object('Users/'+firebase.auth().currentUser.uid).snapshotChanges().subscribe(action => {
       this.users$ = action.payload.val();
       this.noms_balance = this.users$.noms;
+      this.favorites = this.users$.favorites;
     });
     this.getActivities();
   }

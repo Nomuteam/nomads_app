@@ -7,6 +7,12 @@ page-activity {
     color: white;
     position: relative;
     margin-bottom: 5%;
+    .heart{
+      position: absolute;
+      top: 3%;
+      right: 3%;
+      z-index: 200;
+    }
     .cover-gradient1{
       position: absolute;
       top: 0!important;
@@ -118,7 +124,7 @@ page-activity {
       padding-bottom: 3%;
       .hashtags{
         display: flex;
-        justify-content: space-around;
+        justify-content: flex-start;
         width: 100%;
         .hashtag{
           padding: 2%;

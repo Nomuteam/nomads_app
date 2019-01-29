@@ -31,6 +31,7 @@ public response$: any;
 public nomads_joined: any = [];
 
 public temp_schedule: any = [];
+public favorites: any = [];
 
     @ViewChild('map') mapElement: ElementRef;
      map: any;
@@ -126,6 +127,42 @@ public temp_schedule: any = [];
 
   }
 
+  changeFav(){
+    if(this.isFavorite()){
+      this.af.list('Users/'+firebase.auth().currentUser.uid+'/favorites/'+this.activity_data.index).remove()
+          .then(() => {
+            this.alertCtrl.create({
+              title: 'Removed from Favorites!',
+              message: 'This activity is no longer one of your favorites',
+              buttons: ['Ok']
+            }).present();
+          })
+    }
+    else{
+      this.af.list('Users/'+firebase.auth().currentUser.uid+'/favorites').update(this.activity_data.index, {
+        'index': this.activity_data.index,
+        'type': 'activity'
+      }).then(() => {
+        this.alertCtrl.create({
+          title: 'Added to Favorites!',
+          message: 'This activity is now one of your favorites',
+          buttons: ['Ok']
+        }).present();
+      })
+    }
+  }
+
+  isFavorite(){
+    if(this.favorites != undefined){
+      for(let key in this.favorites){
+        if(this.favorites[key].index == this.activity_data.index){
+          return true;
+        }
+      }
+    }
+    return false;
+  }
+
   sanitizeThis(image){
     return this.sanitizer.bypassSecurityTrustStyle('url('+image+')');
   }
@@ -139,6 +176,7 @@ public temp_schedule: any = [];
     this.af.object('Users/'+firebase.auth().currentUser.uid).snapshotChanges().subscribe(action => {
       this.users$ = action.payload.val();
       this.noms_balance = this.users$.noms;
+      this.favorites = this.users$.favorites;
     });
     this.af.object('Activities/'+this.activity_data.index+'/nomads').snapshotChanges().subscribe(action => {
       this.response$ = action.payload.val();

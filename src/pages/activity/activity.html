@@ -17,6 +17,8 @@
 <ion-content padding>
 
   <div class="main-card">
+    <img (click)="changeFav()" *ngIf="!isFavorite()" src="assets/img/heart.png" class="heart">
+    <img (click)="changeFav()" *ngIf="isFavorite()" src="assets/img/hearth_filled.png" class="heart">
     <div class="cover-gradient1"><div class="class-title">{{this.activity_data.title_complete}}</div></div>
     <div class="cover-gradient2"></div>
     <div class="cover-img" [style.background-image]="sanitizeThis(this.activity_data.img)"></div>
