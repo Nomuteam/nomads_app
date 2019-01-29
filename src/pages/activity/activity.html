@@ -30,8 +30,11 @@
         </div>
       </div>
       <div *ngIf="!isAlready()" (click)="openBook()" class="right-side">
-        <div class="noms-qty">
-          Join - {{this.activity_data.class_price}}
+        <div *ngIf="activity_data.class_price != 0" class="noms-qty">
+          Join {{this.activity_data.class_price}} noms
+        </div>
+        <div *ngIf="activity_data.class_price == 0" class="noms-qty">
+          Join Free!
         </div>
         <!-- <div class="circles-noms">
           <div class="div1"></div>

@@ -207,7 +207,7 @@ public example_level: any = [
     'level': 'Expert'
   },
 ];
-public allday: any = true;
+public allday: any;
 public distance: any = 0;
 
 public response$: any;
@@ -244,6 +244,7 @@ public user_preferences: any = [];
     this.user_preferences.allday = this.allday;
     this.user_preferences.schedule = this.example_schedule;
     this.user_preferences.days = this.example_days;
+    this.user_preferences.allday = this.allday;
 
     this.af.list('Users/'+firebase.auth().currentUser.uid).update('preferences', this.user_preferences);
   }
@@ -252,6 +253,8 @@ public user_preferences: any = [];
   let a = this.response$;
 
   console.log(a);
+
+  this.allday = a.allday;
 
   if(a.categories){
     for(let key in a.categories){

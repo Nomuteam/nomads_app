@@ -6,6 +6,8 @@ import { AngularFireDatabase, AngularFireObject } from 'angularfire2/database';
 import firebase from 'firebase';
 import { DomSanitizer } from '@angular/platform-browser'
 import { WalletPage } from '../wallet/wallet';
+import { ActivityPage } from '../activity/activity';
+import { EventPage } from '../event/event';
 
 /**
  * Generated class for the CalendarPage page.
@@ -103,7 +105,7 @@ export class CalendarPage {
     return false;
   }
 
-  checkExistE(clave){
+  checkExistE(clave, llave){
     let a = this.e_response$;
     let aux;
     for(let key in a){
@@ -115,15 +117,21 @@ export class CalendarPage {
           'difficulty':  a[key].difficulty,
           'img':  a[key].img,
           'cost':  a[key].cost,
+          'about_event':  a[key].about_event,
+          'provided':  a[key].provided,
+          'about_organizer':  a[key].about_organizer,
           'type':  a[key].type,
           'startTime': this.markStart(a[key].day, a[key].time),
           'endTime': this.markEnd(a[key].day, a[key].time),
           'allDay': false,
           'time': a[key].time,
+          'nomads': a[key].nomads,
           'creator':  a[key].creator,
           'index':  a[key].index,
           'media': a[key].media,
-          'isEvent': true
+          'isEvent': true,
+          'clave': llave,
+          'clave_nomada': this.getClave(a[key].nomads)
         }
         return aux2;
       }
@@ -131,7 +139,7 @@ export class CalendarPage {
     return aux;
   }
 
-  checkExistA(clave){
+  checkExistA(clave, llave){
     let b = this.response$;
     let aux;
     for(let key in b){
@@ -140,7 +148,10 @@ export class CalendarPage {
           'title': b[key].title.substring(0, 10) + '..',
           'title_complete': b[key].title,
           'location': b[key].location,
-          'difficulty':  b[key].difficulty,
+          'description':  b[key].description,
+          'cancelation_policy':  b[key].cancelation_policy,
+          'categories':  b[key].categories,
+          'schedule':  b[key].schedule,
           'img':  b[key].img,
           'cost':  b[key].cost,
           'type':  b[key].type,
@@ -148,10 +159,13 @@ export class CalendarPage {
           'endTime': '',
           'allDay': '',
           'time': b[key].time,
+          'nomads': b[key].nomads,
           'creator':  b[key].creator,
           'index':  b[key].index,
           'media': b[key].media,
-          'isEvent': false
+          'isEvent': false,
+          'clave': llave,
+          'clave_nomada': this.getClave(b[key].nomads)
         }
         return aux2;
       }
@@ -159,15 +173,24 @@ export class CalendarPage {
     return aux;
   }
 
+  getClave(nomadas){
+    for(let key in nomadas){
+      if(nomadas[key].index == firebase.auth().currentUser.uid){
+        return key;
+      }
+    }
+    return '';
+  }
+
   convertActivities(){
 
     for(let i=0; i<this.nomad_schedule.length; i++){
-      if(this.checkExistE(this.nomad_schedule[i].activity_id) != undefined){
+      if(this.checkExistE(this.nomad_schedule[i].activity_id, this.nomad_schedule[i].key) != undefined){
 
-        this.activities_all.push(this.checkExistE(this.nomad_schedule[i].activity_id));
+        this.activities_all.push(this.checkExistE(this.nomad_schedule[i].activity_id, this.nomad_schedule[i].key));
       }
-      else if(this.checkExistA(this.nomad_schedule[i].activity_id) != undefined){
-        let ayuda = this.checkExistA(this.nomad_schedule[i].activity_id);
+      else if(this.checkExistA(this.nomad_schedule[i].activity_id, this.nomad_schedule[i].key) != undefined){
+        let ayuda = this.checkExistA(this.nomad_schedule[i].activity_id, this.nomad_schedule[i].key);
         ayuda.startTime = this.markStart(this.nomad_schedule[i].date, this.nomad_schedule[i].time);
         ayuda.endTime = this.markEnd(this.nomad_schedule[i].date, this.nomad_schedule[i].time);
         ayuda.allDay = false;
@@ -185,6 +208,15 @@ export class CalendarPage {
       this.activities_all = [];
       this.convertActivities();
     });
+  }
+
+  seeDetails(a){
+    if(a.isEvent){
+      this.navCtrl.push(EventPage, {'Event': a});
+    }
+    else{
+      this.navCtrl.push(ActivityPage, {'Activity': a});
+    }
   }
 
   getActivities(){
@@ -218,7 +250,8 @@ export class CalendarPage {
           'activity_id': a[key].activity_id,
           'day': a[key].day,
           'time': a[key].time,
-          'date': a[key].date
+          'date': a[key].date,
+          'key': key
         });
     }
     console.log(this.nomad_schedule);
@@ -237,9 +270,27 @@ export class CalendarPage {
        this.isToday = today.getTime() === event.getTime();
    }
 
+   markDone(){
+     this.general_loader.dismiss();
+
+     this.alertCtrl.create({
+       title: 'Removed succesfully!',
+       message: 'The event or activity was removed succesfully from your schedule!',
+       buttons: ['Ok']
+     }).present();
+   }
+
    goAhead(evento){
+     this.general_loader = this.loadingCtrl.create({
+       spinner: 'bubbles',
+       content: 'Removing..'
+     });
+     this.general_loader.present();
 
     //Quitarlo del schedule de la persona
+    this.af.list('Users/'+firebase.auth().currentUser.uid+'/schedule/'+evento.clave).remove();
+    if(evento.isEvent) this.af.list('Events/'+evento.index+'/nomads/'+evento.clave_nomada).remove().then(()=>{this.markDone()});
+    else this.af.list('Activities/'+evento.index+'/nomads/'+evento.clave_nomada).remove().then(()=>{this.markDone()});
    }
 
    confirmCancelation(evento){
@@ -275,7 +326,7 @@ export class CalendarPage {
         {
           text: 'View Details',
           handler: () => {
-
+            this.seeDetails(event);
           }
         },
         {

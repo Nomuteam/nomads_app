@@ -30,7 +30,7 @@
       <div class="number">{{this.activities_all.length}}</div>
     </div>
     <ion-slides [hidden]="this.class_slides" slidesPerView="2.5">
-     <ion-slide *ngFor="let a of this.activities_all">
+     <ion-slide *ngFor="let a of this.activities_all" (click)="seeDetails(a)">
        <img src="{{a.img}}" class="img-slide">
        <!-- <div class="img-slide" [style.background-image]="sanitizeThis(a.img)"></div> -->
        <p class="act-title">{{a.title}}</p>

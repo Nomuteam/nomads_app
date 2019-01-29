@@ -235,7 +235,8 @@ public transactions: any = [];
      alert.addInput({
        type: 'radio',
        label: 'Saved Card *******'+this.payment_data.cardnumber.substring(this.payment_data.cardnumber.length - 4),
-       value: 'saved'
+       value: 'saved',
+       checked: true
      });
    }
 

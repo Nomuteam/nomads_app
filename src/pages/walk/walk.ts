@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, LoadingController, AlertController } from 'ionic-angular';
-import { TermsPage } from '../terms/terms';
+import { TabsPage } from '../tabs/tabs';
 import { AngularFireDatabase, AngularFireObject } from 'angularfire2/database';
 import firebase from 'firebase';
 import { Stripe } from '@ionic-native/stripe';
@@ -42,15 +42,11 @@ public example_cats: any = [
     'selected': false
   },
   {
-    'name': 'Adventures',
+    'name': 'Experience',
     'selected': false
   },
   {
     'name': 'Studios',
-    'selected': false
-  },
-  {
-    'name': 'Superhumans',
     'selected': false
   },
 ];
@@ -329,6 +325,25 @@ public class_type = 'input-field card';
 
   }
 
+  getAct(indice){
+    if(this.user_type == 'nomads'){
+        return ( this.example_activities[indice].selected ? 'likes-element selected' : 'likes-element');
+    }
+    else{
+        return ( this.example_activities[indice].selected ? 'likes-element selectedrose' : 'likes-element');
+    }
+
+  }
+
+  addAct(indice){
+    if(this.example_activities[indice].selected){
+      this.example_activities[indice].selected = false;
+    }
+    else{
+      this.example_activities[indice].selected = true;
+    }
+  }
+
   addCategorie(indice){
     if(this.example_cats[indice].selected){
       this.example_cats[indice].selected = false;
@@ -372,7 +387,8 @@ public class_type = 'input-field card';
       return (this.user_data.payment.cardholder != '' && this.user_data.payment.cardnumber != '' && this.user_data.payment.card_expiry != '' && this.user_data.payment.card_ccv != '' && this.user_data.payment.card_address != '')
     }
     else if(this.current_index == 3 && this.user_type == 'nomads'){
-      return (this.example_cats.filter(value => value.selected === true).length > 0 && this.level != '' && this.user_data.preferences.distance != '');
+      return (this.example_activities.filter(value => value.selected === true).length > 0);
+      // return (this.example_activities.filter(value => value.selected === true).length > 0 && this.level != '' && this.user_data.preferences.distance != '');
     }
     else if(this.current_index == 3 && this.user_type == 'allies'){
       return (this.user_data.business.business_name != '' && this.user_data.business.legal_name != '' && this.user_data.business.phone != '' && this.user_data.business.billing_address != '' && this.user_data.business.rfc != '' && this.user_data.business.bank != '' && this.user_data.business.clabe != '')
@@ -402,7 +418,7 @@ public class_type = 'input-field card';
        this.af.list('/Users/').update(firebase.auth().currentUser.uid, this.user_data)
        .then( () => {
          localStorage.setItem('walk_progress', 'complete');
-         this.navCtrl.setRoot(TermsPage);
+         this.navCtrl.setRoot(TabsPage);
        })
     }
     else{

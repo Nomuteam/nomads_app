@@ -50,7 +50,9 @@ public noms_balance: any;
   }
 
   getBirthday(){
-    return moment(this.user_data.birthdate).fromNow();
+    let a = moment(this.user_data.birthdate).fromNow();
+    a = a.charAt(0) + a.charAt(1) + ' years old';
+    return a;
   }
 
   ionViewDidLoad() {

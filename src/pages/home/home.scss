@@ -20,12 +20,13 @@ page-home {
         color: white;
         font-size: 80%;
         margin-top: 3%!important;
+        font-weight: 700;
      }
    }
 
    .activities-circle{
-     height: 70px;
-     width: 70px;
+     height: 85px;
+     width: 85px;
      border-radius: 50%;
      background: linear-gradient(#973EF0, #AB72FF);
      display: flex;
@@ -75,8 +76,17 @@ page-home {
    }
 
    .events{
+     height: 60px;
+     width: 60px;
+     background: linear-gradient(#6EC6CA, #26B594);
+   }
+
+   .experiences{
+     height: 60px;
+     width: 60px;
      background: linear-gradient(#007C5B, #26B594);
    }
+
    .input-search{
      width: 90%;
      margin-left: 5%;
@@ -136,6 +146,9 @@ page-home {
   .rose{
     //background-color: #FF6B84;
     background-image: linear-gradient(to right, #5E99B9, #274D61)!important;
+  }
+  .cool{
+    background-image: linear-gradient(to right, #05974A, #F2E51E)!important;
   }
   .green{
     //background-color: #229B86;
@@ -236,7 +249,7 @@ page-home {
         //border: 1px solid red;
         text-align: left;
         padding-left: 2%;
-        margin-top: -10%;
+        margin-top: -7%;
       }
       .act-distance{
         font-family: 'Raleway', sans-serif;
@@ -246,7 +259,7 @@ page-home {
         //border: 1px solid red;
         text-align: left;
         padding-left: 2%;
-        margin-top: -12%;
+        margin-top: -8%;
         text-transform: uppercase;
         color: #55D1AC;
         opacity: .6;

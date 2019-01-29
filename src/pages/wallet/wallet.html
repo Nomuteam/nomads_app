@@ -55,7 +55,7 @@
      <div class="amount-container">
        <div class="input-group">
          <p class="input-title">Amount of Cash</p>
-         <input placeholder="$" type="text" class="input-field" [(ngModel)]="cash" (ngModelChange)="noms = cash/20">
+         <input (click)="cash = 0" placeholder="$" type="text" class="input-field" [(ngModel)]="cash" (ngModelChange)="noms = cash/20">
        </div>
        <!-- <div class="amount-hint">Amount of cash</div>
        <div class="amount-text" contenteditable="true">$0</div> -->

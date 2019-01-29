@@ -14,17 +14,13 @@
      <!-- <p class="noms-hint">Noms</p>
      <p class="noms-qty">120</p> -->
     </ion-buttons>
-    <ion-buttons (click)="openFilters()" end>
-     <!-- <div class="filters-noms">
-       <div class="div1"></div>
-       <div class="div2"></div>
-       <div class="div3"></div>
-     </div> -->
+    <!-- <ion-buttons (click)="openFilters()" end>
+
      <button ion-button icon-only>
        <ion-icon name="ios-options" color="white"></ion-icon>
      </button>
-    </ion-buttons>
-    <p class="title">All</p>
+    </ion-buttons> -->
+    <!-- <p class="title">All</p> -->
   </ion-navbar>
 </ion-header>
 
@@ -38,9 +34,9 @@
    <div class="overflowing">
      <ion-grid>
        <ion-row>
-         <ion-col col-6 *ngFor="let a of this.activitites_example">
-          <div (click)="openFiltered('activities')" class="act-element">
-            <p class="act-title">{{a.title}}</p>
+         <ion-col col-6 *ngFor="let a of this.getRealA()">
+          <div (click)="openFiltered(a.type)" class="act-element">
+            <p class="act-title">{{a.type}}</p>
             <p class="act-number">{{a.number}}</p>
           </div>
          </ion-col>
@@ -52,9 +48,9 @@
  <div class="bottom">
    <ion-grid>
      <ion-row>
-       <ion-col col-4 *ngFor="let a of this.activities_types; let in=index">
+       <ion-col col-4 *ngFor="let a of this.categorias; let in=index">
         <div (click)="change(in)" class="{{getClass(a.selected)}}">
-          <p class="type-title">{{a.title}}</p>
+          <p class="type-title">{{a.type}}</p>
         </div>
        </ion-col>
      </ion-row>
@@ -64,9 +60,9 @@
 
  <div *ngIf="this.segment == 'events'">
    <div class="overflowing">
-     <div *ngFor="let a of this.activitites_example">
-       <div (click)="openFiltered('events')" class="event-element">
-         <p class="event-title">{{a.title}}</p>
+     <div *ngFor="let a of this.events">
+       <div (click)="openFiltered(a.type)" class="event-element">
+         <p class="event-title">{{a.type}}</p>
          <p class="event-number">{{a.number}}</p>
        </div>
      </div>
@@ -83,7 +79,7 @@
          </ion-col>
          <ion-col col-4>
           <div (click)="changeType('cost')" class="{{getType('cost')}}">
-            <p class="etype-title">Cost</p>
+            <p class="etype-title">Private</p>
           </div>
          </ion-col>
          <ion-col col-4>

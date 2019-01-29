@@ -173,7 +173,7 @@ public nomads_joined: any = [];
   }
 
   canJoin(){
-    if(parseInt(this.noms_balance) > parseInt(this.event_data.cost)){
+    if(parseInt(this.event_data.cost) == 0 || parseInt(this.noms_balance) > parseInt(this.event_data.cost)){
       this.showConfirm();
     }
     else{
@@ -283,7 +283,7 @@ let marker = new google.maps.Marker({
   position: this.map.getCenter()
 });
 
-let content = "<h4>The event is here!</h4>";
+let content = "<h4>This is the location!</h4>";
 //let content = context.toDataUrl()
 this.addInfoWindow(marker, content);
 

@@ -69,6 +69,7 @@ page-activity {
         border-radius: 20px 0 0 20px;
         background-color: #9013FE;
         padding: 2%;
+        width: 40%;
         .noms-qty{
           font-weight: 700;
         }
@@ -118,11 +119,11 @@ page-activity {
       .hashtags{
         display: flex;
         justify-content: space-around;
-        width: 80%;
+        width: 100%;
         .hashtag{
           padding: 2%;
           opacity: .5;
-          display: inline;
+          display: inline!important;
         }
       }
     }

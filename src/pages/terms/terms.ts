@@ -23,9 +23,14 @@ export class TermsPage {
     console.log('ionViewDidLoad TermsPage');
   }
 
-  openTabs(){
+  goBack(){
     localStorage.setItem('Accepted', 'yes');
-    this.navCtrl.setRoot(TabsPage);
+    this.navCtrl.pop();
   }
+
+  // openTabs(){
+  //   localStorage.setItem('Accepted', 'yes');
+  //   this.navCtrl.setRoot(TabsPage);
+  // }
 
 }

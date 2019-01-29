@@ -27,7 +27,7 @@
   </div>
 
   <div *ngIf="this.segment == 'daytime'">
-    <p class="title-container">Main Category</p>
+    <p class="title-container">Prefered Spaces</p>
     <div class="likes-container">
         <div *ngFor="let c of this.example_cats; let in=index" (click)="addCategorie(in)" class="{{getSelected(c.selected)}}">{{c.name}}</div>
     </div>

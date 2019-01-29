@@ -30,8 +30,11 @@
         </div>
       </div>
       <div *ngIf="!isAlready()" (click)="canJoin()" class="right-side">
-        <div class="noms-qty">
-          Join - {{this.event_data.cost}}
+        <div *ngIf="event_data.cost != 0" class="noms-qty">
+          Join {{this.event_data.cost}} noms
+        </div>
+        <div *ngIf="event_data.cost == 0" class="noms-qty">
+          Join Free!
         </div>
         <!-- <div class="circles-noms">
           <div class="div1"></div>

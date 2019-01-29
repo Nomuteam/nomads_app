@@ -69,9 +69,9 @@ page-event {
         border-radius: 20px 0 0 20px;
         background-color: #9013FE;
         padding: 2%;
+        width: 40%;
         .noms-qty{
           font-weight: 700;
-          font-size: 80%;
         }
         .circles-noms{
           width: 7vw;
@@ -121,7 +121,7 @@ page-event {
         .hashtag{
           padding: 2%;
           opacity: .5;
-          display: inline;
+          display: inline!important;
         }
       }
     }

@@ -5,6 +5,7 @@ import { CirclesPage } from '../circles/circles';
 import { AngularFireAuth } from 'angularfire2/auth';
 import { AngularFireDatabase, AngularFireObject } from 'angularfire2/database';
 import firebase from 'firebase';
+import { TermsPage } from '../terms/terms';
 
 /**
  * Generated class for the RegisterPage page.
@@ -37,6 +38,10 @@ constructor(
   public loadingCtrl: LoadingController,
   public alertCtrl: AlertController) {
     this.user_type = this.navParams.get('User');
+  }
+
+  openTerms(){
+    this.navCtrl.push(TermsPage);
   }
 
   getClass(){

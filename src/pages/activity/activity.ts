@@ -30,6 +30,8 @@ public noms_balance: any;
 public response$: any;
 public nomads_joined: any = [];
 
+public temp_schedule: any = [];
+
     @ViewChild('map') mapElement: ElementRef;
      map: any;
 
@@ -42,11 +44,37 @@ public nomads_joined: any = [];
     public sanitizer: DomSanitizer,
     public modalCtrl: ModalController) {
     this.activity_data = this.navParams.get('Activity');
+    this.formatSchedule();
     console.log(this.activity_data)
   }
 
   isOwner(){
     return this.activity_data.creator == firebase.auth().currentUser.uid;
+  }
+
+  formatSchedule(){
+   let a = this.activity_data.schedule;
+
+   for(let key in a){
+     if(a[key].day == 'Monday') a[key].order = 1;
+     else if(a[key].day == 'Tuesday') a[key].order = 2;
+      else if(a[key].day == 'Wednesday') a[key].order = 3;
+       else if(a[key].day == 'Thursday') a[key].order = 4;
+        else if(a[key].day == 'Friday') a[key].order = 5;
+         else if(a[key].day == 'Saturday') a[key].order = 6;
+          else if(a[key].day == 'Sunday') a[key].order = 7;
+   }
+
+    this.temp_schedule = this.activity_data.schedule.sort(function(a, b){
+      var keyA = a.order,
+          keyB = b.order;
+       // Compare the 2 dates
+       if(keyA < keyB) return -1;
+       if(keyA > keyB) return 1;
+       return 0;
+    });
+
+    console.log(this.temp_schedule);
   }
 
   confirmEdit(){
@@ -73,7 +101,7 @@ public nomads_joined: any = [];
 
   openBook(){
     if(this.activity_data.creator != firebase.auth().currentUser.uid){
-      if(parseInt(this.noms_balance) > parseInt(this.activity_data.class_price)){
+      if(parseInt(this.activity_data.class_price) == 0 || parseInt(this.noms_balance) > parseInt(this.activity_data.class_price)){
         let modal = this.modalCtrl.create(BookPage, {'Activity': this.activity_data});
             modal.onDidDismiss( data => {
               if(data && data.go) this.navCtrl.parent.select(3);
@@ -185,7 +213,7 @@ let marker = new google.maps.Marker({
   position: this.map.getCenter()
 });
 
-let content = "<h4>Here you are!</h4>";
+let content = "<h4>This is the location!</h4>";
 //let content = context.toDataUrl()
 this.addInfoWindow(marker, content);
 

@@ -19,7 +19,7 @@ import { LocatePage } from '../locate/locate';
   templateUrl: 'newact.html',
 })
 export class NewactPage {
-  public current_index: any = 2;
+  public current_index: any = 1;
   public user_type: any = '';
   public isAdding: any = false;
   public general_loader: any;

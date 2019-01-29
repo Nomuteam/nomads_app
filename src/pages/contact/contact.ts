@@ -170,6 +170,9 @@ public class_slides: any= false;
         'difficulty':  a[key].difficulty,
         'img':  a[key].img,
         'cost':  a[key].cost,
+        'about_event':  a[key].about_event,
+        'provided':  a[key].provided,
+        'about_organizer':  a[key].about_organizer,
         'type':  a[key].type,
         'allDay': false,
         'time': a[key].time,
@@ -191,12 +194,14 @@ public class_slides: any= false;
             'title': b[key].title.substring(0, 10) + '..',
             'title_complete': b[key].title,
             'location': b[key].location,
-            'difficulty':  b[key].difficulty,
+            'description':  b[key].description,
+            'cancelation_policy':  b[key].cancelation_policy,
+            'categories':  b[key].categories,
+            'schedule':  b[key].schedule,
             'img':  b[key].img,
             'cost':  b[key].cost,
             'type':  b[key].type,
             'allDay': false,
-            'time': b[key].time,
             'creator':  b[key].creator,
             'index':  b[key].index,
             'media': b[key].media,
@@ -247,7 +252,7 @@ public class_slides: any= false;
 
         let mapOptions = {
           center: latLng,
-          zoom: 4,
+          zoom: 8,
           mapTypeId: google.maps.MapTypeId.ROADMAP,
           disableDefaultUI: true
         }
