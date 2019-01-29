@@ -103,14 +103,16 @@
 
   <div class="category-container">
    <div (click)="openFiltered('All Activities')" class="category-title rose">Your Favorites</div>
-   <p *ngIf="this.getFavorites.length > 0" class="category-suggestions">These are your favorite activities</p>
-   <p *ngIf="this.getFavorites.length == 0" class="category-suggestions">You don't have favorites yet!</p>
+   <p class="category-suggestions">These are your favorite activities</p>
+   <!-- <p *ngIf="this.favoritos.length == 0" class="category-suggestions">You don't have favorites yet!</p> -->
    <ion-slides slidesPerView="2.2">
-    <ion-slide (click)="openActivity(f)"  *ngFor="let f of this.getFavorites()">
+    <ion-slide (click)="seeDetails(f)"  *ngFor="let f of this.favoritos">
       <div class="img-slide" [style.background-image]="sanitizeThis(f.img)"></div>
-      <p class="act-first">{{f.categories.activity_type}}</p>
+      <p *ngIf="!f.isEvent" class="act-first">{{f.categories.activity_type}}</p>
+      <p *ngIf="f.isEvent" class="act-first">{{f.type}}</p>
       <p class="act-title">{{f.title}}</p>
-      <p class="act-distance">{{f.class_price}} noms</p>
+      <p *ngIf="!f.isEvent" class="act-distance">{{f.class_price}} noms</p>
+      <p *ngIf="f.isEvent" class="act-distance">{{f.cost}} noms</p>
     </ion-slide>
   </ion-slides>
   </div>

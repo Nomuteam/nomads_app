@@ -26,6 +26,7 @@ export class HomePage {
   public noms_balance: any = '';
   public e_response$: any;
   public events: any = [];
+  public favoritos: any = [];
 
   constructor(public navCtrl: NavController,
   public navParams: NavParams,
@@ -74,15 +75,42 @@ export class HomePage {
 
   getFavorites(){
     let a = this.favorites;
-    let aux = [];
-    // if(a!=undefined){
-    //   for(let key in a){
-    //     if(a[key].type == 'activity') aux[aux.length] = this.activities.filter( act => act.index == a[key].index)[0];
-    //     //else aux[aux.length] = this.events.filter( act => act.index == a[key].index);
-    //   }
-    // }
-    // console.log(aux);
-    return aux;
+    this.favoritos = [];
+    for(let key in a){
+      // this.favoritos.push({
+      //   'title': 'hi',
+      //   'title_complete': 'hi',
+      //   'location': 'hi',
+      //   'description':  'hi',
+      //   'cancelation_policy': 'hi',
+      //   'class_price':  'hi',
+      //   'fee': 'hi',
+      //   'categories':  'hi',
+      //   'schedule':  'hi',
+      //   'media':  'hi',
+      //   'img': 'hi',
+      // });
+      //console.log(this.activities.filter( act => act.index == a[key].index));
+      console.log(a[key]);
+      if(a[key].type == 'activity') this.favoritos[this.favoritos.length] = this.activities.filter( act => act.index == a[key].index)[0];
+      else this.favoritos[this.favoritos.length] =  this.events.filter( act => act.index == a[key].index)[0];
+    }
+
+    console.log(this.favoritos);
+    // return this.favoritos;
+  }
+
+  seeDetails(a){
+    if(a.isEvent){
+      this.navCtrl.push(EventPage, {'Event': a});
+    }
+    else{
+      this.navCtrl.push(ActivityPage, {'Activity': a});
+    }
+  }
+
+  verifyRaro(cosa){
+    console.log(cosa);
   }
 
 
@@ -122,6 +150,7 @@ export class HomePage {
     let today  = moment();
     this.events = this.events.filter( event => !moment(event.day).isBefore(today));
     if(this.general_loader) this.general_loader.dismiss();
+    this.getFavorites();
   }
 
   convertActivities(){
@@ -171,6 +200,10 @@ export class HomePage {
       this.events = [];
       this.convertEvents();
     });
+  }
+
+  ionViewWillEnter(){
+    this.getFavorites();
   }
 
   ionViewDidLoad() {

@@ -37,6 +37,8 @@ public ally_balance: any = [];
 public response$: any;
 public nomads_joined: any = [];
 
+public favorites: any = [];
+
 
 
 @ViewChild('map') mapElement: ElementRef;
@@ -185,6 +187,42 @@ public nomads_joined: any = [];
     }
   }
 
+  changeFav(){
+    if(this.isFavorite()){
+      this.af.list('Users/'+firebase.auth().currentUser.uid+'/favorites/'+this.event_data.index).remove()
+          .then(() => {
+            this.alertCtrl.create({
+              title: 'Removed from Favorites!',
+              message: 'This event is no longer one of your favorites',
+              buttons: ['Ok']
+            }).present();
+          })
+    }
+    else{
+      this.af.list('Users/'+firebase.auth().currentUser.uid+'/favorites').update(this.event_data.index, {
+        'index': this.event_data.index,
+        'type': 'event'
+      }).then(() => {
+        this.alertCtrl.create({
+          title: 'Added to Favorites!',
+          message: 'This event is now one of your favorites',
+          buttons: ['Ok']
+        }).present();
+      })
+    }
+  }
+
+  isFavorite(){
+    if(this.favorites != undefined){
+      for(let key in this.favorites){
+        if(this.favorites[key].index == this.event_data.index){
+          return true;
+        }
+      }
+    }
+    return false;
+  }
+
   ionViewDidLoad(){
     this.general_loader = this.loadingCtrl.create({
       spinner: 'bubbles',
@@ -200,6 +238,7 @@ public nomads_joined: any = [];
       this.users$ = action.payload.val();
       this.noms_balance = this.users$.noms;
       this.nomad_schedule = [];
+      this.favorites = this.users$.favorites;
       this.convertSchedule();
     });
     this.af.object('Events/'+this.event_data.index+'/nomads').snapshotChanges().subscribe(action => {
