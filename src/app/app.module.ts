@@ -44,6 +44,8 @@ import { LocatePage } from '../pages/locate/locate';
 import { EventPage } from '../pages/event/event';
 import { ChatPage } from '../pages/chat/chat';
 import { DetailsPage } from '../pages/details/details';
+import { AyudaPage } from '../pages/ayuda/ayuda';
+import { ReviewsPage } from '../pages/reviews/reviews';
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
@@ -100,7 +102,9 @@ import { FIREBASE_CONFIG } from './firebase.credentials';
     LocatePage,
     EventPage,
     ChatPage,
-    DetailsPage
+    DetailsPage,
+    AyudaPage,
+    ReviewsPage
   ],
   imports: [
     NgCalendarModule,
@@ -156,7 +160,9 @@ import { FIREBASE_CONFIG } from './firebase.credentials';
     LocatePage,
     EventPage,
     ChatPage,
-    DetailsPage
+    DetailsPage,
+    AyudaPage,
+    ReviewsPage
   ],
   providers: [
     StatusBar,

@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, AlertController, LoadingController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, AlertController, LoadingController, ModalController } from 'ionic-angular';
 import * as moment from 'moment';
 import { FiltersPage } from '../filters/filters';
 import { AngularFireDatabase, AngularFireObject } from 'angularfire2/database';
@@ -8,6 +8,7 @@ import { DomSanitizer } from '@angular/platform-browser'
 import { WalletPage } from '../wallet/wallet';
 import { ActivityPage } from '../activity/activity';
 import { EventPage } from '../event/event';
+import { ReviewsPage } from '../reviews/reviews';
 
 /**
  * Generated class for the CalendarPage page.
@@ -43,6 +44,9 @@ export class CalendarPage {
  };
  public type: any;
 
+ public past_events: any = [];
+ public show_pop: any;
+
 
 
   constructor(public navCtrl: NavController,
@@ -50,7 +54,8 @@ export class CalendarPage {
   public af: AngularFireDatabase,
   public loadingCtrl: LoadingController,
   public alertCtrl: AlertController,
-  public sanitizer: DomSanitizer) {
+  public sanitizer: DomSanitizer,
+  public modalCtrl: ModalController) {
     this.type = localStorage.getItem('Tipo');
     let time = new Date();
     let time2 = time.setHours(time.getHours()+2);
@@ -62,6 +67,11 @@ export class CalendarPage {
       'endTime': time,
       'allDay': false
     })
+  }
+
+  giveReview(evento){
+    let modal = this.modalCtrl.create(ReviewsPage, {'Activity': evento});
+    modal.present();
   }
 
   openFilters(){
@@ -105,7 +115,7 @@ export class CalendarPage {
     return false;
   }
 
-  checkExistE(clave, llave){
+  checkExistE(clave, llave, review){
     let a = this.e_response$;
     let aux;
     for(let key in a){
@@ -128,10 +138,11 @@ export class CalendarPage {
           'nomads': a[key].nomads,
           'creator':  a[key].creator,
           'index':  a[key].index,
-          'media': a[key].media,
+          // 'media': a[key].media,
           'isEvent': true,
           'clave': llave,
-          'clave_nomada': this.getClave(a[key].nomads)
+          'clave_nomada': this.getClave(a[key].nomads),
+          'reviewed': (review != undefined ? review : false)
         }
         return aux2;
       }
@@ -139,7 +150,7 @@ export class CalendarPage {
     return aux;
   }
 
-  checkExistA(clave, llave){
+  checkExistA(clave, llave, review){
     let b = this.response$;
     let aux;
     for(let key in b){
@@ -162,10 +173,11 @@ export class CalendarPage {
           'nomads': b[key].nomads,
           'creator':  b[key].creator,
           'index':  b[key].index,
-          'media': b[key].media,
+          // 'media': b[key].media,
           'isEvent': false,
           'clave': llave,
-          'clave_nomada': this.getClave(b[key].nomads)
+          'clave_nomada': this.getClave(b[key].nomads),
+          'reviewed': (review != undefined ? review : false)
         }
         return aux2;
       }
@@ -185,12 +197,12 @@ export class CalendarPage {
   convertActivities(){
 
     for(let i=0; i<this.nomad_schedule.length; i++){
-      if(this.checkExistE(this.nomad_schedule[i].activity_id, this.nomad_schedule[i].key) != undefined){
+      if(this.checkExistE(this.nomad_schedule[i].activity_id, this.nomad_schedule[i].key, this.nomad_schedule[i].reviewed) != undefined){
 
-        this.activities_all.push(this.checkExistE(this.nomad_schedule[i].activity_id, this.nomad_schedule[i].key));
+        this.activities_all.push(this.checkExistE(this.nomad_schedule[i].activity_id, this.nomad_schedule[i].key, this.nomad_schedule[i].reviewed));
       }
-      else if(this.checkExistA(this.nomad_schedule[i].activity_id, this.nomad_schedule[i].key) != undefined){
-        let ayuda = this.checkExistA(this.nomad_schedule[i].activity_id, this.nomad_schedule[i].key);
+      else if(this.checkExistA(this.nomad_schedule[i].activity_id, this.nomad_schedule[i].key, this.nomad_schedule[i].reviewed) != undefined){
+        let ayuda = this.checkExistA(this.nomad_schedule[i].activity_id, this.nomad_schedule[i].key, this.nomad_schedule[i].reviewed);
         ayuda.startTime = this.markStart(this.nomad_schedule[i].date, this.nomad_schedule[i].time);
         ayuda.endTime = this.markEnd(this.nomad_schedule[i].date, this.nomad_schedule[i].time);
         ayuda.allDay = false;
@@ -198,8 +210,18 @@ export class CalendarPage {
         this.activities_all.push(ayuda);
       }
     }
+    // let start = moment(event.startTime).format('LLLL');
+    // let end = moment(event.endTime).format('LLLL');
 
+   if(this.show_pop){
+     let today  = moment();
+     this.past_events = this.activities_all.filter( event => moment(moment(event.startTime).format('LLLL')).isBefore(today)&&event.reviewed);
+     if(this.past_events.length > 0) this.alertCtrl.create({title: 'Review your activities and events', message: 'It seems like you have past events and activities waiting for review. Click on them and select the review option!', buttons: ['Ok']}).present();
+
+     this.show_pop = false;
+   }
    console.log(this.activities_all);
+   console.log(this.past_events);
   }
 
   getEvents(){
@@ -227,6 +249,7 @@ export class CalendarPage {
   }
 
   ionViewDidLoad() {
+    this.show_pop = true;
     this.general_loader =  this.loadingCtrl.create({
           spinner: 'bubbles',
            content: 'Loading...'
@@ -251,7 +274,8 @@ export class CalendarPage {
           'day': a[key].day,
           'time': a[key].time,
           'date': a[key].date,
-          'key': key
+          'key': key,
+          'reviewed': a[key].reviewed
         });
     }
     console.log(this.nomad_schedule);
@@ -294,24 +318,24 @@ export class CalendarPage {
    }
 
    confirmCancelation(evento){
-     this.alertCtrl.create({
-       title: 'Are you sure you want to remove '+evento.title_complete+' from your schedule?',
-       message: 'By doing this you wont get a refund of your noms',
-       buttons: [
-         {
-           text: 'Cancel',
-           handler: () => {
+       this.alertCtrl.create({
+         title: 'Are you sure you want to remove '+evento.title_complete+' from your schedule?',
+         message: 'By doing this you wont get a refund of your noms',
+         buttons: [
+           {
+             text: 'Cancel',
+             handler: () => {
 
+             }
+           },
+           {
+             text: 'Remove',
+             handler: () => {
+               this.goAhead(evento);
+             }
            }
-         },
-         {
-           text: 'Remove',
-           handler: () => {
-             this.goAhead(evento);
-           }
-         }
-       ]
-     }).present();
+         ]
+       }).present();
    }
 
   onEventSelected(event) {
@@ -319,6 +343,9 @@ export class CalendarPage {
     let start = moment(event.startTime).format('LLLL');
     let end = moment(event.endTime).format('LLLL');
 
+    let today  = moment();
+    //this.events = this.events.filter( event => !moment(event.day).isBefore(today));
+    if(!moment(start).isBefore(today)){
     let alert = this.alertCtrl.create({
       title: '' + event.title_complete,
       subTitle: 'From: ' + start + '<br>To: ' + end,
@@ -337,6 +364,41 @@ export class CalendarPage {
         }]
     })
     alert.present();
+  }
+  else if(!event.reviewed || event.reviewed == undefined){
+    let alert = this.alertCtrl.create({
+      title: '' + event.title_complete,
+      subTitle: 'From: ' + start + '<br>To: ' + end,
+      buttons: [
+        {
+          text: 'View Details',
+          handler: () => {
+            this.seeDetails(event);
+          }
+        },
+        {
+          text: 'Write a review',
+          handler: () =>{
+            this.giveReview(event);
+          }
+        }]
+    })
+    alert.present();
+  }
+  else{
+    let alert = this.alertCtrl.create({
+      title: '' + event.title_complete,
+      subTitle: 'From: ' + start + '<br>To: ' + end,
+      buttons: [
+        {
+          text: 'View Details',
+          handler: () => {
+            this.seeDetails(event);
+          }
+        }]
+    })
+    alert.present();
+  }
   }
 
   onTimeSelected(ev) {

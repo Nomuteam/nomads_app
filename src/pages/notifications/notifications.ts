@@ -42,6 +42,10 @@ public example_notifs: any = [
 public users$: any;
 public noms_balance: any = [];
 
+//For the Notifications
+public response$: any;
+public notifications: any = [];
+
   constructor(public navCtrl: NavController,
   public navParams: NavParams,
   public af: AngularFireDatabase,
@@ -56,13 +60,26 @@ public noms_balance: any = [];
 
 
   isAdmin(admin, type){
-    console.log(admin);
     if(type == 'general'){
       return ( admin ? 'notif-container purple' : 'notif-container');
     }
     else{
       return ( admin ? type + ' inverted' : type);
     }
+  }
+
+  convertN(){
+    let a = this.response$;
+    for(let key in a){
+     this.notifications.push({
+       'title': a[key].title,
+       'subtitle': a[key].subtitle,
+       'isAdmin': a[key].isAdmin
+     });
+    }
+
+    console.log(this.notifications);
+    if(this.general_loader) this.general_loader.dismiss();
   }
 
   ionViewDidLoad() {
@@ -76,7 +93,13 @@ public noms_balance: any = [];
       this.users$ = action.payload.val();
 
       this.noms_balance = this.users$.noms;
-      if(this.general_loader) this.general_loader.dismiss();
+      //if(this.general_loader) this.general_loader.dismiss();
+    });
+
+    this.af.object('Notifications/').snapshotChanges().subscribe(action => {
+      this.response$ = action.payload.val();
+      this.notifications = [];
+      this.convertN();
     });
   }
 

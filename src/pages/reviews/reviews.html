@@ -1,0 +1,48 @@
+<!--
+  Generated template for the ReviewsPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<div class="todo" navPop>
+
+</div>
+
+<div *ngIf="this.section == '1'" class="modal1" padding>
+
+  <div class="top-container">
+    <div class="top-title">Give a Review</div>
+    <div navPop class="top-cancel">Cancel</div>
+  </div>
+
+  <div class="class-container">
+    <div class="left-side">
+      <div class="cover-gradient1"></div>
+      <div class="cover-gradient2"></div>
+      <div class="class-img" [style.background-image]="sanitizeThis(this.activity_data.img)"></div>
+      </div>
+      <div class="class-text">
+        <div class="class-title">{{this.activity_data.title_complete}}</div>
+        <div class="class-hint">{{this.activity_data.startTime}}</div>
+        <!-- <div class="class-distance">4.5 km</div> -->
+    </div>
+  </div>
+
+  <div class="section-title">Number of Stars</div>
+  <div class="selector-containers">
+    <div class="">Stars: {{stars_number}}</div>
+    <ion-range mode="ios" color="green" min="1" max="5" step=".5" snaps="true" pin="true" [(ngModel)]="stars_number"></ion-range>
+  </div>
+
+  <div class="section-title">Written Review (optional)</div>
+  <div class="selector-containers">
+    <textarea name="name" rows="6" cols="40" class="selector" [(ngModel)]="detalles"></textarea>
+  </div>
+
+
+  <button [disabled]="!canAdvance()" (click)="sendReview()" type="button" class="pay-btn">
+   <div class="pay-container">
+     <div class="pay-hint">Send Review</div>
+   </div>
+  </button>
+</div>

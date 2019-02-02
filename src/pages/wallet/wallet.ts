@@ -122,7 +122,7 @@ public transactions: any = [];
           buttons: ['Ok']
         }).present();
 
-        this.getFriendBalance();
+        //this.getFriendBalance();
 
         let transaction = {'date': new Date(), 'index': this.transaction_id, 'amount': this.cash, 'type': 'noms', 'sender_id': firebase.auth().currentUser.uid};
         this.af.list('transactions').update(this.transaction_id, transaction);

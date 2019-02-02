@@ -21,11 +21,10 @@ page-history {
       flex-direction: column;
       justify-content: space-between;
       //border: 1px solid red;
-      height: 50%;
       width: 65%;
       .event-sender{
         font-family: 'Raleway', sans-serif;
-        font-size: 100%;
+        font-size: 80%;
         font-weight: 700!important;
         color: white;
         display: inline-block;
@@ -33,7 +32,7 @@ page-history {
       }
       .event-hint{
         font-family: 'Raleway', sans-serif;
-        font-size: 100%;
+        font-size: 80%;
         color: white;
         display: inline-block;
         overflow: hidden;
@@ -42,7 +41,7 @@ page-history {
     .stats-hint{
       //border: 1px solid red;
       font-family: 'Raleway', sans-serif;
-      font-size: 100%;
+      font-size: 80%;
       font-weight: 700!important;
       color: #50E3C2;
     }

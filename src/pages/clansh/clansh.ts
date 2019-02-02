@@ -26,6 +26,7 @@ export class ClanshPage {
   public my_clans: any = [];
   public users$: any;
   public noms_balance: any = '';
+  public name: any = '';
   public clans_example: any = [
     {
       'title': 'Tec de Mty',
@@ -130,6 +131,7 @@ export class ClanshPage {
     this.af.object('Users/'+firebase.auth().currentUser.uid).snapshotChanges().subscribe(action => {
       this.users$ = action.payload.val();
       this.noms_balance = this.users$.noms;
+      this.name = this.users$.first_name;
     });
     this.getClans();
   }
@@ -138,9 +140,9 @@ export class ClanshPage {
     return (miembros != '1' ? miembros.length+' nomads' : miembros.length+' nomads');
   }
 
-  canJoin(indice, tipo, code, chat){
+  canJoin(indice, tipo, code, chat, nombre){
     if(tipo == 'public'){
-      this.joinClan(indice, chat);
+      this.joinClan(indice, chat, nombre);
     }
     else{
       const prompt = this.alertCtrl.create({
@@ -163,7 +165,7 @@ export class ClanshPage {
            text: 'Validate',
            handler: data => {
              if(data.codigo == code){
-               this.joinClan(indice, chat);
+               this.joinClan(indice, chat, nombre);
              }
              else{
                this.alertCtrl.create({
@@ -180,7 +182,7 @@ export class ClanshPage {
     }
   }
 
-  joinClan(indice, chat){
+  joinClan(indice, chat, nombre){
       this.general_loader = this.loadingCtrl.create({
         spinner: 'bubbles',
         content: 'Joining Clan...'
@@ -202,6 +204,12 @@ export class ClanshPage {
         'isOwner': false
       })
        .then(() =>{
+         let a = this.response$.members;
+         for(let key in a){
+           if(a[key].index != firebase.auth().currentUser.uid){
+             this.af.list('Notifications').push({'title': 'New clan member!', 'subtitle': this.name+' just joined the clan '+nombre, 'index': a[key].index});
+           }
+         }
          this.general_loader.dismiss();
          this.alertCtrl.create({
            title: 'Clan Joined!',

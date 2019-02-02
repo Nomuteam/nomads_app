@@ -28,6 +28,7 @@ export class ChatPage {
   public msgu: any;
   public chat_room: any;
 
+
   constructor(public navCtrl: NavController,
   public navParams: NavParams,
   public af: AngularFireDatabase,
@@ -42,8 +43,16 @@ export class ChatPage {
       this.af.list('Chats/'+this.chat_room+'/messages').push({
         'senderId': firebase.auth().currentUser.uid,
         'message': this.msgu
-      });
-      this.msgu = '';
+      }).then(() => {
+        let a = this.response$.members;
+        for(let key in a){
+          if(a[key].index != firebase.auth().currentUser.uid){
+            this.af.list('Notifications').push({'title': 'New chat message!', 'subtitle': this.getName(firebase.auth().currentUser.uid)+' just sent a message to your chat!', 'index': a[key].index});
+          }
+        }
+        this.msgu = '';
+      })
+
     }
   }
 

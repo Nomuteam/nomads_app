@@ -1,0 +1,317 @@
+page-ayuda {
+
+      .todo{
+        background-color: rgba(0,0,0,.4);
+        width: 100%;
+        height: 110%;
+        position: absolute;
+        top: 0%;
+      }
+
+       .modal1{
+        background-color: white;
+        width: 90%;
+        display: block;
+        margin: 0 auto;
+        padding: 5%;
+        border-radius: 5px;
+        //margin-top: 30%;
+        position: absolute;
+        top: 10%;
+        left: 5%;
+        ffont-family: 'Open Sans', sans-serif;
+         .top-container{
+           display: flex;
+           justify-content: space-between;
+           align-items: center;
+           padding-bottom: 2%;
+           margin-bottom: 2%;
+           border-bottom: 1px solid rgba(151, 151, 151, .9);
+           font-weight: 700;
+           .top-title{
+             font-size: 120%;
+           }
+           .top-cancel{
+             font-size: 80%;
+             color: #229B86;
+           }
+         }
+
+         .saldo-container{
+           display: flex;
+           flex-direction: column;
+           justify-content: center;
+           align-items: flex-start;
+           margin-bottom: 3%;
+           width: 100%;
+           .saldo-msg{
+             font-size: 90%;
+             opacity: .6;
+             margin-bottom: 3%;
+           }
+           .selector{
+             padding: 3%;
+             border: 1px solid rgba(151, 151, 151, .38);
+             background-color: #F4F4F4;
+             padding-left: 5%;
+             font-weight: 700;
+             margin-bottom: 2%;
+             border-radius: 10px;
+             width: 100%;
+           }
+         }
+
+         .class-container{
+           display: flex;
+           justify-content: center;
+           align-items: center;
+           margin-bottom: 5%;
+           width: 100%;
+           .left-side{
+             position: relative;
+             width: 30%;
+             .cover-gradient1{
+               position: absolute;
+               top: 0!important;
+               height: 8vh;
+               width: 100%;
+               z-index: 100;
+               border-radius: 6px;
+               background-image: linear-gradient(-179deg, rgba(0,244,174,0.00) 7%, #00E676 100%);
+             }
+             .cover-gradient2{
+               position: absolute;
+               top: 0!important;
+               height: 8vh;
+               width: 100%;
+               z-index: 99;
+               border-radius: 6px;
+               background-image: linear-gradient(0deg, rgba(0,0,0,0.00) 48%, rgba(0,0,0,0.66) 100%);
+             }
+             .class-img{
+              z-index: 90;
+              height: 8vh;
+              width: 100%;
+              background-image: url('../../assets/img/example_act.png');
+              background-size: cover;
+              background-repeat: no-repeat;
+              background-position: center;
+              border-radius: 6px;
+             }
+           }
+           .class-text{
+             display: flex;
+             flex-direction: column;
+             justify-content: center;
+             align-items: flex-start;
+             width: 60%;
+             margin-left: 5%;
+             .class-title{
+               font-size: 90%;
+               font-weight: 700;
+             }
+             .class-hint{
+               font-size: 80%;
+             }
+             .class-distance{
+               font-size: 70%;
+               color: #229B86;
+             }
+           }
+         }
+
+       .section-title{
+         font-size: 90%;
+         font-weight: 700;
+         width: 100%;
+         text-align: left;
+         padding: 2%;
+         border-bottom: 1px solid rgba(151, 151, 151, .6);
+         margin-bottom: 5%;
+       }
+
+       .share-container{
+         display: flex;
+         justify-content: flex-start;
+         align-items: center;
+         width: 100%;
+         margin-bottom: 5%;
+         .share{
+           padding: 3%;
+           width: 20%;
+           height: 50px;
+           border-radius: 50%;
+         }
+         .facebook{
+           background-color: #3363A4;
+           background-repeat: no-repeat;
+           background-image: url('../../assets/img/facebook.png');
+           background-size: cover;
+           background-position: center;
+         }
+         .nomads{
+           background-color: #000000;
+           background-repeat: no-repeat;
+           background-image: url('../../assets/img/logo_1.png');
+           background-size: 70%;
+           background-position: center;
+           margin-left: 5%;
+         }
+       }
+
+       .selector-containers{
+         margin-bottom: 5%;
+         .selector{
+           padding: 3%;
+           border: 1px solid rgba(151, 151, 151, .38);
+           background-color: #F4F4F4;
+           padding-left: 5%;
+           font-weight: 700;
+           margin-bottom: 2%;
+           border-radius: 10px;
+           width: 100%;
+         }
+       }
+
+       .balance-container{
+         margin-top: -3%;
+         margin-bottom: 3%;
+         width: 100%;
+         .balance-row{
+           display: flex;
+           justify-content: space-between;
+           align-items: center;
+           margin-bottom: 0%;
+           width: 100%;
+           .left-text{
+             font-size: 90%;
+             color: rgba(0, 0, 0, .7);
+             width: 80%;
+           }
+           .last{
+             font-weight: 700;
+             color: black;
+           }
+           .right-text{
+             display: flex;
+             justify-content: center;
+             align-items: center;
+             width: 20%;
+             .noms-qty{
+               font-size: 80%;
+               color: rgba(0, 0, 0, .7);
+             }
+             .last{
+               font-weight: 700;
+               color: black;
+             }
+             .circles-noms{
+               width: 40%;
+               position: relative;
+               height: 20px;
+               .div1{
+                 position: absolute;
+                 top: 15%;
+                 left: 25%;
+                 height: 70%;
+                 border: 1px solid #229B86;
+                 width: 50%;
+                 border-radius: 50%;
+               }
+               .div2{
+                 position: absolute;
+                 top: 7.5%;
+                 left: 17.5%;
+                 height: 85%;
+                 border: 1px solid #229B86;
+                 width: 65%;
+                 border-radius: 50%;
+               }
+               .div3{
+                 position: absolute;
+                 left: 12.5%;
+                 height: 100%;
+                 border: 1px solid #229B86;
+                 width: 75%;
+                 border-radius: 50%;
+               }
+             }
+           }
+         }
+       }
+
+       .pay-btn{
+         font-family: 'Open Sans', sans-serif;
+         font-weight: 700;
+         font-size: 100%;
+         color: white;
+         text-transform: uppercase;
+         background-color: #229B86;
+         width: 70%;
+         margin-left: 15%;
+         height: 50px;
+         border-radius: 8px;
+         box-shadow: 0 8px 29px 0 rgba(15,227,154,0.20);
+         letter-spacing: 0.31px;
+         text-align: center;
+         margin-top: 30px;
+         .pay-container{
+           display: flex;
+           justify-content: center;
+           align-items: center;
+           color: white;
+           font-weight: 700;
+           width: 100%;
+           .pay-hint{
+
+           }
+           .pay-circles{
+             display: flex;
+             justify-content: center;
+             align-items: center;
+             width: 25%;
+             .noms-qty{
+             }
+             .circles-noms{
+               width: 100%;
+               position: relative;
+               height: 20px;
+               .div1{
+                 position: absolute;
+                 top: 15%;
+                 left: 25%;
+                 height: 70%;
+                 border: 1px solid white;
+                 width: 50%;
+                 border-radius: 50%;
+               }
+               .div2{
+                 position: absolute;
+                 top: 7.5%;
+                 left: 17.5%;
+                 height: 85%;
+                 border: 1px solid white;
+                 width: 65%;
+                 border-radius: 50%;
+               }
+               .div3{
+                 position: absolute;
+                 left: 12.5%;
+                 height: 100%;
+                 border: 1px solid white;
+                 width: 75%;
+                 border-radius: 50%;
+               }
+             }
+           }
+         }
+       }
+
+       .rose{
+         background-color: #FF6B84;
+       }
+
+
+       }
+
+}

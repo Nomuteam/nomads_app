@@ -28,6 +28,7 @@ public event_data: any = [];
 public users$: any;
 public noms_balance: any = [];
 public nomad_schedule: any = [];
+public name: any = '';
 
 //For the activity_owner
 public owners$: any;
@@ -146,6 +147,7 @@ public favorites: any = [];
         this.af.list('Users/'+firebase.auth().currentUser.uid+'/transactions').update(t_id, t_reference);
         this.af.list('Users/'+this.event_data.creator+'/transactions').update(t_id, t_reference)
             .then(()=>{
+              this.af.list('Notifications').push({'title': 'Someone joined your event!', 'subtitle': this.name+' just joined your event '+this.event_data.title_complete, 'index': this.event_data.creator});
               this.alertCtrl.create({
                 title: 'You are all set!',
                 subTitle: 'Some details..',
@@ -238,6 +240,7 @@ public favorites: any = [];
       this.users$ = action.payload.val();
       this.noms_balance = this.users$.noms;
       this.nomad_schedule = [];
+      this.name = this.users$.first_name;
       this.favorites = this.users$.favorites;
       this.convertSchedule();
     });

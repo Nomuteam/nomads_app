@@ -14,7 +14,7 @@
      <p class="noms-hint">Noms</p>
      <p class="noms-qty">{{this.noms_balance}}</p>
     </ion-buttons>
-    <ion-buttons end>
+    <ion-buttons end (click)="presentActionSheet()">
 
      <button ion-button icon-only>
        <ion-icon name="ios-settings" color="white"></ion-icon>

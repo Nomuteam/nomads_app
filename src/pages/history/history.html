@@ -30,13 +30,16 @@
 
 
 <ion-content padding>
-  <!-- <div class="event-element" *ngFor="let c of this.example_events">
-      <div class="user-img"></div>
+  <div class="event-element" *ngFor="let c of this.transactions">
+      <!-- <div class="user-img"></div> -->
       <div class="event-texts">
-       <div class="event-sender">{{c.title}}</div>
-       <div class="event-hint">{{c.members}}/{{c.occupancy}}</div>
+       <div class="event-sender" style="text-transform: capitalize">{{this.getTitle(c.type)}}</div>
+       <div *ngIf="c.type == 'noms-referral'" class="event-hint" style="text-decoration: line-through">Amount: ${{c.amount}} mxn</div>
+       <div *ngIf="c.type == 'noms'" class="event-hint">Amount: ${{c.amount}} mxn</div>
+       <div *ngIf="c.type != 'activity'" class="event-hint">Noms: {{this.getNoms(c.amount)}}</div>
+       <div *ngIf="c.type == 'activity'" class="event-hint">Noms: {{c.amount}}</div>
       </div>
 
-    <div class="stats-hint">Stats</div>
-  </div> -->
+    <div class="stats-hint">View</div>
+  </div>
 </ion-content>

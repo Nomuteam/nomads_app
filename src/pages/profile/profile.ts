@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { App, IonicPage, NavController, NavParams, LoadingController, AlertController } from 'ionic-angular';
+import { App, IonicPage, NavController, NavParams, LoadingController, AlertController, ActionSheetController, ModalController } from 'ionic-angular';
 import { ChatsPage } from '../chats/chats';
 import { WalletPage } from '../wallet/wallet';
 import { MyeventsPage } from '../myevents/myevents';
@@ -12,6 +12,7 @@ import firebase from 'firebase';
 import { AngularFireAuth } from 'angularfire2/auth';
 import { WelcomePage } from '../welcome/welcome';
 import * as moment from 'moment';
+import { AyudaPage } from '../ayuda/ayuda';
 
 
 /**
@@ -42,7 +43,41 @@ public noms_balance: any;
     public loadingCtrl: LoadingController,
     public alertCtrl: AlertController,
     public appCtrl: App,
-    public afAuth: AngularFireAuth) {
+    public afAuth: AngularFireAuth,
+    public actionSheetCtrl: ActionSheetController,
+    public modalCtrl: ModalController) {
+  }
+
+  openAyuda(){
+  let modal = this.modalCtrl.create(AyudaPage);
+  modal.present();
+  }
+
+  presentActionSheet(){
+    const actionSheet = this.actionSheetCtrl.create({
+  title: 'Choose an Option',
+  buttons: [
+    {
+      text: 'Help Center',
+      handler: () => {
+        this.openAyuda();
+      }
+    },
+    {
+      text: 'Logout',
+      handler: () => {
+        this.logOut();
+      }
+    },{
+      text: 'Cancel',
+      role: 'cancel',
+      handler: () => {
+        console.log('Cancel clicked');
+      }
+    }
+  ]
+});
+actionSheet.present();
   }
 
   openFilters(){

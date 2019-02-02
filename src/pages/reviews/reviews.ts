@@ -14,10 +14,10 @@ import * as moment from 'moment';
 
 @IonicPage()
 @Component({
-  selector: 'page-book',
-  templateUrl: 'book.html',
+  selector: 'page-reviews',
+  templateUrl: 'reviews.html',
 })
-export class BookPage {
+export class ReviewsPage {
 public general_loader: any;
 public section: any = '1';
 public selected_day: any = '';
@@ -40,6 +40,9 @@ public nomads_joined: any = [];
 public activity_data: any;
 public schedule: any = [];
 
+public stars_number: any = 0;
+public detalles: any = '';
+
 
   constructor(public navCtrl: NavController,
   public navParams: NavParams,
@@ -49,8 +52,54 @@ public schedule: any = [];
   public sanitizer: DomSanitizer,
   public viewCtrl: ViewController) {
     this.activity_data = this.navParams.get('Activity');
-    this.activity_data.schedule.map(x => this.schedule.filter(a => a.day == x.day).length > 0 ? null : this.schedule.push(x));
+    this.activity_data.startTime = moment(this.activity_data.startTime).format('LLLL');
+    if(!this.activity_data.isEvent) this.activity_data.schedule.map(x => this.schedule.filter(a => a.day == x.day).length > 0 ? null : this.schedule.push(x));
     console.log(this.schedule);
+  }
+
+  sendReview(){
+    let index = this.generateUUID();
+    let reviewer = firebase.auth().currentUser.uid;
+
+    let review = {'stars': this.stars_number, 'details': this.detalles, 'reviewer': reviewer, 'creator': this.activity_data.creator, 'activity': this.activity_data, 'date': new Date(), 'index': index};
+    this.af.list('Reviews').update(index, review);
+
+    if(this.activity_data.isEvent){
+      this.af.list('Events/'+this.activity_data.index+'/reviews').update(index, {'index': index})
+          .then(() => {
+            this.af.list('Notifications').push({'title': 'New Review!', 'subtitle': 'Your event '+this.activity_data.title_complete+' just received a new review! Check it out.', 'index':this.activity_data.creator});
+            this.alertCtrl.create({
+              title: 'Review Sent!',
+              subTitle: 'Thanks for reviewing!',
+              message: 'The ally who created this event will receive your review and improve its service and events!',
+              buttons: ['Ok']
+            }).present();
+           this.af.list('Users/'+firebase.auth().currentUser.uid+'/schedule').update(this.activity_data.clave,{
+             'reviewed': true
+           }).then(() => {
+             this.returnTo();
+           });
+          })
+    }
+    else{
+      this.af.list('Activities/'+this.activity_data.index+'/reviews').update(index, {'index': index})
+          .then(() => {
+             this.af.list('Notifications').push({'title': 'New Review!', 'subtitle': 'Your activity '+this.activity_data.title_complete+' just received a new review! Check it out.', 'index':this.activity_data.creator});
+             this.alertCtrl.create({
+               title: 'Review Sent!',
+               subTitle: 'Thanks for reviewing!',
+               message: 'The ally who created this activity will receive your review and improve its service and events!',
+               buttons: ['Ok']
+             }).present();
+             this.af.list('Users/'+firebase.auth().currentUser.uid+'/schedule').update(this.activity_data.clave,{
+               'reviewed': true
+             }).then(() => {
+               this.returnTo();
+             });
+          });
+    }
+
+
   }
 
   sanitizeThis(image){
@@ -122,7 +171,7 @@ public schedule: any = [];
   }
 
   canAdvance(){
-    return this.selected_day != '' && this.selected_time != '';
+    return this.stars_number != 0;
   }
 
   getDay(){

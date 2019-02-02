@@ -30,7 +30,7 @@
     <div class="jc-container">
       <button *ngIf="user_type == 'allies'" (click)="openNomads()" type="button" name="button" class="sign-btn">Home</button>
       <button (click)="loginMail()" *ngIf="user_type == 'nomads'" type="button" name="button" class="login-btn">Log In</button>
-      <button *ngIf="user_type == 'allies'" type="button" name="button" class="login-btn rose">Log In</button>
+      <button (click)="loginMail()" *ngIf="user_type == 'allies'" type="button" name="button" class="login-btn rose">Log In</button>
     </div>
   </div>
 
