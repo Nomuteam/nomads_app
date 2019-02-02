@@ -53,6 +53,8 @@ public example_packages: any = [
 public selected: any = 0;
 public cash: any = 0;
 public noms: any = 0;
+public user_code: any = '';
+public friend_balance: any = '';
 
 public payment_data: any = {
   'card_address': '',
@@ -84,6 +86,31 @@ public transactions: any = [];
     this.user_type = localStorage.getItem('Tipo');
   }
 
+  getFriendBalance(){
+    if(this.user_code != undefined){
+      this.af.object('Users/'+this.user_code).snapshotChanges().subscribe(action => {
+      this.friend_balance = action.payload.val().noms;
+      });
+      this.giveFriend();
+    }
+  }
+
+  giveFriend(){
+      let transaction = {'date': new Date(), 'index': this.generateUUID(), 'amount': Math.ceil(this.noms*.05)/20, 'type': 'noms-referral', 'sender_id': firebase.auth().currentUser.uid, 'receiver_id': this.user_code};
+      this.af.list('transactions').update(this.transaction_id, transaction);
+
+      this.af.list('Users/').update(this.user_code, {
+        'noms': parseInt(this.friend_balance)+this.noms
+      }).then( () => {
+        this.alertCtrl.create({
+          title: 'Good Friend!',
+          subTitle: 'This transaction just gave the friend who gave you his code a 5% noms bonus',
+          message: 'Tell him about it!',
+          buttons: ['Ok']
+        }).present();
+      })
+  }
+
   verifyConfirmation(){
       if(this.transaction_status == 'succeeded'){
         this.general_loader.dismiss();
@@ -94,6 +121,8 @@ public transactions: any = [];
           message: 'Enjoy your noms!',
           buttons: ['Ok']
         }).present();
+
+        this.getFriendBalance();
 
         let transaction = {'date': new Date(), 'index': this.transaction_id, 'amount': this.cash, 'type': 'noms', 'sender_id': firebase.auth().currentUser.uid};
         this.af.list('transactions').update(this.transaction_id, transaction);
@@ -380,6 +409,7 @@ public transactions: any = [];
     this.af.object('Users/'+firebase.auth().currentUser.uid).snapshotChanges().subscribe(action => {
       this.users$ = action.payload.val();
       this.noms_balance = this.users$.noms;
+      this.user_code = this.users$.code;
 
       if(this.users$.payment){
         this.payment_data.cardnumber = this.users$.payment.cardnumber;

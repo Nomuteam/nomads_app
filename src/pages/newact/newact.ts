@@ -265,9 +265,13 @@ export class NewactPage {
   addForm(indice){
     if(!this.example_forms[indice].selected){
         this.example_forms[indice].selected = true;
+        this.activity_data.categories.workout_form = this.example_forms[indice].title;
     }
     else{
         this.example_forms[indice].selected = false;
+        if(this.example_forms.filter(f=>f.selected).length == 0){
+            this.activity_data.categories.workout_form = '';
+        }
     }
   }
 

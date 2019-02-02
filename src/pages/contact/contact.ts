@@ -1,5 +1,5 @@
 import { Component, ViewChild, ElementRef } from '@angular/core';
-import { NavController, NavParams, LoadingController, AlertController } from 'ionic-angular';
+import { NavController, NavParams, LoadingController, AlertController, ModalController } from 'ionic-angular';
 declare var google;
 import { Geolocation } from '@ionic-native/geolocation';
 import { FiltersPage } from '../filters/filters';
@@ -10,6 +10,7 @@ import { DomSanitizer } from '@angular/platform-browser';
 import { ActivityPage } from '../activity/activity';
 import { EventPage } from '../event/event';
 import * as moment from 'moment';
+import { DetailsPage } from '../details/details';
 
 @Component({
   selector: 'page-contact',
@@ -39,7 +40,8 @@ public class_slides: any= false;
     public loadingCtrl: LoadingController,
     public alertCtrl: AlertController,
     public geolocation: Geolocation,
-    public sanitizer: DomSanitizer) {
+    public sanitizer: DomSanitizer,
+    public modalCtrl: ModalController) {
 
   }
 
@@ -83,7 +85,7 @@ public class_slides: any= false;
    }
  }
 
- coordenadas(address, tit, fn){
+ coordenadas(a, address, tit, fn){
    let geocoder = new google.maps.Geocoder();
    let vm = this;
    geocoder.geocode( { 'address' : address}, function( results, status ) {
@@ -96,6 +98,8 @@ public class_slides: any= false;
           position: results[0].geometry.location,
           icon: 'https://firebasestorage.googleapis.com/v0/b/dev-nomads.appspot.com/o/pink-icon.png?alt=media&token=3448077b-ef8e-4925-a3fa-27274caee626'
         });
+
+        let modal = vm.modalCtrl.create(DetailsPage, {'Details': a});
         let content = "<h4>"+tit+"</h4>";
 
         let infoWindow = new google.maps.InfoWindow({
@@ -103,7 +107,8 @@ public class_slides: any= false;
         });
 
         google.maps.event.addListener(marker, 'click', () => {
-          infoWindow.open(vm.map, marker);
+          //infoWindow.open(vm.map, marker);
+          modal.present();
         });
       } else {
          alert( 'Geocode was not successful for the following reason: ' + status );
@@ -116,7 +121,7 @@ public class_slides: any= false;
     let vm = this;
     for(let i=0; i<this.activities_all.length; i++){
 
-    this.coordenadas(this.activities_all[i].location, this.activities_all[i].title_complete,  function(location){
+    this.coordenadas(this.activities_all[i], this.activities_all[i].location, this.activities_all[i].title_complete,  function(location){
         vm.activities_all[i].location = location;
     });
 
@@ -199,7 +204,7 @@ public class_slides: any= false;
             'categories':  b[key].categories,
             'schedule':  b[key].schedule,
             'img':  b[key].img,
-            'cost':  b[key].cost,
+            'class_price':  b[key].class_price,
             'type':  b[key].type,
             'allDay': false,
             'creator':  b[key].creator,
@@ -285,7 +290,7 @@ public class_slides: any= false;
       });
 
       google.maps.event.addListener(marker, 'click', () => {
-        infoWindow.open(this.map, marker);
+        //infoWindow.open(this.map, marker);
       });
       this.getActivities();
     }

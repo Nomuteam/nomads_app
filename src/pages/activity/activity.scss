@@ -121,15 +121,16 @@ page-activity {
       align-items: center;
       padding-left: 5%;
       padding-right: 5%;
-      padding-bottom: 3%;
       .hashtags{
         display: flex;
         justify-content: flex-start;
         width: 100%;
         .hashtag{
-          padding: 2%;
+          width: auto;
+          margin-right: 10px;
+          padding: 1%;
           opacity: .5;
-          display: inline!important;
+          display: inline-flex;
         }
       }
     }
@@ -162,8 +163,8 @@ page-activity {
       justify-content: space-around;
       width: 30%;
       .row-start{
-        padding-right: 8%;
-        display: inline;
+        margin-right: 8%;
+        display: inline-flex;
       }
       .row-end{
         opacity: .6;

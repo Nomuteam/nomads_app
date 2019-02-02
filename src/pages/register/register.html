@@ -25,9 +25,9 @@
          <p class="input-title">Phone Number</p>
          <input type="tel" class="input-field" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" [(ngModel)]="phone">
        </div>
-       <div *ngIf="user_type == 'allies'" class="input-group">
+       <div class="input-group">
          <p class="input-title">Invitation Code</p>
-         <input type="text" class="input-field" [(ngModel)]="code">
+         <input type="text" class="input-field" [(ngModel)]="code" (blur)="checkCode()">
        </div>
        <label class="container">
          <p>I accept <b (click)="openTerms()"> Nomads' Terms and Conditions</b></p>
