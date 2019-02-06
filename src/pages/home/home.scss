@@ -1,4 +1,17 @@
 page-home {
+
+ .explore-all{
+   border-radius: 10px;
+   margin-bottom: 4vh;
+   display: flex;
+   justify-content: space-around;
+   align-items: center;
+   //border: 1px solid rgba(255, 255, 255, .7);
+   background-color: rgb(80, 80, 80);
+   padding: 3%;
+   font-family: 'Raleway', sans-serif;
+   color: white;
+ }
  .search-container{
    //background-color: rgba( 255, 255, 255, .3);
    border-radius: 10px;
@@ -6,7 +19,8 @@ page-home {
    display: flex;
    justify-content: space-around;
    align-items: center;
-   border: 1px solid rgba(255, 255, 255, .7);
+   //border: 1px solid rgba(255, 255, 255, .7);
+   background-color: rgb(80, 80, 80);
    padding: 3%;
 
    .option-container{
@@ -15,7 +29,7 @@ page-home {
      justify-content: center;
      align-items: center;
      .option-hint{
-        padding: 0%;
+        margin: 2%;
         font-family: 'Raleway', sans-serif;
         color: white;
         font-size: 80%;
@@ -25,8 +39,8 @@ page-home {
    }
 
    .activities-circle{
-     height: 85px;
-     width: 85px;
+     height: 60px;
+     width: 60px;
      border-radius: 50%;
      background: linear-gradient(#973EF0, #AB72FF);
      display: flex;
@@ -119,7 +133,7 @@ page-home {
 
  .category-container{
    //border: 1px solid red;
-   margin-bottom: 5%;
+   margin-bottom: 3%;
   .category-title{
     border-radius: 5px;
     //background-color: gray;
@@ -133,10 +147,19 @@ page-home {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    margin-bottom: 3%;
     small{
       padding-right: 5%;
       color: black;
     }
+  }
+
+  .best{
+    background-image: linear-gradient(to right, #442068, #0A5353)!important;
+  }
+
+  .sug{
+    background-image: linear-gradient(to right, #5E99B9, #274D61)!important;
   }
 
   .blue{
@@ -220,7 +243,7 @@ page-home {
         }
       }
       .img-slide{
-        height: 100px;
+        height: 140px;
         border-radius: 10px;
         background-image: url('../../assets/img/example.png');
         background-repeat: no-repeat;
@@ -231,7 +254,7 @@ page-home {
       .act-first{
         font-family: 'Raleway', sans-serif;
         font-weight: 600!important;
-        font-size: 60%;
+        font-size: 70%;
         color: white;
         //border: 1px solid red;
         text-align: left;
@@ -239,12 +262,12 @@ page-home {
         margin-top: 3%;
         text-transform: uppercase;
         color: #55D1AC;
-        opacity: .6;
+        opacity: .4;
       }
       .act-title{
         font-family: 'Raleway', sans-serif;
         font-weight: 700!important;
-        font-size: 60%;
+        font-size: 70%;
         color: white;
         //border: 1px solid red;
         text-align: left;
@@ -254,7 +277,7 @@ page-home {
       .act-distance{
         font-family: 'Raleway', sans-serif;
         font-weight: 600!important;
-        font-size: 60%;
+        font-size: 70%;
         color: white;
         //border: 1px solid red;
         text-align: left;
@@ -263,6 +286,19 @@ page-home {
         text-transform: uppercase;
         color: #55D1AC;
         opacity: .6;
+      }
+      .act-rating{
+        font-family: 'Raleway', sans-serif;
+        font-weight: 600!important;
+        font-size: 50%;
+        color: white;
+        //border: 1px solid red;
+        text-align: left;
+        padding-left: 2%;
+        margin-top: -6%;
+        text-transform: uppercase;
+        color: #55D1AC;
+        opacity: .4;
       }
     }
   }

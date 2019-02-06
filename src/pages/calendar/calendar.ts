@@ -135,7 +135,7 @@ export class CalendarPage {
           'endTime': this.markEnd(a[key].day, a[key].time),
           'allDay': false,
           'time': a[key].time,
-          'nomads': a[key].nomads,
+          'nomads': (a[key].nomads != undefined ? a[key].nomads : ''),
           'creator':  a[key].creator,
           'index':  a[key].index,
           // 'media': a[key].media,

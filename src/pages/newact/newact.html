@@ -20,8 +20,8 @@
   <div class="{{getClass(4)}}"></div>
 </div>
 
-<div *ngIf="this.current_index == 1" class="container-datos w3-animate-right">
-  <p class="title-container">Activity Info</p>
+<div *ngIf="this.current_index == 2" class="container-datos w3-animate-right">
+  <p class="title-container">General Info</p>
 
    <div class="card-container">
      <div class="input-group">
@@ -57,7 +57,7 @@
    </div>
 </div>
 
-<div *ngIf="this.current_index == 2" class="container-datos w3-animate-right">
+<div *ngIf="this.current_index == 1" class="container-datos w3-animate-right">
   <p class="title-container">Main Category</p>
   <div class="likes-container">
       <div *ngFor="let c of this.example_cats; let in=index" (click)="addCategorie(c.name)" class="{{getCategorie(c.name)}}">{{c.name}}</div>

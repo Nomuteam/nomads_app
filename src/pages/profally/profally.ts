@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { App, IonicPage, NavController, NavParams, LoadingController, AlertController } from 'ionic-angular';
+import { App, IonicPage, NavController, NavParams, LoadingController, AlertController, ActionSheetController, ModalController  } from 'ionic-angular';
 import { ChatsPage } from '../chats/chats';
 import { WalletPage } from '../wallet/wallet';
 import { MyeventsPage } from '../myevents/myevents';
@@ -12,6 +12,7 @@ import { AngularFireDatabase, AngularFireObject } from 'angularfire2/database';
 import firebase from 'firebase';
 import * as moment from 'moment';
 import { WelcomePage } from '../welcome/welcome';
+import { AyudaPage } from '../ayuda/ayuda';
 
 /**
  * Generated class for the ProfallyPage page.
@@ -38,7 +39,47 @@ public general_loader: any;
        public loadingCtrl: LoadingController,
        public alertCtrl: AlertController,
        public afAuth: AngularFireAuth,
-       public appCtrl: App) {
+       public appCtrl: App,
+       public actionSheetCtrl: ActionSheetController,
+       public modalCtrl: ModalController) {
+  }
+
+  openAyuda(){
+  let modal = this.modalCtrl.create(AyudaPage);
+  modal.present();
+  }
+
+  presentActionSheet(){
+    const actionSheet = this.actionSheetCtrl.create({
+  title: 'Choose an Option',
+  buttons: [
+    {
+      text: 'Help Center',
+      handler: () => {
+        this.openAyuda();
+      }
+    },
+    {
+      text: 'Edit Bank Info',
+      handler: () => {
+        this.openAyuda();
+      }
+    },
+    {
+      text: 'Logout',
+      handler: () => {
+        this.logOut();
+      }
+    },{
+      text: 'Cancel',
+      role: 'cancel',
+      handler: () => {
+        console.log('Cancel clicked');
+      }
+    }
+  ]
+});
+actionSheet.present();
   }
 
   getBirthday(){
@@ -58,6 +99,8 @@ public general_loader: any;
       this.user_data.last_name = this.alumno$.last_name;
       this.user_data.email = this.alumno$.email;
       this.user_data.phone = this.alumno$.phone;
+      this.user_data.business_name = this.alumno$.business.business_name;
+      this.user_data.legal_name = this.alumno$.business.legal_name;
       if(this.general_loader) this.general_loader.dismiss();
     });
     console.log(this.user_data);

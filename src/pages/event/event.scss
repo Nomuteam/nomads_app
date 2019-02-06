@@ -55,6 +55,8 @@ page-event {
       display: flex;
       justify-content: space-between;
       align-items: center;
+      padding-top: 3%;
+      padding-left: 3%;
       .left-side{
         display: flex;
         flex-direction: column;
@@ -74,9 +76,10 @@ page-event {
         align-items: center;
         border-radius: 20px 0 0 20px;
         background-color: #9013FE;
-        padding: 2%;
+        padding: 1%;
         width: 40%;
         .noms-qty{
+          text-align: center;
           font-weight: 700;
         }
         .circles-noms{

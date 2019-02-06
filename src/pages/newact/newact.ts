@@ -45,10 +45,6 @@ export class NewactPage {
       'name': 'Studios',
       'selected': false
     },
-    {
-      'name': 'Superhumans',
-      'selected': false
-    },
   ];
   public example_activities: any = [
     {
@@ -309,10 +305,10 @@ export class NewactPage {
   }
 
   canAdvance(){
-    if(this.current_index == 1){
+    if(this.current_index == 2){
       return (this.activity_data.title != '' && this.activity_data.location != '' && this.activity_data.description != '' && this.activity_data.cancelation_policy != '' && this.activity_data.class_price != '');
     }
-    else if(this.current_index == 2){
+    else if(this.current_index == 1){
       return (this.activity_data.categories.main_category != '' && this.activity_data.categories.activity_type  != '' && this.activity_data.categories.workout_form  != '')
     }
     else if(this.current_index == 3){

@@ -6,6 +6,12 @@
 -->
 <ion-header>
   <ion-navbar color="black1">
+    <ion-buttons end (click)="presentActionSheet()">
+
+     <button ion-button icon-only>
+       <ion-icon name="ios-settings" color="white"></ion-icon>
+     </button>
+    </ion-buttons>
     <p class="title">Ally Profile</p>
   </ion-navbar>
 </ion-header>
@@ -13,9 +19,10 @@
 
 <ion-content>
  <div class="bg-img"></div>
+ <div class="profile-img"></div>
  <p class="user-name">{{this.user_data.business_name}}</p>
  <div class="things-container">
-     <div class="user-info">{{this.user_data.business_location}}</div>
+     <div class="user-info">{{this.user_data.legal_name}}</div>
  </div>
 
  <div class="card-container">
@@ -28,16 +35,16 @@
      <img src="assets/img/wallet_ally.png">
      <div class="element-title">Wallet</div>
    </div>
-   <div (click)="openPage('e')" class="element-container">
-     <img src="assets/img/event_ally.png">
-     <div class="element-title">My Events</div>
-   </div>
   </div>
   <hr>
   <div class="row-container">
-   <div (click)="openPage('cl')" class="element-container">
+   <!-- <div (click)="openPage('cl')" class="element-container">
      <img src="assets/img/nomads_ally.png">
      <div class="element-title">Ratings</div>
+   </div> -->
+   <div (click)="openPage('e')" class="element-container">
+     <img src="assets/img/event_ally.png">
+     <div class="element-title">My Events</div>
    </div>
    <div (click)="openPage('n')" class="element-container">
      <img src="assets/img/notif_ally.png">

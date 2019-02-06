@@ -22,7 +22,7 @@
     <div class="cover-gradient1"><div class="class-title">{{this.activity_data.title_complete}}</div></div>
     <div class="cover-gradient2"></div>
     <div class="cover-img" [style.background-image]="sanitizeThis(this.activity_data.img)"></div>
-    <div class="main-info" padding>
+    <div class="main-info">
       <div class="left-side">
         <div class="workout-text">
 
@@ -33,10 +33,10 @@
       </div>
       <div *ngIf="!isAlready()" (click)="openBook()" class="right-side">
         <div *ngIf="activity_data.class_price != 0" class="noms-qty">
-          Join {{this.activity_data.class_price}} noms
+          Join <br> {{this.activity_data.class_price}} noms
         </div>
         <div *ngIf="activity_data.class_price == 0" class="noms-qty">
-          Join Free!
+          Join <br> Free!
         </div>
         <!-- <div class="circles-noms">
           <div class="div1"></div>
@@ -58,7 +58,7 @@
         <img src="assets/img/share_icon.png">
       </div> -->
     </div>
-  </div>
+      </div>
 
   <div class="section-title">Description</div>
   <div class="description-area">
@@ -66,7 +66,7 @@
   </div>
 
   <div class="section-title">Availability</div>
-  <div *ngFor="let s of this.activity_data.schedule" class="row-times" padding>
+  <div *ngFor="let s of this.activity_data.schedule" class="row-times" padding (click)="openBook()">
     <div class="row-day">{{s.day}}</div>
     <div class="row-hours">
      <div class="row-start">{{s.start_time}}</div>

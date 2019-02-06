@@ -424,14 +424,14 @@ public class_type = 'input-field card';
     else{
       this.current_index++;
       if(this.current_index == 3 && this.user_type == 'nomads'){
-        this.message = 'This are the filters we use to give you the best recommedations. Change them anytime'
+        this.message = 'These are the filters we use to give you the best recommedations. Change them anytime'
       }
     }
   }
 
   back(){
     this.current_index--;
-    if(this.message == 'This are the filters we use to give you the best recommedations. Change them anytime'){
+    if(this.message == 'These are the filters we use to give you the best recommedations. Change them anytime'){
       this.message = 'You are almost there, tell us more about you.';
     }
   }

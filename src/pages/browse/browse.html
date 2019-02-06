@@ -26,8 +26,8 @@
 
 <ion-content padding>
   <div class="segment-container">
-   <p (click)="changeSegment('activities')" class="{{getSegment('activities')}}" style="margin-left: 0!important;">Activities</p>
-   <p (click)="changeSegment('events')" class="{{getSegment('events')}}">Events</p>
+   <p (click)="changeSegment('events')" class="{{getSegment('events')}}" style="margin-left: 0!important;">Events</p>
+   <p (click)="changeSegment('activities')" class="{{getSegment('activities')}}">Activities</p>
   </div>
 
  <div *ngIf="this.segment == 'activities'">

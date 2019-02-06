@@ -1,5 +1,9 @@
 page-welcome {
 
+  .scroll-content{
+    overflow: hidden!important;
+  }
+
  .welcome-page{
    background-color: #0C0C0C;
    background-image: url('../../assets/img/bg_1.png');

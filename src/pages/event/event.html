@@ -22,7 +22,7 @@
     <div class="cover-gradient1"><div class="class-title">{{this.event_data.title_complete}}</div></div>
     <div class="cover-gradient2"></div>
     <div class="cover-img" [style.background-image]="sanitizeThis(this.event_data.img)"></div>
-    <div class="main-info" padding>
+    <div class="main-info">
       <div class="left-side">
         <div class="workout-text">
 
@@ -33,10 +33,10 @@
       </div>
       <div *ngIf="!isAlready()" (click)="canJoin()" class="right-side">
         <div *ngIf="event_data.cost != 0" class="noms-qty">
-          Join {{this.event_data.cost}} noms
+          Join <br> {{this.event_data.cost}} noms
         </div>
         <div *ngIf="event_data.cost == 0" class="noms-qty">
-          Join Free!
+          Join <br> Free!
         </div>
         <!-- <div class="circles-noms">
           <div class="div1"></div>

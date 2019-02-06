@@ -8,6 +8,7 @@ import { TabsPage } from '../tabs/tabs';
 import { AngularFireAuth } from 'angularfire2/auth';
 import { AngularFireDatabase, AngularFireObject } from 'angularfire2/database';
 import firebase from 'firebase';
+import { WelcomePage } from '../welcome/welcome';
 
 /**
  * Generated class for the LoginPage page.
@@ -133,7 +134,7 @@ public pw: any = '';
   }
 
   openNomads(){
-    this.navCtrl.setRoot(LoginPage, {'User': 'nomads'});
+    this.navCtrl.setRoot(WelcomePage);
   }
 
 

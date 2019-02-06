@@ -28,7 +28,7 @@ public mail: any='';
 public pw: any='';
 public phone: any='';
 public code: any='';
-public code_user: any;
+public code_user: any='';
 public accepted: any=false;
 public my_code: any = '';
 public users$: any;
