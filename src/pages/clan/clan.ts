@@ -4,6 +4,8 @@ import { FiltersPage } from '../filters/filters';
 import { DomSanitizer } from '@angular/platform-browser';
 import { MembersPage } from '../members/members';
 import { NeweventPage } from '../newevent/newevent';
+import { ChatsPage } from '../chats/chats';
+
 /**
  * Generated class for the ClanPage page.
  *
@@ -25,8 +27,13 @@ public clan: any = [];
     this.clan = this.navParams.get('Clan');
   }
 
+  openChat(){
+    this.navCtrl.parent.select(4)
+        .then(()=> this.navCtrl.parent.getSelected().push(ChatsPage, {'Segmento': 'clans'}));
+  }
+
   openNew(){
-    this.navCtrl.push(NeweventPage);
+    this.navCtrl.push(NeweventPage, {'Clan': true});
   }
 
   sanitizeThis(image){

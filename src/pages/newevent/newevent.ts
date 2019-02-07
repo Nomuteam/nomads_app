@@ -35,11 +35,13 @@ export class NeweventPage {
    'provided': '',
    'about_organizer': '',
    'spaces_available': '',
-   'cost': '',
+   'cost': '0',
    'type': 'public',
    'media': [],
    'nomads': []
  }
+ public isClan: any = false;
+
   constructor( public navCtrl: NavController,
     public navParams: NavParams,
     public af: AngularFireDatabase,
@@ -50,6 +52,7 @@ export class NeweventPage {
     public sanitizer: DomSanitizer,
     public modalCtrl: ModalController) {
      this.type = localStorage.getItem('Tipo');
+     if(this.navParams.get('Clan')) this.isClan = true;
   }
 
   sanitizeThis(image){

@@ -257,7 +257,7 @@ public class_slides: any= false;
 
         let mapOptions = {
           center: latLng,
-          zoom: 8,
+          zoom: 12,
           mapTypeId: google.maps.MapTypeId.ROADMAP,
           disableDefaultUI: true
         }

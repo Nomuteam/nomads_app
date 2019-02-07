@@ -11,8 +11,8 @@
        <div class="div1"></div>
        <div class="div2"></div>
        <div class="div3"></div></div> -->
-     <p class="noms-hint">Noms</p>
-     <p class="noms-qty">{{this.noms_balance}}</p>
+     <!-- <p class="noms-hint">Noms</p>
+     <p class="noms-qty">{{this.noms_balance}}</p> -->
     </ion-buttons>
     <ion-buttons *ngIf="type == 'nomads'" (click)="openFilters()" end>
      <!-- <div class="filters-noms">
@@ -86,13 +86,13 @@
            <input type="tel" class="input-field" [(ngModel)]="event_data.spaces_available">
          </div>
 
-         <div class="input-group">
+         <div *ngIf="type != 'nomads'" class="input-group">
            <p class="input-title">Cost</p>
            <input (blur)="avisarNoms()" type="tel" class="input-field" [(ngModel)]="event_data.cost">
          </div>
        </div>
 
-       <div class="input-group">
+       <div *ngIf="!isClan" class="input-group">
          <p class="input-title">Type of Event</p>
          <div class="types-container">
            <div (click)="changeType('public')" class="{{getType('public')}}">Public</div>

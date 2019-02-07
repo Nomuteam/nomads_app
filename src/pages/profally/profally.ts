@@ -32,6 +32,7 @@ public alumno$: any;
 public user_data: any=[];
 public general_loader: any;
 
+
   constructor(
        public navCtrl: NavController,
        public navParams: NavParams,
@@ -49,6 +50,50 @@ public general_loader: any;
   modal.present();
   }
 
+
+  bankInfo(){
+    const prompt = this.alertCtrl.create({
+    title: 'Bank Info',
+    message: 'This is the bank account where you will receive your earnings.',
+    inputs: [
+      {
+        name: 'clabe',
+        placeholder: 'CLABE',
+        value: this.user_data.clabe
+      },
+      {
+        name: 'rfc',
+        placeholder: 'RFC',
+        value: this.user_data.rfc
+      }
+    ],
+    buttons: [
+      {
+        text: 'Cancel',
+        handler: data => {
+          console.log('Cancel clicked');
+        }
+      },
+      {
+        text: 'Update',
+        handler: data => {
+          this.af.list('Users/'+firebase.auth().currentUser.uid).update('business', {
+            'clabe': data.clabe,
+            'rfc': data.rfc
+          }).then(()=>{
+            this.alertCtrl.create({
+              title: 'Bank Info Updated!',
+              message: 'Your info was succesfully updated',
+              buttons: ['Ok']
+            }).present();
+          })
+        }
+      }
+    ]
+  });
+  prompt.present();
+  }
+
   presentActionSheet(){
     const actionSheet = this.actionSheetCtrl.create({
   title: 'Choose an Option',
@@ -62,7 +107,7 @@ public general_loader: any;
     {
       text: 'Edit Bank Info',
       handler: () => {
-        this.openAyuda();
+        this.bankInfo();
       }
     },
     {
@@ -101,6 +146,10 @@ actionSheet.present();
       this.user_data.phone = this.alumno$.phone;
       this.user_data.business_name = this.alumno$.business.business_name;
       this.user_data.legal_name = this.alumno$.business.legal_name;
+
+      this.user_data.clabe = this.alumno$.business.clabe;
+      this.user_data.rfc = this.alumno$.business.rfc;
+
       if(this.general_loader) this.general_loader.dismiss();
     });
     console.log(this.user_data);

@@ -4,13 +4,31 @@ page-home {
    border-radius: 10px;
    margin-bottom: 4vh;
    display: flex;
+   flex-direction: column;
    justify-content: space-around;
    align-items: center;
    //border: 1px solid rgba(255, 255, 255, .7);
-   background-color: rgb(80, 80, 80);
+   //background-color: rgb(80, 80, 80);
+   background: linear-gradient(#8141CB, #4C216D 70%)!important;
    padding: 3%;
-   font-family: 'Raleway', sans-serif;
+   font-family: 'Montserrat', sans-serif;
    color: white;
+
+   .explore-options{
+     display: flex;
+     justify-content: center;
+     align-items: center;
+     width: 100%;
+     text-align: center;
+     padding: 3% 0 1% 0;
+     .option{
+      width: 30%;
+      margin: 2%;
+      text-align: center;
+      border: 1px solid white;
+      border-radius: 12px;
+     }
+   }
  }
  .search-container{
    //background-color: rgba( 255, 255, 255, .3);
@@ -30,7 +48,7 @@ page-home {
      align-items: center;
      .option-hint{
         margin: 2%;
-        font-family: 'Raleway', sans-serif;
+        font-family: 'Montserrat', sans-serif;
         color: white;
         font-size: 80%;
         margin-top: 3%!important;
@@ -110,7 +128,7 @@ page-home {
      background-color: rgba(255, 255, 255, .24);
      border: 1px solid #B7B7B7;
      color: white;
-     font-family: 'Raleway', sans-serif;
+     font-family: 'Montserrat', sans-serif;
      font-weight: 600!important;
      font-size: 90%;
      border-radius: 10px;
@@ -124,7 +142,7 @@ page-home {
       #229B86;
      margin-top: 3%;
 
-     font-family: 'Raleway', sans-serif;
+     font-family: 'Montserrat', sans-serif;
      font-size: 100%;
      color: white;
      margin-bottom: 3%;
@@ -137,7 +155,7 @@ page-home {
   .category-title{
     border-radius: 5px;
     //background-color: gray;
-    font-family: 'Raleway', sans-serif;
+    font-family: 'Montserrat', sans-serif;
     font-weight: 700!important;
     font-size: 110%;
     color: white;
@@ -150,7 +168,7 @@ page-home {
     margin-bottom: 3%;
     small{
       padding-right: 5%;
-      color: black;
+      color: white;
     }
   }
 
@@ -183,7 +201,7 @@ page-home {
   }
 
   .category-suggestions{
-    font-family: 'Raleway', sans-serif;
+    font-family: 'Montserrat', sans-serif;
     font-weight: 400!important;
     font-size: 80%;
     margin-top: 1%;
@@ -200,7 +218,7 @@ page-home {
         justify-content: flex-end;
         margin-top: -32%!important;
         p{
-          font-family: 'Raleway', sans-serif;
+          font-family: 'Montserrat', sans-serif;
           font-weight: 600!important;
           font-size: 80%;
           color: white;
@@ -252,7 +270,7 @@ page-home {
         filter: opacity(.8);
       }
       .act-first{
-        font-family: 'Raleway', sans-serif;
+        font-family: 'Montserrat', sans-serif;
         font-weight: 600!important;
         font-size: 70%;
         color: white;
@@ -265,7 +283,7 @@ page-home {
         opacity: .4;
       }
       .act-title{
-        font-family: 'Raleway', sans-serif;
+        font-family: 'Montserrat', sans-serif;
         font-weight: 700!important;
         font-size: 70%;
         color: white;
@@ -275,7 +293,7 @@ page-home {
         margin-top: -7%;
       }
       .act-distance{
-        font-family: 'Raleway', sans-serif;
+        font-family: 'Montserrat', sans-serif;
         font-weight: 600!important;
         font-size: 70%;
         color: white;
@@ -288,7 +306,7 @@ page-home {
         opacity: .6;
       }
       .act-rating{
-        font-family: 'Raleway', sans-serif;
+        font-family: 'Montserrat', sans-serif;
         font-weight: 600!important;
         font-size: 50%;
         color: white;

@@ -45,6 +45,7 @@ public example_chats: any = [
   public alertCtrl: AlertController,
   public sanitizer: DomSanitizer) {
     this.user_type = localStorage.getItem('Tipo');
+    if(this.navParams.get('Segmento')) this.segment = this.navParams.get('Segmento');
   }
 
 

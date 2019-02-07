@@ -46,7 +46,7 @@ page-wallet {
         align-items: center;
         //border: 1px solid red;
         .balance-hint{
-          font-family: 'Raleway', sans-serif;
+          font-family: 'Montserrat', sans-serif;
           font-size: 100%;
           font-weight: 400!important;
         }
@@ -56,12 +56,12 @@ page-wallet {
           align-items: center;
           margin-top: -5%!important;
           .number{
-            font-family: 'Raleway', sans-serif;
+            font-family: 'Montserrat', sans-serif;
             font-size: 300%;
             font-weight: 700!important;
           }
           .currency{
-            font-family: 'Raleway', sans-serif;
+            font-family: 'Montserrat', sans-serif;
             font-size: 80%;
             font-weight: 500!important;
           }
@@ -75,7 +75,7 @@ page-wallet {
       align-items: center;
       border-radius: 0 0 8px 8px;
       .hint-avg{
-        font-family: 'Raleway', sans-serif;
+        font-family: 'Montserrat', sans-serif;
         font-size: 110%;
         font-weight: 400!important;
       }
@@ -83,7 +83,7 @@ page-wallet {
   }
 
   .buy-hint{
-    font-family: 'Raleway', sans-serif;
+    font-family: 'Montserrat', sans-serif;
     font-size: 110%;
     font-weight: 400!important;
     color: white;
@@ -108,7 +108,7 @@ page-wallet {
       display: flex;
       justify-content: space-around;
       flex-direction: column;
-      font-family: 'Raleway', sans-serif;
+      font-family: 'Montserrat', sans-serif;
       color: white;
       font-weight: 700;
       .btm-text{
@@ -153,14 +153,14 @@ page-wallet {
         }
       }
       .amount-hint{
-        font-family: 'Raleway', sans-serif;
+        font-family: 'Montserrat', sans-serif;
         font-size: 100%;
         font-weight: 300!important;
         color: rgba(255, 255, 255, .6);
       }
       .amount-text{
         margin-top: 5%;
-        font-family: 'Raleway', sans-serif;
+        font-family: 'Montserrat', sans-serif;
         font-size: 120%;
         font-weight: 700!important;
         color: #50E3C2;
@@ -173,7 +173,7 @@ page-wallet {
   }
 
   .booking-avg{
-    font-family: 'Raleway', sans-serif;
+    font-family: 'Montserrat', sans-serif;
     font-size: 120%;
     font-weight: 700!important;
     color: white;
@@ -186,7 +186,7 @@ page-wallet {
   .pay-btn{
     width: 100%;
     background-color: #229B86;
-    font-family: 'Raleway', sans-serif;
+    font-family: 'Montserrat', sans-serif;
     font-size: 120%;
     font-weight: 700!important;
     color: white;
@@ -216,7 +216,7 @@ page-wallet {
          align-items: center;
          border-bottom: 1px solid rgba(255, 255, 255, .1);
          .qty-slide{
-           font-family: 'Raleway', sans-serif;
+           font-family: 'Montserrat', sans-serif;
            font-size: 150%;
            font-weight: 700!important;
            color: white;
@@ -229,13 +229,13 @@ page-wallet {
          justify-content: center;
          align-items: center;
          .bookings-avg{
-           font-family: 'Raleway', sans-serif;
+           font-family: 'Montserrat', sans-serif;
            font-size: 60%;
            font-weight: 300!important;
            color: rgba(255, 255, 255, .5);
          }
          .slide-price{
-           font-family: 'Raleway', sans-serif;
+           font-family: 'Montserrat', sans-serif;
            font-size: 70%;
            font-weight: 700!important;
            color: rgba(255, 255, 255, 1);

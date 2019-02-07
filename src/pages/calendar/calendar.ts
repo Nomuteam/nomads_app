@@ -160,6 +160,7 @@ export class CalendarPage {
           'title_complete': b[key].title,
           'location': b[key].location,
           'description':  b[key].description,
+          'class_price': b[key].class_price,
           'cancelation_policy':  b[key].cancelation_policy,
           'categories':  b[key].categories,
           'schedule':  b[key].schedule,
@@ -304,6 +305,23 @@ export class CalendarPage {
      }).present();
    }
 
+   getBack(evento){
+     if(evento.isEvent){
+       this.af.list('Users/').update(firebase.auth().currentUser.uid, {
+         'noms': parseInt(this.noms_balance) + parseInt(evento.cost)
+       }).then(()=>{
+         this.goAhead(evento);
+       });
+     }
+     else{
+       this.af.list('Users/').update(firebase.auth().currentUser.uid, {
+         'noms': parseInt(this.noms_balance) + parseInt(evento.class_price)
+       }).then(()=>{
+         this.goAhead(evento);
+       });
+     }
+   }
+
    goAhead(evento){
      this.general_loader = this.loadingCtrl.create({
        spinner: 'bubbles',
@@ -318,6 +336,54 @@ export class CalendarPage {
    }
 
    confirmCancelation(evento){
+     if(evento.cancelation_policy){
+       let d = new Date();
+       let dif = moment(evento.startTime).fromNow();
+
+       //dif = (dif.indexOf('hours') || dif.indexOf('hour'));
+       dif = (dif.indexOf('days') || dif.indexOf('day'));
+
+      if(dif > -1){
+        this.alertCtrl.create({
+          title: 'Are you sure you want to remove '+evento.title_complete+' from your schedule?',
+          buttons: [
+            {
+              text: 'Cancel',
+              handler: () => {
+
+              }
+            },
+            {
+              text: 'Remove',
+              handler: () => {
+                this.getBack(evento);
+              }
+            }
+          ]
+        }).present();
+      }
+      else{
+        this.alertCtrl.create({
+          title: 'Are you sure you want to remove '+evento.title_complete+' from your schedule?',
+          message: 'By doing this you wont get a refund of your noms',
+          buttons: [
+            {
+              text: 'Cancel',
+              handler: () => {
+
+              }
+            },
+            {
+              text: 'Remove',
+              handler: () => {
+                this.goAhead(evento);
+              }
+            }
+          ]
+        }).present();
+      }
+     }
+     else{
        this.alertCtrl.create({
          title: 'Are you sure you want to remove '+evento.title_complete+' from your schedule?',
          message: 'By doing this you wont get a refund of your noms',
@@ -336,6 +402,7 @@ export class CalendarPage {
            }
          ]
        }).present();
+     }
    }
 
   onEventSelected(event) {

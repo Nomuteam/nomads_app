@@ -151,7 +151,7 @@ public favorites: any = [];
               this.alertCtrl.create({
                 title: 'You are all set!',
                 subTitle: 'Some details..',
-                message: 'You can find a chat room in your profile between you and this NeweventPage creator in case of questions. It will expire after the event',
+                message: 'You can find a chat room in your profile between you and this event creator in case of questions. It will expire after the event',
                 buttons: ['Ok']
               }).present();
               this.general_loader.dismiss();
