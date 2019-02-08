@@ -158,21 +158,39 @@ page-activity {
 
   .row-times{
     display: flex;
+    flex-direction: column;
     justify-content: space-between;
     font-family: 'Montserrat', sans-serif;
     color: white;
-    .row-hours{
+    padding: 3%;
+    .row-day{
+      font-weight: 700;
+      margin-bottom: 1em;
+    }
+    .row-right{
       display: flex;
-      justify-content: space-around;
-      width: 30%;
-      .row-start{
-        margin-right: 8%;
-        display: inline-flex;
-      }
-      .row-end{
-        opacity: .6;
+      flex-wrap: wrap;
+      justify-content: flex-start;
+      align-items: center;
+      .row-hours{
+        display: flex;
+        justify-content: space-around;
+        width: 100px;
+        border: 1px solid rgba(255, 255, 255, .3);
+        border-radius: 12px;
+        padding: 5px;
+        margin-right: 6px;
+        margin-bottom: 6px;
+        .row-start{
+          margin-right: 8%;
+          display: inline-flex;
+        }
+        .row-end{
+          opacity: .6;
+        }
       }
     }
+
   }
 
   .location-hint{

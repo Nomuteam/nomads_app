@@ -18,29 +18,14 @@ declare var google;
 
 @IonicPage()
 @Component({
-  selector: 'page-newevent',
-  templateUrl: 'newevent.html',
+  selector: 'page-editevent',
+  templateUrl: 'editevent.html',
 })
-export class NeweventPage {
+export class EditeventPage {
  public general_loader: any;
  public type: any;
  public current_index: any = 1;
- public event_data: any = {
-   'title': '',
-   'day': '',
-   'time': '',
-   'location': '',
-   'difficulty': '',
-   'img': 'https://images.pexels.com/photos/1246953/pexels-photo-1246953.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260',
-   'about_event': '',
-   'provided': '',
-   'about_organizer': '',
-   'spaces_available': '',
-   'cost': '0',
-   'type': 'public',
-   'media': [],
-   'nomads': []
- }
+ public event_data: any;
  public isClan: any = false;
  public GoogleAutocomplete: any = new google.maps.places.AutocompleteService();
  public autocompleteItems: any = [];
@@ -56,6 +41,8 @@ export class NeweventPage {
     public modalCtrl: ModalController) {
      this.type = localStorage.getItem('Tipo');
      if(this.navParams.get('Clan')) this.isClan = true;
+
+     this.event_data = this.navParams.get('Event');
   }
 
   sanitizeThis(image){
@@ -120,22 +107,9 @@ export class NeweventPage {
     });
     this.general_loader.present();
 
-    let indice = this.generateUUID();
+    let indice = this.event_data.index;
     this.event_data.creator = firebase.auth().currentUser.uid;
-    this.event_data.index = indice;
-    this.event_data.nomads.push({
-      'index': this.event_data.creator,
-      'isOwner': true,
-      'date': this.event_data.day,
-      'day': moment(this.event_data.day).format('dddd'),
-      'time': this.event_data.time
-    });
-    this.af.list('Users/'+firebase.auth().currentUser.uid+'/schedule').push({
-      'activity_id': indice,
-      'date': this.event_data.day,
-      'day': moment(this.event_data.day).format('dddd'),
-      'time': this.event_data.time
-    });
+
     this.af.list('Users/'+firebase.auth().currentUser.uid+'/Events').update(indice, {
       'index': indice,
       'isOwner': true
@@ -144,8 +118,8 @@ export class NeweventPage {
         .then(() => {
           this.general_loader.dismiss();
           this.alertCtrl.create({
-            title: 'Event Created',
-            message: 'Your event was created succesfully',
+            title: 'Event Updated',
+            message: 'Your event was updated succesfully',
             buttons: ['Ok']
           }).present();
           this.navCtrl.pop();

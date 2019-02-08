@@ -341,9 +341,9 @@ export class CalendarPage {
        let dif = moment(evento.startTime).fromNow();
 
        //dif = (dif.indexOf('hours') || dif.indexOf('hour'));
-       dif = (dif.indexOf('days') || dif.indexOf('day'));
+       let dif2 = (dif.indexOf('days') || dif.indexOf('day'));
 
-      if(dif > -1){
+      if(dif2 > -1){
         this.alertCtrl.create({
           title: 'Are you sure you want to remove '+evento.title_complete+' from your schedule?',
           buttons: [

@@ -1,8 +1,10 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, LoadingController, AlertController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, LoadingController, AlertController, ModalController } from 'ionic-angular';
 import { FiltersPage } from '../filters/filters';
 import { AngularFireDatabase, AngularFireObject } from 'angularfire2/database';
 import firebase from 'firebase';
+import * as moment from 'moment';
+import { TicketPage } from '../ticket/ticket';
 
 /**
  * Generated class for the HistoryPage page.
@@ -40,36 +42,91 @@ public general_loader: any;
 public response$: any;
 public transactions: any = [];
 
+public a_response$: any;
+public e_response$: any;
+
 
   constructor(public navCtrl: NavController,
   public navParams: NavParams,
   public af: AngularFireDatabase,
   public loadingCtrl: LoadingController,
-  public alertCtrl: AlertController) {}
+  public alertCtrl: AlertController,
+  public modalCtrl: ModalController) {}
 
   openFilters(){
     this.navCtrl.push(FiltersPage);
   }
 
+  getName(id){
+    let a = this.a_response$;
+    let e = this.e_response$;
+    let name = '';
+
+    for(let key in a){
+      if(a[key].index == id){
+        name = a[key].title;
+      }
+    }
+
+    for(let key in e){
+      if(e[key].index == id){
+        name = e[key].title;
+      }
+    }
+
+    return name;
+
+  }
+
+  openModal(bc){
+    let modal = this.modalCtrl.create(TicketPage, {'Details': bc});
+    modal.present();
+  }
+
   convertT(){
     let a = this.response$;
     let usuario = firebase.auth().currentUser.uid;
+    let start = '';
+    let cool;
+    let nice;
 
     for(let key in a){
       if(a[key].sender_id == usuario || a[key].receiver_id == usuario){
+
+      start = moment(a[key].date).format('LL');
+      cool = new Date(a[key].date);
+      cool = cool.setHours(cool.getHours());
+      nice = new Date(cool);
+      nice = nice.setMinutes(nice.getMinutes());
+      cool = false;
+
+
         this.transactions.push({
           'activity_id': a[key].activity_id,
+          'activity_name': this.getName(a[key].activity_id),
           'amount': a[key].amount,
-          'date': a[key].date,
+          'date': start,
           'index': a[key].index,
           'receiver': a[key].receiver,
           'receiver_id': a[key].receiver_id,
           'sender': a[key].sender,
           'sender_id': a[key].sender_id,
-          'type': a[key].type
+          'type': a[key].type,
+          'start': nice
         });
       }
     }
+
+    this.transactions = this.transactions.sort(function(a, b){
+    var keyA = new Date(a.start),
+        keyB = new Date(b.start);
+    // Compare the 2 dates
+    if(keyA < keyB) return -1;
+    if(keyA > keyB) return 1;
+     return 0;
+    });
+
+    this.transactions = this.transactions.reverse();
 
     console.log(this.transactions);
     if(this.general_loader) this.general_loader.dismiss();
@@ -99,6 +156,14 @@ public transactions: any = [];
            content: 'Loading...'
           });
     this.general_loader.present();
+
+    this.af.object('Activities/').snapshotChanges().subscribe(action => {
+      this.a_response$ = action.payload.val();
+    });
+
+    this.af.object('Events/').snapshotChanges().subscribe(action => {
+      this.e_response$ = action.payload.val();
+    });
 
     this.af.object('transactions/').snapshotChanges().subscribe(action => {
       this.response$ = action.payload.val();

@@ -81,11 +81,12 @@ export class LocatePage {
 
 let marker = new google.maps.Marker({
   map: this.map,
+  draggable: true,
   animation: google.maps.Animation.DROP,
   position: this.map.getCenter()
 });
 
-let content = "<h4>Here you are!</h4>";
+let content = "<h4>Location provided</h4>";
 //let content = context.toDataUrl()
 this.addInfoWindow(marker, content);
 

@@ -1,0 +1,26 @@
+<!--
+  Generated template for the TicketPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<div class="todo" navPop>
+
+</div>
+
+<div class="modal1" (click)="seeDetails()">
+  <div class="top-part">
+      <!-- <img src="{{this.act.img}}" class="img"> -->
+      <div class="text">
+        <div *ngIf="this.act.activity_name != ''" class="top">{{this.act.activity_name}}</div>
+        <!-- <div class="hints">Next: 5:00 pm</div>
+        <div class="hints">Spaces: 3/9</div> -->
+      </div>
+  </div>
+  <div class="btm-part">
+    <div class="cost">Confirmation Code: <br> <br>  <b style="opacity: 1!important">{{this.act.index}}</b> <br> <br> <br> Remember to take an ID with you! </div>
+    <!-- <div *ngIf="this.act.isEvent" class="cost">{{this.act.cost}} noms</div>
+    <div *ngIf="!this.act.isEvent" class="cost">{{this.act.class_price}} noms</div>
+    <img src="assets/img/go.png" class="go"> -->
+  </div>
+</div>

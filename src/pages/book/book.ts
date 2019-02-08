@@ -39,6 +39,9 @@ public nomads_joined: any = [];
 
 public activity_data: any;
 public schedule: any = [];
+public selected_key: any = '';
+
+public c_available: any = '';
 
 
   constructor(public navCtrl: NavController,
@@ -202,92 +205,127 @@ public schedule: any = [];
    return good;
  }
 
+ spacesA(){
+
+   let a = this.activity_data.schedule;
+
+   for(let key in a){
+     if(a[key].day == this.selected_day && a[key].start_time == this.selected_time) this.selected_key = key;
+   }
+
+   let aux = this.activity_data.schedule.filter(dia => dia.day == this.selected_day);
+
+   for(let key in aux){
+     if(aux[key].start_time == this.selected_time){
+       if(parseInt(aux[key].spaces_available) > 0){
+         this.c_available = parseInt(aux[key].spaces_available);
+         return true;
+       }
+     }
+   }
+
+   return false;
+ }
+
   payNow(){
 
+   if(this.spacesA() && this.selected_key != '' && this.c_available != ''){
+     if(!this.isBusy()){
+       if(!this.isAlready()){
+         this.general_loader = null;
+         this.general_loader =  this.loadingCtrl.create({
+               spinner: 'bubbles',
+                content: 'Loading...'
+               });
+         this.general_loader.present();
 
-    if(!this.isBusy()){
-      if(!this.isAlready()){
-        this.general_loader = null;
-        this.general_loader =  this.loadingCtrl.create({
-              spinner: 'bubbles',
-               content: 'Loading...'
-              });
-        this.general_loader.present();
+         let new_noms_nomad = parseInt(this.noms_balance) - parseInt(this.activity_data.class_price);
+         let new_noms_ally = parseInt(this.ally_balance) + parseInt(this.activity_data.class_price);
 
-        let new_noms_nomad = parseInt(this.noms_balance) - parseInt(this.activity_data.class_price);
-        let new_noms_ally = parseInt(this.ally_balance) + parseInt(this.activity_data.class_price);
+         console.log(new_noms_nomad);
+         console.log(new_noms_ally);
 
-        console.log(new_noms_nomad);
-        console.log(new_noms_ally);
+         //Decrease the noms balance in the user db
+         this.af.list('Users').update(firebase.auth().currentUser.uid, {'noms': new_noms_nomad});
 
-        //Decrease the noms balance in the user db
-        this.af.list('Users').update(firebase.auth().currentUser.uid, {'noms': new_noms_nomad});
+         //Increase the noms balance in the ally db
+         this.af.list('Users').update(this.activity_data.creator, {'noms': new_noms_ally});
 
-        //Increase the noms balance in the ally db
-        this.af.list('Users').update(this.activity_data.creator, {'noms': new_noms_ally});
+         let date = this.getReal();
+         //Update user schedule with recently added item
+         let schedule_item = {'activity_id': this.activity_data.index, 'day': this.selected_day, 'time': this.selected_time, 'date': date};
+         this.af.list('Users/'+firebase.auth().currentUser.uid+'/schedule').push(schedule_item);
 
-        let date = this.getReal();
-        //Update user schedule with recently added item
-        let schedule_item = {'activity_id': this.activity_data.index, 'day': this.selected_day, 'time': this.selected_time, 'date': date};
-        this.af.list('Users/'+firebase.auth().currentUser.uid+'/schedule').push(schedule_item);
+         //Create a chat room with the owner of this activity
+         let chat_index = this.generateUUID();
+         let chat_members = [{'index': this.activity_data.creator},{'index': firebase.auth().currentUser.uid}];
+         let chat_expires = moment(date).add(1, 'days').format('YYYY-MM-DD');
+         let messages = [{'senderId': 'admin', 'message': 'Welcome to your chat. Ask any question you need about this activity!'}];
+         let chat_room = {'index': chat_index, 'createdAt': new Date(), 'type': 'other', 'members': chat_members, 'expireDay': chat_expires, 'messages': messages, 'lastMsg': 'Welcome to your chat. Ask any question you need about this activity!', 'lastMsg_index': 'admin', 'clanName': '', 'activity_name': this.activity_data.title};
+         this.af.list('Chats/').update(chat_index, chat_room);
 
-        //Create a chat room with the owner of this activity
-        let chat_index = this.generateUUID();
-        let chat_members = [{'index': this.activity_data.creator},{'index': firebase.auth().currentUser.uid}];
-        let chat_expires = moment(date).add(1, 'days').format('YYYY-MM-DD');
-        let messages = [{'senderId': 'admin', 'message': 'Welcome to your chat. Ask any question you need about this activity!'}];
-        let chat_room = {'index': chat_index, 'createdAt': new Date(), 'type': 'other', 'members': chat_members, 'expireDay': chat_expires, 'messages': messages, 'lastMsg': 'Welcome to your chat. Ask any question you need about this activity!', 'lastMsg_index': 'admin', 'clanName': '', 'activity_name': this.activity_data.title};
-        this.af.list('Chats/').update(chat_index, chat_room);
+         //Update this chat room index in both the user and the owner object
+         let chat_ref = {'index': chat_index};
+         this.af.list('Users/'+this.activity_data.creator+'/Chats').update(chat_index, chat_ref);
+         this.af.list('Users/'+firebase.auth().currentUser.uid+'/Chats').update(chat_index, chat_ref);
 
-        //Update this chat room index in both the user and the owner object
-        let chat_ref = {'index': chat_index};
-        this.af.list('Users/'+this.activity_data.creator+'/Chats').update(chat_index, chat_ref);
-        this.af.list('Users/'+firebase.auth().currentUser.uid+'/Chats').update(chat_index, chat_ref);
+         //Update spaces available for this schedule
+         this.af.list('Activities/'+this.activity_data.index+'/schedule').update(this.selected_key, {
+           'spaces_available': this.c_available - 1
+         })
 
 
-        //Update activities attendants with recently joined user
-        let attendant = {'index': firebase.auth().currentUser.uid, 'day': this.selected_day, 'time': this.selected_time, 'date': date};
-        this.af.list('Activities/'+this.activity_data.index+'/nomads').push(attendant);
-        //this.af.list('Activities/'+this.activity_data.index+'/schedule/').update(this.getIndexDay(), attendant);
-        //
-        // //Save a description of the transaction
-        let t_id = this.generateUUID();
-        let sender_data = {'index': firebase.auth().currentUser.uid, 'amount': this.activity_data.class_price, 'pre_balance': this.noms_balance, 'after_balance': parseInt(this.noms_balance) - parseInt(this.activity_data.class_price)};
-        let receiver_data = {'index': this.activity_data.creator, 'amount': this.activity_data.class_price, 'pre_balance': this.ally_balance, 'after_balance': parseInt(this.ally_balance) + parseInt(this.activity_data.class_price)};
-        let transaction = {'date': new Date(), 'index': t_id, 'amount': this.activity_data.class_price, 'type': 'activity', 'sender_id': firebase.auth().currentUser.uid, 'receiver_id': this.activity_data.creator, 'sender': sender_data, 'receiver': receiver_data, 'activity_id': this.activity_data.index};
-        this.af.list('transactions').update(t_id, transaction);
-        //
-        // //Save transaction id in ally db
-        let t_reference = {'index': t_id};
-        this.af.list('Users/'+firebase.auth().currentUser.uid+'/transactions').update(t_id, t_reference);
-        this.af.list('Users/'+this.activity_data.creator+'/transactions').update(t_id, t_reference)
-            .then(()=>{
-              this.af.list('Notifications').push({'title': 'Someone joined your activity!', 'subtitle': this.name+' just joined your activity '+this.activity_data.title_complete, 'index': this.activity_data.creator});
-              this.alertCtrl.create({
-                title: 'In case of questions...',
-                subTitle: 'We just created a chat',
-                message: 'You can find a chat room in your profile between you and this activity creator in case of questions. It will expire after the class',
-                buttons: ['Ok']
-              }).present();
-              this.section = '2';
-            });
-        this.general_loader.dismiss();
-      }
-      else{
-        this.alertCtrl.create({
-          title: 'Already joined',
-          message: 'You already joined this activity in the same exact time and day',
-          buttons: ['Ok']
-        }).present();
-      }
-    }
-    else{
-      this.alertCtrl.create({
-        title: 'Tight Schedule',
-        message: 'You already have an activity or event in your schedule for the same exact time and day',
-        buttons: ['Ok']
-      }).present();
-    }
+         //Update activities attendants with recently joined user
+         let attendant = {'index': firebase.auth().currentUser.uid, 'day': this.selected_day, 'time': this.selected_time, 'date': date};
+         this.af.list('Activities/'+this.activity_data.index+'/nomads').push(attendant);
+         //this.af.list('Activities/'+this.activity_data.index+'/schedule/').update(this.getIndexDay(), attendant);
+         //
+         // //Save a description of the transaction
+         let t_id = this.generateUUID();
+         let sender_data = {'index': firebase.auth().currentUser.uid, 'amount': this.activity_data.class_price, 'pre_balance': this.noms_balance, 'after_balance': parseInt(this.noms_balance) - parseInt(this.activity_data.class_price)};
+         let receiver_data = {'index': this.activity_data.creator, 'amount': this.activity_data.class_price, 'pre_balance': this.ally_balance, 'after_balance': parseInt(this.ally_balance) + parseInt(this.activity_data.class_price)};
+         let transaction = {'date': new Date(), 'index': t_id, 'amount': this.activity_data.class_price, 'type': 'activity', 'sender_id': firebase.auth().currentUser.uid, 'receiver_id': this.activity_data.creator, 'sender': sender_data, 'receiver': receiver_data, 'activity_id': this.activity_data.index};
+         this.af.list('transactions').update(t_id, transaction);
+         //
+         // //Save transaction id in ally db
+         let t_reference = {'index': t_id};
+         this.af.list('Users/'+firebase.auth().currentUser.uid+'/transactions').update(t_id, t_reference);
+         this.af.list('Users/'+this.activity_data.creator+'/transactions').update(t_id, t_reference)
+             .then(()=>{
+               this.af.list('Notifications').push({'title': 'Someone joined your activity!', 'subtitle': this.name+' just joined your activity '+this.activity_data.title_complete, 'index': this.activity_data.creator});
+               this.alertCtrl.create({
+                 title: 'In case of questions...',
+                 subTitle: 'We just created a chat',
+                 message: 'You can find a chat room in your profile between you and this activity creator in case of questions. It will expire after the class',
+                 buttons: ['Ok']
+               }).present();
+               this.section = '2';
+             });
+         this.general_loader.dismiss();
+       }
+       else{
+         this.alertCtrl.create({
+           title: 'Already joined',
+           message: 'You already joined this activity in the same exact time and day',
+           buttons: ['Ok']
+         }).present();
+       }
+     }
+     else{
+       this.alertCtrl.create({
+         title: 'Tight Schedule',
+         message: 'You already have an activity or event in your schedule for the same exact time and day',
+         buttons: ['Ok']
+       }).present();
+     }
+   }
+   else{
+     this.alertCtrl.create({
+       title: 'No spaces available!',
+       message: 'There are no spaces available for the selected day and time, try another one!',
+       buttons: ['Ok']
+     }).present();
+   }
   }
 
   selectTime(){
@@ -295,12 +333,13 @@ public schedule: any = [];
     alert.setTitle('Select Time');
 
     let aux = this.activity_data.schedule.filter(dia => dia.day == this.selected_day);
+    console.log(aux);
 
     for(let key in aux){
       alert.addInput({
         type: 'radio',
-        label: this.activity_data.schedule[key].start_time,
-        value: this.activity_data.schedule[key].start_time
+        label: aux[key].start_time,
+        value: aux[key].start_time
       });
     }
 

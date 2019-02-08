@@ -16,10 +16,10 @@ declare var google;
 
 @IonicPage()
 @Component({
-  selector: 'page-newact',
-  templateUrl: 'newact.html',
+  selector: 'page-editact',
+  templateUrl: 'editact.html',
 })
-export class NewactPage {
+export class EditactPage {
   public current_index: any = 1;
   public user_type: any = '';
   public isAdding: any = false;
@@ -127,21 +127,7 @@ export class NewactPage {
     },
   ];
 
-  public activity_data: any = {
-     'title': '',
-     'location': '',
-     'description': '',
-     'cancelation_policy': '',
-     'class_price': '',
-     'fee': '',
-     'categories': {
-       'main_category': '',
-       'activity_type': '',
-       'workout_form': [],
-     },
-     'schedule': [],
-     'media': []
-   };
+  public activity_data: any;
 
   public schedule: any = {
      'start_time': '06:00',
@@ -166,7 +152,7 @@ export class NewactPage {
     public camera: Camera,
     public sanitizer: DomSanitizer,
     public modalCtrl: ModalController) {
-
+    this.activity_data = this.navParams.get('Act');
   }
 
   selectSearchResult(item){
@@ -350,20 +336,16 @@ export class NewactPage {
     }
     this.activity_data.img = this.activity_data.media[0].url;
 
-    let indice = this.generateUUID();
-    this.activity_data.index = indice;
+    let indice = this.activity_data.index;
     this.activity_data.categories.workout_form = this.example_forms.filter(form => form.selected);
     this.activity_data.creator = firebase.auth().currentUser.uid;
-    this.af.list('Users/'+this.activity_data.creator+'/Activities_created').update(indice, {
-      'index': indice,
-      'created_at': new Date()
-    });
+
     this.af.list('Activities').update(indice, this.activity_data)
       .then( () =>{
         this.general_loader.dismiss();
         this.alertCtrl.create({
-          title: 'Activity Created',
-          message: 'Your activity was created succesfully',
+          title: 'Activity Updated',
+          message: 'Your activity was updated succesfully',
           buttons: ['Ok']
         }).present();
         this.navCtrl.pop();
@@ -374,7 +356,7 @@ export class NewactPage {
     if(this.current_index == 4){
       this.general_loader = this.loadingCtrl.create({
         spinner: 'bubbles',
-        content: 'Creating...'
+        content: 'Updating...'
       });
       this.general_loader.present();
       this.doMagic();

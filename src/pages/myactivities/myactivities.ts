@@ -4,6 +4,7 @@ import { NewactPage } from '../newact/newact';
 import { AngularFireDatabase, AngularFireObject } from 'angularfire2/database';
 import firebase from 'firebase';
 import { ActivityPage } from '../activity/activity';
+import { EditactPage } from '../editact/editact';
 
 /**
  * Generated class for the MyactivitiesPage page.
@@ -37,7 +38,7 @@ public general_loader: any;
         {
           text: 'Edit',
           handler: () => {
-
+           this.navCtrl.push(EditactPage, {'Act': act});
           }
         },
         {
@@ -56,7 +57,7 @@ public general_loader: any;
     let a = this.response$;
     for(let key in a){
       this.activities.push({
-        'title': a[key].title.substring(0, 10) + '..',
+        'title': a[key].title,
         'title_complete': a[key].title,
         'location': a[key].location,
         'description':  a[key].description,

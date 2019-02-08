@@ -35,6 +35,8 @@ import { LocatePage } from '../pages/locate/locate';
 import { EventPage } from '../pages/event/event';
 import { ChatPage } from '../pages/chat/chat';
 import { DetailsPage } from '../pages/details/details';
+import { EditactPage } from '../pages/editact/editact';
+import { EditeventPage } from '../pages/editevent/editevent';
 
 import { Keyboard } from '@ionic-native/keyboard';
 

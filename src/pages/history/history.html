@@ -35,11 +35,13 @@
       <div class="event-texts">
        <div class="event-sender" style="text-transform: capitalize">{{this.getTitle(c.type)}}</div>
        <div *ngIf="c.type == 'noms-referral'" class="event-hint" style="text-decoration: line-through">Amount: ${{c.amount}} mxn</div>
+       <div *ngIf="c.type == 'activity'" class="event-hint">Name: {{c.activity_name}}</div>
        <div *ngIf="c.type == 'noms'" class="event-hint">Amount: ${{c.amount}} mxn</div>
        <div *ngIf="c.type != 'activity'" class="event-hint">Noms: {{this.getNoms(c.amount)}}</div>
        <div *ngIf="c.type == 'activity'" class="event-hint">Noms: {{c.amount}}</div>
+       <div class="event-hint" style="opacity: .5">Date: {{c.date}}</div>
       </div>
 
-    <div class="stats-hint">View</div>
+    <div (click)="openModal(c)" class="stats-hint">View</div>
   </div>
 </ion-content>

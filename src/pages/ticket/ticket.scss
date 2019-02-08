@@ -1,0 +1,65 @@
+page-ticket {
+  .todo{
+    background-color: rgba(0, 0, 0, .6);
+    width: 100%;
+    height: 110%;
+    position: absolute;
+    top: 0%;
+  }
+
+   .modal1{
+    background-color: rgba(12, 12, 12, .8);
+    width: 80%;
+    margin-left: 10%;
+    border-radius: 5px;
+    padding: 3%;
+    //margin-top: 30%;
+    position: absolute;
+    top: 40%;
+    font-family: 'Montserrat', sans-serif;
+    .top-part{
+      display: flex;
+      justify-content: flex-start;
+      align-items: center;
+      margin-bottom: 8%;
+      .img{
+        width: 40%;
+        border-radius: 12px;
+      }
+      .text{
+        margin-left: 5%;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: flex-start;
+        font-size: 90%;
+        color: white;
+        .top{
+          font-weight: 700;
+          text-align: center;
+          font-size: 150%;
+        }
+        .hints{
+          font-weight: 400;
+          text-align: left;
+        }
+      }
+    }
+    .btm-part{
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      .cost{
+        font-size: 90%;
+        color: white;
+        font-weight: 700;
+        text-align: center;
+        opacity: .5;
+      }
+      .go{
+        width: 10%;
+      }
+    }
+   }
+}

@@ -65,14 +65,28 @@
     {{this.activity_data.description}}
   </div>
 
-  <div class="section-title">Availability</div>
+  <!-- <div class="section-title">Availability</div>
   <div *ngFor="let s of this.activity_data.schedule" class="row-times" padding (click)="openBook()">
     <div class="row-day">{{s.day}}</div>
     <div class="row-hours">
      <div class="row-start">{{s.start_time}}</div>
      <div class="row-end">{{getEnd(s.start_time, s.duration)}}</div>
     </div>
+  </div> -->
+
+  <div class="section-title">Availability</div>
+  <div *ngFor="let s of this.time_helper; let in = index" >
+    <div *ngIf="s.times.length > 0"  class="row-times" (click)="openBook()">
+      <div class="row-day">{{s.title}}</div>
+      <div class="row-right">
+        <div *ngFor="let t of s.times"  class="row-hours">
+         <div class="row-start">{{t.start_time}}</div>
+         <div class="row-end">{{getEnd(t.start_time, t.duration)}}</div>
+        </div>
+      </div>
+    </div>
   </div>
+
 
 
   <div class="section-title" style="margin-top: 5%;">Location</div>

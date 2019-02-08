@@ -6,6 +6,7 @@ import { AngularFireDatabase, AngularFireObject } from 'angularfire2/database';
 import firebase from 'firebase'
 import { DomSanitizer } from '@angular/platform-browser';
 import { EventPage } from '../event/event';
+import { EditeventPage } from '../editevent/editevent';
 
 /**
  * Generated class for the MyeventsPage page.
@@ -60,7 +61,7 @@ public example_events: any = [
         {
           text: 'Edit',
           handler: () => {
-
+           this.navCtrl.push(EditeventPage, {'Event': act});
           }
         },
         {
@@ -90,7 +91,7 @@ public example_events: any = [
     for(let key in a){
       if(a[key].creator == firebase.auth().currentUser.uid){
         this.events.push({
-          'title': a[key].title.substring(0, 10) + '..',
+          'title': a[key].title,
           'title_complete': a[key].title,
           'location': a[key].location,
           'difficulty':  a[key].difficulty,

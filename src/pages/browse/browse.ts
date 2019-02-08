@@ -118,7 +118,9 @@ public general_loader: any;
 
   convertEvents(){
     let a = this.e_response$;
-    this.events.push({'type': 'All Events', 'number': Object.keys(a).length, 'main': 'all'});
+    let today  = moment();
+    // let len = Object.keys(a).filter(b =>  !moment(b.day).isBefore(today)).length;
+    this.events.push({'type': 'All Events', 'number': 1, 'main': 'all'});
     if(this.general_loader) this.general_loader.dismiss();
     // for(let key in a){
     //   this.events.push({});
@@ -127,7 +129,7 @@ public general_loader: any;
     // let today  = moment();
     // this.events = this.events.filter( event => !moment(event.day).isBefore(today));
     // if(this.general_loader) this.general_loader.dismiss();
-    //
+
     // console.log(this.activities);
     // console.log(this.events);
   }

@@ -33,6 +33,37 @@ public nomads_joined: any = [];
 public temp_schedule: any = [];
 public favorites: any = [];
 
+public time_helper: any = [
+  {
+    'title': 'Monday',
+    'times': []
+  },
+  {
+    'title': 'Thursday',
+    'times': []
+  },
+  {
+    'title': 'Wednesday',
+    'times': []
+  },
+  {
+    'title': 'Tuesday',
+    'times': []
+  },
+  {
+    'title': 'Friday',
+    'times': []
+  },
+  {
+    'title': 'Saturday',
+    'times': []
+  },
+  {
+    'title': 'Sunday',
+    'times': []
+  },
+];
+
     @ViewChild('map') mapElement: ElementRef;
      map: any;
 
@@ -51,6 +82,22 @@ public favorites: any = [];
 
   isOwner(){
     return this.activity_data.creator == firebase.auth().currentUser.uid;
+  }
+
+  fillHelper(){
+    let a = this.temp_schedule;
+
+    for(let key in a){
+      if(a[key].day == 'Monday') this.time_helper[0].times.push({'start_time': a[key].start_time, 'duration': a[key].duration});
+      else if(a[key].day == 'Tuesday') this.time_helper[1].times.push({'start_time': a[key].start_time, 'duration': a[key].duration});
+      else if(a[key].day == 'Wednesday') this.time_helper[2].times.push({'start_time': a[key].start_time, 'duration': a[key].duration});
+      else if(a[key].day == 'Thursday') this.time_helper[3].times.push({'start_time': a[key].start_time, 'duration': a[key].duration});
+      else if(a[key].day == 'Friday') this.time_helper[4].times.push({'start_time': a[key].start_time, 'duration': a[key].duration});
+      else if(a[key].day == 'Saturday') this.time_helper[5].times.push({'start_time': a[key].start_time, 'duration': a[key].duration});
+      else if(a[key].day == 'Sunday') this.time_helper[6].times.push({'start_time': a[key].start_time, 'duration': a[key].duration});
+    }
+
+    console.log(this.time_helper);
   }
 
   formatSchedule(){
@@ -76,6 +123,8 @@ public favorites: any = [];
     });
 
     console.log(this.temp_schedule);
+
+    this.fillHelper();
   }
 
   confirmEdit(){
