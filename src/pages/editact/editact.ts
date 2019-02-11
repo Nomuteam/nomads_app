@@ -156,17 +156,17 @@ export class EditactPage {
   }
 
   selectSearchResult(item){
-    this.event_data.location = item.description;
+    this.activity_data.location = item.description;
     this.autocompleteItems = [];
     this.seeCorrect();
   }
 
   updateSearchResults(){
-  if (this.event_data.location == '') {
+  if (this.activity_data.location == '') {
     this.autocompleteItems = [];
     return;
   }
-  this.GoogleAutocomplete.getPlacePredictions({ input: this.event_data.location },
+  this.GoogleAutocomplete.getPlacePredictions({ input: this.activity_data.location },
   (predictions, status) => {
     this.autocompleteItems = [];
       predictions.forEach((prediction) => {
