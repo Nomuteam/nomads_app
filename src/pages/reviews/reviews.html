@@ -29,14 +29,20 @@
   </div>
 
   <div class="section-title">Number of Stars</div>
-  <div class="selector-containers">
-    <div class="">Stars: {{stars_number}}</div>
-    <ion-range mode="ios" color="green" min="1" max="5" step=".5" snaps="true" pin="true" [(ngModel)]="stars_number"></ion-range>
+  <!-- <div class="">Stars: {{stars_number}}</div> -->
+  <div class="stars-containers">
+    <ion-item no-lines><ion-icon (click)="changeStars(1)" name="{{s_1}}" color="mustard"></ion-icon></ion-item>
+    <ion-item no-lines><ion-icon (click)="changeStars(2)" name="{{s_2}}" color="mustard"></ion-icon></ion-item>
+    <ion-item no-lines><ion-icon (click)="changeStars(3)" name="{{s_3}}" color="mustard"></ion-icon></ion-item>
+    <ion-item no-lines><ion-icon (click)="changeStars(4)" name="{{s_4}}" color="mustard"></ion-icon></ion-item>
+    <ion-item no-lines><ion-icon (click)="changeStars(5)" name="{{s_5}}" color="mustard"></ion-icon></ion-item>
+
+    <!-- <ion-range mode="ios" color="green" min="1" max="5" step=".5" snaps="true" pin="true" [(ngModel)]="stars_number"></ion-range> -->
   </div>
 
   <div class="section-title">Written Review (optional)</div>
   <div class="selector-containers">
-    <textarea name="name" rows="6" cols="40" class="selector" [(ngModel)]="detalles"></textarea>
+    <textarea name="name" rows="6" cols="80" class="selector" [(ngModel)]="detalles"></textarea>
   </div>
 
 

@@ -44,6 +44,12 @@ public stars_number: any = 0;
 public detalles: any = '';
 public califs: any = [];
 
+public s_1: any = 'star-outline';
+public s_2: any = 'star-outline';
+public s_3: any = 'star-outline';
+public s_4: any = 'star-outline';
+public s_5: any = 'star-outline';
+
 
   constructor(public navCtrl: NavController,
   public navParams: NavParams,
@@ -56,6 +62,46 @@ public califs: any = [];
     this.activity_data.startTime = moment(this.activity_data.startTime).format('LLLL');
     if(!this.activity_data.isEvent) this.activity_data.schedule.map(x => this.schedule.filter(a => a.day == x.day).length > 0 ? null : this.schedule.push(x));
     console.log(this.schedule);
+  }
+
+  changeStars(num){
+    if(num==1){
+      this.s_1 = 'star';
+      this.s_2 ='star-outline';
+      this.s_3 = 'star-outline';
+      this.s_4 ='star-outline';
+      this.s_5 = 'star-outline';
+    }
+    else if(num==2){
+      this.s_1 = 'star';
+      this.s_2 ='star';
+      this.s_3 = 'star-outline';
+      this.s_4 ='star-outline';
+      this.s_5 = 'star-outline';
+    }
+    else if(num==3){
+      this.s_1 = 'star';
+      this.s_2 ='star';
+      this.s_3 ='star';
+      this.s_4 ='star-outline';
+      this.s_5 = 'star-outline';
+    }
+    else if(num==4){
+      this.s_1 = 'star';
+      this.s_2 ='star';
+      this.s_3 = 'star';
+      this.s_4 ='star';
+      this.s_5 = 'star-outline';
+    }
+    else if(num==5){
+      this.s_1 = 'star';
+      this.s_2 ='star';
+      this.s_3 = 'star';
+      this.s_4 ='star';
+      this.s_5 = 'star';
+    }
+    this.stars_number = num;
+    console.log(this.stars_number);
   }
 
   add(a, b){

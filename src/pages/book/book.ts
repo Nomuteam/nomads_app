@@ -4,6 +4,7 @@ import { AngularFireDatabase, AngularFireObject } from 'angularfire2/database';
 import firebase from 'firebase';
 import { DomSanitizer } from '@angular/platform-browser';
 import * as moment from 'moment';
+import { ChatsPage } from '../chats/chats';
 
 /**
  * Generated class for the BookPage page.
@@ -43,6 +44,9 @@ public selected_key: any = '';
 
 public c_available: any = '';
 
+public clans$: any;
+public chats_index: any = [];
+
 
   constructor(public navCtrl: NavController,
   public navParams: NavParams,
@@ -63,6 +67,31 @@ public c_available: any = '';
     return this.sanitizer.bypassSecurityTrustStyle('url('+image+')');
   }
 
+  getClans(){
+    this.af.object('Clans').snapshotChanges().subscribe(action => {
+      this.clans$ = action.payload.val();
+      this.getMines();
+    });
+  }
+
+  amiMember(clave){
+    let m = this.users$.Clans;
+    for(let key in m){
+      if(m[key].index == clave) return true;
+    }
+    return false;
+  }
+
+  getMines(){
+    let c = this.clans$;
+    for(let key in c){
+      if(this.amiMember(c[key].index)){
+        this.chats_index.push({'index': c[key].chat, 'members': c[key].members});
+      }
+    }
+    console.log(this.chats_index);
+  }
+
   ionViewDidLoad() {
     this.general_loader =  this.loadingCtrl.create({
           spinner: 'bubbles',
@@ -81,6 +110,7 @@ public c_available: any = '';
       this.name = this.users$.name;
       this.nomad_schedule = [];
       this.convertSchedule();
+      this.getClans();
     });
     this.af.object('Activities/'+this.activity_data.index+'/nomads').snapshotChanges().subscribe(action => {
       this.response$ = action.payload.val();
@@ -228,6 +258,54 @@ public c_available: any = '';
    }
 
    return false;
+ }
+
+ confirmShare(){
+   const confirm = this.alertCtrl.create({
+     title: 'Share to your clans?',
+     message: 'Do you want to share that you joined this activity with the clans you are a member?',
+     buttons: [
+       {
+         text: 'Cancel',
+         handler: () => {
+
+         }
+       },
+       {
+         text: 'Share!',
+         handler: () => {
+           this.sharetoClans();
+         }
+       }
+     ]
+   });
+   confirm.present();
+ }
+
+ openChat(){
+   this.navCtrl.parent.select(4)
+       .then(()=> {
+         this.navCtrl.parent.getSelected().push(ChatsPage, {'Segmento': 'clans'});
+       });
+ }
+
+ sharetoClans(){
+   let c = this.chats_index;
+   for(let key in c){
+     this.af.list('Chats/'+c[key].index+'/messages').push({
+       'senderId': firebase.auth().currentUser.uid,
+       'message': 'Hey Everybody! I just joined '+this.activity_data.title_complete+' at '+this.selected_time+' on '+this.selected_day+'. Join Me!'
+     }).then(() => {
+       let a = c[key].members;
+       for(let key in a){
+         if(a[key].index != firebase.auth().currentUser.uid){
+           this.af.list('Notifications').push({'title': 'New chat message!', 'subtitle': this.users$.first_name+' just sent a message to your chat!', 'index': a[key].index});
+         }
+       }
+     })
+   }
+   this.alertCtrl.create({title: 'Succesfully Shared!', subTitle: 'Your clan friends should be joining soon!', buttons: ['Ok']}).present();
+   this.returnTo();
  }
 
   payNow(){

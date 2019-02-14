@@ -35,6 +35,9 @@ export class HomePage {
   public filtered_a: any = [];
   public posicion: any = '';
 
+  public done_e: any = false;
+  public done_a: any = false;
+
   constructor(public navCtrl: NavController,
   public navParams: NavParams,
   public af: AngularFireDatabase,
@@ -148,7 +151,8 @@ export class HomePage {
          console.log(results);
          fn(results[0].formatted_address);
        } else {
-          alert( 'Geocode was not successful for the following reason: ' + status );
+          this.af.list('AppErrors/').push({'type': 'Geocode', 'error': status});
+          // alert( 'Geocode was not successful for the following reason: ' + status );
        }
    });
   }
@@ -214,6 +218,8 @@ export class HomePage {
     this.events = this.events.filter( event => !moment(event.day).isBefore(today));
     console.log(this.events.length);
 
+    if(!this.done_e){
+    this.done_e = true;
     let vm = this;
     for(let i=0; i < this.events.length; i++){
 
@@ -226,6 +232,7 @@ export class HomePage {
           vm.events[i].distance_number = distance;
         });
     });
+  }
 
     }
 
@@ -261,20 +268,25 @@ export class HomePage {
     }
 
 
-    let vm = this;
-    for(let i=0; i < this.activities.length; i++){
+   if(!this.done_a){
+     this.done_a = true;
+     let vm = this;
+     for(let i=0; i < this.activities.length; i++){
 
-    this.coordenadas(this.activities[i], this.activities[i].location, this.activities[i].title_complete,  function(location){
-        vm.activities[i].location = location;
-        let om = vm;
-        vm.getDistance(location, function(distance, text){
-          console.log(distance+' km');
-          vm.activities[i].distance = text;
-          vm.activities[i].distance_number = distance;
-        });
-    });
+     this.coordenadas(this.activities[i], this.activities[i].location, this.activities[i].title_complete,  function(location){
+         vm.activities[i].location = location;
+         let om = vm;
+         vm.getDistance(location, function(distance, text){
+           console.log(distance+' km');
+           vm.activities[i].distance = text;
+           vm.activities[i].distance_number = distance;
+         });
+     });
 
-    }
+     }
+   }
+
+
   }
 
   getRated(){
@@ -366,7 +378,10 @@ export class HomePage {
   }
 
   ionViewWillEnter(){
-    if(this.activities != []) this.getFiltersP();
+    if(this.activities != []){
+      this.getFavorites();
+    }
+
 
     this.geolocation.getCurrentPosition().then((position) => {
 

@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Platform, ModalController } from 'ionic-angular';
+import { Config, Platform, ModalController } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 
@@ -47,8 +47,10 @@ export class MyApp {
 
   rootPage:any = WelcomePage;
 
-  constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen, modalCtrl: ModalController, keyboard: Keyboard) {
+  constructor(config: Config, platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen, modalCtrl: ModalController, keyboard: Keyboard) {
     platform.ready().then(() => {
+
+      //config.set('backButtonIcon', 'fa-fal-angle-left');
 
       localStorage.setItem('Tipo', 'nomads');
       if (localStorage.getItem('Accepted') == 'caca'){

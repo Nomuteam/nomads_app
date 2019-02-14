@@ -136,14 +136,28 @@ page-reviews {
 
    .selector-containers{
      margin-bottom: 5%;
+     // width: 100%;
+     // overflow: hidden;
      .selector{
        padding: 3%;
        border: 1px solid rgba(151, 151, 151, .38);
        background-color: #F4F4F4;
-       padding-left: 5%;
+       // padding-left: 5%;
        font-weight: 700;
        margin-bottom: 2%;
        border-radius: 10px;
+       width: 100%;
+     }
+   }
+
+   .stars-containers{
+     margin-bottom: 5%;
+     display: flex;
+     justify-content: space-around;
+     align-items: center;
+     ion-icon{
+      // border: 1px solid red;
+      //padding: 5%;
      }
    }
 

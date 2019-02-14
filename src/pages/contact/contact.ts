@@ -31,6 +31,8 @@ public activities_all: any = [];
 public auxiliar: any;
 public class_slides: any= false;
 
+public done_g: any = false;
+
   @ViewChild('map') mapElement: ElementRef;
    map: any;
 
@@ -111,7 +113,8 @@ public class_slides: any= false;
           modal.present();
         });
       } else {
-         alert( 'Geocode was not successful for the following reason: ' + status );
+         this.af.list('AppErrors/').push({'type': 'Geocode', 'error': status});
+         // alert( 'Geocode was not successful for the following reason: ' + status );
       }
   });
  }
@@ -128,7 +131,7 @@ public class_slides: any= false;
  }
 
   populateMap(){
-
+    this.done_g = true;
     let vm = this;
     for(let i=0; i<this.activities_all.length; i++){
 
@@ -239,7 +242,7 @@ public class_slides: any= false;
       }
 
    console.log(this.activities_all);
-   this.populateMap();
+   if(!this.done_g) this.populateMap();
   }
 
   getEvents(){
