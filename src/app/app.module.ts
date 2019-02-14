@@ -49,6 +49,7 @@ import { ReviewsPage } from '../pages/reviews/reviews';
 import { TicketPage } from '../pages/ticket/ticket';
 import { EditactPage } from '../pages/editact/editact';
 import { EditeventPage } from '../pages/editevent/editevent';
+import { CalendarioPage } from '../pages/calendario/calendario';
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
@@ -110,7 +111,8 @@ import { FIREBASE_CONFIG } from './firebase.credentials';
     ReviewsPage,
     TicketPage,
     EditactPage,
-    EditeventPage
+    EditeventPage,
+    CalendarioPage
   ],
   imports: [
     NgCalendarModule,
@@ -171,7 +173,8 @@ import { FIREBASE_CONFIG } from './firebase.credentials';
     ReviewsPage,
     TicketPage,
     EditactPage,
-    EditeventPage
+    EditeventPage,
+    CalendarioPage
   ],
   providers: [
     StatusBar,

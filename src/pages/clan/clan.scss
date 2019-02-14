@@ -12,7 +12,7 @@ page-clan {
    ont-family: 'Raleway', sans-serif;
    font-size: 80%;
    font-weight: 400!important;
-   color: #FF6B84;
+   color: #8141CB;
    text-align: center;
  }
 
@@ -44,7 +44,7 @@ page-clan {
      font-family: 'Montserrat', sans-serif;
      font-weight: 400!important;
      font-size: 80%;
-     color: #FF6B84;
+     color: #8141CB;
      //border: 1px solid red;
      text-align: left;
      padding-left: 5%;
@@ -167,20 +167,25 @@ page-clan {
    font-family: 'Montserrat', sans-serif;
    font-weight: 700;
    color: rgba(255, 255, 255, 1);
-   background-color: #FF6B84;
+   background-color: #8141CB;
    margin-bottom: 3%;
    border-radius: 12px;
  }
 
+ .chat{
+   background-color: #1B5074;
+ }
+
  .green{
-   background-color: #229B86;
+   background-color: transparent;
+   border: 1px solid #2edbac;
  }
 
  .leave-btn{
    text-align: center;
    font-family: 'Montserrat', sans-serif;
    font-weight: 700;
-   color: #FF6B84;
+   color: gray;
    margin-top: 10%;
    margin-bottom: 6%;
  }

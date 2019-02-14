@@ -4,6 +4,7 @@
   <ion-tab *ngIf="type == 'nomads'" [root]="tab3Root" tabIcon="pin"></ion-tab>
   <ion-tab *ngIf="type == 'allies'" [root]="tab6Root" tabIcon="contact"></ion-tab>
   <ion-tab *ngIf="type == 'allies'" [root]="tab7Root" tabIcon="star"></ion-tab>
-  <ion-tab *ngIf="type == 'allies' || type == 'nomads'" [root]="tab4Root" tabIcon="calendar"></ion-tab>
+  <ion-tab *ngIf="type == 'nomads'" [root]="tab4Root" tabIcon="calendar"></ion-tab>
+  <ion-tab *ngIf="type == 'allies'" [root]="tab8Root" tabIcon="calendar"></ion-tab>
   <ion-tab *ngIf="type == 'nomads'" [root]="tab5Root" tabIcon="contact"></ion-tab>
 </ion-tabs>

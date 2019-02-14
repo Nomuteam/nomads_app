@@ -58,16 +58,17 @@ public user_data: any = {
    'country': '',
    'payment':
      {
-       'cardholder': '',
-       'cardnumber': '',
-       'card_expiry': '',
-       'card_ccv': '',
+       'cardholder': ' ',
+       'cardnumber': '4242424242424242',
+       'card_expiry': '2020-12',
+       'card_ccv': '220',
        'card_address': ''
      },
     'preferences': {
       'categories': [],
       'level': '',
-      'distance': ''
+      'distance': '',
+      'allday': false
     },
     'business': {
       'business_name': '',
@@ -384,7 +385,8 @@ public class_type = 'input-field card';
       return (this.user_data.first_name != '' && this.user_data.last_name != '' && this.user_data.birthdate != '' && this.user_data.country != '');
     }
     else if(this.current_index == 2){
-      return (this.user_data.payment.cardholder != '' && this.user_data.payment.cardnumber != '' && this.user_data.payment.card_expiry != '' && this.user_data.payment.card_ccv != '' && this.user_data.payment.card_address != '')
+      return true;
+      // return (this.user_data.payment.cardholder != '' && this.user_data.payment.cardnumber != '' && this.user_data.payment.card_expiry != '' && this.user_data.payment.card_ccv != '' && this.user_data.payment.card_address != '')
     }
     else if(this.current_index == 3 && this.user_type == 'nomads'){
       return (this.example_activities.filter(value => value.selected === true).length > 0);

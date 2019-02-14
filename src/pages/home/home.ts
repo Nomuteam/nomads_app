@@ -12,6 +12,8 @@ import * as moment from 'moment';
 import { WalletPage } from '../wallet/wallet';
 import { NeweventPage } from '../newevent/newevent';
 import { FilteredPage } from '../filtered/filtered';
+declare var google;
+import { Geolocation } from '@ionic-native/geolocation';
 
 @Component({
   selector: 'page-home',
@@ -28,13 +30,19 @@ export class HomePage {
   public events: any = [];
   public favoritos: any = [];
 
+  public user_preferences: any = [];
+
+  public filtered_a: any = [];
+  public posicion: any = '';
+
   constructor(public navCtrl: NavController,
   public navParams: NavParams,
   public af: AngularFireDatabase,
   public loadingCtrl: LoadingController,
   public alertCtrl: AlertController,
   public sanitizer: DomSanitizer,
-  public stripe: Stripe ) {
+  public stripe: Stripe,
+  public geolocation: Geolocation ) {
 
    this.stripe.setPublishableKey('pk_test_tRNrxhMhtRyPzotatGi5Mapm');
     let date = new Date();
@@ -97,7 +105,16 @@ export class HomePage {
     }
 
     console.log(this.favoritos);
+    this.getFiltersP();
     // return this.favoritos;
+  }
+
+  getFiltersP(){
+    this.af.object('Users/'+firebase.auth().currentUser.uid+'/preferences').snapshotChanges().subscribe(action => {
+      this.user_preferences = action.payload.val();
+      console.log(this.user_preferences);
+      this.applyFilters();
+    });
   }
 
   seeDetails(a){
@@ -123,6 +140,46 @@ export class HomePage {
     return this.sanitizer.bypassSecurityTrustStyle('url('+image+')');
   }
 
+  coordenadas(a, address, tit, fn){
+    let geocoder = new google.maps.Geocoder();
+    let vm = this;
+    geocoder.geocode( { 'address' : address}, function( results, status ) {
+       if( status == google.maps.GeocoderStatus.OK ) {
+         console.log(results);
+         fn(results[0].formatted_address);
+       } else {
+          alert( 'Geocode was not successful for the following reason: ' + status );
+       }
+   });
+  }
+
+  getDistance(address, fn){
+    let geocoder = new google.maps.Geocoder();
+    let vm = this;
+    let distance = new google.maps.DistanceMatrixService();
+    let result = 0;
+    let result2 = '';
+
+    return distance.getDistanceMatrix({
+         origins: [this.posicion],
+         destinations: [address],
+         travelMode: google.maps.TravelMode.DRIVING
+         },
+     function (response, status) {
+         // check status from google service call
+         if (status !== google.maps.DistanceMatrixStatus.OK) {
+             console.log('Error:', status);
+         } else {
+           console.log(response);
+           result = response.rows[0].elements[0].distance.value;
+           result2 = response.rows[0].elements[0].distance.text;
+           fn(result, result2);
+           //vm.activities_all[p].distance = response.rows[0].elements[0].distance.value;
+           }
+     });
+
+  }
+
   convertEvents(){
     let a = this.e_response$;
     for(let key in a){
@@ -139,16 +196,39 @@ export class HomePage {
         'cost':  a[key].cost,
         'type':  a[key].type,
         'day': a[key].day,
+        'distance': '',
+        'distance_number': 0,
         'time': a[key].time,
         'creator':  a[key].creator,
         'index':  a[key].index,
         'media': a[key].media,
-        'isEvent': true
+        'nomads': (a[key].nomads ? a[key].nomads : []),
+        'isEvent': true,
+        'review':( a[key].review ? a[key].review : 5),
+        'reviews': (a[key].reviews ? a[key].reviews : []),
+        'special': (a[key].special ? a[key].special : false)
       });
     }
 
     let today  = moment();
     this.events = this.events.filter( event => !moment(event.day).isBefore(today));
+    console.log(this.events.length);
+
+    let vm = this;
+    for(let i=0; i < this.events.length; i++){
+
+    this.coordenadas(this.events[i], this.events[i].location, this.events[i].title_complete,  function(location){
+        vm.events[i].location = location;
+        let om = vm;
+        vm.getDistance(location, function(distance, text){
+          console.log(distance+' km');
+          vm.events[i].distance = text;
+          vm.events[i].distance_number = distance;
+        });
+    });
+
+    }
+
     if(this.general_loader) this.general_loader.dismiss();
     this.getFavorites();
   }
@@ -167,12 +247,52 @@ export class HomePage {
         'categories':  a[key].categories,
         'schedule':  a[key].schedule,
         'media':  a[key].media,
+        'nomads': (a[key].nomads ? a[key].nomads : []),
         'img':  a[key].img,
         'creator':  a[key].creator,
         'index':  a[key].index,
-        'isEvent': false
+        'isEvent': false,
+        'review':( a[key].review ? a[key].review : 5),
+        'reviews': (a[key].reviews ? a[key].reviews : []),
+        'special': (a[key].special ? a[key].special : false),
+        'distance': '',
+        'distance_number': 0
       });
     }
+
+
+    let vm = this;
+    for(let i=0; i < this.activities.length; i++){
+
+    this.coordenadas(this.activities[i], this.activities[i].location, this.activities[i].title_complete,  function(location){
+        vm.activities[i].location = location;
+        let om = vm;
+        vm.getDistance(location, function(distance, text){
+          console.log(distance+' km');
+          vm.activities[i].distance = text;
+          vm.activities[i].distance_number = distance;
+        });
+    });
+
+    }
+  }
+
+  getRated(){
+   let aux = [];
+   aux = this.activities.sort(function(a, b){
+    var keyA = a.review,
+        keyB = b.review;
+    // Compare the 2 dates
+    if(keyA > keyB) return -1;
+    if(keyA < keyB) return 1;
+    return 0;
+   });
+   //console.log(aux);
+   return aux;
+  }
+
+  getSpecial(){
+    return this.activities.filter(act => act.special);
   }
 
   openActivity(actividad){
@@ -202,8 +322,59 @@ export class HomePage {
     });
   }
 
+  existsF(arre, cual){
+    for(let key in arre){
+      if(arre[key].name == cual) return true;
+    }
+    return false;
+  }
+
+  existsO(arre, cual){
+    console.log(arre);
+    for(let key in arre){
+      if(arre[key].title == cual) return true;
+    }
+    return false;
+  }
+
+  applyFilters(){
+    let cats = this.user_preferences.categories.filter(c => c.selected);
+    let days = this.user_preferences.days.filter(d => d.selected);
+    let forms = this.user_preferences.forms.filter(f=> f.selected);
+    let types = this.user_preferences.types.filter(t=> t.selected);
+    let aux = [];
+    let a = this.activities;
+
+    if(cats.length > 0){
+      for(let i=0; i<a.length; i++){
+        if(this.existsF(cats, a[i].categories.main_category)){
+          aux.push(a[i]);
+        }
+      }
+    }
+
+    if(types.length > 0){
+      for(let i=0; i<a.length; i++){
+        if(this.existsO(types, a[i].categories.activity_type)){
+          aux.push(a[i]);
+        }
+      }
+    }
+
+
+    this.filtered_a = aux;
+  }
+
   ionViewWillEnter(){
-    this.getFavorites();
+    if(this.activities != []) this.getFiltersP();
+
+    this.geolocation.getCurrentPosition().then((position) => {
+
+      this.posicion = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
+
+    }, (err) => {
+      console.log(err);
+    });
   }
 
   ionViewDidLoad() {

@@ -230,6 +230,7 @@ public user_preferences: any = [];
       this.response$ = action.payload.val();
       this.noms_balance = this.response$.noms;
       this.user_preferences = this.response$;
+      if(this.user_preferences.allday == undefined) this.allday = false;
       this.markSelected();
       if(this.general_loader) this.general_loader.dismiss();
     });

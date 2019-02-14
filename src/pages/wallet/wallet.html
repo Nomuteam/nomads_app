@@ -11,8 +11,8 @@
        <div class="div1"></div>
        <div class="div2"></div>
        <div class="div3"></div></div> -->
-     <p class="noms-hint">Noms</p>
-     <p class="noms-qty">{{this.noms_balance}}</p>
+     <!-- <p class="noms-hint">Noms</p>
+     <p class="noms-qty">{{this.noms_balance}}</p> -->
     </ion-buttons>
     <ion-buttons *ngIf="this.user_type == 'nomads'" (click)="openFilters()" end>
      <!-- <div class="filters-noms">
@@ -20,9 +20,9 @@
        <div class="div2"></div>
        <div class="div3"></div>
      </div> -->
-     <button ion-button icon-only>
+     <!-- <button ion-button icon-only>
        <ion-icon name="ios-options" color="white"></ion-icon>
-     </button>
+     </button> -->
     </ion-buttons>
     <p class="title">Wallet</p>
   </ion-navbar>
@@ -43,10 +43,10 @@
     </div>
    </div>
   </div>
-  <div class="card-btm-container" padding>
+  <!-- <div class="card-btm-container" padding>
     <div *ngIf="this.user_type == 'nomads'" class="hint-avg">20 booking average</div>
     <div *ngIf="this.user_type == 'allies'" class="hint-avg">3 activities</div>
-  </div>
+  </div> -->
  </div>
 
  <div *ngIf="this.user_type == 'nomads'">
@@ -54,8 +54,8 @@
    <div class="amounts-container">
      <div class="amount-container">
        <div class="input-group">
-         <p class="input-title">Amount of Cash</p>
-         <input (click)="cash = 0" placeholder="$" type="text" class="input-field" [(ngModel)]="cash" (ngModelChange)="noms = cash/20">
+         <p class="input-title">Set amount of Cash</p>
+         <input (click)="cash = ''" placeholder="$" type="text" class="input-field" [(ngModel)]="cash" (ngModelChange)="noms = cash/20">
        </div>
        <!-- <div class="amount-hint">Amount of cash</div>
        <div class="amount-text" contenteditable="true">$0</div> -->
@@ -69,7 +69,7 @@
        <div class="amount-text">{{95}}</div> -->
      </div>
    </div>
-   <div class="booking-avg"><b>10</b> to <b>20</b> bookings</div>
+   <div class="booking-avg"><b>{{this.getMenor()}}</b> to <b>{{this.getMayor()}}</b> bookings</div>
 
    <button (click)="confirmPay()" type="button" class="pay-btn" padding>Pay NOMS</button>
 

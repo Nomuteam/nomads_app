@@ -84,6 +84,13 @@ public transactions: any = [];
     public alertCtrl: AlertController,
     public stripe: Stripe) {
     this.user_type = localStorage.getItem('Tipo');
+
+    this.alertCtrl.create({
+      title: 'Welcome to your wallet!',
+      subTitle: 'Pick a package or enter the amount',
+      message: 'Enter the amount you wish to buy or select a predefined package to buy noms',
+      buttons: ['Ok']
+    }).present();
   }
 
   getFriendBalance(){
@@ -109,6 +116,14 @@ public transactions: any = [];
           buttons: ['Ok']
         }).present();
       })
+  }
+
+  getMenor(){
+    return Math.ceil(this.noms/9);
+  }
+
+  getMayor(){
+    return Math.ceil(this.noms/3.5);
   }
 
   verifyConfirmation(){

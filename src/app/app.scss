@@ -45,31 +45,45 @@ ion-navbar{
     font-family: 'Montserrat', sans-serif;
     font-weight: 400!important;
     font-size: 120%;
+    font-weight: 700!important;
+    //text-transform: uppercase;
   }
   ion-buttons{
     //border: 1px solid red;
     position: relative;
-    width: 30px;
-    height: 20px;
+    // width: 30px;
+    // height: 20px;
+    ion-icon{
+      border-radius: 50%;
+      // width: 25px;
+      padding: 5px;
+      background-color: #007C6E;
+      box-shadow: 0px 0px 5px #007C6E; 
+    }
     .cancel-hint{
       font-family: 'Montserrat', sans-serif;
       font-weight: 700!important;
       color: #FF6B84;
       margin-left: 0%;
     }
+    .noms-ctr{
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      align-items: flex-start;
+    }
     .noms-hint{
-      position: absolute;
-      top: -5%;
-      margin-top: 0%;
+      // position: absolute;
+      // top: 0%;
       color: white;
       font-family: 'Montserrat', sans-serif;
       font-weight: 300!important;
       font-size: 60%;
     }
     .noms-qty{
-      position: absolute;
-      top: 20%;
-      margin-top: 0%;
+      // position: absolute;
+      // top: 20%;
+      margin-top: -15%;
       color: white;
       font-family: 'Montserrat', sans-serif;
       font-weight: 700!important;

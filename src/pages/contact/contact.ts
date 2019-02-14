@@ -116,6 +116,17 @@ public class_slides: any= false;
   });
  }
 
+ getSorted(){
+   return this.activities_all.sort(function(a, b){
+    var keyA = a.distance_number,
+        keyB = b.distance_number;
+    // Compare the 2 dates
+    if(keyA < keyB) return -1;
+    if(keyA > keyB) return 1;
+    return 0;
+   });
+ }
+
   populateMap(){
 
     let vm = this;
@@ -123,28 +134,31 @@ public class_slides: any= false;
 
     this.coordenadas(this.activities_all[i], this.activities_all[i].location, this.activities_all[i].title_complete,  function(location){
         vm.activities_all[i].location = location;
+        let om = vm;
+        vm.getDistance(location, function(distance, text){
+          console.log(distance+' km');
+          vm.activities_all[i].distance = text;
+          vm.activities_all[i].distance_number = distance;
+        });
     });
 
     }
 
+
     console.log(this.activities_all);
     this.general_loader.dismiss();
     setTimeout(() => {this.class_slides = true}, 100);
-    this.getDistance();
   }
 
 
-
-
-  getDistance(){
+  getDistance(address, fn){
     let geocoder = new google.maps.Geocoder();
     let vm = this;
     let distance = new google.maps.DistanceMatrixService();
-    let address = 'Sebastian el Cano 200 Del Valle San Luis Potosi';
+    let result = 0;
+    let result2 = '';
 
-    for(let i=0; i<this.activities_all.length; i++){
-      console.log(vm.activities_all[i].location);
-      distance.getDistanceMatrix({
+    return distance.getDistanceMatrix({
          origins: [vm.map.getCenter()],
          destinations: [address],
          travelMode: google.maps.TravelMode.DRIVING
@@ -155,12 +169,13 @@ public class_slides: any= false;
              console.log('Error:', status);
          } else {
            console.log(response);
-              // vm.activities_all[i].distance = response.rows[0].elements[0].distance.value;
-             }
+           result = response.rows[0].elements[0].distance.value;
+           result2 = response.rows[0].elements[0].distance.text;
+           fn(result, result2);
+           //vm.activities_all[p].distance = response.rows[0].elements[0].distance.value;
+           }
      });
 
-    }
-   console.log(this.activities_all);
   }
 
 
@@ -186,7 +201,11 @@ public class_slides: any= false;
         'media': a[key].media,
         'isEvent': true,
         'distance': 0,
-        'day': a[key].day
+        'distance_number': '',
+        'day': a[key].day,
+        'review':( a[key].review ? a[key].review : 5),
+        'reviews': (a[key].reviews ? a[key].reviews : []),
+        'nomads': (a[key].nomads ? a[key].nomads : [])
       });
   }
 
@@ -211,7 +230,11 @@ public class_slides: any= false;
             'index':  b[key].index,
             'media': b[key].media,
             'isEvent': false,
-            'distance': 0
+            'distance': 0,
+            'distance_number': '',
+            'review':( b[key].review ? b[key].review : 5),
+            'reviews': (b[key].reviews ? b[key].reviews : []),
+            'nomads': (b[key].nomads ? b[key].nomads : [])
           });
       }
 

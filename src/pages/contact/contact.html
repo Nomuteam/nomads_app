@@ -1,13 +1,15 @@
 <ion-header>
   <ion-navbar color="customD" >
     <ion-buttons (click)="testWallet()" start style="margin-left: 3%!important;">
-     <p class="noms-hint">Noms</p>
-     <p class="noms-qty">{{this.noms_balance}}</p>
+      <div class="noms-ctr">
+        <div class="noms-hint">Noms</div>
+        <div class="noms-qty">{{this.noms_balance}}</div>
+      </div>
     </ion-buttons>
     <ion-buttons (click)="openFilters()" end>
-     <button ion-button icon-only>
-       <ion-icon name="ios-options" color="white"></ion-icon>
-     </button>
+      <button ion-button>
+        <ion-icon name="ios-options" color="white"></ion-icon>
+      </button>
     </ion-buttons>
     <!-- <p class="title">Near Me</p> -->
     <div class="input-container">
@@ -30,13 +32,16 @@
       <div class="number">{{this.activities_all.length}}</div>
     </div>
     <ion-slides [hidden]="this.class_slides" slidesPerView="2.5">
-     <ion-slide *ngFor="let a of this.activities_all" (click)="seeDetails(a)">
+     <ion-slide *ngFor="let a of this.getSorted()" (click)="seeDetails(a)">
        <img src="{{a.img}}" class="img-slide">
        <!-- <div class="img-slide" [style.background-image]="sanitizeThis(a.img)"></div> -->
        <p class="act-title">{{a.title}}</p>
        <p class="act-distance"> {{a.distance}} km</p>
-       <div class="noms-coins">
+       <div *ngIf="!a.isEvent" class="noms-coins">
          <p>{{a.class_price}}</p>
+       </div>
+       <div *ngIf="a.isEvent" class="noms-coins">
+         <p>{{a.cost}}</p>
        </div>
      </ion-slide>
     </ion-slides>

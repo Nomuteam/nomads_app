@@ -5,11 +5,13 @@
        <div class="div1"></div>
        <div class="div2"></div>
        <div class="div3"></div></div> -->
-     <p class="noms-hint">Noms</p>
-     <p class="noms-qty">{{this.noms_balance}}</p>
+       <div class="noms-ctr">
+         <div class="noms-hint">Noms</div>
+         <div class="noms-qty">{{this.noms_balance}}</div>
+       </div>
     </ion-buttons>
     <ion-buttons (click)="openFilters()" end>
-      <button ion-button icon-only>
+      <button ion-button>
         <ion-icon name="ios-options" color="white"></ion-icon>
       </button>
      <!-- <div class="filters-noms">
@@ -25,12 +27,12 @@
 <ion-content padding>
 
   <div class="explore-all">
-    <div (click)="openBrowse('activities')" class="explore">Explore by list</div>
-    <div class="explore-options">
+    <div (click)="openBrowse('activities')" class="explore">Browse All</div>
+    <!-- <div class="explore-options">
      <div (click)="openBrowse('events')" class="option">Events</div>
      <div (click)="openBrowse('activities')" class="option">Activities</div>
      <div (click)="openBrowse('events')" class="option">Experiences</div>
-    </div>
+    </div> -->
   </div>
 
   <!-- <div class="search-container">
@@ -72,24 +74,24 @@
   </div> -->
 
   <div class="category-container">
-   <div (click)="openFiltered('All Activities')" class="category-title best">Best Rated Activities</div>
+   <div (click)="openFiltered('All Activities')" class="category-title experiences">Best Rated Activities</div>
    <!-- <p class="category-suggestions">Next ones for you</p> -->
    <ion-slides slidesPerView="1.6">
-    <ion-slide (click)="openActivity(a)" *ngFor="let a of this.activities">
+    <ion-slide (click)="openActivity(a)" *ngFor="let a of this.getRated()">
       <div class="img-slide" [style.background-image]="sanitizeThis(a.img)"></div>
-      <p class="act-first">{{a.categories.activity_type}} - 0 km</p>
+      <p class="act-first">{{a.categories.activity_type}} - {{a.distance}}</p>
       <p class="act-title">{{a.title}}</p>
       <p class="act-distance">{{a.class_price}} noms</p>
-      <p class="act-rating">5 stars / (0)</p>
+      <p class="act-rating">{{a.review}} stars / ({{a.reviews.length}})</p>
     </ion-slide>
   </ion-slides>
   </div>
 
   <div class="category-container">
    <div (click)="openFiltered('All Activities')" class="category-title sug">Suggestions for you</div>
-   <!-- <p class="category-suggestions">We have this suggestions for you</p> -->
+   <p *ngIf="this.filtered_a.length == 0" class="category-suggestions">Add your preferences so we can suggest activities for you</p>
    <ion-slides slidesPerView="1.6">
-    <ion-slide (click)="openActivity(a)" *ngFor="let a of this.activities">
+    <ion-slide (click)="openActivity(a)" *ngFor="let a of this.filtered_a">
       <div class="img-slide" [style.background-image]="sanitizeThis(a.img)"></div>
       <p class="act-first">{{a.categories.activity_type}}</p>
       <p class="act-title">{{a.title}}</p>
@@ -106,7 +108,7 @@
    <ion-slides slidesPerView="1.6">
     <ion-slide (click)="seeDetails(f)"  *ngFor="let f of this.favoritos">
       <div class="img-slide" [style.background-image]="sanitizeThis(f.img)"></div>
-      <p *ngIf="!f.isEvent" class="act-first">{{f.categories.activity_type}}</p>
+      <p *ngIf="!f.isEvent" class="act-first">{{f.categories.activity_type}} - {{f.distance}}</p>
       <p *ngIf="f.isEvent" class="act-first">{{f.type}}</p>
       <p class="act-title">{{f.title}}</p>
       <p *ngIf="!f.isEvent" class="act-distance">{{f.class_price}} noms</p>
@@ -118,12 +120,12 @@
 
   <div class="category-container">
    <div (click)="openFiltered('All Events')" class="category-title events">Events <small (click)="openNew()">Create one</small></div>
-   <p class="category-suggestions">Join the events created by the community</p>
+   <p class="category-suggestions">Join events created by the community</p>
    <!-- <p *ngIf="this.events.length == 0" class="category-suggestions">There are not any events available now!</p> -->
    <ion-slides slidesPerView="1.6">
      <ion-slide (click)="openEvent(e)" *ngFor="let e of this.events">
        <div class="img-slide" [style.background-image]="sanitizeThis(e.img)"></div>
-       <p class="act-first">{{e.type}}</p>
+       <p class="act-first">{{e.type}}  - {{e.distance}}</p>
        <p class="act-title">{{e.title}}</p>
        <p class="act-distance">{{e.cost}} noms</p>
        <p class="act-rating">5 stars / (0)</p>
@@ -132,12 +134,12 @@
   </div>
 
   <div class="category-container">
-   <div (click)="openFiltered('All Events')" class="category-title experiences">Experiences</div>
+   <div (click)="openFiltered('All Events')" class="category-title rose">Experiences</div>
    <!-- <p class="category-suggestions">We have this experiences for you</p> -->
    <ion-slides slidesPerView="1.6">
     <ion-slide (click)="openActivity(a)" *ngFor="let a of this.activities">
       <div class="img-slide" [style.background-image]="sanitizeThis(a.img)"></div>
-      <p class="act-first">{{a.categories.activity_type}}</p>
+      <p class="act-first">{{a.categories.activity_type}}  - {{a.distance}}</p>
       <p class="act-title">{{a.title}}</p>
       <p class="act-distance">{{a.class_price}} noms</p>
       <p class="act-rating">5 stars / (0)</p>
@@ -147,11 +149,11 @@
 
   <div class="category-container">
    <div (click)="openFiltered('All Activities')" class="category-title green">Special Offers</div>
-   <!-- <p class="category-suggestions">Next ones for you</p> -->
+   <p *ngIf="this.getSpecial().length == 0" class="category-suggestions">There are no special offers currently!</p>
    <ion-slides slidesPerView="1.6">
-    <ion-slide (click)="openActivity(a)" *ngFor="let a of this.activities">
+    <ion-slide (click)="openActivity(a)" *ngFor="let a of this.getSpecial()">
       <div class="img-slide" [style.background-image]="sanitizeThis(a.img)"></div>
-      <p class="act-first">{{a.categories.activity_type}}</p>
+      <p class="act-first">{{a.categories.activity_type}}  - {{a.distance}}</p>
       <p class="act-title">{{a.title}}</p>
       <p class="act-distance">{{a.class_price}} noms</p>
       <p class="act-rating">5 stars / (0)</p>

@@ -7,6 +7,7 @@ import { AngularFireDatabase, AngularFireObject } from 'angularfire2/database';
 import firebase from 'firebase';
 import { DomSanitizer } from '@angular/platform-browser';
 import { BookPage } from '../book/book';
+import * as moment from 'moment';
 
 /**
  * Generated class for the ActivityPage page.
@@ -32,6 +33,11 @@ public nomads_joined: any = [];
 
 public temp_schedule: any = [];
 public favorites: any = [];
+
+public friends: any = [];
+public clans$: any;
+public amigos: any = [];
+public people$: any;
 
 public time_helper: any = [
   {
@@ -149,10 +155,10 @@ public time_helper: any = [
     }).present();
   }
 
-  openBook(){
+  openBook(dia, tiempo){
     if(this.activity_data.creator != firebase.auth().currentUser.uid){
       if(parseInt(this.activity_data.class_price) == 0 || parseInt(this.noms_balance) > parseInt(this.activity_data.class_price)){
-        let modal = this.modalCtrl.create(BookPage, {'Activity': this.activity_data});
+        let modal = this.modalCtrl.create(BookPage, {'Activity': this.activity_data, 'Day': dia, 'Time': tiempo});
             modal.onDidDismiss( data => {
               if(data && data.go) this.navCtrl.parent.select(3);
             });
@@ -216,16 +222,129 @@ public time_helper: any = [
     return this.sanitizer.bypassSecurityTrustStyle('url('+image+')');
   }
 
+  getClans(){
+    this.af.object('Clans').snapshotChanges().subscribe(action => {
+      this.clans$ = action.payload.val();
+      this.getFriends();
+    });
+  }
+
+  inClan(clave){
+    let f = this.users$.Clans;
+    for(let key in f){
+      if(f[key].index == clave) return true;
+    }
+    return false;
+  }
+
+  makeFriends(ami){
+    for(let key in ami){
+      this.friends.push({
+        'index': ami[key].index
+      });
+    }
+  }
+
+  isFriend(clave){
+    let f = this.friends;
+    for(let key in f){
+      if(f[key].index == clave && clave != firebase.auth().currentUser.uid) return true;
+    }
+    return false;
+  }
+
+  isDespues(fecha){
+    let today  = moment();
+    return moment(fecha).isBefore(today);
+  }
+
+  checkExistAC(clave){
+    let a = this.amigos;
+    for(let key in a){
+      if(a[key].index == clave.index && !this.isDespues(clave.date)) {
+        a[key].schedule.push({
+          'day': clave.day,
+          'date': clave.date,
+          'time': clave.time
+        })
+        return true;
+      }
+    }
+    return false;
+  }
+
+  makeAmigo(amigo){
+    if(!this.checkExistAC(amigo)){
+      if(!this.isDespues(amigo.date)){
+        this.amigos.push({
+          'index': amigo.index,
+          'name': this.getName(amigo.index),
+          'initial': this.getName(amigo.index).charAt(0),
+          'img': this.getImg(amigo.index),
+          'schedule': [{'day': amigo.day, 'date': amigo.date, 'time': amigo.time}]
+        });
+      }
+    }
+  }
+
+  getImg(clave){
+    let p = this.people$;
+    for(let key in p){
+      if(p[key].index == clave) return '';
+    }
+    return '';
+  }
+
+  seeDetails(amigo){
+    let horas = '<br><br>';
+    for(let key in amigo.schedule){
+      horas+= '<li>' + amigo.schedule[key].time + ' next <b>' + amigo.schedule[key].day+'</b>';
+      horas+= '<br>'
+    }
+    this.alertCtrl.create({
+      'title': 'Friend Going!',
+      'subTitle': amigo.name+' is going to this activity!',
+      'message': 'He signed up for: '+horas,
+      'buttons': ['Ok']
+    }).present();
+  }
+
+  getName(clave){
+    let p = this.people$;
+    for(let key in p){
+      if(p[key].index == clave) return p[key].first_name + ' ' + p[key].last_name;
+    }
+    return '';
+  }
+
+  getFriends(){
+    let c = this.clans$;
+    for(let key in c){
+      if(this.inClan(c[key].index)) this.makeFriends(c[key].members);
+    }
+
+    let a = this.activity_data.nomads;
+    for(let key in a){
+      if(this.isFriend(a[key].index)) this.makeAmigo(a[key]);
+    }
+
+    console.log(this.amigos);
+  }
+
   ionViewDidLoad(){
     this.general_loader = this.loadingCtrl.create({
       spinner: 'bubbles',
       content: 'Loading...'
     });
     this.general_loader.present();
+    this.af.object('Users').snapshotChanges().subscribe(action => {
+      this.people$ = action.payload.val();
+    });
     this.af.object('Users/'+firebase.auth().currentUser.uid).snapshotChanges().subscribe(action => {
       this.users$ = action.payload.val();
       this.noms_balance = this.users$.noms;
       this.favorites = this.users$.favorites;
+      this.getClans();
     });
     this.af.object('Activities/'+this.activity_data.index+'/nomads').snapshotChanges().subscribe(action => {
       this.response$ = action.payload.val();

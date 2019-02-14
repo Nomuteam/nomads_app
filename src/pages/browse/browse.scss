@@ -59,7 +59,7 @@ page-browse {
           }
         }
         .event-type{
-          border: 1px solid #FF6B84;
+          border: 1px solid #8141CB;
           border-radius: 30px;
           text-align: center;
           .etype-title{
@@ -69,10 +69,11 @@ page-browse {
           }
         }
         .rose{
-          background-color: #FF6B84;
+          background-color: #8141CB;
         }
         .selected{
-          background-color: #229B86;
+            // border: 1px solid #2edbac;
+          background-color: #2edbac;
         }
       }
     }

@@ -1,7 +1,9 @@
 page-home {
 
  .explore-all{
-   border-radius: 10px;
+   border-radius: 30px;
+   width: 60%;
+   margin-left: 20%;
    margin-bottom: 4vh;
    display: flex;
    flex-direction: column;
@@ -13,6 +15,17 @@ page-home {
    padding: 3%;
    font-family: 'Montserrat', sans-serif;
    color: white;
+   background-image: url('../../assets/img/go.png');
+   background-position: 95%;
+   background-repeat: no-repeat;
+   box-shadow: 0px 0px 20px #8141CB;
+
+
+
+   .explore{
+    font-weight: 700;
+    font-size: 140%;
+   }
 
    .explore-options{
      display: flex;
@@ -27,6 +40,7 @@ page-home {
       text-align: center;
       border: 1px solid white;
       border-radius: 12px;
+      font-size: 90%;
      }
    }
  }
@@ -113,11 +127,11 @@ page-home {
      background: linear-gradient(#6EC6CA, #26B594);
    }
 
-   .experiences{
-     height: 60px;
-     width: 60px;
-     background: linear-gradient(#007C5B, #26B594);
-   }
+   // .experiences{
+   //   height: 60px;
+   //   width: 60px;
+   //   background: linear-gradient(#007C5B, #26B594);
+   // }
 
    .input-search{
      width: 90%;
@@ -193,7 +207,8 @@ page-home {
   }
 
   .experiences{
-    background-image: linear-gradient(to right, #146474, #C10777)!important;
+    //background-image: linear-gradient(to right, #146474 40%, #C10777)!important;
+    background-image: linear-gradient(to right, #146474 50%, #8141CB)!important;
   }
 
   .blue{
@@ -296,7 +311,7 @@ page-home {
         margin-top: 3%;
         text-transform: uppercase;
         color: #55D1AC;
-        opacity: .4;
+        opacity: .8;
       }
       .act-title{
         font-family: 'Montserrat', sans-serif;

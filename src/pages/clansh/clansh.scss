@@ -9,6 +9,7 @@ page-clansh {
         background-color: rgba(216, 216, 216, .08);
         border-radius: 15px;
         overflow: scroll;
+        //box-shadow: 0px 0px 5px white;
         .clan-img{
           background-image: url('../../assets/img/clans_example.png');
           background-repeat: no-repeat;
@@ -79,7 +80,9 @@ page-clansh {
           height: 6vh;
           border-radius: 12px;
           //background-color: #FF6B84;
-          background-color: #9073CB;
+          //background-color: #9073CB;
+          background-color: #8141CB;
+          box-shadow: 0px 0px 10px #0C0C0C;
 
           font-family: 'Montserrat', sans-serif;
           font-size: 90%;

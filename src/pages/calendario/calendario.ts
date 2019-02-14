@@ -19,10 +19,10 @@ import { ReviewsPage } from '../reviews/reviews';
 
 @IonicPage()
 @Component({
-  selector: 'page-calendar',
-  templateUrl: 'calendar.html',
+  selector: 'page-calendario',
+  templateUrl: 'calendario.html',
 })
-export class CalendarPage {
+export class CalendarioPage {
   public general_loader: any;
   public eventSource = [];
   public viewTitle: string;
@@ -66,7 +66,13 @@ export class CalendarPage {
       'startTime': time,
       'endTime': time,
       'allDay': false
-    })
+    });
+
+    this.alertCtrl.create({
+      title: 'Welcome to your calendar!',
+      message: 'Wanna know how many spots are left in your classes? Click in any of them to see!',
+      buttons: ['Ok']
+    }).present();
   }
 
   giveReview(evento){
@@ -83,13 +89,20 @@ export class CalendarPage {
    setTimeout(() => {this.navCtrl.parent.getSelected().push(WalletPage)}, 500);
   }
 
+  isDespues(fecha){
+    let today  = moment();
+    return moment(fecha).isBefore(today);
+  }
+
   markStart(inicio, tiempo){
     let t = parseInt(tiempo.slice(0,2));
     let m = parseInt(tiempo.slice(3));
-    let ayuda = moment(inicio).toDate();
-
+    let ayuda = moment(inicio, 'dddd').toDate();
     ayuda.setHours(t);
     ayuda.setMinutes(m);
+
+    if(this.isDespues(ayuda)) ayuda = (moment(ayuda).add(7, 'days')).toDate();
+    //ayuda = moment(ayuda).toDate();
 
     return ayuda;
   }
@@ -97,10 +110,13 @@ export class CalendarPage {
   markEnd(inicio, tiempo){
     let t = parseInt(tiempo.slice(0,2));
     let m = parseInt(tiempo.slice(3));
-    let ayuda = moment(inicio).toDate();
-
+    let ayuda = moment(inicio, 'dddd').toDate();
     ayuda.setHours(t+2);
     ayuda.setMinutes(m);
+
+    if(this.isDespues(ayuda)) ayuda = (moment(ayuda).add(7, 'days')).toDate();
+    //ayuda = moment(ayuda).toDate();
+
 
     return ayuda;
   }
@@ -152,42 +168,52 @@ export class CalendarPage {
     return aux;
   }
 
-  checkExistA(clave, llave, review){
+  isMine(clave){
+    let a = this.users$.Activities_created;
+    console.log(a);
+    for(let key in a){
+      if(a[key].index == clave) return true;
+    }
+    return false;
+  }
+
+  checkExistA(){
     let b = this.response$;
-    let aux;
+    console.log(b);
     for(let key in b){
-      if(b[key].index == clave){
-        let aux2 = {
-          'title': b[key].title.substring(0, 10) + '..',
-          'title_complete': b[key].title,
-          'location': b[key].location,
-          'description':  b[key].description,
-          'class_price': b[key].class_price,
-          'cancelation_policy':  b[key].cancelation_policy,
-          'categories':  b[key].categories,
-          'schedule':  b[key].schedule,
-          'img':  b[key].img,
-          'cost':  b[key].cost,
-          'type':  b[key].type,
-          'startTime': '',
-          'endTime': '',
-          'allDay': '',
-          'time': b[key].time,
-          'nomads': b[key].nomads,
-          'creator':  b[key].creator,
-          'index':  b[key].index,
-          // 'media': b[key].media,
-          'isEvent': false,
-          'clave': llave,
-          'clave_nomada': this.getClave(b[key].nomads),
-          'reviewed': (review != undefined ? review : false),
-          'review':( b[key].review ? b[key].review : 5),
-          'reviews': (b[key].reviews ? b[key].reviews : [])
+      if(this.isMine(b[key].index)){
+        if(b[key].schedule){
+          for(let lla in b[key].schedule){
+            this.activities_all.push({
+              'title': b[key].title.substring(0, 10) + '..',
+              'title_complete': b[key].title,
+              'location': b[key].location,
+              'description':  b[key].description,
+              'class_price': b[key].class_price,
+              'cancelation_policy':  b[key].cancelation_policy,
+              'categories':  b[key].categories,
+              'schedule':  b[key].schedule,
+              'img':  b[key].img,
+              'cost':  b[key].cost,
+              'type':  b[key].type,
+              'startTime': this.markStart(b[key].schedule[lla].day, b[key].schedule[lla].start_time),
+              'endTime': this.markEnd(b[key].schedule[lla].day, b[key].schedule[lla].start_time),
+              'allDay': '',
+              'time': b[key].time,
+              'nomads': b[key].nomads,
+              'creator':  b[key].creator,
+              'index':  b[key].index,
+              // 'media': b[key].media,
+              'isEvent': false,
+              'clave_nomada': this.getClave(b[key].nomads),
+              'review':( b[key].review ? b[key].review : 5),
+              'reviews': (b[key].reviews ? b[key].reviews : []),
+              'spaces_available': b[key].schedule[lla].spaces_available
+          });
+          }
         }
-        return aux2;
       }
     }
-    return aux;
   }
 
   getClave(nomadas){
@@ -206,25 +232,10 @@ export class CalendarPage {
 
         this.activities_all.push(this.checkExistE(this.nomad_schedule[i].activity_id, this.nomad_schedule[i].key, this.nomad_schedule[i].reviewed));
       }
-      else if(this.checkExistA(this.nomad_schedule[i].activity_id, this.nomad_schedule[i].key, this.nomad_schedule[i].reviewed) != undefined){
-        let ayuda = this.checkExistA(this.nomad_schedule[i].activity_id, this.nomad_schedule[i].key, this.nomad_schedule[i].reviewed);
-        ayuda.startTime = this.markStart(this.nomad_schedule[i].date, this.nomad_schedule[i].time);
-        ayuda.endTime = this.markEnd(this.nomad_schedule[i].date, this.nomad_schedule[i].time);
-        ayuda.allDay = false;
-        console.log(ayuda);
-        this.activities_all.push(ayuda);
-      }
     }
-    // let start = moment(event.startTime).format('LLLL');
-    // let end = moment(event.endTime).format('LLLL');
 
-   if(this.show_pop){
-     let today  = moment();
-     this.past_events = this.activities_all.filter( event => moment(moment(event.startTime).format('LLLL')).isBefore(today)&&event.reviewed);
-     if(this.past_events.length > 0) this.alertCtrl.create({title: 'Review your activities and events', message: 'It seems like you have past events and activities waiting for review. Click on them and select the review option!', buttons: ['Ok']}).present();
+    this.checkExistA();
 
-     this.show_pop = false;
-   }
    console.log(this.activities_all);
    console.log(this.past_events);
   }
@@ -413,53 +424,12 @@ export class CalendarPage {
     console.log(event);
     let start = moment(event.startTime).format('LLLL');
     let end = moment(event.endTime).format('LLLL');
+    let spaces = Object.keys(event.nomads).length;
 
-    let today  = moment();
-    //this.events = this.events.filter( event => !moment(event.day).isBefore(today));
-    if(!moment(start).isBefore(today)){
     let alert = this.alertCtrl.create({
       title: '' + event.title_complete,
-      subTitle: 'From: ' + start + '<br>To: ' + end,
-      buttons: [
-        {
-          text: 'View Details',
-          handler: () => {
-            this.seeDetails(event);
-          }
-        },
-        {
-          text: 'Remove',
-          handler: () =>{
-            this.confirmCancelation(event);
-          }
-        }]
-    })
-    alert.present();
-  }
-  else if(!event.reviewed || event.reviewed == undefined){
-    let alert = this.alertCtrl.create({
-      title: '' + event.title_complete,
-      subTitle: 'From: ' + start + '<br>To: ' + end,
-      buttons: [
-        {
-          text: 'View Details',
-          handler: () => {
-            this.seeDetails(event);
-          }
-        },
-        {
-          text: 'Write a review',
-          handler: () =>{
-            this.giveReview(event);
-          }
-        }]
-    })
-    alert.present();
-  }
-  else{
-    let alert = this.alertCtrl.create({
-      title: '' + event.title_complete,
-      subTitle: 'From: ' + start + '<br>To: ' + end,
+      subTitle: spaces + '/'+ event.spaces_available + ' spaces taken',
+      message: 'From: ' + start + '<br>To: ' + end,
       buttons: [
         {
           text: 'View Details',
@@ -469,7 +439,7 @@ export class CalendarPage {
         }]
     })
     alert.present();
-  }
+
   }
 
   onTimeSelected(ev) {

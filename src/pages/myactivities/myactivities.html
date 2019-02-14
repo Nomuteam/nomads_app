@@ -15,7 +15,7 @@
 
 <div *ngFor="let a of this.activities" (click)="confirmEdit(a)" class="activity-container" padding>
   <div class="activity-title">{{a.title}}</div>
-  <div class="activity-time">{{a.schedule[0].start_time}}</div>
+  <!-- <div class="activity-time">{{a.schedule[0].start_time}}</div> -->
 </div>
 
 <ion-fab (click)="openNew()" right bottom>

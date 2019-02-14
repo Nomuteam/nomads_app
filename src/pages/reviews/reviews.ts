@@ -42,6 +42,7 @@ public schedule: any = [];
 
 public stars_number: any = 0;
 public detalles: any = '';
+public califs: any = [];
 
 
   constructor(public navCtrl: NavController,
@@ -57,6 +58,10 @@ public detalles: any = '';
     console.log(this.schedule);
   }
 
+  add(a, b){
+    return a+b;
+  }
+
   sendReview(){
     let index = this.generateUUID();
     let reviewer = firebase.auth().currentUser.uid;
@@ -65,6 +70,13 @@ public detalles: any = '';
     this.af.list('Reviews').update(index, review);
 
     if(this.activity_data.isEvent){
+      let newr;
+      if(this.califs.length > 0) newr = (this.califs.reduce(this.add, 0) + this.stars_number)/this.califs.length;
+      else newr = this.stars_number;
+
+      this.af.list('Events').update(this.activity_data.index, {
+        'review': newr
+      })
       this.af.list('Events/'+this.activity_data.index+'/reviews').update(index, {'index': index})
           .then(() => {
             this.af.list('Notifications').push({'title': 'New Review!', 'subtitle': 'Your event '+this.activity_data.title_complete+' just received a new review! Check it out.', 'index':this.activity_data.creator});
@@ -82,6 +94,14 @@ public detalles: any = '';
           })
     }
     else{
+      let newr;
+      if(this.califs.length > 0) newr = (this.califs.reduce(this.add, 0) + this.stars_number)/this.califs.length;
+      else newr = this.stars_number;
+
+      this.af.list('Activities').update(this.activity_data.index, {
+        'review': newr
+      })
+
       this.af.list('Activities/'+this.activity_data.index+'/reviews').update(index, {'index': index})
           .then(() => {
              this.af.list('Notifications').push({'title': 'New Review!', 'subtitle': 'Your activity '+this.activity_data.title_complete+' just received a new review! Check it out.', 'index':this.activity_data.creator});
@@ -132,6 +152,10 @@ public detalles: any = '';
       this.convertNomads();
       if(this.general_loader) this.general_loader.dismiss();
     });
+    for(let key in this.activity_data.reviews){
+      this.califs[this.califs.length] = this.activity_data.reviews[key].this.stars_number;
+    }
+    console.log(this.califs);
     console.log(this.noms_balance);
   }
 

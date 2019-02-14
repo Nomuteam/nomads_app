@@ -54,6 +54,9 @@ public c_available: any = '';
     this.activity_data = this.navParams.get('Activity');
     this.activity_data.schedule.map(x => this.schedule.filter(a => a.day == x.day).length > 0 ? null : this.schedule.push(x));
     console.log(this.schedule);
+
+    if(this.navParams.get('Time')) this.selected_time = this.navParams.get('Time');
+    if(this.navParams.get('Day')) this.selected_day = this.navParams.get('Day');
   }
 
   sanitizeThis(image){

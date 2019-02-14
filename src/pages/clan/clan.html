@@ -37,7 +37,7 @@
    <div class="clan-img" [style.background-image]="sanitizeThis(clan.img)"></div>
    <div class="jc-topcontainer">
     <div class="clan-members">{{clan.members.length}} nomads</div>
-    <div class="clan-members">4.5 (90)</div>
+    <!-- <div class="clan-members">4.5 (90)</div> -->
     <img src="assets/img/share_icon.png" class="share-icon">
    </div>
 
@@ -69,7 +69,7 @@
 
  <button (click)="openNew()" type="button" class="pink-btn green">Create Event</button>
  <button (click)="openMembers()" type="button" class="pink-btn">View Members</button>
- <button (click)="openChat()" type="button" class="pink-btn">Chat</button>
+ <button (click)="openChat()" type="button" class="pink-btn chat">Chat</button>
  <!-- <button [disabled]="true" type="button" class="pink-btn">Invite through code</button> -->
 
  <div class="leave-btn">Leave Clan</div>

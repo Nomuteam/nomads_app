@@ -11,8 +11,10 @@
        <div class="div1"></div>
        <div class="div2"></div>
        <div class="div3"></div></div> -->
-     <p class="noms-hint">Noms</p>
-     <p class="noms-qty">{{this.noms_balance}}</p>
+       <div class="noms-ctr">
+         <div class="noms-hint">Noms</div>
+         <div class="noms-qty">{{this.noms_balance}}</div>
+       </div>
     </ion-buttons>
     <ion-buttons end (click)="presentActionSheet()">
 
@@ -40,10 +42,10 @@
      <div  class="container-circles">
        <div class="noms-qty2">{{this.noms_balance}}</div>
        <div class="container-down">
-         <div class="circles-noms">
+         <!-- <div class="circles-noms">
            <div class="div1"></div>
            <div class="div2"></div>
-           <div class="div3"></div></div>
+           <div class="div3"></div></div> -->
            <div class="noms-hint">NOMS</div>
        </div>
 
@@ -85,8 +87,8 @@
 
 
  <div class="container-btns">
-   <button (click)="logOut()" type="button" class="scan-btn">Logout (Provisional)</button>
-   <button (click)="openPage('h')" type="button" class="history-btn">My Purchases</button>
+   <button (click)="logOut()" type="button" class="scan-btn">Logout</button>
+   <button (click)="openPage('h')" type="button" class="history-btn">Tickets</button>
  </div>
 
 

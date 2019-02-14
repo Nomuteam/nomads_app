@@ -40,6 +40,11 @@ public nomads_joined: any = [];
 
 public favorites: any = [];
 
+public friends: any = [];
+public clans$: any;
+public amigos: any = [];
+public people$: any;
+
 
 
 @ViewChild('map') mapElement: ElementRef;
@@ -244,12 +249,85 @@ public favorites: any = [];
     return false;
   }
 
+  getClans(){
+    this.af.object('Clans').snapshotChanges().subscribe(action => {
+      this.clans$ = action.payload.val();
+      this.getFriends();
+    });
+  }
+
+  inClan(clave){
+    let f = this.users$.Clans;
+    for(let key in f){
+      if(f[key].index == clave) return true;
+    }
+    return false;
+  }
+
+  makeFriends(ami){
+    for(let key in ami){
+      this.friends.push({
+        'index': ami[key].index
+      });
+    }
+  }
+
+  isFriend(clave){
+    let f = this.friends;
+    for(let key in f){
+      if(f[key].index == clave && clave != firebase.auth().currentUser.uid) return true;
+    }
+    return false;
+  }
+
+  makeAmigo(amigo){
+        this.amigos.push({
+          'index': amigo.index,
+          'name': this.getName(amigo.index),
+          'initial': this.getName(amigo.index).charAt(0),
+          'img': this.getImg(amigo.index)
+        });
+  }
+
+  getImg(clave){
+    let p = this.people$;
+    for(let key in p){
+      if(p[key].index == clave) return '';
+    }
+    return '';
+  }
+
+  getName(clave){
+    let p = this.people$;
+    for(let key in p){
+      if(p[key].index == clave) return p[key].first_name + ' ' + p[key].last_name;
+    }
+    return '';
+  }
+
+  getFriends(){
+    let c = this.clans$;
+    for(let key in c){
+      if(this.inClan(c[key].index)) this.makeFriends(c[key].members);
+    }
+
+    let a = this.event_data.nomads;
+    for(let key in a){
+      if(this.isFriend(a[key].index)) this.makeAmigo(a[key]);
+    }
+
+    console.log(this.amigos);
+  }
+
   ionViewDidLoad(){
     this.general_loader = this.loadingCtrl.create({
       spinner: 'bubbles',
       content: 'Loading...'
     });
     this.general_loader.present();
+    this.af.object('Users').snapshotChanges().subscribe(action => {
+      this.people$ = action.payload.val();
+    });
     this.af.object('Users/'+this.event_data.creator).snapshotChanges().subscribe(action => {
       this.owners$ = action.payload.val();
 
@@ -262,6 +340,7 @@ public favorites: any = [];
       this.name = this.users$.first_name;
       this.favorites = this.users$.favorites;
       this.convertSchedule();
+      this.getClans();
     });
     this.af.object('Events/'+this.event_data.index+'/nomads').snapshotChanges().subscribe(action => {
       this.response$ = action.payload.val();
