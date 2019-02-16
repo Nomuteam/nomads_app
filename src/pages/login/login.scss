@@ -21,7 +21,7 @@ page-login {
     }
 
     .container-datos{
-      font-family: 'Montserrat', sans-serif;
+      font-family: 'Custom';
       display: block;
       margin: 0 auto;
       //border: 1px solid white;
@@ -59,7 +59,7 @@ page-login {
         }
 
         .pw-forgot{
-          font-family: 'Montserrat', sans-serif;
+          font-family: 'Custom';
           font-size: 80%;
           color: white;
           width: 60vw;
@@ -67,7 +67,7 @@ page-login {
         }
 
         .register-btn{
-          font-family: 'Montserrat', sans-serif;
+          font-family: 'Custom';
           font-size: 90%;
           color: white;
           margin-left: 5%;
@@ -100,8 +100,9 @@ page-login {
       background-color: #229B86;
 
 
-      font-family: 'Montserrat', sans-serif;
+      font-family: 'Custom';
       font-size: 100%;
+      font-weight: 700;
       color: white;
 
       // position: fixed;
@@ -116,8 +117,9 @@ page-login {
       background-color: transparent;
       border: 1px solid white;
 
-      font-family: 'Montserrat', sans-serif;
+      font-family: 'Custom';
       font-size: 100%;
+      font-weight: 700;
       color: white;
 
       // position: absolute;

@@ -25,7 +25,7 @@ page-welcome {
      margin-top: 10vh;
      ion-slide{
        h3{
-         font-family: 'Montserrat', sans-serif;
+         font-family: 'Custom';
          font-weight: 700;
          color: white;
        }
@@ -38,8 +38,9 @@ page-welcome {
      border-radius: 12px;
      background-color: #229B86;
 
-     font-family: 'Montserrat', sans-serif;
+     font-family: 'Custom';
      font-size: 100%;
+     font-weight: 700;
      color: white;
 
      position: absolute;
@@ -53,8 +54,9 @@ page-welcome {
      border-radius: 12px;
      background-color: #DFDFDF;
 
-     font-family: 'Montserrat', sans-serif;
+     font-family: 'Custom';
      font-size: 100%;
+     font-weight: 700;
      color: black;
 
      position: absolute;
@@ -64,7 +66,7 @@ page-welcome {
 
 
    .allies-btn{
-     font-family: 'Montserrat', sans-serif;
+     font-family: 'Custom';
      color: white;
      position: absolute;
      bottom: 3vh;

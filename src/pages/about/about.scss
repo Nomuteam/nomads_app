@@ -29,7 +29,7 @@ page-about {
     //background: linear-gradient(#8141CB, #4C216D 70%)!important;
     box-shadow: 0px 0px 5px white;
 
-    font-family: 'Montserrat', sans-serif;
+    font-family: 'Custom';
     font-size: 100%;
     font-weight: 700!important;
     //color: rgba(0, 0, 0, 0.8);
@@ -44,22 +44,22 @@ page-about {
     background-color: transparent;
     border: 1px solid #FF6B84;
 
-    font-family: 'Montserrat', sans-serif;
+    font-family: 'Custom';
     font-size: 100%;
     font-weight: 700!important;
     color: white;
   }
 
   .title-container{
-    font-family: 'Montserrat', sans-serif;
-    font-weight: 400;
-    font-size: 100%;
+    font-family: 'Custom';
+    font-weight: 700;
+    font-size: 150%;
     color: white;
     padding-left: 5%;
   }
 
   .no-clans{
-    font-family: 'Montserrat', sans-serif;
+    font-family: 'Custom';
     font-weight: 400;
     font-size: 90%;
     color: white;
@@ -80,7 +80,7 @@ page-about {
             justify-content: flex-end;
             margin-top: -23%!important;
             p{
-              font-family: 'Montserrat', sans-serif;
+              font-family: 'Custom';
               font-weight: 600!important;
               font-size: 80%;
               color: white;
@@ -132,9 +132,9 @@ page-about {
             filter: opacity(.8);
           }
           .act-title{
-            font-family: 'Montserrat', sans-serif;
-            font-weight: 400!important;
-            font-size: 100%;
+            font-family: 'Custom';
+            font-weight: 700!important;
+            font-size: 120%;
             color: white;
             //border: 1px solid red;
             text-align: left;
@@ -142,9 +142,9 @@ page-about {
             margin-top: 5%;
           }
           .act-distance{
-            font-family: 'Montserrat', sans-serif;
-            font-weight: 600!important;
-            font-size: 80%;
+            font-family: 'Custom';
+            font-weight: 400!important;
+            font-size: 100%;
             color: white;
             //border: 1px solid red;
             text-align: left;

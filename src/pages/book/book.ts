@@ -5,6 +5,7 @@ import firebase from 'firebase';
 import { DomSanitizer } from '@angular/platform-browser';
 import * as moment from 'moment';
 import { ChatsPage } from '../chats/chats';
+import { SocialSharing } from '@ionic-native/social-sharing';
 
 /**
  * Generated class for the BookPage page.
@@ -54,7 +55,8 @@ public chats_index: any = [];
   public loadingCtrl: LoadingController,
   public alertCtrl: AlertController,
   public sanitizer: DomSanitizer,
-  public viewCtrl: ViewController) {
+  public viewCtrl: ViewController,
+  public socialSharing: SocialSharing) {
     this.activity_data = this.navParams.get('Activity');
     this.activity_data.schedule.map(x => this.schedule.filter(a => a.day == x.day).length > 0 ? null : this.schedule.push(x));
     console.log(this.schedule);
@@ -65,6 +67,13 @@ public chats_index: any = [];
 
   sanitizeThis(image){
     return this.sanitizer.bypassSecurityTrustStyle('url('+image+')');
+  }
+
+  shareGeneral(){
+    this.socialSharing.share('Hey Everybody! I just joined '+this.activity_data.title_complete+' at '+this.selected_time+' on '+this.selected_day+'. Join Me on nōmu!', 'Nomads!')
+        .then((entries) =>{
+          console.log('success ', +JSON.stringify(entries));
+        })
   }
 
   getClans(){

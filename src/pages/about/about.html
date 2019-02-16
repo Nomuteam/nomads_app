@@ -10,16 +10,11 @@
          <div class="noms-qty">{{this.noms_balance}}</div>
        </div>
     </ion-buttons>
-    <ion-buttons (click)="openFilters()" end>
-     <!-- <div class="filters-noms">
-       <div class="div1"></div>
-       <div class="div2"></div>
-       <div class="div3"></div>
-     </div> -->
+    <!-- <ion-buttons (click)="openFilters()" end>
      <button ion-button>
        <ion-icon name="ios-options" color="white"></ion-icon>
      </button>
-    </ion-buttons>
+    </ion-buttons> -->
     <p class="title">Clans</p>
   </ion-navbar>
 </ion-header>
@@ -41,5 +36,9 @@
       </ion-col>
     </ion-row>
   </ion-grid>
+
+  <ion-fab (click)="openFilters()" right bottom>
+   <button ion-fab color="purple"><ion-icon name="ios-options"></ion-icon></button>
+ </ion-fab>
 
 </ion-content>

@@ -36,12 +36,12 @@
        <img src="{{a.img}}" class="img-slide">
        <!-- <div class="img-slide" [style.background-image]="sanitizeThis(a.img)"></div> -->
        <p class="act-title">{{a.title}}</p>
-       <p class="act-distance"> {{a.distance}} km</p>
+       <p class="act-distance"> {{a.distance}}</p>
        <div *ngIf="!a.isEvent" class="noms-coins">
-         <p>{{a.class_price}}</p>
+         <p>{{a.class_price}} noms</p>
        </div>
        <div *ngIf="a.isEvent" class="noms-coins">
-         <p>{{a.cost}}</p>
+         <p>{{a.cost}} noms</p>
        </div>
      </ion-slide>
     </ion-slides>

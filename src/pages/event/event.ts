@@ -7,6 +7,8 @@ import { AngularFireDatabase, AngularFireObject } from 'angularfire2/database';
 import firebase from 'firebase';
 import { DomSanitizer } from '@angular/platform-browser';
 import * as moment from 'moment';
+import { ChatsPage } from '../chats/chats';
+import { SocialSharing } from '@ionic-native/social-sharing';
 
 /**
  * Generated class for the EventPage page.
@@ -41,9 +43,12 @@ public nomads_joined: any = [];
 public favorites: any = [];
 
 public friends: any = [];
-public clans$: any;
+// public clans$: any;
 public amigos: any = [];
 public people$: any;
+
+public clans$: any;
+public chats_index: any = [];
 
 
 
@@ -57,7 +62,8 @@ public people$: any;
     public alertCtrl: AlertController,
     public geolocation: Geolocation,
     public sanitizer: DomSanitizer,
-    public modalCtrl: ModalController) {
+    public modalCtrl: ModalController,
+    public socialSharing: SocialSharing) {
       this.event_data = this.navParams.get('Event');
       console.log(this.event_data);
   }
@@ -98,6 +104,54 @@ public people$: any;
 
  spacesA(){
   return parseInt(this.event_data.spaces_available) > 0;
+}
+
+confirmShare(){
+  const confirm = this.alertCtrl.create({
+    title: 'Share to your clans?',
+    message: 'Do you want to share that you joined this event with the clans you are a member?',
+    buttons: [
+      {
+        text: 'Cancel',
+        handler: () => {
+
+        }
+      },
+      {
+        text: 'Share!',
+        handler: () => {
+          this.sharetoClans();
+        }
+      }
+    ]
+  });
+  confirm.present();
+}
+
+// openChat(){
+//   this.navCtrl.parent.select(4)
+//       .then(()=> {
+//         this.navCtrl.parent.getSelected().push(ChatsPage, {'Segmento': 'clans'});
+//       });
+// }
+
+sharetoClans(){
+  let c = this.chats_index;
+  for(let key in c){
+    this.af.list('Chats/'+c[key].index+'/messages').push({
+      'senderId': firebase.auth().currentUser.uid,
+      'message': 'Hey Everybody! I just joined '+this.event_data.title_complete+'. Join Me!'
+    }).then(() => {
+      let a = c[key].members;
+      for(let key in a){
+        if(a[key].index != firebase.auth().currentUser.uid){
+          this.af.list('Notifications').push({'title': 'New chat message!', 'subtitle': this.users$.first_name+' just sent a message to your chat!', 'index': a[key].index});
+        }
+      }
+    })
+  }
+  this.alertCtrl.create({title: 'Succesfully Shared!', subTitle: 'Your clan friends should be joining soon!', buttons: ['Ok']}).present();
+  // this.returnTo();
 }
 
   goJoin(){
@@ -167,7 +221,20 @@ public people$: any;
                   title: 'You are all set!',
                   subTitle: 'Some details..',
                   message: 'You can find a chat room in your profile between you and this event creator in case of questions. It will expire after the event',
-                  buttons: ['Ok']
+                  buttons: [
+                    {
+                    text: 'Ok',
+                    handler: () =>{
+
+                    }
+                  },
+                  {
+                  text: 'Share',
+                  handler: () =>{
+                    this.shareGeneral();
+                  }
+                },
+                ]
                 }).present();
                 this.general_loader.dismiss();
                 this.navCtrl.parent.select(3);
@@ -253,6 +320,7 @@ public people$: any;
     this.af.object('Clans').snapshotChanges().subscribe(action => {
       this.clans$ = action.payload.val();
       this.getFriends();
+      this.getMines();
     });
   }
 
@@ -262,6 +330,23 @@ public people$: any;
       if(f[key].index == clave) return true;
     }
     return false;
+  }
+
+  getMines(){
+    let c = this.clans$;
+    for(let key in c){
+      if(this.inClan(c[key].index)){
+        this.chats_index.push({'index': c[key].chat, 'members': c[key].members});
+      }
+    }
+    console.log(this.chats_index);
+  }
+
+  shareGeneral(){
+    this.socialSharing.share('Hey Everybody! I just joined the event '+this.event_data.title_complete+'. Join Me on nōmu!', 'Nomads!')
+        .then((entries) =>{
+          console.log('success ', +JSON.stringify(entries));
+        })
   }
 
   makeFriends(ami){
@@ -306,6 +391,7 @@ public people$: any;
   }
 
   getFriends(){
+    this.amigos = [];
     let c = this.clans$;
     for(let key in c){
       if(this.inClan(c[key].index)) this.makeFriends(c[key].members);

@@ -3,7 +3,7 @@ page-event {
     //height: 50vh;
     background-color: rgba(74, 74, 74, .3);
     border-radius: 15px;
-    font-family: 'Montserrat', sans-serif;
+    font-family: 'Custom';
     color: white;
     position: relative;
     margin-bottom: 5%;
@@ -141,14 +141,14 @@ page-event {
     }
   }
   .section-title{
-    font-family: 'Montserrat', sans-serif;
+    font-family: 'Custom';
     color: rgba(255, 255, 255, .8);
     border-bottom: 1px solid rgba(255, 255, 255, .3);
     font-weight: 700;
     margin-bottom: 2%;
   }
   .description-area{
-    font-family: 'Montserrat', sans-serif;
+    font-family: 'Custom';
     color: rgba(255, 255, 255, .6);
     font-weight: 90%;
     font-weight: 400;
@@ -190,7 +190,7 @@ page-event {
         font-size: 200%;
       }
       .name{
-        font-family: 'Montserrat', sans-serif;
+        font-family: 'Custom';
         color: white;
         margin-top: 3%;
       }
@@ -200,7 +200,7 @@ page-event {
   .row-times{
     display: flex;
     justify-content: space-between;
-    font-family: 'Montserrat', sans-serif;
+    font-family: 'Custom';
     color: white;
     .row-hours{
       display: flex;
@@ -217,7 +217,7 @@ page-event {
   }
 
   .location-hint{
-    font-family: 'Montserrat', sans-serif;
+    font-family: 'Custom';
     color: rgba(255, 255, 255, .6);
     font-weight: 90%;
     font-weight: 400;

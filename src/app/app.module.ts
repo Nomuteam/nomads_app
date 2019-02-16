@@ -59,6 +59,7 @@ import { NgCalendarModule  } from 'ionic2-calendar';
 import { Geolocation } from '@ionic-native/geolocation';
 import { Camera } from '@ionic-native/camera';
 import { Stripe } from '@ionic-native/stripe';
+import { SocialSharing } from '@ionic-native/social-sharing';
 
 import { AngularFireModule } from 'angularfire2';
 import { AngularFireDatabaseModule } from 'angularfire2/database';
@@ -182,6 +183,7 @@ import { FIREBASE_CONFIG } from './firebase.credentials';
     Keyboard,
     Camera,
     Stripe,
+    SocialSharing,
     Geolocation,
     {provide: ErrorHandler, useClass: IonicErrorHandler}
   ]

@@ -19,7 +19,7 @@
     <ion-buttons end (click)="presentActionSheet()">
 
      <button ion-button icon-only>
-       <ion-icon name="ios-settings" color="white"></ion-icon>
+       <ion-icon style="background-color: black!important; box-shadow: none!important;" name="ios-settings" color="white"></ion-icon>
      </button>
     </ion-buttons>
     <p class="title">My Profile</p>
@@ -28,7 +28,13 @@
 
 
 <ion-content>
- <div class="bg-img"></div>
+  <div class="superior">
+    <div (click)="shareGeneral()" class="code-info">
+      <div class="mine">Click to share my code: {{this.user_data.my_code}}</div>
+      <img src="assets/img/share_icon.png" class="share-icon">
+    </div>
+  </div>
+ <!-- <div class="bg-img"></div> -->
  <div class="profile-img">{{this.user_data.initial}}</div>
  <p class="user-name">{{this.user_data.first_name}}</p>
  <div class="things-container">
@@ -86,10 +92,13 @@
  </div>
 
 
- <div class="container-btns">
-   <button (click)="logOut()" type="button" class="scan-btn">Logout</button>
-   <button (click)="openPage('h')" type="button" class="history-btn">Tickets</button>
+ <div class="cont-bt">
+   <div class="container-btns">
+     <button (click)="logOut()" type="button" class="scan-btn">Logout</button>
+     <button (click)="openPage('h')" type="button" class="history-btn">Tickets</button>
+   </div>
  </div>
+
 
 
 

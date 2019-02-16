@@ -13,7 +13,7 @@ import { AngularFireAuth } from 'angularfire2/auth';
 import { WelcomePage } from '../welcome/welcome';
 import * as moment from 'moment';
 import { AyudaPage } from '../ayuda/ayuda';
-
+import { SocialSharing } from '@ionic-native/social-sharing';
 
 /**
  * Generated class for the ProfilePage page.
@@ -45,12 +45,20 @@ public noms_balance: any;
     public appCtrl: App,
     public afAuth: AngularFireAuth,
     public actionSheetCtrl: ActionSheetController,
-    public modalCtrl: ModalController) {
+    public modalCtrl: ModalController,
+    public socialSharing: SocialSharing) {
   }
 
   openAyuda(){
   let modal = this.modalCtrl.create(AyudaPage);
   modal.present();
+  }
+
+  shareGeneral(){
+    this.socialSharing.share('Hey! Join me on nōmu and get amazing gifts with my invitation code. Download the app and use my code: '+this.user_data.my_code, 'Nomads!')
+        .then((entries) =>{
+          console.log('success ', +JSON.stringify(entries));
+        })
   }
 
   presentActionSheet(){
@@ -106,6 +114,7 @@ actionSheet.present();
       this.user_data.birthdate = this.alumno$.birthdate;
       this.user_data.email = this.alumno$.email;
       this.user_data.phone = this.alumno$.phone;
+      this.user_data.my_code = this.alumno$.my_code;
       this.noms_balance = this.alumno$.noms;
       if(this.general_loader) this.general_loader.dismiss();
     });

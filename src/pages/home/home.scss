@@ -11,14 +11,17 @@ page-home {
    align-items: center;
    //border: 1px solid rgba(255, 255, 255, .7);
    //background-color: rgb(80, 80, 80);
-   background: linear-gradient(#8141CB, #4C216D 70%)!important;
+   // background: linear-gradient(#8141CB, #4C216D 70%)!important;
+   background-color: #1BBF80;
    padding: 3%;
-   font-family: 'Montserrat', sans-serif;
+   //font-family: 'Custom';
+   font-family: 'Custom';
+   font-weight: 700!important;
    color: white;
-   background-image: url('../../assets/img/go.png');
-   background-position: 95%;
-   background-repeat: no-repeat;
-   box-shadow: 0px 0px 20px #8141CB;
+   // background-image: url('../../assets/img/go.png');
+   // background-position: 95%;
+   // background-repeat: no-repeat;
+   box-shadow: 0px 0px 1px #8141CB;
 
 
 
@@ -62,7 +65,7 @@ page-home {
      align-items: center;
      .option-hint{
         margin: 2%;
-        font-family: 'Montserrat', sans-serif;
+        font-family: 'Custom';
         color: white;
         font-size: 80%;
         margin-top: 3%!important;
@@ -142,7 +145,7 @@ page-home {
      background-color: rgba(255, 255, 255, .24);
      border: 1px solid #B7B7B7;
      color: white;
-     font-family: 'Montserrat', sans-serif;
+     font-family: 'Custom';
      font-weight: 600!important;
      font-size: 90%;
      border-radius: 10px;
@@ -156,7 +159,7 @@ page-home {
       #229B86;
      margin-top: 3%;
 
-     font-family: 'Montserrat', sans-serif;
+     font-family: 'Custom';
      font-size: 100%;
      color: white;
      margin-bottom: 3%;
@@ -169,9 +172,9 @@ page-home {
   .category-title{
     border-radius: 5px;
     //background-color: gray;
-    font-family: 'Montserrat', sans-serif;
+    font-family: 'Custom';
     font-weight: 700!important;
-    font-size: 110%;
+    font-size: 125%;
     color: white;
     height: 40px;
     padding: 3%;
@@ -199,7 +202,8 @@ page-home {
   }
 
   .best{
-    background-image: linear-gradient(to right, #65655C, #d2d2d2)!important;
+    background-image: linear-gradient(to right, #4400C4, #1AA3AF)!important;
+    //background-image: linear-gradient(to right, #65655C, #d2d2d2)!important;
   }
 
   .events{
@@ -232,9 +236,9 @@ page-home {
   }
 
   .category-suggestions{
-    font-family: 'Montserrat', sans-serif;
+    font-family: 'Custom';
     font-weight: 400!important;
-    font-size: 80%;
+    font-size: 90%;
     margin-top: 1%;
     color: white;
   }
@@ -249,7 +253,7 @@ page-home {
         justify-content: flex-end;
         margin-top: -32%!important;
         p{
-          font-family: 'Montserrat', sans-serif;
+          font-family: 'Custom';
           font-weight: 600!important;
           font-size: 80%;
           color: white;
@@ -301,9 +305,9 @@ page-home {
         filter: opacity(.8);
       }
       .act-first{
-        font-family: 'Montserrat', sans-serif;
+        font-family: 'Custom';
         font-weight: 600!important;
-        font-size: 70%;
+        font-size: 80%;
         color: white;
         //border: 1px solid red;
         text-align: left;
@@ -314,9 +318,9 @@ page-home {
         opacity: .8;
       }
       .act-title{
-        font-family: 'Montserrat', sans-serif;
+        font-family: 'Custom';
         font-weight: 700!important;
-        font-size: 70%;
+        font-size: 80%;
         color: white;
         //border: 1px solid red;
         text-align: left;
@@ -324,30 +328,30 @@ page-home {
         margin-top: -7%;
       }
       .act-distance{
-        font-family: 'Montserrat', sans-serif;
+        font-family: 'Custom';
         font-weight: 600!important;
-        font-size: 70%;
+        font-size: 80%;
         color: white;
         //border: 1px solid red;
         text-align: left;
         padding-left: 2%;
         margin-top: -8%;
         text-transform: uppercase;
-        color: #55D1AC;
-        opacity: .6;
+        color: #A8A8A8;
+        opacity: 1;
       }
       .act-rating{
-        font-family: 'Montserrat', sans-serif;
+        font-family: 'Custom';
         font-weight: 600!important;
-        font-size: 50%;
+        font-size: 60%;
         color: white;
         //border: 1px solid red;
         text-align: left;
         padding-left: 2%;
         margin-top: -6%;
         text-transform: uppercase;
-        color: #55D1AC;
-        opacity: .4;
+        color: #A8A8A8;
+        opacity: .7;
       }
     }
   }

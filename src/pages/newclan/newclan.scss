@@ -9,7 +9,7 @@ page-newclan {
   }
 
   .newclan{
-    background: linear-gradient(#A491CC, #0C0C0C 70%)!important;
+      background: linear-gradient(#008573, #0C0C0C 70%)!important;
   }
 
   .title-container{
@@ -46,7 +46,7 @@ page-newclan {
       .add-btn{
         width: 95%;
         border-radius: 5px;
-        font-family: 'Montserrat', sans-serif;
+        font-family: 'Custom';
         font-size: 70%;
         color: white;
         padding: 4%;
@@ -58,7 +58,7 @@ page-newclan {
         justify-content: space-between;
         align-items: center;
         .type-element{
-          font-family: 'Montserrat', sans-serif;
+          font-family: 'Custom';
           font-size: 70%;
           color: white;
           padding: 4%;
@@ -76,7 +76,7 @@ page-newclan {
     }
 
     .pw-forgot{
-      font-family: 'Montserrat', sans-serif;
+      font-family: 'Custom';
       font-size: 80%;
       color: white;
       width: 60vw;
@@ -84,7 +84,7 @@ page-newclan {
     }
 
     .register-btn{
-      font-family: 'Montserrat', sans-serif;
+      font-family: 'Custom';
       font-size: 90%;
       color: white;
       margin-left: 5%;
@@ -98,7 +98,7 @@ page-newclan {
     margin: 0 auto;
     padding: 3%;
     width: 100%;
-    font-family: 'Montserrat', sans-serif;
+    font-family: 'Custom';
     font-weight: 700;
     color: rgba(255, 255, 255, 1);
     background-color: #FF6B84;

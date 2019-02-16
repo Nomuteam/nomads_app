@@ -10,16 +10,11 @@
          <div class="noms-qty">{{this.noms_balance}}</div>
        </div>
     </ion-buttons>
-    <ion-buttons (click)="openFilters()" end>
+    <!-- <ion-buttons (click)="openFilters()" end>
       <button ion-button>
         <ion-icon name="ios-options" color="white"></ion-icon>
       </button>
-     <!-- <div class="filters-noms">
-       <div class="div1"></div>
-       <div class="div2"></div>
-       <div class="div3"></div>
-     </div> -->
-    </ion-buttons>
+    </ion-buttons> -->
     <p class="title">Home</p>
   </ion-navbar>
 </ion-header>
@@ -74,7 +69,7 @@
   </div> -->
 
   <div class="category-container">
-   <div (click)="openFiltered('All Activities')" class="category-title experiences">Best Rated Activities</div>
+   <div (click)="openFiltered('All Activities')" class="category-title best">Best Rated Activities</div>
    <!-- <p class="category-suggestions">Next ones for you</p> -->
    <ion-slides slidesPerView="1.6">
     <ion-slide (click)="openActivity(a)" *ngFor="let a of this.getRated()">
@@ -105,6 +100,7 @@
    <div (click)="openFiltered('All Activities')" class="category-title fav">Your Favorites</div>
    <!-- <p class="category-suggestions">These are your favorite activities</p> -->
    <!-- <p *ngIf="this.favoritos.length == 0" class="category-suggestions">You don't have favorites yet!</p> -->
+   <p *ngIf="this.favoritos.length == 0" class="category-suggestions">You don't have any favorite activities selected. Click on the heart to add them!</p>
    <ion-slides slidesPerView="1.6">
     <ion-slide (click)="seeDetails(f)"  *ngFor="let f of this.favoritos">
       <div class="img-slide" [style.background-image]="sanitizeThis(f.img)"></div>
@@ -174,6 +170,10 @@
      </ion-slide>
   </ion-slides>
   </div> -->
+
+  <ion-fab (click)="openFilters()" right bottom>
+   <button ion-fab color="purple"><ion-icon name="ios-options"></ion-icon></button>
+ </ion-fab>
 
 
 </ion-content>

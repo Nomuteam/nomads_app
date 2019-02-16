@@ -121,7 +121,7 @@ export class CalendarPage {
     for(let key in a){
       if(a[key].index == clave){
         let aux2 = {
-          'title': a[key].title.substring(0, 10) + '..',
+          'title': a[key].title,
           'title_complete': a[key].title,
           'location': a[key].location,
           'difficulty':  a[key].difficulty,
@@ -158,7 +158,7 @@ export class CalendarPage {
     for(let key in b){
       if(b[key].index == clave){
         let aux2 = {
-          'title': b[key].title.substring(0, 10) + '..',
+          'title': b[key].title,
           'title_complete': b[key].title,
           'location': b[key].location,
           'description':  b[key].description,

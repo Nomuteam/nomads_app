@@ -7,14 +7,26 @@ page-clanf {
     }
   }
 
+  .toolbar-background-ios{
+    border-style: none!important;
+  }
+
   .clanf{
-    background: linear-gradient(#A491CC, #0C0C0C 70%)!important;
+    background: linear-gradient(#008573, #0C0C0C 70%)!important;
+  }
+
+  .title-container{
+    font-family: 'Custom';
+    font-weight: 700;
+    font-size: 150%;
+    color: white;
+    padding-left: 5%;
   }
 
  .clan-search{
    height: 40px;
    padding: 3%;
-   font-family: 'Montserrat', sans-serif;
+   font-family: 'Custom';
    font-size: 100%;
    color: white;
    //border: 1px solid #9073CB;
@@ -27,7 +39,7 @@ page-clanf {
  }
 
  .message{
-   font-family: 'Montserrat', sans-serif;
+   font-family: 'Custom';
    font-weight: 400;
    font-size: 100%;
    color: white;
@@ -45,7 +57,7 @@ page-clanf {
          justify-content: flex-end;
          margin-top: -23%!important;
          p{
-           font-family: 'Montserrat', sans-serif;
+           font-family: 'Custom';
            font-weight: 600!important;
            font-size: 80%;
            color: white;
@@ -97,7 +109,7 @@ page-clanf {
          filter: opacity(.8);
        }
        .act-status{
-         font-family: 'Montserrat', sans-serif;
+         font-family: 'Custom';
          font-weight: 400!important;
          font-size: 80%;
          color: #8BC4C0;
@@ -110,9 +122,9 @@ page-clanf {
          color: #9073CB;
        }
        .act-title{
-         font-family: 'Montserrat', sans-serif;
-         font-weight: 400!important;
-         font-size: 100%;
+         font-family: 'Custom';
+         font-weight: 700!important;
+         font-size: 120%;
          color: white;
          //border: 1px solid red;
          text-align: left;
@@ -120,25 +132,25 @@ page-clanf {
          margin-top: -8%;
        }
        .act-distance{
-         font-family: 'Montserrat', sans-serif;
-         font-weight: 600!important;
-         font-size: 80%;
+         font-family: 'Custom';
+         font-weight: 400!important;
+         font-size: 100%;
          color: white;
          //border: 1px solid red;
          text-align: left;
          padding-left: 2%;
-         margin-top: -10%;
+         margin-top: -12%;
        }
        .act-location{
-         font-family: 'Montserrat', sans-serif;
+         font-family: 'Custom';
          font-weight: 600!important;
-         font-size: 60%;
+         font-size: 80%;
          color: white;
          opacity: .5;
          //border: 1px solid red;
          text-align: left;
          padding-left: 2%;
-         margin-top: -7%;
+         margin-top: -10%;
        }
      }
    }

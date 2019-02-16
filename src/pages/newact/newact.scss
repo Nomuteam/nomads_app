@@ -6,9 +6,9 @@ page-newact {
     ion-item{
       color: white!important;
     }
-    
+
     .walk-title{
-      font-family: 'Montserrat', sans-serif;
+      font-family: 'Custom';
       color: white;
       font-weight: 700!important;
       padding-left: 9%;
@@ -33,7 +33,7 @@ page-newact {
     }
    }
    .walk-message{
-     font-family: 'Montserrat', sans-serif;
+     font-family: 'Custom';
      color: white;
      font-weight: 300!important;
      padding-left: 9%;
@@ -41,7 +41,7 @@ page-newact {
    }
 
    .container-datos{
-     font-family: 'Montserrat', sans-serif;
+     font-family: 'Custom';
      display: block;
      margin: 0 auto;
      //border: 1px solid white;
@@ -94,7 +94,7 @@ page-newact {
        justify-content: space-around;
        margin-bottom: 3%;
        .a-title{
-          font-family: 'Montserrat', sans-serif;
+          font-family: 'Custom';
           font-size: 80%;
           color: rgba(255, 255, 255, .5);
        }
@@ -114,13 +114,13 @@ page-newact {
          flex-direction: column;
        }
        .main-text{
-         font-family: 'Montserrat', sans-serif;
+         font-family: 'Custom';
          font-size: 80%;
          font-weight: 700!important;
          color: rgba(255, 255, 255, .8);
        }
        .comp-text{
-         font-family: 'Montserrat', sans-serif;
+         font-family: 'Custom';
          font-size: 70%;
          font-weight: 700!important;
          color: rgba(255, 255, 255, .6);
@@ -164,7 +164,7 @@ page-newact {
        margin-bottom: 3%;
      }
      .distance{
-       font-family: 'Montserrat', sans-serif;
+       font-family: 'Custom';
        font-weight: 400;
        font-size: 100%;
        color: white;
@@ -184,7 +184,7 @@ page-newact {
        justify-content: space-around;
        flex-wrap: wrap;
        .likes-element{
-         font-family: 'Montserrat', sans-serif;
+         font-family: 'Custom';
          font-size: 90%;
          color: white;
          border-radius: 20px;
@@ -238,7 +238,7 @@ page-newact {
        }
 
        .pw-forgot{
-         font-family: 'Montserrat', sans-serif;
+         font-family: 'Custom';
          font-size: 80%;
          color: white;
          width: 60vw;
@@ -246,7 +246,7 @@ page-newact {
        }
 
        .register-btn{
-         font-family: 'Montserrat', sans-serif;
+         font-family: 'Custom';
          font-size: 90%;
          color: white;
          margin-left: 5%;
@@ -272,7 +272,7 @@ page-newact {
      border-radius: 20px;
      background-color: #229B86;
 
-     font-family: 'Montserrat', sans-serif;
+     font-family: 'Custom';
      font-size: 100%;
      color: white;
 
@@ -294,7 +294,7 @@ page-newact {
      background-color: transparent;
      border: 1px solid white;
 
-     font-family: 'Montserrat', sans-serif;
+     font-family: 'Custom';
      font-size: 100%;
      color: white;
 

@@ -113,7 +113,7 @@ public done_g: any = false;
           modal.present();
         });
       } else {
-         this.af.list('AppErrors/').push({'type': 'Geocode', 'error': status});
+         vm.af.list('AppErrors/').push({'type': 'Geocode', 'error': status});
          // alert( 'Geocode was not successful for the following reason: ' + status );
       }
   });

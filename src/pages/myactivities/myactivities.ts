@@ -70,7 +70,9 @@ public general_loader: any;
         'img':  a[key].img,
         'creator':  a[key].creator,
         'index':  a[key].index,
-        'isEvent': false
+        'isEvent': false,
+        'review': (a[key].review ? a[key].review : 5),
+        'reviews': (a[key].reviews ? a[key].reviews : [])
       });
     }
     this.activities = this.activities.filter( a => a.creator == firebase.auth().currentUser.uid);

@@ -24,7 +24,7 @@ page-register {
     }
 
     .container-datos{
-      font-family: 'Montserrat', sans-serif;
+      font-family: 'Custom';
       display: block;
       margin: 0 auto;
       //border: 1px solid white;
@@ -68,7 +68,7 @@ page-register {
           padding-left: 5%;
           padding-bottom: 5%;
           cursor: pointer;
-          font-family: 'Montserrat', sans-serif;
+          font-family: 'Custom';
           font-size: 80%;
           p{
             margin-left: 5vw;
@@ -140,7 +140,7 @@ page-register {
 }
 
         .pw-forgot{
-          font-family: 'Montserrat', sans-serif;
+          font-family: 'Custom';
           font-size: 80%;
           color: white;
           width: 60vw;
@@ -148,7 +148,7 @@ page-register {
         }
 
         .register-btn{
-          font-family: 'Montserrat', sans-serif;
+          font-family: 'Custom';
           font-size: 90%;
           color: white;
           margin-left: 5%;
@@ -180,8 +180,9 @@ page-register {
       border-radius: 12px;
       background-color: #229B86;
 
-      font-family: 'Montserrat', sans-serif;
+      font-family: 'Custom';
       font-size: 100%;
+      font-weight: 700;
       color: white;
 
       // position: absolute;
@@ -196,8 +197,9 @@ page-register {
       background-color: transparent;
       border: 1px solid white;
 
-      font-family: 'Montserrat', sans-serif;
+      font-family: 'Custom';
       font-size: 100%;
+      font-weight: 700;
       color: white;
 
       // position: absolute;
