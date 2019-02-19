@@ -57,6 +57,15 @@
     </div>
   </div>
 
+  <div class="section-title" style="margin-top: 5%;">Friends Going</div>
+  <div *ngIf="this.amigos.length == 0" class="location-hint">There are no clan friends going to this activity. Join and invite them!</div>
+  <div class="friends-container">
+    <div *ngFor="let a of this.amigos" class="friend">
+      <div class="img">{{a.initial}}</div>
+      <div class="name">{{a.name}}</div>
+    </div>
+  </div>
+
   <div class="section-title">About the Event</div>
   <div class="description-area">
     {{this.event_data.about_event}}
@@ -86,15 +95,6 @@
   <div class="location-hint">{{this.event_data.location}}</div>
   <div #map id="map"></div>
 
-
-  <div class="section-title" style="margin-top: 5%;">Friends Going</div>
-  <div *ngIf="this.amigos.length == 0" class="location-hint">There are no clan friends going to this activity. Join and invite them!</div>
-  <div class="friends-container">
-    <div *ngFor="let a of this.amigos" class="friend">
-      <div class="img">{{a.initial}}</div>
-      <div class="name">{{a.name}}</div>
-    </div>
-  </div>
 
 
 </ion-content>

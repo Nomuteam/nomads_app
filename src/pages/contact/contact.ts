@@ -32,6 +32,8 @@ public auxiliar: any;
 public class_slides: any= false;
 
 public done_g: any = false;
+public user_preferences: any = [];
+public filtered_a: any = [];
 
   @ViewChild('map') mapElement: ElementRef;
    map: any;
@@ -85,6 +87,66 @@ public done_g: any = false;
    else{
      this.class_slides = true;
    }
+ }
+
+ getFiltersP(){
+   this.af.object('Users/'+firebase.auth().currentUser.uid+'/preferences').snapshotChanges().subscribe(action => {
+     this.user_preferences = action.payload.val();
+     console.log(this.user_preferences);
+     this.applyFilters();
+   });
+ }
+
+ existsF(arre, cual){
+   for(let key in arre){
+     if(arre[key].name == cual) return true;
+   }
+   return false;
+ }
+
+ existsO(arre, cual){
+   console.log(arre);
+   for(let key in arre){
+     if(arre[key].title == cual) return true;
+   }
+   return false;
+ }
+
+ applyFilters(){
+   let cats = this.user_preferences.categories.filter(c => c.selected);
+   let days = this.user_preferences.days.filter(d => d.selected);
+   let forms = this.user_preferences.forms.filter(f=> f.selected);
+   let types = this.user_preferences.types.filter(t=> t.selected);
+   let aux = [];
+   let a = this.activities_all;
+
+   if(cats.length > 0){
+     for(let i=0; i<a.length; i++){
+       if(!a[i].isEvent && this.existsF(cats, a[i].categories.main_category)){
+         aux.push(a[i]);
+       }
+     }
+   }
+
+   if(types.length > 0){
+     for(let i=0; i<a.length; i++){
+       if(!a[i].isEvent && this.existsO(types, a[i].categories.activity_type) && !a[i].isEvent){
+         aux.push(a[i]);
+       }
+     }
+   }
+
+    aux = aux.sort(function(a, b){
+    var keyA = a.distance_number,
+        keyB = b.distance_number;
+    // Compare the 2 dates
+    if(keyA < keyB) return -1;
+    if(keyA > keyB) return 1;
+    return 0;
+   });
+
+   this.filtered_a = aux;
+   console.log(this.filtered_a);
  }
 
  coordenadas(a, address, tit, fn){
@@ -241,6 +303,7 @@ public done_g: any = false;
           });
       }
 
+   this.getFiltersP();
    console.log(this.activities_all);
    if(!this.done_g) this.populateMap();
   }

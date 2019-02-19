@@ -29,14 +29,15 @@
         <div class="text">Nearby and Upcoming</div>
         <div class="text hint">Classes and Events</div>
       </div>
-      <div class="number">{{this.activities_all.length}}</div>
+      <div class="number">{{this.filtered_a.length}}</div>
     </div>
     <ion-slides [hidden]="this.class_slides" slidesPerView="2.5">
-     <ion-slide *ngFor="let a of this.getSorted()" (click)="seeDetails(a)">
+     <ion-slide *ngFor="let a of this.filtered_a" (click)="seeDetails(a)">
        <img src="{{a.img}}" class="img-slide">
        <!-- <div class="img-slide" [style.background-image]="sanitizeThis(a.img)"></div> -->
        <p class="act-title">{{a.title}}</p>
-       <p class="act-distance"> {{a.distance}}</p>
+       <p *ngIf="a.distance != 0" class="act-distance"> {{a.distance}}</p>
+       <p *ngIf="a.distance == 0" class="act-distance"> Distance not available </p>
        <div *ngIf="!a.isEvent" class="noms-coins">
          <p>{{a.class_price}} noms</p>
        </div>

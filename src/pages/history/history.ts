@@ -112,7 +112,8 @@ public e_response$: any;
           'sender': a[key].sender,
           'sender_id': a[key].sender_id,
           'type': a[key].type,
-          'start': nice
+          'start': nice,
+          'time': (a[key].time ? a[key].time : '')
         });
       }
     }
@@ -136,13 +137,14 @@ public e_response$: any;
     return Math.ceil(qt/20);
   }
 
-  getTitle(tit){
+  getTitle(tit2){
     let aux = '';
+    let tit = tit2.type;
     if(tit == 'noms-referral'){
       aux = 'Received noms from referred friend!';
     }
     else if(tit == 'activity'){
-      aux = 'Reserved an Activity or Event';
+      aux = 'Reserved a spot at '+tit2.activity_name;
     }
     else if(tit == 'noms'){
       aux = 'Bought Noms';

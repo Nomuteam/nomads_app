@@ -88,7 +88,7 @@
    <ion-slides slidesPerView="1.6">
     <ion-slide (click)="openActivity(a)" *ngFor="let a of this.filtered_a">
       <div class="img-slide" [style.background-image]="sanitizeThis(a.img)"></div>
-      <p class="act-first">{{a.categories.activity_type}}</p>
+      <p class="act-first">{{a.categories.activity_type}} - {{a.distance}}</p>
       <p class="act-title">{{a.title}}</p>
       <p class="act-distance">{{a.class_price}} noms</p>
       <p class="act-rating">5 stars / (0)</p>

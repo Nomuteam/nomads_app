@@ -18,9 +18,8 @@
       </div>
   </div>
   <div class="btm-part">
-    <div class="cost">Confirmation Code: <br> <br>  <b style="opacity: 1!important">{{this.act.index}}</b> <br> <br> <br> Remember to take an ID with you! </div>
-    <!-- <div *ngIf="this.act.isEvent" class="cost">{{this.act.cost}} noms</div>
-    <div *ngIf="!this.act.isEvent" class="cost">{{this.act.class_price}} noms</div>
-    <img src="assets/img/go.png" class="go"> -->
+    <div class="cost">Confirmation Code: <br> <br>  <b style="opacity: 1!important">{{this.act.index}}</b> <br> <br> Remember to take an ID with you! <br> <br> Date: {{this.act.date}} <br> <br> <span *ngIf="this.act.time != ''">Time: {{this.act.time}}</span> </div>
+
+
   </div>
 </div>

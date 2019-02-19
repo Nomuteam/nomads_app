@@ -39,6 +39,7 @@ page-contact {
     width: 92.5%;
     margin-left: 3.75%;
     background-color: rgba(12, 12, 12, 1)!important;
+    box-shadow: 0px 0px 20px #8141CB!important;
     border-radius: 8px 8px 0 0!important;
     font-family: 'Custom';
     z-index: 100!important;
@@ -77,6 +78,7 @@ page-contact {
         padding: 3%;
         position: relative;
         margin-bottom: 2%;
+        //border: 1px solid red;
         .noms-coins{
           //border: 1px solid red;
           display: flex;
@@ -85,9 +87,10 @@ page-contact {
           p{
             font-family: 'Custom';
             font-weight: 600!important;
-            font-size: 80%;
+            font-size: 70%;
             color: white;
             padding: 0!important;
+            padding-right: 4%;
             //border: 1px solid white;
             margin-top: -4%!important;
           }
@@ -142,7 +145,7 @@ page-contact {
           color: white;
           //border: 1px solid red;
           text-align: left;
-          padding-left: 2%;
+          padding-left: 4%;
           margin-top: 5%;
         }
         .act-distance{
@@ -153,7 +156,7 @@ page-contact {
           //border: 1px solid red;
           text-align: left;
           padding-left: 2%;
-          margin-top: -12%;
+          margin-top: -10%;
         }
       }
     }

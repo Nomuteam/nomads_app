@@ -282,11 +282,28 @@ export class HomePage {
            vm.activities[i].distance_number = distance;
          });
      });
-
      }
    }
 
+   // this.activities = this.activities.sort(function(a, b){
+   //  var keyA = a.distance_number,
+   //      keyB = b.distance_number;
+   //  // Compare the 2 dates
+   //  if(keyA < keyB) return -1;
+   //  if(keyA > keyB) return 1;
+   //  return 0;
+   // });
+  }
 
+  getClosest(){
+    return this.activities.sort(function(a, b){
+     var keyA = a.distance_number,
+         keyB = b.distance_number;
+     // Compare the 2 dates
+     if(keyA < keyB) return -1;
+     if(keyA > keyB) return 1;
+     return 0;
+    });
   }
 
   getRated(){
@@ -299,6 +316,7 @@ export class HomePage {
     if(keyA < keyB) return 1;
     return 0;
    });
+   aux = this.getClosest();
    //console.log(aux);
    return aux;
   }
@@ -373,6 +391,14 @@ export class HomePage {
       }
     }
 
+     aux = aux.sort(function(a, b){
+     var keyA = a.distance_number,
+         keyB = b.distance_number;
+     // Compare the 2 dates
+     if(keyA < keyB) return -1;
+     if(keyA > keyB) return 1;
+     return 0;
+    });
 
     this.filtered_a = aux;
   }
