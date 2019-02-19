@@ -9,6 +9,7 @@ import { DomSanitizer } from '@angular/platform-browser';
 import * as moment from 'moment';
 import { ChatsPage } from '../chats/chats';
 import { SocialSharing } from '@ionic-native/social-sharing';
+import { LaunchNavigator, LaunchNavigatorOptions } from '@ionic-native/launch-navigator';
 
 /**
  * Generated class for the EventPage page.
@@ -63,9 +64,14 @@ public chats_index: any = [];
     public geolocation: Geolocation,
     public sanitizer: DomSanitizer,
     public modalCtrl: ModalController,
-    public socialSharing: SocialSharing) {
+    public socialSharing: SocialSharing,
+    public launchNavigator: LaunchNavigator) {
       this.event_data = this.navParams.get('Event');
       console.log(this.event_data);
+  }
+
+  goNavigate(){
+    this.launchNavigator.navigate(this.event_data.location);
   }
 
   isOwner(){

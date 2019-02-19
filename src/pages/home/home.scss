@@ -1,5 +1,13 @@
 page-home {
 
+  .home-page{
+    background: linear-gradient(#6C6C6C, #0C0C0C 70%)!important;
+  }
+
+  .toolbar-background-ios{
+    border-style: none!important;
+  }
+
  .explore-all{
    border-radius: 30px;
    width: 60%;
@@ -194,7 +202,7 @@ page-home {
   // }
 
   .sug{
-    background-image: linear-gradient(to right, #4D0F7D, #d91990)!important;
+    background-image: linear-gradient(to right, #5B00C4, #008379)!important;
   }
 
   .fav{

@@ -105,4 +105,7 @@
         <variable name="GEOLOCATION_USAGE_DESCRIPTION" value="To locate you" />
     </plugin>
     <plugin name="cordova-plugin-x-socialsharing" spec="^5.4.4" />
+    <plugin name="uk.co.workingedge.phonegap.plugin.launchnavigator" spec="^5.0.4">
+        <variable name="LOCATION_USAGE_DESCRIPTION" value="This app requires access to your location for navigation purposes" />
+    </plugin>
 </widget>

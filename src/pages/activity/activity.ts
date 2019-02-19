@@ -8,6 +8,8 @@ import firebase from 'firebase';
 import { DomSanitizer } from '@angular/platform-browser';
 import { BookPage } from '../book/book';
 import * as moment from 'moment';
+import { LaunchNavigator, LaunchNavigatorOptions } from '@ionic-native/launch-navigator';
+
 
 /**
  * Generated class for the ActivityPage page.
@@ -80,10 +82,15 @@ public time_helper: any = [
     public alertCtrl: AlertController,
     public geolocation: Geolocation,
     public sanitizer: DomSanitizer,
-    public modalCtrl: ModalController) {
+    public modalCtrl: ModalController,
+    public launchNavigator: LaunchNavigator) {
     this.activity_data = this.navParams.get('Activity');
     this.formatSchedule();
     console.log(this.activity_data)
+  }
+
+  goNavigate(){
+    this.launchNavigator.navigate(this.activity_data.location);
   }
 
   isOwner(){
