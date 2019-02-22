@@ -91,6 +91,17 @@ public chats_index: any = [];
     return false;
   }
 
+  addClanSchedule(){
+    let c = this.clans$;
+    let s;
+    for(let key in c){
+      if(this.amiMember(c[key].index)){
+        s = {'name': this.users$.first_name, 'nomad_index': firebase.auth().currentUser.uid,'title': this.activity_data.title, 'index': this.activity_data.index, 'day': this.selected_day, 'time': this.selected_time, 'date': this.getReal()};
+        this.af.list('Clans/'+c[key].index+'/schedule').push(s);
+      }
+    }
+  }
+
   getMines(){
     let c = this.clans$;
     for(let key in c){
@@ -239,7 +250,7 @@ public chats_index: any = [];
        good = moment(aux).add(1, 'days').format('YYYY-MM-DD');
      }
      else{
-       let ai = 5 - parseInt(moment(this.selected_day, 'dddd').format('d'));
+       let ai = 7 - parseInt(moment(this.selected_day, 'dddd').format('d'));
        good = moment(aux, 'YYYY-MM-DD').add(ai, 'days').format('YYYY-MM-DD');
      }
    }
@@ -299,6 +310,7 @@ public chats_index: any = [];
  }
 
  sharetoClans(){
+   this.addClanSchedule();
    let c = this.chats_index;
    for(let key in c){
      this.af.list('Chats/'+c[key].index+'/messages').push({

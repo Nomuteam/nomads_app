@@ -238,7 +238,7 @@ public user_preferences: any = [];
 
   }
 
-  ionViewWillLeave(){
+  ionViewDidLeave(){
     this.user_preferences.forms = this.example_forms;
     this.user_preferences.types = this.example_activities;
     this.user_preferences.categories = this.example_cats;

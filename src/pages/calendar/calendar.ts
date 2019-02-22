@@ -303,7 +303,7 @@ export class CalendarPage {
      this.general_loader.dismiss();
 
      this.alertCtrl.create({
-       title: 'Removed succesfully!',
+       title: 'Succesfully removed!',
        message: 'The event or activity was removed succesfully from your schedule!',
        buttons: ['Ok']
      }).present();

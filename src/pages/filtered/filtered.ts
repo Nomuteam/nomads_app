@@ -96,7 +96,10 @@ public activities_all: any = [];
         'media': a[key].media,
         'isEvent': true,
         'distance': 0,
-        'day': a[key].day
+        'day': a[key].day,
+        'nomads': (a[key].nomads ? a[key].nomads : []),
+        'review': (a[key].review ? a[key].review : 5),
+        'reviews': (a[key].reviews ? a[key].reviews : [])
       });
   }
 
@@ -123,7 +126,10 @@ public activities_all: any = [];
             'index':  b[key].index,
             'media': b[key].media,
             'isEvent': false,
-            'distance': 0
+            'distance': 0,
+            'nomads': (b[key].nomads ? b[key].nomads : []),
+            'review': (b[key].review ? b[key].review : 5),
+            'reviews': (b[key].reviews ? b[key].reviews : [])
           });
       }
 

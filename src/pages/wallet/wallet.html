@@ -71,7 +71,7 @@
    </div>
    <div class="booking-avg"><b>{{this.getMenor()}}</b> to <b>{{this.getMayor()}}</b> bookings</div>
 
-   <button (click)="confirmPay()" type="button" class="pay-btn" padding>Pay NOMS</button>
+   <button [disabled]="!canPay()" (click)="confirmPay()" type="button" class="pay-btn" padding>Pay NOMS</button>
 
    <div class="buy-hint">Packages</div>
 

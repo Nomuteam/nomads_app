@@ -11,15 +11,20 @@
 <div class="modal1" (click)="seeDetails()">
   <div class="top-part">
       <img src="{{this.act.img}}" class="img">
-      <div class="text">
+      <div *ngIf="!this.act.isEvent" class="text">
         <div class="top">{{this.act.title}}</div>
-        <div class="hints">Next: 5:00 pm</div>
-        <div class="hints">Spaces: 3/9</div>
+        <div class="hints">Next: {{this.act.schedule[0].start_time}}</div>
+        <div class="hints">Spaces: {{this.act.schedule[0].spaces_available}}</div>
+      </div>
+      <div *ngIf="this.act.isEvent" class="text">
+        <div class="top">{{this.act.title}}</div>
+        <!-- <div class="hints">Next: {{this.act.schedule[0].start_time}}</div> -->
+        <div class="hints">Spaces: {{this.act.spaces_available}}</div>
       </div>
   </div>
   <div class="btm-part">
-    <div *ngIf="this.act.isEvent" class="cost">{{this.act.cost}} noms</div>
-    <div *ngIf="!this.act.isEvent" class="cost">{{this.act.class_price}} noms</div>
+    <div *ngIf="this.act.isEvent" class="cost">Cost: {{this.act.cost}} noms</div>
+    <div *ngIf="!this.act.isEvent" class="cost">Cost: {{this.act.class_price}} noms</div>
     <img src="assets/img/go.png" class="go">
   </div>
 </div>

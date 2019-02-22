@@ -22,10 +22,33 @@ import { SocialSharing } from '@ionic-native/social-sharing';
 export class ClanPage {
 public type: any='';
 public clan: any = [];
+public schedule: any = [];
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public sanitizer: DomSanitizer, public socialSharing: SocialSharing) {
     this.type = localStorage.getItem('Tipo');
     this.clan = this.navParams.get('Clan');
+    if(this.clan.schedule.length != 0) this.getSchedule();
+  }
+
+  getSchedule(){
+    let a = this.clan.schedule;
+    for(let key in a){
+      this.schedule.push({
+        'date': a[key].date,
+        'day': a[key].day,
+        'index': a[key].index,
+        'name': a[key].name,
+        'nomad_index': a[key].nomad_index,
+        'time': a[key].time,
+        'title': a[key].title
+      });
+    }
+    console.log(this.schedule);
+  }
+
+  goJoin(){
+    this.navCtrl.parent.select(0);
+    // setTimeout(() => {this.navCtrl.parent.getSelected().push(WalletPage)}, 500);
   }
 
   shareGeneral(){

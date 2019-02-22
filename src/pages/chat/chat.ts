@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild, ElementRef } from '@angular/core';
 import { IonicPage, NavController, NavParams, LoadingController, AlertController } from 'ionic-angular';
 import { AngularFireDatabase, AngularFireObject } from 'angularfire2/database';
 import firebase from 'firebase';
@@ -27,7 +27,7 @@ export class ChatPage {
   public Mensajes: any = [];
   public msgu: any;
   public chat_room: any;
-
+  @ViewChild('list') list:any;
 
   constructor(public navCtrl: NavController,
   public navParams: NavParams,
@@ -94,6 +94,8 @@ export class ChatPage {
   }
 
   ionViewDidLoad() {
+    // this.list.scrollTop = this.list.scrollHeight;
+    // this.list.scrollToBottom(100);
     this.general_loader =  this.loadingCtrl.create({
           spinner: 'bubbles',
            content: 'Loading...'

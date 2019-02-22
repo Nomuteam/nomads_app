@@ -3,8 +3,8 @@ page-history {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    height: 12vh;
-    padding-left: 5%;
+    // height: 12vh;
+    // padding-left: 5%;
     border-bottom: 1px solid rgba(255, 255, 255, .3);
     .user-img{
       width: 15%;
@@ -22,9 +22,10 @@ page-history {
       justify-content: space-between;
       //border: 1px solid red;
       width: 65%;
+      margin: 5%;
       .event-sender{
         font-family: 'Custom';
-        font-size: 80%;
+        font-size: 100%;
         font-weight: 700!important;
         color: white;
         display: inline-block;
@@ -32,7 +33,7 @@ page-history {
       }
       .event-hint{
         font-family: 'Custom';
-        font-size: 80%;
+        font-size: 90%;
         color: white;
         display: inline-block;
         overflow: hidden;
@@ -41,7 +42,7 @@ page-history {
     .stats-hint{
       //border: 1px solid red;
       font-family: 'Custom';
-      font-size: 80%;
+      font-size: 90%;
       font-weight: 700!important;
       color: #50E3C2;
     }

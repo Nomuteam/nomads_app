@@ -13,7 +13,7 @@
 
 <ion-content padding class="chat-page">
 
-  <div class="chat-area">
+  <div #list class="chat-area" [scrollTop]="list.scrollHeight">
     <div *ngFor="let m of Mensajes">
       <div class="msg-container" *ngIf="m.isMe">
         <div class="msguser w3-animate-right">

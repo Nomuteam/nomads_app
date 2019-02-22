@@ -9,7 +9,7 @@ import { DomSanitizer } from '@angular/platform-browser';
 import { BookPage } from '../book/book';
 import * as moment from 'moment';
 import { LaunchNavigator, LaunchNavigatorOptions } from '@ionic-native/launch-navigator';
-
+import { WalletPage } from '../wallet/wallet';
 
 /**
  * Generated class for the ActivityPage page.
@@ -47,7 +47,7 @@ public time_helper: any = [
     'times': []
   },
   {
-    'title': 'Thursday',
+    'title': 'Tuesday',
     'times': []
   },
   {
@@ -55,7 +55,7 @@ public time_helper: any = [
     'times': []
   },
   {
-    'title': 'Tuesday',
+    'title': 'Thursday',
     'times': []
   },
   {
@@ -175,7 +175,20 @@ public time_helper: any = [
         this.alertCtrl.create({
           title: 'Not enough Noms',
           message: 'You need to buy more noms to join this activity.',
-          buttons: ['Ok']
+          buttons: [
+            {
+            text: 'Cancel',
+            handler: () => {
+
+            }
+            },
+            {
+              text: 'Buy noms',
+              handler: () => {
+                this.navCtrl.parent.select(4)
+                    .then(()=> this.navCtrl.parent.getSelected().push(WalletPage));
+              }
+            }]
         }).present();
       }
     }

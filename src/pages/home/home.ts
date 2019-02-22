@@ -14,6 +14,7 @@ import { NeweventPage } from '../newevent/newevent';
 import { FilteredPage } from '../filtered/filtered';
 declare var google;
 import { Geolocation } from '@ionic-native/geolocation';
+import { MyeventsPage } from '../myevents/myevents';
 
 @Component({
   selector: 'page-home',
@@ -110,6 +111,10 @@ export class HomePage {
     console.log(this.favoritos);
     this.getFiltersP();
     // return this.favoritos;
+  }
+
+  getExperiences(){
+    return this.activities.filter(act => act.categories.main_category == 'Experiences');
   }
 
   getFiltersP(){
@@ -263,8 +268,56 @@ export class HomePage {
         'reviews': (a[key].reviews ? a[key].reviews : []),
         'special': (a[key].special ? a[key].special : false),
         'distance': '',
-        'distance_number': 0
+        'distance_number': 0,
+        'next_time': '',
+        'next_remaining': 0
       });
+    }
+
+    for(let i=0; i<this.activities.length; i++){
+      let h = this.activities[i].schedule;
+      let today =  moment().format('dddd');
+      let next = 'not today';
+      let hours_left = 1000;
+      let aux = new Date();
+      let remaining;
+      let remaining_n;
+
+      for(let key in h){
+       if(today == h[key].day){
+
+         aux.setHours(parseInt(h[key].start_time.charAt(0) + h[key].start_time.charAt(1)));
+         aux.setMinutes(parseInt(h[key].start_time.charAt(3) + h[key].start_time.charAt(4)));
+
+         remaining = moment(aux).fromNow();
+
+         if(remaining.indexOf('in ')>-1){
+           remaining = remaining.slice(3);
+           remaining_n = parseInt(remaining.charAt(0)+remaining.charAt(1));
+           if(remaining.indexOf('minutes')==-1) remaining_n += 100;
+
+           if(remaining_n < hours_left){
+             next = h[key].start_time;
+             hours_left = remaining_n;
+           }
+         }
+
+       }
+      }
+
+      // if(next != 'not today'){
+      //   console.log('Para la actividad '+this.activities[i].title+' hoy, el horario más cercano es '+next);
+      // }
+      if(next != 'not today'){
+        let aux2 = new Date();
+        aux2.setHours(parseInt(next.charAt(0) + next.charAt(1))-1);
+        aux2.setMinutes(parseInt(next.charAt(3) + next.charAt(4)));
+        next = moment(aux2).format('LT');
+      }
+
+
+      this.activities[i].next_time = next;
+      this.activities[i].next_remaining = hours_left;
     }
 
 
@@ -285,6 +338,8 @@ export class HomePage {
      }
    }
 
+   console.log(this.activities);
+
    // this.activities = this.activities.sort(function(a, b){
    //  var keyA = a.distance_number,
    //      keyB = b.distance_number;
@@ -295,10 +350,23 @@ export class HomePage {
    // });
   }
 
+
   getClosest(){
     return this.activities.sort(function(a, b){
      var keyA = a.distance_number,
          keyB = b.distance_number;
+     // Compare the 2 dates
+     if(keyA < keyB) return -1;
+     if(keyA > keyB) return 1;
+     return 0;
+    });
+  }
+
+  getUpcoming(){
+    let aux = this.activities.filter(act => act.next_time != 'not today');
+    return aux.sort(function(a, b){
+     var keyA = a.next_remaining,
+         keyB = b.next_remaining;
      // Compare the 2 dates
      if(keyA < keyB) return -1;
      if(keyA > keyB) return 1;
@@ -357,6 +425,11 @@ export class HomePage {
       if(arre[key].name == cual) return true;
     }
     return false;
+  }
+
+  createEvent(){
+    this.navCtrl.parent.select(4)
+        .then(()=> this.navCtrl.parent.getSelected().push(MyeventsPage));
   }
 
   existsO(arre, cual){

@@ -1,4 +1,13 @@
 page-activity {
+
+  // .activity-page{
+  //   background: linear-gradient(#6C6C6C, #0C0C0C 70%)!important;
+  // }
+
+  .toolbar-background-ios{
+    border-style: none!important;
+  }
+
   .main-card{
     //height: 50vh;
     background-color: rgba(74, 74, 74, .3);
@@ -237,11 +246,28 @@ page-activity {
 
   }
 
+  .location-row{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    .location-btn{
+      font-family: 'Custom';
+      color: rgba(255, 255, 255, 1);
+      font-size: 90%;
+      font-weight: 700;
+      background-color: #8141CB;
+      box-shadow: 0px 0px 15px #0C0C0C;
+      border-radius: 12px;
+      padding: 5px;
+    }
+  }
+
   .location-hint{
     font-family: 'Custom';
     color: rgba(255, 255, 255, .6);
     font-weight: 90%;
     font-weight: 400;
+    width: 60%;
   }
 
   .scroll {

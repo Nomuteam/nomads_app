@@ -39,7 +39,7 @@ export class NewactPage {
       'selected': false
     },
     {
-      'name': 'Adventures',
+      'name': 'Experiences',
       'selected': false
     },
     {

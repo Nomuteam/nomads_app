@@ -72,7 +72,7 @@ public noms_balance: any = '';
   }
 
   getStatus(status){
-    return status ? 'Open' : 'Private';
+    return status == 'public' ? 'Open' : 'Private';
   }
 
   returnStatus(status){
@@ -107,6 +107,7 @@ public noms_balance: any = '';
         });
       }
     }
+    console.log(this.my_clans);
     this.general_loader.dismiss();
   }
 

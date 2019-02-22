@@ -205,6 +205,12 @@ ion-content{
   src: url('../assets/fonts/MADE-Evolve-Sans-PERSONAL-USE/MADE Evolve Sans Bold (PERSONAL USE).otf');
 }
 
+.ion-ios-customcalendar-outline,
+.ion-ios-customcalendar,.ion-md-customcalendar,.ion-md-customcalendar-outline {
+  content: url('../assets/img/calendar.png');
+	width: 2%!important;
+}
+
 .tabbar {
   background-color: #0C0C0C!important;
   border-top: none!important;
@@ -250,43 +256,43 @@ ion-content{
 		}
 	}
   a.tab-button[aria-selected=false]:nth-of-type(1) {
-		color: rgba(74, 74, 74, 1);
+		color: rgba(74, 74, 74, .5);
 		font-family: 'Montserrat', sans-serif;
 		font-weight: normal;
 		.tab-button-icon {
-			color: rgba(255, 255, 255, 1);
+			color: rgba(255, 255, 255, .5);
 		}
 	}
 	a.tab-button[aria-selected=false]:nth-of-type(2) {
-		color: rgba(74, 74, 74, 1);
+		color: rgba(74, 74, 74, .5);
 		font-family: 'Montserrat', sans-serif;
 		font-weight: normal;
 		.tab-button-icon {
-			color: rgba(255, 255, 255, 1);
+			color: rgba(255, 255, 255, .5);
 		}
 	}
 	a.tab-button[aria-selected=false]:nth-of-type(3) {
-		color: rgba(74, 74, 74, 1);
+		color: rgba(74, 74, 74, .5);
 		font-family: 'Montserrat', sans-serif;
 		font-weight: normal;
 		.tab-button-icon {
-			color: rgba(255, 255, 255, 1);
+			color: rgba(255, 255, 255, .5);
 		}
 	}
   a.tab-button[aria-selected=false]:nth-of-type(4) {
-		color: rgba(74, 74, 74, 1);
+		color: rgba(74, 74, 74, .5);
 		font-family: 'Montserrat', sans-serif;
 		font-weight: normal;
 		.tab-button-icon {
-			color: rgba(255, 255, 255, 1);
+			color: rgba(255, 255, 255, .5);
 		}
 	}
 	a.tab-button[aria-selected=false]:nth-of-type(5) {
-		color: rgba(74, 74, 74, 1);
+		color: rgba(74, 74, 74, .5);
 		font-family: 'Montserrat', sans-serif;
 		font-weight: normal;
 		.tab-button-icon {
-			color: rgba(255, 255, 255, 1);
+			color: rgba(255, 255, 255, .5);
 		}
 	}
 }

@@ -70,8 +70,10 @@ public noms_balance: any = '';
           'type':  a[key].type,
           'secret_code':  a[key].secret_code,
           'members':  a[key].members,
+          'members_n': Object.keys(a[key].members).length,
           'img':  a[key].img,
-          'index':  a[key].index
+          'index':  a[key].index,
+          'schedule': (a[key].schedule ? a[key].schedule : [])
         });
       }
     }

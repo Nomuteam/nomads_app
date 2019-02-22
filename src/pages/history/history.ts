@@ -75,7 +75,26 @@ public e_response$: any;
     }
 
     return name;
+  }
 
+  getLocation(id){
+    let a = this.a_response$;
+    let e = this.e_response$;
+    let location = '';
+
+    for(let key in a){
+      if(a[key].index == id){
+        location = a[key].location;
+      }
+    }
+
+    for(let key in e){
+      if(e[key].index == id){
+        location = e[key].location;
+      }
+    }
+
+    return location;
   }
 
   openModal(bc){
@@ -104,6 +123,7 @@ public e_response$: any;
         this.transactions.push({
           'activity_id': a[key].activity_id,
           'activity_name': this.getName(a[key].activity_id),
+          'location': this.getLocation(a[key].activity_id),
           'amount': a[key].amount,
           'date': start,
           'index': a[key].index,

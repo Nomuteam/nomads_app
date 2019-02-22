@@ -59,7 +59,7 @@ page-clan {
    .clan-members{
      font-family: 'Custom';
      font-weight: 400!important;
-     font-size: 70%;
+     font-size: 90%;
      color: white;
      //border: 1px solid red;
      text-align: left;
@@ -76,7 +76,7 @@ page-clan {
    .element-title{
      font-family: 'Custom';
      font-weight: 700!important;
-     font-size: 70%;
+     font-size: 90%;
      color: rgba(255, 255, 255, .5);
      text-align: left;
      padding-left: 5%;
@@ -84,7 +84,7 @@ page-clan {
    .element-desc{
      font-family: 'Custom';
      font-weight: 400!important;
-     font-size: 70%;
+     font-size: 90%;
      color: rgba(255, 255, 255, 1);
      text-align: left;
      padding-left: 5%;
@@ -107,14 +107,16 @@ page-clan {
 
  .section-title{
    font-family: 'Custom';
-   font-size: 90%;
+   font-size: 100%;
    font-weight: 700!important;
-   color: #FFCC9A;
+   color: #1BBF80;
    margin-bottom: 3%;
+   padding-left: 5%;
  }
 
  .schedule-container{
    margin-bottom: 10%;
+   padding-left: 5%;
    .schedule-day{
      font-family: 'Custom';
      font-size: 90%;
@@ -130,16 +132,17 @@ page-clan {
      .schedule-left{
        display: flex;
        flex-direction: column;
-       justify-content: center;
-       align-items: center;
+       justify-content: flex-start;
+       align-items: flex-start;
        .schedule-nomad{
          color: rgba(255, 255, 255, .8);
-         font-size: 90%;
+         font-size: 100%;
+         text-align: left;
        }
        .schedule-activity{
          text-align: left;
          color: rgba(255, 255, 255, .5);
-         font-size: 70%;
+         font-size: 80%;
        }
      }
      .schedule-right{
@@ -149,11 +152,11 @@ page-clan {
        align-items: center;
        .schedule-spots{
          color: #229B86;
-         font-size: 90%;
+         font-size: 100%;
        }
        .schedule-time{
          color: rgba(255, 255, 255, .5);
-         font-size: 70%;
+         font-size: 80%;
        }
      }
    }
@@ -162,14 +165,14 @@ page-clan {
  .pink-btn{
    display: block;
    margin: 0 auto;
-   padding: 5%;
+   padding: 3%;
    width: 100%;
    font-family: 'Custom';
    font-weight: 700;
    color: rgba(255, 255, 255, 1);
    background-color: #8141CB;
    margin-bottom: 3%;
-   border-radius: 12px;
+   border-radius: 8px;
  }
 
  .chat{

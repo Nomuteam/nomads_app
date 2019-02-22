@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { LaunchNavigator, LaunchNavigatorOptions } from '@ionic-native/launch-navigator';
 
 /**
  * Generated class for the TicketPage page.
@@ -16,9 +17,15 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 export class TicketPage {
 public act: any = [];
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  constructor(public navCtrl: NavController,
+              public navParams: NavParams,
+              public launchNavigator: LaunchNavigator) {
     this.act = this.navParams.get('Details');
     console.log(this.act);
+  }
+
+  goNavigate(){
+    this.launchNavigator.navigate(this.act.location);
   }
 
   ionViewDidLoad() {

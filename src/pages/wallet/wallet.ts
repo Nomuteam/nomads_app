@@ -118,6 +118,10 @@ public transactions: any = [];
       })
   }
 
+  canPay(){
+    return this.cash != 0;
+  }
+
   getMenor(){
     return Math.ceil(this.noms/9);
   }
