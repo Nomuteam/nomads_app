@@ -303,6 +303,50 @@ public filtered_a: any = [];
           });
       }
 
+      for(let i=0; i<this.activities_all.length; i++){
+        if(!this.activities_all[i].isEvent){
+          let h = this.activities_all[i].schedule;
+          let today =  moment().format('dddd');
+          let next = 'not today';
+          let hours_left = 1000;
+          let aux = new Date();
+          let remaining;
+          let remaining_n;
+
+          for(let key in h){
+           if(today == h[key].day){
+
+             aux.setHours(parseInt(h[key].start_time.charAt(0) + h[key].start_time.charAt(1)));
+             aux.setMinutes(parseInt(h[key].start_time.charAt(3) + h[key].start_time.charAt(4)));
+
+             remaining = moment(aux).fromNow();
+
+             if(remaining.indexOf('in ')>-1){
+               remaining = remaining.slice(3);
+               remaining_n = parseInt(remaining.charAt(0)+remaining.charAt(1));
+               if(remaining.indexOf('minutes')==-1) remaining_n += 100;
+
+               if(remaining_n < hours_left){
+                 next = h[key].start_time;
+                 hours_left = remaining_n;
+               }
+             }
+
+           }
+          }
+          if(next != 'not today'){
+            let aux2 = new Date();
+            aux2.setHours(parseInt(next.charAt(0) + next.charAt(1))-1);
+            aux2.setMinutes(parseInt(next.charAt(3) + next.charAt(4)));
+            next = moment(aux2).format('LT');
+          }
+
+
+          this.activities_all[i].next_time = next;
+          this.activities_all[i].next_remaining = hours_left;
+        }
+      }
+
    this.getFiltersP();
    console.log(this.activities_all);
    if(!this.done_g) this.populateMap();

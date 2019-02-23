@@ -61,7 +61,7 @@
       <div class="schedule-activity">Actividad: {{s.title}}</div>
     </div>
     <div class="schedule-right">
-      <div class="schedule-spots">Join</div>
+      <div (click)="whichIs(s.index)" class="schedule-spots">Join</div>
       <div class="schedule-time">{{s.day}} {{s.time}}</div>
     </div>
   </div>

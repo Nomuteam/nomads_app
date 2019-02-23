@@ -144,7 +144,8 @@ export class CalendarPage {
           'clave_nomada': this.getClave(a[key].nomads),
           'reviewed': (review != undefined ? review : false),
           'review':( a[key].review ? a[key].review : 5),
-          'reviews': (a[key].reviews ? a[key].reviews : [])
+          'reviews': (a[key].reviews ? a[key].reviews : []),
+          'eventColor': '#2edbac'
         }
         return aux2;
       }
@@ -182,7 +183,8 @@ export class CalendarPage {
           'clave_nomada': this.getClave(b[key].nomads),
           'reviewed': (review != undefined ? review : false),
           'review':( b[key].review ? b[key].review : 5),
-          'reviews': (b[key].reviews ? b[key].reviews : [])
+          'reviews': (b[key].reviews ? b[key].reviews : []),
+          'eventColor': '#2edbac'
         }
         return aux2;
       }
@@ -217,14 +219,21 @@ export class CalendarPage {
     }
     // let start = moment(event.startTime).format('LLLL');
     // let end = moment(event.endTime).format('LLLL');
+   let today  = moment();
 
    if(this.show_pop){
-     let today  = moment();
      this.past_events = this.activities_all.filter( event => moment(moment(event.startTime).format('LLLL')).isBefore(today)&&event.reviewed);
      if(this.past_events.length > 0) this.alertCtrl.create({title: 'Review your activities and events', message: 'It seems like you have past events and activities waiting for review. Click on them and select the review option!', buttons: ['Ok']}).present();
 
      this.show_pop = false;
    }
+
+   for(let key in this.activities_all){
+     if(moment(moment(this.activities_all[key].startTime).format('LLLL')).isBefore(today)){
+       this.activities_all.eventColor = 'red';
+     }
+   }
+
    console.log(this.activities_all);
    console.log(this.past_events);
   }

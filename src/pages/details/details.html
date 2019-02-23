@@ -13,8 +13,14 @@
       <img src="{{this.act.img}}" class="img">
       <div *ngIf="!this.act.isEvent" class="text">
         <div class="top">{{this.act.title}}</div>
-        <div class="hints">Next: {{this.act.schedule[0].start_time}}</div>
-        <div class="hints">Spaces: {{this.act.schedule[0].spaces_available}}</div>
+        <div *ngIf="this.act.next_time != 'not today'">
+          <div class="hints">Next: {{this.act.next_time}}</div>
+          <div class="hints">Spaces: {{this.act.next_spaces}}</div>
+        </div>
+        <div *ngIf="this.act.next_time == 'not today'">
+          <div class="hints">No classes today!</div>
+          <!-- <div class="hints">Spaces: {{this.act.next_spaces}}</div> -->
+        </div>
       </div>
       <div *ngIf="this.act.isEvent" class="text">
         <div class="top">{{this.act.title}}</div>
