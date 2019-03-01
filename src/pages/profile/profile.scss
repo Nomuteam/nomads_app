@@ -170,6 +170,12 @@ page-profile {
         margin: 0 auto;
         padding-bottom: 20%;
       }
+      ion-icon{
+        display: block;
+        margin: 0 auto;
+        padding-bottom: 20%;
+        font-size: 2em;
+      }
       .element-title{
         font-family: 'Custom';
         font-weight: 500!important;
@@ -181,10 +187,12 @@ page-profile {
      //border: 1px solid red;
     }
     hr{
-      //background-color: white;
+      background-color: white;
       width: 90%;
       margin-left: 5%;
-      border: 1px solid white;
+      //border: 1px solid rbga(255, 255, 255, .5);
+      color: rgba(255, 255, 255, .3);
+      height: 1px;
     }
   }
 

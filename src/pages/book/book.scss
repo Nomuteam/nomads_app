@@ -112,9 +112,19 @@ page-book {
      align-items: center;
      width: 100%;
      margin-bottom: 5%;
+     .compartir{
+       display: flex;
+       flex-direction: column;
+       margin-right: 30px;
+     }
+     .share-text{
+       font-family: 'Custom';
+       font-size: 80%;
+       font-weight: 700;
+     }
      .share{
        padding: 3%;
-       width: 20%;
+       width: 50px;
        height: 50px;
        border-radius: 50%;
      }
@@ -130,6 +140,14 @@ page-book {
        background-repeat: no-repeat;
        background-image: url('../../assets/img/logo_1.png');
        background-size: 70%;
+       background-position: center;
+       margin-left: 5%;
+     }
+     .link{
+       background-color: #000000;
+       background-repeat: no-repeat;
+       background-image: url('../../assets/img/link.png');
+       background-size: 40%;
        background-position: center;
        margin-left: 5%;
      }

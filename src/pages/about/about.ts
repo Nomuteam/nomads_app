@@ -61,7 +61,7 @@ public noms_balance: any = '';
     for(let key in a){
       if(this.isMember(a[key].members)){
         this.my_clans.push({
-          'name': a[key].name.substring(0, 10) + '..',
+          'name': (a[key].name.length > 14 ? a[key].name.substring(0, 13) + '..' : a[key].name),
           'name_complete': a[key].name,
           'location': a[key].location,
           'description':  a[key].description,

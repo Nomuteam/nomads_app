@@ -383,7 +383,7 @@ sharetoClans(){
   getImg(clave){
     let p = this.people$;
     for(let key in p){
-      if(p[key].index == clave) return '';
+      if(p[key].index == clave) return p[key].img;
     }
     return '';
   }

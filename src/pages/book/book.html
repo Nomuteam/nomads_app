@@ -75,7 +75,7 @@
    <div class="pay-container">
      <div class="pay-hint">Pay Now</div>
      <div class="pay-circles">
-       <p class="noms-qty">{{this.activity_data.class_price}}</p>
+       <p class="noms-qty">{{this.activity_data.class_price}} noms</p>
        <!-- <div class="circles-noms">
          <div class="div1"></div>
          <div class="div2"></div>
@@ -94,23 +94,31 @@
 
   <div class="class-container">
     <div class="left-side">
-      <div class="cover-gradient1"></div>
+      <!-- <div class="cover-gradient1"></div> -->
       <div class="cover-gradient2"></div>
       <div class="class-img"></div>
       </div>
       <div class="class-text">
         <div class="class-title">{{this.activity_data.title_complete}}</div>
         <div class="class-hint">{{this.activity_data.categories.activity_type}}</div>
-        <div class="class-hint">18 Dic</div>
-        <div class="class-hint">17:30 Hrs</div>
+        <div class="class-hint">{{getDay()}}</div>
+        <div class="class-hint">{{getTime()}}</div>
     </div>
   </div>
 
-  <div class="section-title">Share</div>
+  <div class="section-title">Share with...</div>
 
   <div class="share-container">
-    <div (click)="shareGeneral()" class="share facebook"></div>
-    <div (click)="confirmShare()" class="share nomads"></div>
+    <div class="compartir">
+      <div (click)="confirmShare()" class="share nomads"></div>
+      <div class="share-text">My Clans</div>
+    </div>
+
+    <div class="compartir">
+      <div (click)="shareGeneral()" class="share link"></div>
+      <div class="share-text">Social Media</div>
+    </div>
+
   </div>
 
   <button navPop type="button" class="pay-btn rose" padding>

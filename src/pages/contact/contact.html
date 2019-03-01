@@ -21,12 +21,15 @@
 <ion-content>
 
   <ion-fab (click)="openFilters()" right top>
-   <button ion-fab mini color="purple"><ion-icon name="ios-options"></ion-icon></button>
+   <button ion-fab mini color="purple"><ion-icon name="ios-switch"></ion-icon></button>
  </ion-fab>
 
   <div #map id="map"></div>
 
   <div class="slides-cool">
+    <div (click)="changePosition()" class="flecha">
+        <span>&#94;</span>
+    </div>
     <div class="top-container" (click)="changePosition()">
       <div class="left-top">
         <div class="text">Nearby and Upcoming</div>

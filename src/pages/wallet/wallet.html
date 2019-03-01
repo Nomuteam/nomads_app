@@ -71,7 +71,7 @@
    </div>
    <div class="booking-avg"><b>{{this.getMenor()}}</b> to <b>{{this.getMayor()}}</b> bookings</div>
 
-   <button [disabled]="!canPay()" (click)="confirmPay()" type="button" class="pay-btn" padding>Pay NOMS</button>
+   <button [disabled]="!canPay()" (click)="confirmPaypal()" type="button" class="pay-btn" padding>Pay NOMS</button>
 
    <div class="buy-hint">Packages</div>
 
@@ -81,9 +81,10 @@
         <div class="top-slide">
           <div class="qty-slide">{{s.noms}}</div>
           <div class="circles-noms">
-            <div class="div1"></div>
+            <!-- <div class="div1"></div> -->
             <div class="div2"></div>
-            <div class="div3"></div></div>
+            <div class="div3"></div>
+          </div>
         </div>
         <div class="btm-slide">
           <!-- <div class="bookings-avg">{{s.bookings_avg}} Bookings avg.</div> -->

@@ -310,7 +310,7 @@ export class HomePage {
       // }
       if(next != 'not today'){
         let aux2 = new Date();
-        aux2.setHours(parseInt(next.charAt(0) + next.charAt(1))-1);
+        aux2.setHours(parseInt(next.charAt(0) + next.charAt(1)));
         aux2.setMinutes(parseInt(next.charAt(3) + next.charAt(4)));
         next = moment(aux2).format('LT');
       }

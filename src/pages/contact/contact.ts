@@ -160,7 +160,7 @@ public filtered_a: any = [];
           map: vm.map,
           animation: google.maps.Animation.DROP,
           position: results[0].geometry.location,
-          icon: 'https://firebasestorage.googleapis.com/v0/b/dev-nomads.appspot.com/o/pink-icon.png?alt=media&token=3448077b-ef8e-4925-a3fa-27274caee626'
+          icon: 'https://firebasestorage.googleapis.com/v0/b/dev-nomads.appspot.com/o/mapa_icon.png?alt=media&token=5b6660bb-5110-4a2f-9b4c-f6ad84acacdf'
         });
 
         let modal = vm.modalCtrl.create(DetailsPage, {'Details': a});
@@ -299,7 +299,10 @@ public filtered_a: any = [];
             'distance_number': '',
             'review':( b[key].review ? b[key].review : 5),
             'reviews': (b[key].reviews ? b[key].reviews : []),
-            'nomads': (b[key].nomads ? b[key].nomads : [])
+            'nomads': (b[key].nomads ? b[key].nomads : []),
+            'next_time': '',
+            'next_remaining': 0,
+            'next_spaces': 0
           });
       }
 
@@ -312,6 +315,7 @@ public filtered_a: any = [];
           let aux = new Date();
           let remaining;
           let remaining_n;
+          let spaces;
 
           for(let key in h){
            if(today == h[key].day){
@@ -329,6 +333,7 @@ public filtered_a: any = [];
                if(remaining_n < hours_left){
                  next = h[key].start_time;
                  hours_left = remaining_n;
+                 spaces = h[key].spaces_available;
                }
              }
 
@@ -344,6 +349,7 @@ public filtered_a: any = [];
 
           this.activities_all[i].next_time = next;
           this.activities_all[i].next_remaining = hours_left;
+          this.activities_all[i].next_spaces = spaces;
         }
       }
 
@@ -408,7 +414,7 @@ public filtered_a: any = [];
         map: this.map,
         animation: google.maps.Animation.DROP,
         position: this.map.getCenter(),
-        icon: 'https://firebasestorage.googleapis.com/v0/b/dev-nomads.appspot.com/o/user.png?alt=media&token=fcd730d1-fdd7-4eae-b98f-070237331cee'
+        icon: 'https://firebasestorage.googleapis.com/v0/b/dev-nomads.appspot.com/o/isotipo_nomu.png?alt=media&token=ebb66981-09d6-4dd9-bcd3-8915e4b16581'
       });
 
       let content = "<h4>Here you are!</h4>";

@@ -1,0 +1,99 @@
+page-tutorial {
+  .tutorial-page{
+    //background: linear-gradient(#008573, #0C0C0C 70%)!important;
+    background: linear-gradient(#6C6C6C, #0C0C0C 70%)!important;
+  }
+  .toolbar-background-ios{
+    border-style: none!important;
+  }
+
+  .subtitle{
+    font-family: 'Custom';
+    color: white;
+    text-align: center!important;
+    margin-top: -3vh;
+    margin-left: -7vw;
+  }
+
+  ion-slides{
+    //border: 2px solid red;
+    height: 80%;
+    padding: 0%!important;
+    ion-slide{
+    //border: 2px solid yellow;
+    .content-slider{
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      align-items: center;
+      padding-left:  5%;
+      padding-right:  5%;
+      .imagen-1{
+        //width: 90%!important;
+        border-radius: 12px;
+        position: absolute;
+        top: 15%;
+        //width: 60%;
+      }
+      .imagen-2{
+        width: 20%;
+        //border: 1px solid rgba(255, 255, 255, .1);
+        border-radius: 15px;
+        margin-left: 5px;
+      }
+      .bottom-part{
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        position: absolute;
+        bottom: 10%;
+        border: 1px solid rgba(255, 255, 255, .4);
+        padding: 10px;
+        border-radius: 12px;
+        .bottom-hint{
+          font-family: 'Custom';
+          font-weight: 700!important;
+          font-size: 80%;
+          color: white;
+          width: 80%;
+        }
+      }
+      .slider-title{
+        font-family: 'Custom';
+        font-weight: 700!important;
+        font-size: 120%;
+        color: white;
+        text-align: center;
+        position: absolute;
+        top: 5%;
+      }
+      .slider-subtitle{
+        font-family: 'Custom';
+        font-weight: 400!important;
+        font-size: 80%;
+        color: white;
+        text-align: center;
+        margin-top: 35%;
+        // padding-left: 5%;
+        // padding-right: 5%;
+      }
+    }
+    }
+  }
+
+
+  .done-btn{
+    border-radius: 30px;
+    width: 80%;
+    margin-left: 5%;
+    background-color: #8141CB;
+    padding: 4%;
+    font-family: 'Custom';
+    font-weight: 700!important;
+    color: white;
+    box-shadow: 0px 0px 1px #8141CB;
+    position: absolute;
+    bottom: 5vh;
+  }
+
+}

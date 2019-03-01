@@ -1,0 +1,83 @@
+<!--
+  Generated template for the TutorialPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+  <ion-navbar color="transparent">
+    <ion-buttons start style="margin-left: 3%!important;">
+     <!-- <div class="circles-noms">
+       <div class="div1"></div>
+       <div class="div2"></div>
+       <div class="div3"></div></div> -->
+    </ion-buttons>
+    <!-- <ion-buttons (click)="openFilters()" end>
+     <button ion-button>
+       <ion-icon name="ios-options" color="white"></ion-icon>
+     </button>
+    </ion-buttons> -->
+    <p class="title">Nōmu Tutorial</p>
+    <div class="subtitle">
+      Before we begin...
+    </div>
+  </ion-navbar>
+</ion-header>
+
+
+<ion-content padding class="tutorial-page">
+  <ion-slides pager="true" autoplay="3500">
+    <ion-slide>
+      <div class="content-slider">
+        <div class="slider-title">Wallet</div>
+        <img class="imagen-1" src="assets/img/wallet_tutorial.png">
+        <div class="slider-subtitle">Invest what you want anytime. <br> Here you buy the nom credits which will enable you to reserve services or any activity.</div>
+        <div class="bottom-part">
+          <div class="bottom-hint">Find it in your profile</div>
+          <img class="imagen-2" src="assets/img/profile_tutorial.png">
+        </div>
+      </div>
+    </ion-slide>
+    <ion-slide>
+      <div class="content-slider">
+        <div class="slider-title">Browse All</div>
+        <img class="imagen-1" style="width: 80%" src="assets/img/browse_tutorial.png">
+        <div class="slider-subtitle">Here you will be able to see all the services by category. Use the filters bellow to suit better your needs.</div>
+        <div class="bottom-part">
+          <div class="bottom-hint">Find it in the home screen</div>
+          <img class="imagen-2" src="assets/img/home_tutorial.png">
+        </div>
+      </div>
+    </ion-slide>
+    <ion-slide>
+      <div class="content-slider">
+        <div class="slider-title">Filters</div>
+        <img class="imagen-1" style="width: 65%" src="assets/img/filter_tutorial.png">
+        <div class="slider-subtitle">Advanced options for your experience. Choose what you are intrested in and filter your available time and days.</div>
+        <div class="bottom-part">
+          <div class="bottom-hint">Find it in the floating button</div>
+          <img class="imagen-2" src="assets/img/filters_tutorial.png">
+        </div>
+      </div>
+    </ion-slide>
+    <ion-slide>
+      <div class="content-slider">
+        <div class="slider-title">Clans</div>
+        <img class="imagen-1" style="width: 50%" src="assets/img/clans_tutorial.png">
+        <div class="slider-subtitle">Join or create groups! Share or reserve activities with your clan members. Chat and organize.  Have fun!</div>
+        <div class="bottom-part">
+          <div class="bottom-hint">Find it in the clans screen</div>
+          <img class="imagen-2" src="assets/img/clan_tutorial.png">
+        </div>
+      </div>
+    </ion-slide>
+    <ion-slide>
+      <div class="content-slider">
+        <div class="slider-title">Welcome to nōmu!</div>
+        <img class="imagen-1" style="width: 80%; top: 25%;" src="assets/img/logo_1.png">
+        <div class="slider-subtitle">A redefined fitness lifestyle</div>
+      </div>
+    </ion-slide>
+  </ion-slides>
+ <button [disabled]="!canAdvance()" (click)="moveTabs()" type="button" class="done-btn">Continue</button>
+</ion-content>

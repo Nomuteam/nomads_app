@@ -56,6 +56,19 @@ page-clan {
      align-items: center;
      margin-top: 3%;
    }
+   .left-jc{
+     display: flex;
+     justify-content: space-around;
+     align-items: center;
+     //border: 1px solid red;
+     width: 30%;
+     .left-text{
+       font-family: 'Custom';
+       font-weight: 400!important;
+       font-size: 90%;
+       color: #2edbac;
+     }
+   }
    .clan-members{
      font-family: 'Custom';
      font-weight: 400!important;
@@ -71,6 +84,20 @@ page-clan {
    .flex-containerc{
      display: flex;
      justify-content: space-between;
+   }
+
+   .down-row{
+     display: flex;
+     justify-content: space-between;
+     align-items: center;
+     padding-left: 5%;
+     padding-right: 5%;
+     //border: 1px solid red;
+   }
+
+   .element-down{
+     display: flex;
+     flex-direction: column;
    }
 
    .element-title{
@@ -176,6 +203,12 @@ page-clan {
  }
 
  .chat{
+   background-color: #1B5074;
+ }
+
+ .chat-top{
+   margin: 0!important;
+   width: 20%;
    background-color: #1B5074;
  }
 

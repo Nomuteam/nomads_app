@@ -8,11 +8,43 @@ page-home {
     border-style: none!important;
   }
 
+  ion-navbar{
+    //border: 3px solid red!important;
+  }
+
+  ion-header{
+    //border: 3px solid red!important;
+    position: relative;
+  }
+
+  .explore-all2{
+    border-radius: 30px;
+    width: 60%;
+    margin-left: 20%;
+    //margin-top: -2vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    background-color: #1BBF80;
+    padding: 3%;
+    font-family: 'Custom';
+    font-weight: 700!important;
+    color: white;
+    position: absolute;
+    bottom: -45%;
+    .explore{
+     font-weight: 700;
+     font-size: 140%;
+    }
+  }
+
  .explore-all{
    border-radius: 30px;
    width: 60%;
    margin-left: 20%;
-   margin-bottom: 4vh;
+   margin-top: -2vh;
+   //margin-bottom: 4vh;
    display: flex;
    flex-direction: column;
    justify-content: space-around;
@@ -29,7 +61,7 @@ page-home {
    // background-image: url('../../assets/img/go.png');
    // background-position: 95%;
    // background-repeat: no-repeat;
-   box-shadow: 0px 0px 1px #8141CB;
+   //box-shadow: 0px 0px 1px #8141CB;
 
 
 

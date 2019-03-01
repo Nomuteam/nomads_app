@@ -48,6 +48,8 @@ public c_available: any = '';
 public clans$: any;
 public chats_index: any = [];
 
+public allies_total: any = 0;
+public users_total: any = 0;
 
   constructor(public navCtrl: NavController,
   public navParams: NavParams,
@@ -118,6 +120,14 @@ public chats_index: any = [];
            content: 'Loading...'
           });
     this.general_loader.present();
+
+    this.af.object('Accountance/').snapshotChanges().subscribe(action => {
+     this.allies_total = action.payload.val().allies;
+     this.allies_total = parseInt(this.allies_total);
+     this.users_total = action.payload.val().nomads;
+     this.users_total = parseInt(this.users_total);
+    });
+
     this.af.object('Users/'+this.activity_data.creator).snapshotChanges().subscribe(action => {
       this.owners$ = action.payload.val();
 
@@ -374,7 +384,15 @@ public chats_index: any = [];
          //Update spaces available for this schedule
          this.af.list('Activities/'+this.activity_data.index+'/schedule').update(this.selected_key, {
            'spaces_available': this.c_available - 1
-         })
+         });
+
+         this.af.list('/').update('Accountance', {
+           'allies': this.allies_total + parseInt(this.activity_data.class_price)
+         });
+
+         this.af.list('/').update('Accountance', {
+           'nomads': this.users_total - parseInt(this.activity_data.class_price)
+         });
 
 
          //Update activities attendants with recently joined user
@@ -396,8 +414,7 @@ public chats_index: any = [];
              .then(()=>{
                this.af.list('Notifications').push({'title': 'Someone joined your activity!', 'subtitle': this.name+' just joined your activity '+this.activity_data.title_complete, 'index': this.activity_data.creator});
                this.alertCtrl.create({
-                 title: 'In case of questions...',
-                 subTitle: 'We just created a chat',
+                 title: 'Chat created',
                  message: 'You can find a chat room in your profile between you and this activity creator in case of questions. It will expire after the class',
                  buttons: ['Ok']
                }).present();

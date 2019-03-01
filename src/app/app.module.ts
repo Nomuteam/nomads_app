@@ -2,6 +2,7 @@ import { NgModule, ErrorHandler } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
 import { MyApp } from './app.component';
+import { HttpModule } from '@angular/http';
 
 import { AboutPage } from '../pages/about/about';
 import { ContactPage } from '../pages/contact/contact';
@@ -50,6 +51,7 @@ import { TicketPage } from '../pages/ticket/ticket';
 import { EditactPage } from '../pages/editact/editact';
 import { EditeventPage } from '../pages/editevent/editevent';
 import { CalendarioPage } from '../pages/calendario/calendario';
+import { TutorialPage } from '../pages/tutorial/tutorial';
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
@@ -61,7 +63,7 @@ import { Camera } from '@ionic-native/camera';
 import { Stripe } from '@ionic-native/stripe';
 import { SocialSharing } from '@ionic-native/social-sharing';
 import { LaunchNavigator } from '@ionic-native/launch-navigator';
-
+import { InAppBrowser } from '@ionic-native/in-app-browser';
 
 import { AngularFireModule } from 'angularfire2';
 import { AngularFireDatabaseModule } from 'angularfire2/database';
@@ -115,11 +117,13 @@ import { FIREBASE_CONFIG } from './firebase.credentials';
     TicketPage,
     EditactPage,
     EditeventPage,
-    CalendarioPage
+    CalendarioPage,
+    TutorialPage
   ],
   imports: [
     NgCalendarModule,
     BrowserModule,
+    HttpModule,
     IonicModule.forRoot(MyApp, {
       mode: 'ios',
       scrollPadding: true,
@@ -177,7 +181,8 @@ import { FIREBASE_CONFIG } from './firebase.credentials';
     TicketPage,
     EditactPage,
     EditeventPage,
-    CalendarioPage
+    CalendarioPage,
+    TutorialPage
   ],
   providers: [
     StatusBar,
@@ -186,6 +191,7 @@ import { FIREBASE_CONFIG } from './firebase.credentials';
     LaunchNavigator,
     Camera,
     Stripe,
+    InAppBrowser,
     SocialSharing,
     Geolocation,
     {provide: ErrorHandler, useClass: IonicErrorHandler}

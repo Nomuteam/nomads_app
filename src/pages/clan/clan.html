@@ -40,15 +40,27 @@
     <!-- <div class="clan-members">4.5 (90)</div> -->
     <!-- <p class="element-title">Location</p>
     <p class="element-desc">{{clan.location}}</p> -->
-    <img (click)="shareGeneral()" src="assets/img/share_icon.png" class="share-icon">
+    <div (click)="shareGeneral()" class="left-jc">
+      <div class="left-text">Share clan</div>
+      <img src="assets/img/share_icon.png" class="share-icon">
+    </div>
+
    </div>
 
 
    <!-- <p class="element-title" style="margin-top: 3%;">Description</p>
    <p class="element-desc">{{clan.description}}</p> -->
 
-   <p class="element-title">Location</p>
-   <p class="element-desc">{{clan.location}}</p>
+   <div class="down-row">
+     <div class="element-down">
+       <p class="element-title">Location</p>
+       <p class="element-desc">{{clan.location}}</p>
+     </div>
+
+      <button (click)="openChat()" type="button" class="pink-btn chat-top">Chat</button>
+   </div>
+
+
 
  </div>
 
@@ -67,9 +79,8 @@
   </div>
  </div>
 
+   <button (click)="openNew()" type="button" class="pink-btn green">Create Event</button>
  <button (click)="openMembers()" type="button" class="pink-btn">View Members</button>
- <button (click)="openChat()" type="button" class="pink-btn chat">Chat</button>
-  <button (click)="openNew()" type="button" class="pink-btn green">Create Event</button>
 
  <!-- <button [disabled]="true" type="button" class="pink-btn">Invite through code</button> -->
 

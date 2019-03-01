@@ -5,8 +5,9 @@ page-welcome {
   }
 
  .welcome-page{
-   background-color: #0C0C0C;
-   background-image: url('../../assets/img/bg_1.png');
+   background-color: #373739;
+   //background: linear-gradient(#0C0C0C 50%, #8141CB 100%)!important;
+   //background-image: url('../../assets/img/bg_1.png');
    background-position: center;
    background-repeat: no-repeat;
    background-size: cover;
@@ -36,7 +37,7 @@ page-welcome {
      width: 90vw;
      height: 8vh;
      border-radius: 12px;
-     background-color: #229B86;
+     background-color: #1BBF80;
 
      font-family: 'Custom';
      font-size: 100%;

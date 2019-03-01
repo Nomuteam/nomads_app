@@ -7,6 +7,8 @@ import firebase from 'firebase';
 import * as moment from 'moment';
 import { ActivityPage } from '../activity/activity';
 import { EventPage } from '../event/event';
+declare var google;
+import { Geolocation } from '@ionic-native/geolocation';
 
 /**
  * Generated class for the FilteredPage page.
@@ -50,13 +52,16 @@ public response$: any;
 public e_response$: any;
 
 public activities_all: any = [];
+public posicion: any = '';
+public done_a: any = false;
 
   constructor(public navCtrl: NavController,
   public navParams: NavParams,
   public af: AngularFireDatabase,
   public loadingCtrl: LoadingController,
   public alertCtrl: AlertController,
-  public sanitizer: DomSanitizer) {
+  public sanitizer: DomSanitizer,
+  public geolocation: Geolocation) {
    this.type = this.navParams.get('Tipo');
   }
 
@@ -71,6 +76,47 @@ public activities_all: any = [];
     else{
       this.navCtrl.push(ActivityPage, {'Activity': a});
     }
+  }
+
+  coordenadas(a, address, tit, fn){
+    let geocoder = new google.maps.Geocoder();
+    let vm = this;
+    geocoder.geocode( { 'address' : address}, function( results, status ) {
+       if( status == google.maps.GeocoderStatus.OK ) {
+         console.log(results);
+         fn(results[0].formatted_address);
+       } else {
+          this.af.list('AppErrors/').push({'type': 'Geocode', 'error': status});
+          // alert( 'Geocode was not successful for the following reason: ' + status );
+       }
+   });
+  }
+
+  getDistance(address, fn){
+    let geocoder = new google.maps.Geocoder();
+    let vm = this;
+    let distance = new google.maps.DistanceMatrixService();
+    let result = 0;
+    let result2 = '';
+
+    return distance.getDistanceMatrix({
+         origins: [this.posicion],
+         destinations: [address],
+         travelMode: google.maps.TravelMode.DRIVING
+         },
+     function (response, status) {
+         // check status from google service call
+         if (status !== google.maps.DistanceMatrixStatus.OK) {
+             console.log('Error:', status);
+         } else {
+           console.log(response);
+           result = response.rows[0].elements[0].distance.value;
+           result2 = response.rows[0].elements[0].distance.text;
+           fn(result, result2);
+           //vm.activities_all[p].distance = response.rows[0].elements[0].distance.value;
+           }
+     });
+
   }
 
   convertActivities(){
@@ -95,11 +141,12 @@ public activities_all: any = [];
         'index':  a[key].index,
         'media': a[key].media,
         'isEvent': true,
-        'distance': 0,
         'day': a[key].day,
         'nomads': (a[key].nomads ? a[key].nomads : []),
         'review': (a[key].review ? a[key].review : 5),
-        'reviews': (a[key].reviews ? a[key].reviews : [])
+        'reviews': (a[key].reviews ? a[key].reviews : []),
+        'distance': '',
+        'distance_number': 0
       });
   }
 
@@ -126,16 +173,35 @@ public activities_all: any = [];
             'index':  b[key].index,
             'media': b[key].media,
             'isEvent': false,
-            'distance': 0,
             'nomads': (b[key].nomads ? b[key].nomads : []),
             'review': (b[key].review ? b[key].review : 5),
-            'reviews': (b[key].reviews ? b[key].reviews : [])
+            'reviews': (b[key].reviews ? b[key].reviews : []),
+            'distance': '',
+            'distance_number': 0
           });
       }
 
    if(this.type == 'All Events') this.activities_all = this.activities_all.filter( act => act.isEvent);
    else if (this.type == 'All Activities') this.activities_all = this.activities_all.filter( act => !act.isEvent);
    else this.activities_all = this.activities_all.filter( act => !act.isEvent && act.tipo == this.type);
+
+
+   if(!this.done_a){
+     this.done_a = true;
+     let vm = this;
+     for(let i=0; i < this.activities_all.length; i++){
+
+     this.coordenadas(this.activities_all[i], this.activities_all[i].location, this.activities_all[i].title_complete,  function(location){
+         vm.activities_all[i].location = location;
+         let om = vm;
+         vm.getDistance(location, function(distance, text){
+           console.log(distance+' km');
+           vm.activities_all[i].distance = text;
+           vm.activities_all[i].distance_number = distance;
+         });
+     });
+     }
+   }
 
    console.log(this.activities_all);
    if(this.general_loader) this.general_loader.dismiss();

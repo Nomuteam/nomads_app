@@ -37,6 +37,7 @@ import { ChatPage } from '../pages/chat/chat';
 import { DetailsPage } from '../pages/details/details';
 import { EditactPage } from '../pages/editact/editact';
 import { EditeventPage } from '../pages/editevent/editevent';
+import { TutorialPage } from '../pages/tutorial/tutorial';
 
 import { Keyboard } from '@ionic-native/keyboard';
 

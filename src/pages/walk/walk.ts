@@ -4,6 +4,7 @@ import { TabsPage } from '../tabs/tabs';
 import { AngularFireDatabase, AngularFireObject } from 'angularfire2/database';
 import firebase from 'firebase';
 import { Stripe } from '@ionic-native/stripe';
+import { TutorialPage } from '../tutorial/tutorial';
 
 /**
  * Generated class for the WalkPage page.
@@ -58,11 +59,11 @@ public user_data: any = {
    'country': '',
    'payment':
      {
-       'cardholder': ' ',
+       'cardholder': 'John Doe',
        'cardnumber': '4242424242424242',
        'card_expiry': '2020-12',
        'card_ccv': '220',
-       'card_address': ''
+       'card_address': 'Monterrey'
      },
     'preferences': {
       'categories': [],
@@ -420,11 +421,11 @@ public class_type = 'input-field card';
        this.af.list('/Users/').update(firebase.auth().currentUser.uid, this.user_data)
        .then( () => {
          localStorage.setItem('walk_progress', 'complete');
-         this.navCtrl.setRoot(TabsPage);
+         this.navCtrl.setRoot(TutorialPage);
        })
     }
     else{
-      this.current_index++;
+      this.current_index+=2;
       if(this.current_index == 3 && this.user_type == 'nomads'){
         this.message = 'These are the filters we use to give you the best recommedations. Change them anytime'
       }
@@ -432,7 +433,7 @@ public class_type = 'input-field card';
   }
 
   back(){
-    this.current_index--;
+    this.current_index-=2;
     if(this.message == 'These are the filters we use to give you the best recommedations. Change them anytime'){
       this.message = 'You are almost there, tell us more about you.';
     }

@@ -61,7 +61,8 @@
   <div *ngIf="this.amigos.length == 0" class="location-hint">There are no clan friends going to this activity. Join and invite them!</div>
   <div class="friends-container">
     <div *ngFor="let a of this.amigos" class="friend">
-      <div class="img">{{a.initial}}</div>
+      <div *ngIf="!a.img" class="img">{{a.initial}}</div>
+      <div [style.background-image]="sanitizeThis(a.img)" *ngIf="a.img" class="img"></div>
       <div class="name">{{a.name}}</div>
     </div>
   </div>

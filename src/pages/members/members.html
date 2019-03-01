@@ -28,7 +28,8 @@
 
 <ion-content padding>
   <div *ngFor="let m of this.actual_members" class="nomad-element">
-      <div class="user-img">{{m.first_name.charAt(0)}}</div>
+      <div *ngIf="!m.img" class="user-img">{{m.first_name.charAt(0)}}</div>
+      <div *ngIf="m.img" class="user-img" [style.background-image]="sanitizeThis(m.img)"></div>
       <div class="nomad-texts">
        <div class="nomad-name">{{m.first_name}}</div>
       </div>

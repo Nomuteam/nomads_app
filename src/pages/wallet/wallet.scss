@@ -5,11 +5,12 @@ page-wallet {
     height: 3vh;
     .div1{
       position: absolute;
-      top: 15%;
-      left: 25%;
-      height: 70%;
-      border: 1px solid #229B86;
-      width: 50%;
+      top: 38%;
+      left: 42%;
+      height: 15%;
+      //background-color: linear-gradient(#4400C4, #1AA3AF)!important;
+      border: 2px solid #1AA3AF;
+      width: 15%;
       border-radius: 50%;
     }
     .div2{
@@ -17,16 +18,34 @@ page-wallet {
       top: 7.5%;
       left: 17.5%;
       height: 85%;
-      border: 1px solid #229B86;
+      //background-color: linear-gradient(#4400C4, #1AA3AF)!important;
+      //border: 3px solid #4400C4;
+      border: 2px solid #4400C4;
       width: 65%;
       border-radius: 50%;
     }
-    .div3{
+    .div2:after{
+      background: linear-gradient(#4400C4, #1AA3AF)!important;
       position: absolute;
-      left: 12.5%;
-      height: 100%;
-      border: 1px solid #229B86;
-      width: 75%;
+      content: '';
+      height: 25%;
+      width: 25%;
+      right: 0;
+      left: 40%;
+      top: 40%;
+      border-radius: 50%;
+    }
+    .div3{
+      // position: absolute;
+      // left: 12.5%;
+      // height: 100%;
+      position: absolute;
+      top: 8%;
+      left: 17.5%;
+      height: 85%;
+      border-bottom: 3px solid rgba(26, 163, 175, .4);
+      //width: 75%;
+      width: 65%;
       border-radius: 50%;
     }
   }

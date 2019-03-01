@@ -1,9 +1,13 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, LoadingController, AlertController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, LoadingController, AlertController, ModalController } from 'ionic-angular';
 import { FiltersPage } from '../filters/filters';
 import { AngularFireDatabase, AngularFireObject } from 'angularfire2/database';
 import firebase from 'firebase';
 import { Stripe } from '@ionic-native/stripe';
+import { Http, Headers, RequestOptions} from '@angular/http';
+import 'rxjs/add/operator/map';
+import { InAppBrowser } from '@ionic-native/in-app-browser';
+import { AyudaPage } from '../ayuda/ayuda';
 
 /**
  * Generated class for the WalletPage page.
@@ -77,18 +81,27 @@ public activities: any = [];
 public t_response$: any;
 public transactions: any = [];
 
+public link_payment: any;
+
+public paypal$: any;
+
+public total: any = 0;
+public users_total: any = 0;
+
   constructor(public navCtrl: NavController,
     public navParams: NavParams,
     public af: AngularFireDatabase,
     public loadingCtrl: LoadingController,
     public alertCtrl: AlertController,
-    public stripe: Stripe) {
+    public stripe: Stripe,
+    private http: Http,
+    public iab: InAppBrowser,
+    public modalCtrl: ModalController) {
     this.user_type = localStorage.getItem('Tipo');
 
     this.alertCtrl.create({
       title: 'Welcome to your wallet!',
-      subTitle: 'Pick a package or enter the amount',
-      message: 'Enter the amount you wish to buy or select a predefined package to buy noms',
+      message: 'Enter the amount you wish to buy or select a predefined package to buy NOMS',
       buttons: ['Ok']
     }).present();
   }
@@ -307,6 +320,168 @@ public transactions: any = [];
    alert.present();
   }
 
+  verifyConfirmationPaypal(){
+      if(this.transaction_status == 'completed'){
+        this.general_loader.dismiss();
+
+        this.alertCtrl.create({
+          title: 'Transaction Succesful!',
+          subTitle: 'You paid '+this.cash+' for '+this.noms+' noms',
+          message: 'Enjoy your noms!',
+          buttons: ['Ok']
+        }).present();
+
+        //this.getFriendBalance();
+
+        this.af.list('/').update('Accountance', {
+          'total': this.total + parseInt(this.cash)
+        });
+
+         this.af.list('/').update('Accountance', {
+           'nomads': this.users_total + parseInt(this.cash)
+         });
+
+        this.af.list('Payments/'+firebase.auth().currentUser.uid).update(this.transaction_id, {'amount': this.cash});
+
+        let transaction = {'date': new Date(), 'index': this.transaction_id, 'amount': this.cash, 'type': 'noms', 'sender_id': firebase.auth().currentUser.uid};
+        this.af.list('transactions').update(this.transaction_id, transaction);
+
+        this.af.list('Users/'+firebase.auth().currentUser.uid+'/transactions').update(this.transaction_id, {
+          'index': this.transaction_id
+        });
+
+        this.af.list('Users/').update(firebase.auth().currentUser.uid, {
+          'noms': this.noms_balance+this.noms
+        }).then( () => {
+          this.navCtrl.pop();
+        })
+      }
+      else{
+        this.general_loader.dismiss();
+        this.alertCtrl.create({title: 'Payment Error', message: 'There was an error processing your payment, try again later', buttons: ['Ok']}).present();
+      }
+  }
+
+
+
+  verifyPayment(){
+  this.general_loader.dismiss();
+  this.general_loader = null;
+
+  this.general_loader = this.loadingCtrl.create({
+    spinner: 'bubbles',
+    content: 'Verifying Payment...'
+  })
+  this.general_loader.present();
+  this.verifyConfirmationPaypal();
+}
+
+  watchLink(){
+
+  this.af.object('Fundings/currentProcess').snapshotChanges().subscribe(action => {
+    if(action.payload.val()){
+    console.log(action.payload.val());
+    let a = action.payload.val();
+    for(let key in a){
+      this.paypal$ = a[key];
+
+        if(this.paypal$.paid == true) this.transaction_status = 'completed';
+        this.verifyPayment();
+
+    }
+  }
+  else{
+    // this.verifyPayment();
+  }
+  });
+}
+
+  paypalDone(){
+    this.alertCtrl.create({
+      title: 'Was everything ok with the paypal checkout?',
+      message: 'We are asking this question so we can verify the payment and add the noms to your balance.',
+      // message: 'Se te hará un cargo de  $'+this.quantity+' a la tarjeta que ingresaste',
+      buttons: [
+        {
+          text: 'There was an error',
+          handler: () => {
+            this.general_loader.dismiss();
+            this.navCtrl.pop()
+                .then(()=> this.modalCtrl.create(AyudaPage).present());
+
+          }
+        },
+        {
+          text: 'Payment correct',
+          handler: () =>{
+            this.watchLink();
+          }
+        }
+      ]
+    }).present();
+  }
+
+  chargePaypal(){
+  this.general_loader = this.loadingCtrl.create({
+    spinner: 'bubbles',
+    content: 'Cargando...'
+  })
+  this.general_loader.present();
+  this.af.list('Fundings/currentProcess').remove();
+  this.af.list('paypal/current').remove();
+
+  this.transaction_id = this.generateUUID();
+  let qty = parseInt(this.cash);
+  console.log(qty);
+
+  let data = {
+    amount: qty,
+    uid: firebase.auth().currentUser.uid,
+    t_id: this.transaction_id
+  };
+
+    this.http.post('https://us-central1-dev-nomads.cloudfunctions.net/pay/createPayment', data)
+    .map(res => res.json())
+    .subscribe(data => {
+      //data = JSON.stringify(data);
+      console.log('Response From Server: ' + data.links[1].href);
+      this.link_payment = data.links[1].href;
+      const browser = this.iab.create(data.links[1].href, '_blank');
+      this.paypalDone();
+    });
+}
+
+  confirmPaypal(){
+    if(this.cash > 0){
+      this.alertCtrl.create({
+        title: 'Do you want to buy '+this.noms+' noms?',
+        subTitle: 'You will be charged '+this.cash,
+        message: 'A paypal window will popup for you to checkout',
+        buttons: [
+          {
+            text: 'Cancel',
+            handler: () => {
+
+            }
+          },
+          {
+            text: 'Proceed',
+            handler: () =>{
+              this.chargePaypal();
+            }
+          }
+        ]
+      }).present();
+    }
+    else{
+      this.alertCtrl.create({
+        title: 'Enter an amount of cash',
+        message: 'In order to buy noms you need to enter the amount of cash you want to pay',
+        buttons: ['Ok']
+      }).present();
+    }
+  }
+
   confirmPay(){
     if(this.cash > 0){
       this.alertCtrl.create({
@@ -425,6 +600,14 @@ public transactions: any = [];
       content: 'Loading...'
     });
     this.general_loader.present();
+
+    this.af.object('Accountance/').snapshotChanges().subscribe(action => {
+     this.total = action.payload.val().total;
+     this.total = parseInt(this.total);
+     this.users_total = action.payload.val().nomads;
+     this.users_total = parseInt(this.users_total);
+    });
+
     this.af.object('Users/'+firebase.auth().currentUser.uid).snapshotChanges().subscribe(action => {
       this.users$ = action.payload.val();
       this.noms_balance = this.users$.noms;

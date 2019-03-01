@@ -112,8 +112,21 @@ page-filtered {
           padding-left: 2%;
           margin-top: -8%;
           text-transform: uppercase;
-          color: #55D1AC;
-          opacity: .6;
+          color: #A8A8A8;
+          opacity: 1;
+        }
+        .act-rating{
+          font-family: 'Custom';
+          font-weight: 600!important;
+          font-size: 60%;
+          color: white;
+          //border: 1px solid red;
+          text-align: left;
+          padding-left: 2%;
+          margin-top: -6%;
+          text-transform: uppercase;
+          color: #A8A8A8;
+          opacity: .7;
         }
       }
     }

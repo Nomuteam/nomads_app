@@ -230,7 +230,7 @@ export class CalendarPage {
 
    for(let key in this.activities_all){
      if(moment(moment(this.activities_all[key].startTime).format('LLLL')).isBefore(today)){
-       this.activities_all.eventColor = 'red';
+       //this.activities_all.eventColor = 'red';
      }
    }
 

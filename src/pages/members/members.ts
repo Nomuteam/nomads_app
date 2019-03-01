@@ -54,7 +54,8 @@ public  noms_balance: any = '';
         this.actual_members.push({
           'first_name': a[key].first_name,
           'last_name': a[key].last_name,
-          'index': a[key].index
+          'index': a[key].index,
+          'img': a[key].img
         });
       }
     }

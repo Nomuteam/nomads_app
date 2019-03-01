@@ -14,6 +14,8 @@ import { WelcomePage } from '../welcome/welcome';
 import * as moment from 'moment';
 import { AyudaPage } from '../ayuda/ayuda';
 import { SocialSharing } from '@ionic-native/social-sharing';
+import { Camera, CameraOptions } from '@ionic-native/camera';
+import { DomSanitizer } from '@angular/platform-browser';
 
 /**
  * Generated class for the ProfilePage page.
@@ -46,12 +48,18 @@ public noms_balance: any;
     public afAuth: AngularFireAuth,
     public actionSheetCtrl: ActionSheetController,
     public modalCtrl: ModalController,
-    public socialSharing: SocialSharing) {
+    public socialSharing: SocialSharing,
+    public camera: Camera,
+    public sanitizer: DomSanitizer) {
   }
 
   openAyuda(){
   let modal = this.modalCtrl.create(AyudaPage);
   modal.present();
+  }
+
+  sanitizeThis(image){
+    return this.sanitizer.bypassSecurityTrustStyle('url('+image+')');
   }
 
   shareGeneral(){
@@ -115,6 +123,7 @@ actionSheet.present();
       this.user_data.email = this.alumno$.email;
       this.user_data.phone = this.alumno$.phone;
       this.user_data.my_code = this.alumno$.my_code;
+      this.user_data.img = this.alumno$.img;
       this.noms_balance = this.alumno$.noms;
       if(this.general_loader) this.general_loader.dismiss();
     });
@@ -149,6 +158,98 @@ actionSheet.present();
     this.afAuth.auth.signOut();
     this.appCtrl.getRootNav().setRoot(WelcomePage);
   }
+
+  presentOptions() {
+ let actionSheet = this.actionSheetCtrl.create({
+   title: 'Chose an option for your profile picture',
+   buttons: [
+     {
+       text: 'Take a picture',
+       handler: () => {
+         this.tomarFoto();
+       }
+     },{
+       text: 'Upload a picture',
+       handler: () => {
+         this.escogerFoto();
+       }
+     },{
+       text: 'Cancel',
+       role: 'cancel',
+       handler: () => {
+         console.log('Cancel clicked');
+       }
+     }
+   ]
+ });
+ actionSheet.present();
+}
+
+uploadFoto(link){
+  this.af.list('Users').update(firebase.auth().currentUser.uid, {
+    'img': link
+  }).then(() => this.general_loader.dismiss());
+}
+
+tomarFoto(){
+   this.general_loader = this.loadingCtrl.create({
+     spinner: 'bubbles',
+     content: 'Uploading Picture...'
+    });
+   const options: CameraOptions={
+    quality: 50,
+    destinationType: this.camera.DestinationType.DATA_URL,
+    encodingType: this.camera.EncodingType.JPEG,
+    correctOrientation: true
+   }
+
+   this.camera.getPicture(options).then(result => {
+     this.general_loader.present();
+     const image = `data:image/jpeg;base64,${result}`;
+
+     const pictures = firebase.storage().ref('/Users/');
+     pictures.child('pictures').child(this.generateUUID()).putString(image, 'data_url').then(kk=>{
+       kk.ref.getDownloadURL().then(url => {
+         this.uploadFoto(url);
+       })
+     });
+   });
+}
+escogerFoto(){
+this.general_loader = this.loadingCtrl.create({
+  spinner: 'bubbles',
+  content: 'Uploading Picture...'
+ });
+
+  const options: CameraOptions={
+   quality: 50,
+   sourceType: this.camera.PictureSourceType.PHOTOLIBRARY,
+   destinationType: this.camera.DestinationType.DATA_URL,
+   encodingType: this.camera.EncodingType.JPEG,
+   correctOrientation: true
+  }
+
+  this.camera.getPicture(options).then(result => {
+    this.general_loader.present();
+    const image = `data:image/jpeg;base64,${result}`;
+
+    const pictures = firebase.storage().ref('/Users/');
+    pictures.child('pictures').child(this.generateUUID()).putString(image, 'data_url').then(kk=>{
+      kk.ref.getDownloadURL().then(url => {
+        this.uploadFoto(url);
+      })
+    });
+  });}
+
+  private generateUUID(): any {
+  var d = new Date().getTime();
+  var uuid = 'xxxxxxxx-xxxx-4xxx-yxxx'.replace(/[xy]/g, function (c) {
+  var r = (d + Math.random() * 16) % 16 | 0;
+      d = Math.floor(d / 16);
+      return (c == 'x' ? r : (r & 0x3 | 0x8)).toString(16);
+   });
+  return uuid;
+}
 
 
 }

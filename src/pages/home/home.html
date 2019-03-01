@@ -6,7 +6,7 @@
        <div class="div2"></div>
        <div class="div3"></div></div> -->
        <div class="noms-ctr">
-         <div class="noms-hint">Noms</div>
+         <div class="noms-hint">NOMS</div>
          <div class="noms-qty">{{this.noms_balance}}</div>
        </div>
     </ion-buttons>
@@ -17,18 +17,16 @@
     </ion-buttons> -->
     <p class="title">Home</p>
   </ion-navbar>
+  <div class="explore-all2">
+    <div (click)="openBrowse('activities')" class="explore">Browse All</div>
+  </div>
 </ion-header>
 
 <ion-content padding class="home-page">
 
-  <div class="explore-all">
+  <!-- <div class="explore-all">
     <div (click)="openBrowse('activities')" class="explore">Browse All</div>
-    <!-- <div class="explore-options">
-     <div (click)="openBrowse('events')" class="option">Events</div>
-     <div (click)="openBrowse('activities')" class="option">Activities</div>
-     <div (click)="openBrowse('events')" class="option">Experiences</div>
-    </div> -->
-  </div>
+  </div> -->
 
   <!-- <div class="search-container">
     <div (click)="openBrowse('events')" class="option-container">
@@ -68,7 +66,7 @@
    <button (click)="openBrowse()" type="button" name="button" class="green-btn">Browse all</button>
   </div> -->
 
-  <div class="category-container">
+  <div class="category-container" style="margin-top: 10%;">
    <div (click)="openFiltered('All Activities')" class="category-title best">Best Rated Activities</div>
    <!-- <p class="category-suggestions">Next ones for you</p> -->
    <ion-slides slidesPerView="1.6">
@@ -77,21 +75,21 @@
       <p class="act-first">{{a.categories.activity_type}} - {{a.distance}}</p>
       <p class="act-title">{{a.title}}</p>
       <p class="act-distance">{{a.class_price}} noms</p>
-      <p class="act-rating">{{a.review}} stars / ({{a.reviews.length}})</p>
+      <p class="act-rating">{{a.review}} <ion-icon name="star" color="white"></ion-icon> / ({{a.reviews.length}})</p>
     </ion-slide>
   </ion-slides>
   </div>
 
   <div class="category-container">
    <div (click)="openFiltered('All Activities')" class="category-title blue">Nearby and Upcoming</div>
-   <!-- <p class="category-suggestions">Next ones for you</p> -->
+   <p *ngIf="this.getUpcoming().length == 0" class="category-suggestions">You'll find the upcoming classes for today here</p>
    <ion-slides slidesPerView="1.6">
     <ion-slide (click)="openActivity(a)" *ngFor="let a of this.getUpcoming()">
       <div class="img-slide" [style.background-image]="sanitizeThis(a.img)"></div>
       <p class="act-first">{{a.categories.activity_type}} - {{a.distance}} - {{a.next_time}}</p>
       <p class="act-title">{{a.title}}</p>
       <p class="act-distance">{{a.class_price}} noms</p>
-      <p class="act-rating">{{a.review}} stars / ({{a.reviews.length}})</p>
+      <p class="act-rating">{{a.review}} <ion-icon name="star" color="white"></ion-icon> / ({{a.reviews.length}})</p>
     </ion-slide>
   </ion-slides>
   </div>
@@ -105,7 +103,7 @@
       <p class="act-first">{{a.categories.activity_type}} - {{a.distance}}</p>
       <p class="act-title">{{a.title}}</p>
       <p class="act-distance">{{a.class_price}} noms</p>
-      <p class="act-rating">5 stars / (0)</p>
+      <p class="act-rating">{{a.review}} <ion-icon name="star" color="white"></ion-icon> / ({{a.reviews.length}})</p>
     </ion-slide>
   </ion-slides>
   </div>
@@ -123,7 +121,7 @@
       <p class="act-title">{{f.title}}</p>
       <p *ngIf="!f.isEvent" class="act-distance">{{f.class_price}} noms</p>
       <p *ngIf="f.isEvent" class="act-distance">{{f.cost}} noms</p>
-      <p class="act-rating">5 stars / (0)</p>
+      <p class="act-rating">{{f.review}} <ion-icon name="star" color="white"></ion-icon> / ({{f.reviews.length}})</p>
     </ion-slide>
   </ion-slides>
   </div>
@@ -138,7 +136,7 @@
        <p class="act-first">{{e.type}}  - {{e.distance}}</p>
        <p class="act-title">{{e.title}}</p>
        <p class="act-distance">{{e.cost}} noms</p>
-       <p class="act-rating">5 stars / (0)</p>
+       <p class="act-rating">{{e.review}} <ion-icon name="star" color="white"></ion-icon> / ({{e.reviews.length}})</p>
      </ion-slide>
   </ion-slides>
   </div>
@@ -152,7 +150,7 @@
       <p class="act-first">{{a.categories.activity_type}}  - {{a.distance}}</p>
       <p class="act-title">{{a.title}}</p>
       <p class="act-distance">{{a.class_price}} noms</p>
-      <p class="act-rating">5 stars / (0)</p>
+      <p class="act-rating">{{a.review}} <ion-icon name="star" color="white"></ion-icon> / ({{a.reviews.length}})</p>
     </ion-slide>
   </ion-slides>
   </div>
@@ -166,7 +164,7 @@
       <p class="act-first">{{a.categories.activity_type}}  - {{a.distance}}</p>
       <p class="act-title">{{a.title}}</p>
       <p class="act-distance">{{a.class_price}} noms</p>
-      <p class="act-rating">5 stars / (0)</p>
+      <p class="act-rating">{{a.review}} <ion-icon name="star" color="white"></ion-icon> / ({{a.reviews.length}})</p>
     </ion-slide>
   </ion-slides>
   </div>
@@ -186,7 +184,7 @@
   </div> -->
 
   <ion-fab (click)="openFilters()" right bottom>
-   <button ion-fab color="purple"><ion-icon name="ios-options"></ion-icon></button>
+   <button ion-fab color="purple"><ion-icon name="ios-switch"></ion-icon></button>
  </ion-fab>
 
 
