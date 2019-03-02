@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, AlertController, LoadingController, ModalController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, AlertController, LoadingController, ModalController, ActionSheetController } from 'ionic-angular';
 import * as moment from 'moment';
 import { FiltersPage } from '../filters/filters';
 import { AngularFireDatabase, AngularFireObject } from 'angularfire2/database';
@@ -9,6 +9,8 @@ import { WalletPage } from '../wallet/wallet';
 import { ActivityPage } from '../activity/activity';
 import { EventPage } from '../event/event';
 import { ReviewsPage } from '../reviews/reviews';
+import { LaunchNavigator, LaunchNavigatorOptions } from '@ionic-native/launch-navigator';
+import { SocialSharing } from '@ionic-native/social-sharing';
 
 /**
  * Generated class for the CalendarPage page.
@@ -38,6 +40,8 @@ export class CalendarPage {
   public e_response$: any;
   public activities_all = [];
 
+  public segment: any = 'upcoming';
+
   public calendar = {
    mode: 'month',
    currentDate: new Date()
@@ -46,6 +50,29 @@ export class CalendarPage {
 
  public past_events: any = [];
  public show_pop: any;
+ public week_days : any = [
+   {
+     'day': 'Monday'
+   },
+   {
+     'day': 'Tuesday'
+   },
+   {
+     'day': 'Wednesday'
+   },
+   {
+     'day': 'Thursday'
+   },
+   {
+     'day': 'Friday'
+   },
+   {
+     'day': 'Saturday'
+   },
+   {
+     'day': 'Sunday'
+   }
+ ];
 
 
 
@@ -55,7 +82,10 @@ export class CalendarPage {
   public loadingCtrl: LoadingController,
   public alertCtrl: AlertController,
   public sanitizer: DomSanitizer,
-  public modalCtrl: ModalController) {
+  public modalCtrl: ModalController,
+  public actionSheetCtrl: ActionSheetController,
+  public launchNavigator: LaunchNavigator,
+  public socialSharing: SocialSharing) {
     this.type = localStorage.getItem('Tipo');
     let time = new Date();
     let time2 = time.setHours(time.getHours()+2);
@@ -73,6 +103,56 @@ export class CalendarPage {
     let modal = this.modalCtrl.create(ReviewsPage, {'Activity': evento});
     modal.present();
   }
+
+  goNavigate(direc){
+    this.launchNavigator.navigate(direc);
+  }
+
+  shareGeneral(act){
+    this.socialSharing.share('Hey Everybody! I joined '+act.title_complete+'. Join Me on nōmu!', 'Nomads!')
+        .then((entries) =>{
+          console.log('success ', +JSON.stringify(entries));
+        })
+  }
+
+  presentActionSheet(e){
+    const actionSheet = this.actionSheetCtrl.create({
+  title: 'Choose an Option',
+  buttons: [
+    {
+      text: 'Share',
+      handler: () => {
+        this.shareGeneral(e);
+      }
+    },
+    {
+      text: 'Get Directions',
+      handler: () => {
+        this.goNavigate(e.location)
+      }
+    },
+    {
+      text: 'View Details',
+      handler: () => {
+       this.seeDetails(e);
+      }
+    },
+    {
+      text: 'Cancel Reservation',
+      handler: () => {
+       this.confirmCancelation(e);
+      }
+    },{
+      text: 'Back',
+      role: 'cancel',
+      handler: () => {
+        console.log('Cancel clicked');
+      }
+    }
+  ]
+});
+actionSheet.present();
+}
 
   openFilters(){
     this.navCtrl.push(FiltersPage);
@@ -145,7 +225,9 @@ export class CalendarPage {
           'reviewed': (review != undefined ? review : false),
           'review':( a[key].review ? a[key].review : 5),
           'reviews': (a[key].reviews ? a[key].reviews : []),
-          'eventColor': '#2edbac'
+          'eventColor': '#2edbac',
+          'actual_day': '',
+          'day_number': 0
         }
         return aux2;
       }
@@ -184,7 +266,9 @@ export class CalendarPage {
           'reviewed': (review != undefined ? review : false),
           'review':( b[key].review ? b[key].review : 5),
           'reviews': (b[key].reviews ? b[key].reviews : []),
-          'eventColor': '#2edbac'
+          'eventColor': '#2edbac',
+          'actual_day': '',
+          'day_number': 0
         }
         return aux2;
       }
@@ -201,6 +285,16 @@ export class CalendarPage {
     return '';
   }
 
+
+  formatoNew(dia){
+    console.log(dia);
+    return moment(dia).format('LL');
+  }
+
+  hayDia(dia){
+    return this.activities_all.filter(act => act.actual_day==dia).length > 0;
+  }
+
   convertActivities(){
 
     for(let i=0; i<this.nomad_schedule.length; i++){
@@ -213,6 +307,7 @@ export class CalendarPage {
         ayuda.startTime = this.markStart(this.nomad_schedule[i].date, this.nomad_schedule[i].time);
         ayuda.endTime = this.markEnd(this.nomad_schedule[i].date, this.nomad_schedule[i].time);
         ayuda.allDay = false;
+        ayuda.time = moment(ayuda.startTime).format('LT');
         console.log(ayuda);
         this.activities_all.push(ayuda);
       }
@@ -220,22 +315,39 @@ export class CalendarPage {
     // let start = moment(event.startTime).format('LLLL');
     // let end = moment(event.endTime).format('LLLL');
    let today  = moment();
+   let dia;
+   for(let key in this.activities_all){
+     dia = moment(this.activities_all[key].startTime).format('dddd');
+     this.activities_all[key].actual_day = dia;
+     this.activities_all[key].day_number = this.getNumberDay(dia)
+   }
 
    if(this.show_pop){
-     this.past_events = this.activities_all.filter( event => moment(moment(event.startTime).format('LLLL')).isBefore(today)&&event.reviewed);
-     if(this.past_events.length > 0) this.alertCtrl.create({title: 'Review your activities and events', message: 'It seems like you have past events and activities waiting for review. Click on them and select the review option!', buttons: ['Ok']}).present();
+     this.past_events = this.activities_all.filter( event => moment(moment(event.startTime).format('LLLL')).isBefore(today)&&!event.reviewed);
+     if(this.past_events.length > 0){
+       this.changeSegment('history');
+       this.alertCtrl.create({title: 'Review your activities and events', message: 'It seems like you have past events and activities waiting for review. <br> Click on them and select the review option!', buttons: ['Ok']}).present();
+     }
 
      this.show_pop = false;
    }
+   this.activities_all = this.activities_all.filter( event => !moment(moment(event.startTime).format('LLLL')).isBefore(today));
+   this.activities_all = this.orderByDay(this.activities_all);
 
-   for(let key in this.activities_all){
-     if(moment(moment(this.activities_all[key].startTime).format('LLLL')).isBefore(today)){
-       //this.activities_all.eventColor = 'red';
-     }
-   }
-
+   this.activities_all = this.orderByDate(this.activities_all);
+   this.past_events = this.orderByDate(this.past_events);
    console.log(this.activities_all);
    console.log(this.past_events);
+  }
+
+  getNumberDay(d){
+    if(d=='Monday') return 1;
+    else if(d=='Tuesday') return 2;
+    else if(d=='Wednesday') return 3;
+    else if(d=='Thursday') return 4;
+    else if(d=='Friday') return 5;
+    else if(d=='Saturday') return 6;
+    else if(d=='Sunday') return 7;
   }
 
   getEvents(){
@@ -243,6 +355,28 @@ export class CalendarPage {
       this.e_response$ = action.payload.val();
       this.activities_all = [];
       this.convertActivities();
+    });
+  }
+
+  orderByDate(aux){
+    return aux.sort(function(a, b){
+     var keyA = a.startTime,
+         keyB = b.startTime;
+     // Compare the 2 dates
+     if(keyA < keyB) return -1;
+     if(keyA > keyB) return 1;
+     return 0;
+    });
+  }
+
+  orderByDay(aux){
+    return aux.sort(function(a, b){
+     var keyA = a.day_number,
+         keyB = b.day_number;
+     // Compare the 2 dates
+     if(keyA < keyB) return -1;
+     if(keyA > keyB) return 1;
+     return 0;
     });
   }
 
@@ -333,6 +467,14 @@ export class CalendarPage {
          this.goAhead(evento);
        });
      }
+   }
+
+   changeSegment(tipo){
+     this.segment = tipo;
+   }
+
+   getSegment(tipo){
+     return this.segment == tipo ? 'segment-element selected' : 'segment-element';
    }
 
    goAhead(evento){

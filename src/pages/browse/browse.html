@@ -28,7 +28,27 @@
   <div class="segment-container">
    <p (click)="changeSegment('events')" class="{{getSegment('events')}}" style="margin-left: 0!important;">Events</p>
    <p (click)="changeSegment('activities')" class="{{getSegment('activities')}}">Activities</p>
+   <p (click)="changeSegment('experiences')" class="{{getSegment('experiences')}}">Experiences</p>
   </div>
+
+
+  <div *ngIf="this.segment == 'experiences'">
+    <div class="overflowing">
+      <ion-grid>
+        <ion-row>
+          <ion-col col-6>
+           <div (click)="openFiltered('experiences')" class="act-element">
+             <p class="act-title">All Experiences</p>
+             <p class="act-number">{{this.getExperiences().length}}</p>
+           </div>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </div>
+
+  </div>
+
+
 
  <div *ngIf="this.segment == 'activities'">
    <div class="overflowing">

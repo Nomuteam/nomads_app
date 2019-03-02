@@ -102,6 +102,7 @@ public response$: any;
 public activities: any = [];
 public categorias: any = [];
 public general_loader: any;
+public experiences: any = [];
 
   constructor(public navCtrl: NavController,
   public navParams: NavParams,
@@ -110,6 +111,10 @@ public general_loader: any;
   public alertCtrl: AlertController,
   public sanitizer: DomSanitizer) {
     this.segment = this.navParams.get('segment');
+  }
+
+  getNumberExperiences(){
+
   }
 
   sanitizeThis(image){
@@ -170,6 +175,12 @@ public general_loader: any;
     this.categorias = this.categorias.filter(act => act.type != 'cacaca');
     console.log(this.activities);
     console.log(this.categorias);
+  }
+
+
+  getExperiences(){
+    return ['hi', 'k'];
+    // return this.activities.filter(act => act.categories.main_category == 'Experiences');
   }
 
   getActivities(){

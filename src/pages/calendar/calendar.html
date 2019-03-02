@@ -27,8 +27,49 @@
 </ion-header>
 
 <ion-content padding>
-  <p class="page-hint"> {{ viewTitle }}</p>
-  <calendar [eventSource]="activities_all"
+  <div class="segment-container">
+   <p (click)="changeSegment('history')" class="{{getSegment('history')}}" style="margin-left: 0!important;">History</p>
+   <p (click)="changeSegment('upcoming')" class="{{getSegment('upcoming')}}">Upcoming</p>
+  </div>
+
+  <div *ngIf="segment == 'history'">
+      <div class="week-container">
+        <div *ngFor="let a of this.past_events" >
+          <div class="scheduled-container">
+             <img src="{{a.img}}">
+             <div class="text-area">
+               <div class="text-title">{{a.title}}</div>
+               <div class="text-time">{{this.formatoNew(a.startTime)}}</div>
+               <div class="text-time">{{a.time}}</div>
+             </div>
+             <div *ngIf="a.reviewed" (click)="presentActionSheet(a)" class="green-btn">Click for More</div>
+             <div *ngIf="!a.reviewed" (click)="giveReview(a)" class="green-btn red">Write a Review</div>
+          </div>
+        </div>
+      </div>
+  </div>
+
+
+  <div *ngIf="segment == 'upcoming'">
+    <div *ngIf="this.activities_all.length == 0" class="page-hint">You have no scheduled activities yet. Go book one!</div>
+   <div *ngFor="let w of this.week_days">
+     <div *ngIf="this.hayDia(w.day)" class="week-container">
+       <div class="week-title">{{w.day}}</div>
+       <div *ngFor="let a of this.activities_all" >
+         <div *ngIf="a.actual_day == w.day" class="scheduled-container">
+            <img src="{{a.img}}">
+            <div class="text-area">
+              <div class="text-title">{{a.title}}</div>
+              <div class="text-time">{{a.time}}</div>
+            </div>
+            <div (click)="presentActionSheet(a)" class="green-btn">Click for More</div>
+         </div>
+       </div>
+     </div>
+   </div>
+  </div>
+  <!-- <p class="page-hint"> {{ viewTitle }}</p> -->
+  <!-- <calendar [eventSource]="activities_all"
          [calendarMode]="calendar.mode"
          [currentDate]="calendar.currentDate"
          (onEventSelected)="onEventSelected($event)"
@@ -36,5 +77,5 @@
          (onTimeSelected)="onTimeSelected($event)"
          step="30"
          class="calendar-nomads">
-       </calendar>
+       </calendar> -->
 </ion-content>
