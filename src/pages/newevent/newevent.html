@@ -88,7 +88,7 @@
        <div class="jc-container">
          <div class="input-group">
            <p class="input-title">Spaces Available</p>
-           <input type="tel" class="input-field" [(ngModel)]="event_data.spaces_available">
+           <input type="tel" class="input-field" [(ngModel)]="event_data.spaces_available" (blur)="verifyMini()">
          </div>
 
          <div *ngIf="type != 'nomads'" class="input-group">

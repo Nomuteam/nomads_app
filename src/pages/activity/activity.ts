@@ -140,6 +140,14 @@ public time_helper: any = [
     this.fillHelper();
   }
 
+  getNomadsjoined(){
+    return Object.keys(this.activity_data.nomads).length;
+  }
+
+  isCreator(){
+    return this.activity_data.creator == firebase.auth().currentUser.uid;
+  }
+
   confirmEdit(){
     console.log('clicked k');
     this.alertCtrl.create({

@@ -44,20 +44,33 @@ page-contact {
     border-radius: 8px 8px 0 0!important;
     font-family: 'Custom';
     z-index: 100!important;
-    background: linear-gradient(#008573, #0C0C0C 70%)!important;
+    //background: linear-gradient(#008573, #0C0C0C 70%)!important;
        // background-color: #1BBF80;
     //background: linear-gradient(#FDFDFD, #0C0C0C 90%)!important;
     position: relative;
     .flecha{
       text-align: center;
       color: white;
-      font-size: 2em;
+      font-size: 1.5em;
       //border: 1px solid red;
       padding: 0;
       position: absolute;
       //transform: translate(50%);
       width: 100%;
       margin-bottom: 5px;
+      padding: 1%;
+      .spanner{
+        display: block;
+        margin: 0 auto;
+        //border: 1px solid red;
+        border-radius: 50%;
+        width: 30px!important;
+        height: 30px!important;
+        background-color: #1BBF80;
+      }
+      span{
+
+      }
     }
     .top-container{
      padding: 2%;

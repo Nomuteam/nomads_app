@@ -105,6 +105,16 @@ export class NeweventPage {
     this.navCtrl.push(FiltersPage);
   }
 
+  verifyMini(){
+    if(parseInt(this.event_data.spaces_available)<2){
+      this.alertCtrl.create({
+        title: 'We need more spaces available',
+        message: 'In order to create this event, you need at least 2 spaces avaible in this event',
+        buttons: ['Ok']
+      }).present();
+    }
+  }
+
   canAdvance(){
     return this.event_data.title != '' && this.event_data.day != '' && this.event_data.time != '' && this.event_data.location != '' && this.event_data.difficulty != '' && this.event_data.img != '' && this.event_data.about_event != '' && this.event_data.provided != '' && this.event_data.about_organizer != '' && this.event_data.spaces_available != '' && this.event_data.cost != '';
   }

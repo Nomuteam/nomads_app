@@ -28,12 +28,16 @@
 
   <div class="slides-cool">
     <div (click)="changePosition()" class="flecha">
-        <span>&#94;</span>
+      <div class="spanner">
+          <!-- <span>&#94;</span> -->
+          <span *ngIf="class_slides">&#8679;</span>
+          <span *ngIf="!class_slides">&#8681;</span>
+      </div>
     </div>
     <div class="top-container" (click)="changePosition()">
       <div class="left-top">
         <div class="text">Nearby and Upcoming</div>
-        <div class="text hint">Classes and Events</div>
+        <!-- <div class="text hint">Classes and Events</div> -->
       </div>
       <div class="number">{{this.filtered_a.length}}</div>
     </div>

@@ -38,6 +38,7 @@ import { DetailsPage } from '../pages/details/details';
 import { EditactPage } from '../pages/editact/editact';
 import { EditeventPage } from '../pages/editevent/editevent';
 import { TutorialPage } from '../pages/tutorial/tutorial';
+import { ReservationsPage } from '../pages/reservations/reservations';
 
 import { Keyboard } from '@ionic-native/keyboard';
 

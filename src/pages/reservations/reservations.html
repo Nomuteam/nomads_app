@@ -1,0 +1,52 @@
+<!--
+  Generated template for the ReservationsPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+  <ion-navbar color="black1">
+    <ion-buttons start style="margin-left: 3%!important;">
+     <!-- <div class="circles-noms">
+       <div class="div1"></div>
+       <div class="div2"></div>
+       <div class="div3"></div></div> -->
+     <!-- <p class="noms-hint">Noms</p>
+     <p class="noms-qty">120</p> -->
+    </ion-buttons>
+    <ion-buttons (click)="openFilters()" end>
+     <!-- <div class="filters-noms">
+       <div class="div1"></div>
+       <div class="div2"></div>
+       <div class="div3"></div>
+     </div> -->
+     <!-- <button ion-button icon-only>
+       <ion-icon name="ios-options" color="white"></ion-icon>
+     </button> -->
+    </ion-buttons>
+    <p class="title">Reservations</p>
+
+  </ion-navbar>
+</ion-header>
+
+
+<ion-content>
+  <div class="input-container">
+    <input type="text" [(ngModel)]="search" placeholder="Search in all reservations" class="input-search">
+  </div>
+  <div padding class="event-element" *ngFor="let c of this.getFiltered()">
+      <!-- <div class="user-img"></div> -->
+      <div class="event-texts">
+       <div class="event-sender" style="text-transform: capitalize">{{this.getTitle(c)}}</div>
+       <div *ngIf="c.type == 'noms-referral'" class="event-hint" style="text-decoration: line-through">Amount: ${{c.amount}} mxn</div>
+       <div *ngIf="c.type == 'activity'" class="event-hint">Class: {{c.activity_name}}</div>
+       <div *ngIf="c.type == 'noms'" class="event-hint">Amount: ${{c.amount}} mxn</div>
+       <div *ngIf="c.type != 'activity'" class="event-hint">Noms: {{this.getNoms(c.amount)}}</div>
+       <div *ngIf="c.type == 'activity'" class="event-hint">Noms: {{c.amount}}</div>
+       <div class="event-hint" style="opacity: .5">Date: {{c.date}}</div>
+       <div *ngIf="c.time != ''" class="event-hint" style="opacity: .5">Time: {{c.time}}</div>
+      </div>
+
+    <div (click)="openModal(c)" class="stats-hint">View</div>
+  </div>
+</ion-content>

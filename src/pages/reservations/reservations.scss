@@ -1,0 +1,69 @@
+page-reservations {
+  .input-container{
+    //border: 1px solid red;
+    //background-color: #1A1A1A!important;
+    padding: 2%;
+    border-radius: 0 0 12px 12px!important;
+    .input-search{
+      background-color: #323846;
+      font-family: 'Custom';
+      font-size: 100%;
+      padding: 3%;
+      width: 90%;
+      margin-left: 5%;
+      color: white;
+      border-radius: 12px!important;
+      border: none!important;
+    }
+    z-index: 100!important;
+  }
+
+  .event-element{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    // height: 12vh;
+    // padding-left: 5%;
+    border-bottom: 1px solid rgba(255, 255, 255, .3);
+    .user-img{
+      width: 15%;
+      height: 50%;
+      border-radius: 10px;
+      //border: 1px solid red;
+      background-image: url('../../assets/img/imanol.png');
+      background-repeat: no-repeat;
+      background-size: cover;
+      background-position: center;
+    }
+    .event-texts{
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      //border: 1px solid red;
+      width: 65%;
+      margin: 5%;
+      .event-sender{
+        font-family: 'Custom';
+        font-size: 100%;
+        font-weight: 700!important;
+        color: white;
+        display: inline-block;
+        overflow: hidden;
+      }
+      .event-hint{
+        font-family: 'Custom';
+        font-size: 90%;
+        color: white;
+        display: inline-block;
+        overflow: hidden;
+      }
+    }
+    .stats-hint{
+      //border: 1px solid red;
+      font-family: 'Custom';
+      font-size: 90%;
+      font-weight: 700!important;
+      color: #50E3C2;
+    }
+  }
+}

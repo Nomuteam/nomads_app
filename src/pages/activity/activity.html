@@ -32,10 +32,13 @@
         </div>
       </div>
       <div *ngIf="!isAlready()" (click)="openBook()" class="right-side">
-        <div *ngIf="activity_data.class_price != 0" class="noms-qty">
+        <div *ngIf="!isCreator() && activity_data.class_price != 0" class="noms-qty">
           Join <br> {{this.activity_data.class_price}} noms
         </div>
-        <div *ngIf="activity_data.class_price == 0" class="noms-qty">
+        <div *ngIf="isCreator()" class="noms-qty">
+          Joined <br> {{this.getNomadsjoined()} nomads
+        </div>
+        <div *ngIf="!isCreator() && activity_data.class_price == 0" class="noms-qty">
           Join <br> Free!
         </div>
         <!-- <div class="circles-noms">

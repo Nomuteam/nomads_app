@@ -39,7 +39,7 @@
           <ion-col col-6>
            <div (click)="openFiltered('experiences')" class="act-element">
              <p class="act-title">All Experiences</p>
-             <p class="act-number">{{this.getExperiences().length}}</p>
+             <p class="act-number">{{this.getExperiences()}}</p>
            </div>
           </ion-col>
         </ion-row>
@@ -80,10 +80,10 @@
 
  <div *ngIf="this.segment == 'events'">
    <div class="overflowing">
-     <div *ngFor="let a of this.events">
+     <div >
        <div (click)="openFiltered(a.type)" class="event-element">
-         <p class="event-title">{{a.type}}</p>
-         <p class="event-number">{{a.number}}</p>
+         <p class="event-title">All Events</p>
+         <p class="event-number">{{this.getEventsN()}}</p>
        </div>
      </div>
    </div>

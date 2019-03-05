@@ -123,13 +123,14 @@ public experiences: any = [];
 
   convertEvents(){
     let a = this.e_response$;
-    let today  = moment();
+    //let today  = moment();
     // let len = Object.keys(a).filter(b =>  !moment(b.day).isBefore(today)).length;
-    this.events.push({'type': 'All Events', 'number': 1, 'main': 'all'});
+    //this.events.push({'type': 'All Events', 'number': 1, 'main': 'all'});
     if(this.general_loader) this.general_loader.dismiss();
-    // for(let key in a){
-    //   this.events.push({});
-    // }
+    let today  = moment();
+    for(let key in a){
+      if(!moment(a[key].day).isBefore(today)) this.events.push(a[key]);
+    }
     //
     // let today  = moment();
     // this.events = this.events.filter( event => !moment(event.day).isBefore(today));
@@ -137,6 +138,10 @@ public experiences: any = [];
 
     // console.log(this.activities);
     // console.log(this.events);
+  }
+
+  getEventsN(){
+    return this.events.length;
   }
 
 
@@ -166,6 +171,7 @@ public experiences: any = [];
     for(let key in a){
       this.activities.push(this.alreadyExists(a[key].categories));
       this.categorias.push(this.alreadyMain(a[key].categories.main_category));
+      if(a[key].categories.main_category == 'Experiences') this.experiences.push(a[key]);
       // this.activities.push({
       //   'type': a[key].categories.activity_type,
       //   'number': 0
@@ -179,8 +185,8 @@ public experiences: any = [];
 
 
   getExperiences(){
-    return ['hi', 'k'];
-    // return this.activities.filter(act => act.categories.main_category == 'Experiences');
+    //return ['hi', 'k'];
+    return this.experiences;
   }
 
   getActivities(){

@@ -13,6 +13,7 @@ import firebase from 'firebase';
 import * as moment from 'moment';
 import { WelcomePage } from '../welcome/welcome';
 import { AyudaPage } from '../ayuda/ayuda';
+import { ReservationsPage } from '../reservations/reservations';
 
 /**
  * Generated class for the ProfallyPage page.
@@ -48,6 +49,10 @@ public general_loader: any;
   openAyuda(){
   let modal = this.modalCtrl.create(AyudaPage);
   modal.present();
+  }
+
+  openReservations(){
+    this.navCtrl.push(ReservationsPage);
   }
 
 
