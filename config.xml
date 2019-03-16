@@ -1,6 +1,6 @@
 <?xml version='1.0' encoding='utf-8'?>
-<widget id="neuron.mx.nomads" version="0.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
-    <name>Nomads</name>
+<widget id="neuron.mx.nomu" version="0.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+    <name>nomu</name>
     <description>Mexico</description>
     <author email="hi@ionicframework" href="http://ionicframework.com/">Ionic Framework Team</author>
     <content src="index.html" />
@@ -20,7 +20,7 @@
     <preference name="AutoHideSplashScreen" value="false" />
     <preference name="SplashShowOnlyFirstTime" value="false" />
     <preference name="SplashScreen" value="screen" />
-    <preference name="SplashScreenDelay" value="3000" />
+    <preference name="SplashScreenDelay" value="30000" />
     <platform name="android">
         <allow-intent href="market:*" />
         <icon density="ldpi" src="resources/android/icon/drawable-ldpi-icon.png" />
@@ -92,7 +92,7 @@
     </edit-config>
     <allow-navigation href="http://192.168.100.5:8100" />
     <allow-navigation href="http://192.168.1.73:8100" />
-    <engine name="ios" spec="4.5.5" />
+    <engine name="android" spec="6.3.0" />
     <plugin name="cordova-plugin-whitelist" spec="^1.3.3" />
     <plugin name="cordova-plugin-statusbar" spec="^2.4.2" />
     <plugin name="cordova-plugin-device" spec="^2.0.2" />
@@ -105,8 +105,8 @@
         <variable name="GEOLOCATION_USAGE_DESCRIPTION" value="To locate you" />
     </plugin>
     <plugin name="cordova-plugin-x-socialsharing" spec="^5.4.4" />
-    <plugin name="uk.co.workingedge.phonegap.plugin.launchnavigator" spec="^5.0.4">
-        <variable name="LOCATION_USAGE_DESCRIPTION" value="This app requires access to your location for navigation purposes" />
-    </plugin>
     <plugin name="cordova-plugin-inappbrowser" spec="^3.0.0" />
+    <plugin name="uk.co.workingedge.phonegap.plugin.launchnavigator" spec="^5.0.4">
+        <variable name="GOOGLE_API_KEY_FOR_ANDROID" value="AIzaSyDm544BEGbTNNiK-3hx0Hm1gDUj6vjD5eM" />
+    </plugin>
 </widget>

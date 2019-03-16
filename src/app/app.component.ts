@@ -39,6 +39,7 @@ import { EditactPage } from '../pages/editact/editact';
 import { EditeventPage } from '../pages/editevent/editevent';
 import { TutorialPage } from '../pages/tutorial/tutorial';
 import { ReservationsPage } from '../pages/reservations/reservations';
+import { AllPage } from '../pages/all/all';
 
 import { Keyboard } from '@ionic-native/keyboard';
 
@@ -46,6 +47,7 @@ import { Keyboard } from '@ionic-native/keyboard';
   templateUrl: 'app.html'
 })
 export class MyApp {
+
 
   rootPage:any = WelcomePage;
 

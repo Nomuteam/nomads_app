@@ -421,7 +421,8 @@ public class_type = 'input-field card';
        this.af.list('/Users/').update(firebase.auth().currentUser.uid, this.user_data)
        .then( () => {
          localStorage.setItem('walk_progress', 'complete');
-         this.navCtrl.setRoot(TutorialPage);
+         if(this.user_type == 'nomads')this.navCtrl.setRoot(TutorialPage);
+         else this.navCtrl.setRoot(TabsPage);
        })
     }
     else{

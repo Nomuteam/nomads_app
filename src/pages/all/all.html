@@ -1,0 +1,48 @@
+<!--
+  Generated template for the AllPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+  <ion-navbar color="transparent">
+    <!-- <ion-buttons start style="margin-left: 3%!important;"> -->
+     <!-- <div class="circles-noms">
+       <div class="div1"></div>
+       <div class="div2"></div>
+       <div class="div3"></div></div> -->
+     <!-- <p class="noms-hint">Noms</p>
+     <p class="noms-qty">120</p>
+    </ion-buttons> -->
+    <!-- <ion-buttons (click)="openFilters()" end>
+
+     <button ion-button icon-only>
+       <ion-icon name="ios-options" color="white"></ion-icon>
+     </button>
+    </ion-buttons> -->
+    <p class="title">{{type}}</p>
+  </ion-navbar>
+</ion-header>
+
+
+<ion-content padding class="filtered-page">
+
+<div>
+<p class="title-page">{{this.activities_all.length}} results</p>
+<ion-grid>
+  <ion-row>
+    <ion-col col-6 *ngFor="let a of this.activities_all" (click)="seeDetails(a)">
+      <div class="img-slide" [style.background-image]="sanitizeThis(a.img)"></div>
+      <p *ngIf="a.isEvent" class="act-first">{{a.tipo}} - {{a.distance}}</p>
+      <p *ngIf="!a.isEvent" class="act-first">{{a.categories.activity_type}} - {{a.distance}}</p>
+      <p class="act-title">{{a.title_complete}}</p>
+      <p class="act-distance">{{a.cost}} noms</p>
+      <p class="act-rating">{{a.review}} <ion-icon name="star" color="white"></ion-icon> / ({{a.reviews.length}})</p>
+    </ion-col>
+  </ion-row>
+</ion-grid>
+</div>
+
+
+
+</ion-content>

@@ -424,7 +424,7 @@ public users_total: any = 0;
   chargePaypal(){
   this.general_loader = this.loadingCtrl.create({
     spinner: 'bubbles',
-    content: 'Cargando...'
+    content: 'Loading...'
   })
   this.general_loader.present();
   this.af.list('Fundings/currentProcess').remove();

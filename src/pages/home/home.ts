@@ -15,6 +15,7 @@ import { FilteredPage } from '../filtered/filtered';
 declare var google;
 import { Geolocation } from '@ionic-native/geolocation';
 import { MyeventsPage } from '../myevents/myevents';
+import { AllPage } from '../all/all';
 
 @Component({
   selector: 'page-home',
@@ -83,6 +84,16 @@ export class HomePage {
 
   openFiltered(tipo){
     this.navCtrl.push(FilteredPage, {'Tipo': tipo});
+  }
+
+  openAll(tipo){
+    if(tipo == 'Best Rated Activities') this.navCtrl.push(AllPage, {'Tipo': tipo, 'Acts': this.getRated()});
+    else if(tipo == 'Nearby and Upcoming') this.navCtrl.push(AllPage, {'Tipo': tipo, 'Acts': this.getUpcoming()});
+    else if(tipo == 'Suggestions for you') this.navCtrl.push(AllPage, {'Tipo': tipo, 'Acts': this.filtered_a});
+    else if(tipo == 'Your Favorites') this.navCtrl.push(AllPage, {'Tipo': tipo, 'Acts': this.favoritos});
+    else if(tipo == 'Events') this.navCtrl.push(AllPage, {'Tipo': tipo, 'Acts': this.events});
+    else if(tipo == 'Experiences') this.navCtrl.push(AllPage, {'Tipo': tipo, 'Acts': this.getExperiences()});
+    else if(tipo == 'Special Offers') this.navCtrl.push(AllPage, {'Tipo': tipo, 'Acts': this.getSpecial()});
   }
 
   getFavorites(){
