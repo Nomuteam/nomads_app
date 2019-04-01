@@ -15,14 +15,14 @@ page-newevent {
       width: 95%;
       padding: 5%;
       border-radius: 12px;
-      background-color: #FF6B84;
+      background-color: #1BBF80;
       font-weight: 700;
       color: white;
       margin-top: 20px;
     }
 
     .outline{
-      border: 1px solid #FF6B84;
+      border: 1px solid #7D29FB;
       background-color: transparent;
     }
 
@@ -113,10 +113,11 @@ page-newevent {
       font-size: 200%;
       width: 20%;
       border-radius: 50%;
-      background-color: #7D29FB;
+      background-color: #229B86;
       color: white;
       margin-top: 5%;
       margin-bottom: 5%;
+      margin-left: 0!important;
     }
 
     .container-cool{
@@ -249,7 +250,7 @@ page-newevent {
           font-size: 70%;
           color: white;
           padding: 4%;
-          background-color: #229B86;
+          background-color: #1BBF80;
         }
         .types-container{
           width: 95%;
@@ -266,12 +267,12 @@ page-newevent {
             padding-right: 10%;
             border-radius: 12px;
             background-color: transparent;
-            border: 1px solid #229B86;
+            border: 1px solid #7D29FB;
             width: 48%;
             text-align: center;
           }
           .selected{
-            background-color: #229B86;
+            background-color: #7D29FB;
             font-weight: 700;
           }
         }

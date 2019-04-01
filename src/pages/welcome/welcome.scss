@@ -4,6 +4,11 @@ page-welcome {
     overflow: hidden!important;
   }
 
+  .swiper-pagination-bullet{
+    background: #7D29FB!important;
+    color: #7D29FB!important;
+  }
+
  .welcome-page{
    background-color: #373739;
    //background: linear-gradient(#0C0C0C 50%, #8141CB 100%)!important;
@@ -40,7 +45,7 @@ page-welcome {
      background-color: #1BBF80;
 
      font-family: 'Custom';
-     font-size: 100%;
+     font-size: 120%;
      font-weight: 700;
      color: white;
 
@@ -56,7 +61,7 @@ page-welcome {
      background-color: #DFDFDF;
 
      font-family: 'Custom';
-     font-size: 100%;
+     font-size: 120%;
      font-weight: 700;
      color: black;
 
@@ -72,6 +77,7 @@ page-welcome {
      position: absolute;
      bottom: 3vh;
      right: 10vw;
+     font-size: 120%;
    }
  }
 

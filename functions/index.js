@@ -18,17 +18,17 @@ const paypal = require('paypal-rest-sdk');
 
 const stripe = require('stripe')(functions.config().stripe.testkey)
 
-paypal.configure({
-  'mode': 'sandbox', //sandbox or live
-  'client_id': 'AX_ac3tIQ-Mm_3y3WT400FOtKTehvYcSlpe3bvgXUyzwmvtbfaKB3-qMhl7LY0YJ7uXKHmdqiiiD9phn',
-  'client_secret': 'EBZCrebfkicALaKdNYxxcD8cGYfzWIZyYy5vD7Eq_4xxbImO-fl7thcpQrc72_tgvTxdXHHUGUG--1qQ'
-});
-
 // paypal.configure({
-//   'mode': 'live', //sandbox or live
-//   'client_id': 'AcNyOAAwZWq6zHNZs79IAggaJ__fakKbBkjPdmpdqJJrcVN1SgPUkcXasyQ9IY9RYtoNCpYtu8WGLsj5',
-//   'client_secret': 'EJ_r71J9yTKIFnoeZlOKAnVq3W-oC8odV0j8DwseiSadgP0ThGFDn3egfcz7i-4wJOp67OHISBJmxEq-'
+//   'mode': 'sandbox', //sandbox or live
+//   'client_id': 'AX_ac3tIQ-Mm_3y3WT400FOtKTehvYcSlpe3bvgXUyzwmvtbfaKB3-qMhl7LY0YJ7uXKHmdqiiiD9phn',
+//   'client_secret': 'EBZCrebfkicALaKdNYxxcD8cGYfzWIZyYy5vD7Eq_4xxbImO-fl7thcpQrc72_tgvTxdXHHUGUG--1qQ'
 // });
+
+paypal.configure({
+  'mode': 'live', //sandbox or live
+  'client_id': 'AcNyOAAwZWq6zHNZs79IAggaJ__fakKbBkjPdmpdqJJrcVN1SgPUkcXasyQ9IY9RYtoNCpYtu8WGLsj5',
+  'client_secret': 'EJ_r71J9yTKIFnoeZlOKAnVq3W-oC8odV0j8DwseiSadgP0ThGFDn3egfcz7i-4wJOp67OHISBJmxEq-'
+});
 
 //Con el routing de Express defino la función
 app.post('/createPayment', function(req, res){

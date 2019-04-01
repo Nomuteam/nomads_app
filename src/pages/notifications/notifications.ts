@@ -71,11 +71,13 @@ public notifications: any = [];
   convertN(){
     let a = this.response$;
     for(let key in a){
-     this.notifications.push({
-       'title': a[key].title,
-       'subtitle': a[key].subtitle,
-       'isAdmin': a[key].isAdmin
-     });
+    if(a[key].index == firebase.auth().currentUser.uid){
+      this.notifications.push({
+        'title': a[key].title,
+        'subtitle': a[key].subtitle,
+        'isAdmin': a[key].isAdmin
+      });  
+    }
     }
 
     console.log(this.notifications);

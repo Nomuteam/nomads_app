@@ -36,6 +36,18 @@ public type: any = '';
     console.log('ionViewDidLoad AllPage');
   }
 
+  getClass(){
+    let aux = 'category-title';
+    if(this.type == 'Best Rated Activities') aux+= ' best';
+    else if(this.type == 'Nearby and Upcoming') aux+= ' blue';
+    else if(this.type == 'Suggestions for you') aux+= ' sug';
+    else if(this.type == 'Your Favorites') aux+= ' fav';
+    else if(this.type == 'Events') aux+= ' events';
+    else if(this.type == 'Experiences') aux+= ' rose';
+    else if(this.type == 'Special Offers') aux+= ' green';
+    return aux;
+  }
+
   seeDetails(a){
     if(a.isEvent){
       this.navCtrl.push(EventPage, {'Event': a});

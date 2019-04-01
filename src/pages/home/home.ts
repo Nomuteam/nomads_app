@@ -40,6 +40,8 @@ export class HomePage {
   public done_e: any = false;
   public done_a: any = false;
 
+  public location_loader: any;
+
   constructor(public navCtrl: NavController,
   public navParams: NavParams,
   public af: AngularFireDatabase,
@@ -204,7 +206,7 @@ export class HomePage {
     let a = this.e_response$;
     for(let key in a){
       this.events.push({
-        'title': (a[key].title.length > 15 ? a[key].title.substring(0, 15) + '..' : a[key].title),
+        'title': (a[key].title.length > 100 ? a[key].title.substring(0, 15) + '..' : a[key].title),
         'title_complete': a[key].title,
         'location': a[key].location,
         'difficulty':  a[key].difficulty,
@@ -249,7 +251,8 @@ export class HomePage {
         });
     });
   }
-
+   this.location_loader.dismiss();
+   this.location_loader = null;
     }
 
     if(this.general_loader) this.general_loader.dismiss();
@@ -258,9 +261,14 @@ export class HomePage {
 
   convertActivities(){
     let a = this.response$;
+    this.location_loader = this.loadingCtrl.create({
+     spinner: 'bubbles',
+     content: 'Calculating distances...'
+   });
+   this.location_loader.present();
     for(let key in a){
       this.activities.push({
-        'title': (a[key].title.length > 15 ? a[key].title.substring(0, 15) + '..' : a[key].title),
+        'title': (a[key].title.length > 50 ? a[key].title.substring(0, 20) + '..' : a[key].title),
         'title_complete': a[key].title,
         'location': a[key].location,
         'description':  a[key].description,

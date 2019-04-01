@@ -218,8 +218,9 @@ page-locate {
        margin: 0 auto;
        width: 70%;
        border-radius: 30px;
-       padding: 2%;
-       background-color: #229B86;
+       padding: 0%;
+       font-size: 120%;
+       background-color: #1BBF80;
        margin-bottom: 3%;
        .pay-container{
          display: flex;
@@ -275,7 +276,12 @@ page-locate {
      }
 
      .rose{
-       background-color: #FF6B84;
+       background-color: transparent;
+       color: #0C0C0C!important;
+       border: 2px solid #7D29FB;
+       .pay-hint{
+         color: #7D29FB!important;
+       }
      }
 
      .scroll {

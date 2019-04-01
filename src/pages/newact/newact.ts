@@ -147,8 +147,8 @@ export class NewactPage {
      'start_time': '06:00',
      'duration': '',
      'spaces_available': '',
-     'gender': 'Female',
-     'level': 'Beginner',
+     'gender': 'Both',
+     'level': 'All',
      'min_age': '',
      'max_age': ''
    }

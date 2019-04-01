@@ -7,12 +7,17 @@ page-tutorial {
     border-style: none!important;
   }
 
+  .swiper-pagination-bullet{
+    background: #7D29FB!important;
+    color: #7D29FB!important;
+  }
+
   .subtitle{
     font-family: 'Custom';
     color: white;
     text-align: center!important;
     margin-top: -3vh;
-    margin-left: -7vw;
+    margin-left: -9vw;
   }
 
   ion-slides{
@@ -74,6 +79,7 @@ page-tutorial {
         color: white;
         text-align: center;
         margin-top: 35%;
+        //border: 2px solid red;
         // padding-left: 5%;
         // padding-right: 5%;
       }
@@ -85,7 +91,7 @@ page-tutorial {
   .done-btn{
     border-radius: 30px;
     width: 80%;
-    margin-left: 5%;
+    margin-left: 10%;
     background-color: #8141CB;
     padding: 4%;
     font-family: 'Custom';

@@ -50,6 +50,26 @@ public example_cats: any = [
     'name': 'Studios',
     'selected': false
   },
+  {
+    'name': 'Spinning',
+    'selected': false
+  },
+  {
+    'name': 'Box',
+    'selected': false
+  },
+  {
+    'name': 'Rock Climbing',
+    'selected': false
+  },
+  {
+    'name': 'Fitness Studio',
+    'selected': false
+  },
+  {
+    'name': 'Pilates',
+    'selected': false
+  },
 ];
 
 public user_data: any = {
@@ -119,6 +139,18 @@ public user_data: any = {
     },
     {
       'title': 'Endurance',
+      'selected': false
+    },
+    {
+      'title': 'Balance',
+      'selected': false
+    },
+    {
+      'title': 'Mobility',
+      'selected': false
+    },
+    {
+      'title': 'Flexibility',
       'selected': false
     },
   ];

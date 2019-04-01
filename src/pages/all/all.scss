@@ -7,6 +7,72 @@ page-all {
     border-style: none!important;
   }
 
+  .category-title{
+    border-radius: 5px;
+    //background-color: gray;
+    font-family: 'Custom';
+    font-weight: 700!important;
+    font-size: 125%;
+    color: white;
+    height: 40px;
+    padding: 3%;
+    padding-left: 3%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 5%;
+    small{
+      padding-right: 5%;
+      color: white;
+    }
+  }
+
+  // .best{
+  //   background-image: linear-gradient(to right, #442068, #0A5353)!important;
+  // }
+
+  .sug{
+    background-image: linear-gradient(to right, #5B00C4, #008379)!important;
+  }
+
+  .fav{
+    background-image: linear-gradient(to right, #1B5074, #24DBDB)!important;
+  }
+
+  .best{
+    background-image: linear-gradient(to right, #4400C4, #1AA3AF)!important;
+    //background-image: linear-gradient(to right, #65655C, #d2d2d2)!important;
+  }
+
+  .events{
+    background-image: linear-gradient(to right, #2a433c, #2edbac)!important;
+  }
+
+  .experiences{
+    //background-image: linear-gradient(to right, #146474 40%, #C10777)!important;
+    background-image: linear-gradient(to right, #146474 50%, #8141CB)!important;
+  }
+
+  .blue{
+    //background-color: #5C77F6;
+    background-image: linear-gradient(to right, #973EF0, #007C5B)!important;
+  }
+  .rose{
+    //background-color: #FF6B84;
+    background-image: linear-gradient(to right, #5E99B9, #274D61)!important;
+  }
+  .cool{
+    background-image: linear-gradient(to right, #05974A, #F2E51E)!important;
+  }
+  .green{
+    //background-color: #229B86;
+    background-image: linear-gradient(to right, #A53535, #8A15AD)!important;
+  }
+  .purple{
+    //background-color: #7D29FB;
+    background-image: linear-gradient(to left, #CDF4FB, #007C6E 60%)!important;
+  }
+
   .title-page{
     font-family: 'Custom';
     font-size: 80%;

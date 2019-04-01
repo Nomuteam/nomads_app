@@ -20,7 +20,7 @@
        <ion-icon name="ios-options" color="white"></ion-icon>
      </button>
     </ion-buttons> -->
-    <p class="title">{{type}}</p>
+    <!-- <p class="title">{{type}}</p> -->
   </ion-navbar>
 </ion-header>
 
@@ -28,6 +28,7 @@
 <ion-content padding class="filtered-page">
 
 <div>
+<div class="{{this.getClass()}}">{{type}}</div>
 <p class="title-page">{{this.activities_all.length}} results</p>
 <ion-grid>
   <ion-row>

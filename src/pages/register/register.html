@@ -27,7 +27,7 @@
        </div>
        <div class="input-group">
          <p class="input-title">Invitation Code (Optional)</p>
-         <input type="text" class="input-field" [(ngModel)]="code" (blur)="checkCode()">
+         <input (keyup.enter)="registerMail()" type="text" class="input-field" [(ngModel)]="code" (blur)="checkCode()">
        </div>
        <label class="container">
          <p>I accept <b (click)="openTerms()"> nōmu' Terms and Conditions</b></p>

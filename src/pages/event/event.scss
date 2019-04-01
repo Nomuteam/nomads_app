@@ -125,17 +125,20 @@ page-event {
     }
     .ht-text{
       display: flex;
-      justify-content: center;
+      justify-content: space-between;
       align-items: center;
-      width: 100%;
+      padding-left: 5%;
+      padding-right: 5%;
       .hashtags{
         display: flex;
-        justify-content: space-around;
+        justify-content: flex-start;
         width: 100%;
         .hashtag{
-          padding: 2%;
+          width: auto;
+          margin-right: 10px;
+          padding: 1%;
           opacity: .5;
-          display: inline!important;
+          display: inline-flex;
         }
       }
     }

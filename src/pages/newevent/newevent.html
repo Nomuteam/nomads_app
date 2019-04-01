@@ -67,7 +67,7 @@
 
        <div class="input-group">
          <p class="input-title">Picture</p>
-         <button (click)="presentOptions()" type="button" class="add-btn">Select Picture</button>
+         <button (click)="presentOptions()" type="button" class="add-btn" style="background-color: #7D29FB!important">Select Picture</button>
        </div>
 
        <div class="input-group">
@@ -76,8 +76,8 @@
        </div>
 
        <div class="input-group">
-         <p class="input-title">Provided</p>
-         <textarea rows="4" type="text" class="input-field" [(ngModel)]="event_data.provided"></textarea>
+         <p class="input-title">Useful Note / What is Provided / Recommendations</p>
+         <textarea rows="4" type="text" class="input-field" [(ngModel)]="event_data.provided" placeholder="(Yoga mats, Transport, Food, Water, etc..)"></textarea>
        </div>
 
        <div class="input-group">

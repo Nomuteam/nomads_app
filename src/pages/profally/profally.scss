@@ -14,21 +14,21 @@ page-profally {
     width: 10vh;
     height: 10vh;
     border-radius: 50%;
-    background-color: #00B0FF;
+    background-color: #D12CA5;
   //  background-image: url('../../assets/img/imanol.png');
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;
     margin-left: 5%;
     margin-top: -7%;
-    border: 1px solid rgba(255, 255, 255, .3);
+    //border: 1px solid rgba(255, 255, 255, .3);
   }
   .user-name{
     font-family: 'Custom';
     font-weight: 700!important;
     font-size: 100%;
     color: white;
-    padding-left: 7%;
+    margin-left: 8%;
     display: inline!important;
     margin-top: 10%!important;
   }
@@ -37,7 +37,7 @@ page-profally {
     font-weight: 400!important;
     font-size: 70%;
     color: rgba(255, 255, 255, .6);
-    padding-left: 7%;
+    margin-left: 8%;
   }
 
   .things-container{
@@ -172,7 +172,7 @@ page-profally {
     width: 40vw;
     height: 7vh;
     border-radius: 12px;
-    background-color: #229B86;
+    background-color: #7D29FB;
 
 
     font-family: 'Custom';
