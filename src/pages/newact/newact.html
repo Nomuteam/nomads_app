@@ -45,6 +45,11 @@
      </div>
 
      <div class="input-group">
+       <p class="input-title">Useful Notes / What is Provided / Recommendations</p>
+       <textarea rows="4" type="text" class="input-field" [(ngModel)]="activity_data.useful_notes" placeholder="(Yoga mats, Transport, Food, Water, etc..)"></textarea>
+     </div>
+
+     <div class="input-group">
        <p class="input-title">Cancelation Policy (hours)</p>
        <input type="tel" class="input-field" [(ngModel)]="activity_data.cancelation_policy">
      </div>
@@ -70,7 +75,7 @@
 
   <p class="title-container">Type of Activity</p>
   <div class="likes-container">
-      <div *ngFor="let c of this.example_activities; let in=index" (click)="addActivity(c.title)" class="{{getActivity(c.title)}}">{{c.title}}</div>
+      <div *ngFor="let c of this.example_activities; let in=index" (click)="addActivity(in)" class="{{getActivity(in)}}">{{c.title}}</div>
   </div>
 
   <p class="title-container">Workout Form</p>
@@ -95,7 +100,7 @@
       <div class="comp-text">{{s.start_time}}</div>
     </div>
     <div class="main-text">{{s.spaces_available}}</div>
-    <img (click)="eraseSchedule(in)" src="assets/img/edit_icon.png" class="edit-btn">
+    <img (click)="eraseSchedule(in)" src="assets/img/erase_icon.png" class="edit-btn">
   </div>
   <button (click)="isAdding = true" type="button" class="add-btn" padding>+</button>
 </div>
@@ -118,7 +123,7 @@
 
   <div class="option-container" padding>
    <div class="title-option">Spaces Available</div>
-   <ion-range color="purple" min="2" pin="true" [(ngModel)]="schedule.spaces_available"></ion-range>
+   <ion-range color="purple" min="2" max="30" pin="true" [(ngModel)]="schedule.spaces_available"></ion-range>
   </div>
 
   <div class="option-container" padding>
@@ -133,12 +138,12 @@
 
   <div class="option-container" padding>
    <div class="title-option">Min Age</div>
-   <ion-range color="purple" pin="true" [(ngModel)]="schedule.min_age"></ion-range>
+   <ion-range color="purple" min="3" max="18" pin="true" [(ngModel)]="schedule.min_age"></ion-range>
   </div>
 
   <div class="option-container" padding>
    <div class="title-option">Max Age</div>
-   <ion-range color="purple" pin="true" [(ngModel)]="schedule.max_age"></ion-range>
+   <ion-range color="purple" min="5" max="60" pin="true" [(ngModel)]="schedule.max_age"></ion-range>
   </div>
 
   <button (click)="withMagic()" type="button" class="next-btn add">Add</button>

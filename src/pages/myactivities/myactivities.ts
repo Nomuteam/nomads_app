@@ -61,6 +61,7 @@ public general_loader: any;
         'title_complete': a[key].title,
         'location': a[key].location,
         'description':  a[key].description,
+        'useful_notes': (a[key].useful_notes ? a[key].useful_notes : ''),
         'cancelation_policy':  a[key].cancelation_policy,
         'class_price':  a[key].class_price,
         'fee':  a[key].fee,

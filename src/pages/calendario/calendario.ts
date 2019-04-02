@@ -189,6 +189,7 @@ export class CalendarioPage {
               'title_complete': b[key].title,
               'location': b[key].location,
               'description':  b[key].description,
+              'useful_notes': (b[key].useful_notes ? b[key].useful_notes : ''),
               'class_price': b[key].class_price,
               'cancelation_policy':  b[key].cancelation_policy,
               'categories':  b[key].categories,

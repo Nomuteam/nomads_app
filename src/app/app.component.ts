@@ -49,7 +49,7 @@ import { Keyboard } from '@ionic-native/keyboard';
 export class MyApp {
 
 
-  rootPage:any = WelcomePage;
+  rootPage:any = NewactPage;
 
   constructor(config: Config, platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen, modalCtrl: ModalController, keyboard: Keyboard) {
     platform.ready().then(() => {

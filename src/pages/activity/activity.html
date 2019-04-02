@@ -36,7 +36,7 @@
           Join <br> {{this.activity_data.class_price}} noms
         </div>
         <div *ngIf="isCreator()" class="noms-qty">
-          Joined <br> {{this.getNomadsjoined()} nomads
+          Joined <br> {{this.getNomadsjoined()}} nomads
         </div>
         <div *ngIf="!isCreator() && activity_data.class_price == 0" class="noms-qty">
           Join <br> Free!
@@ -76,6 +76,11 @@
   <div class="section-title">Description</div>
   <div class="description-area">
     {{this.activity_data.description}}
+  </div>
+
+  <div class="section-title">Useful Notes</div>
+  <div class="description-area">
+    {{this.activity_data.useful_notes}}
   </div>
 
   <!-- <div class="section-title">Availability</div>

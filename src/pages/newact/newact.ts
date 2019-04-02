@@ -20,7 +20,7 @@ declare var google;
   templateUrl: 'newact.html',
 })
 export class NewactPage {
-  public current_index: any = 1;
+  public current_index: any = 3;
   public user_type: any = '';
   public isAdding: any = false;
   public general_loader: any;
@@ -62,6 +62,21 @@ export class NewactPage {
     },
     {
       'title': 'Hiking'
+    },
+    {
+      'title': 'Gym'
+    },
+    {
+      'title': 'Spinning'
+    },
+    {
+      'title': 'Box'
+    },
+    {
+      'title': 'Rock Climbing'
+    },
+    {
+      'title': 'Pilates'
     },
   ];
   public example_forms: any = [
@@ -131,6 +146,7 @@ export class NewactPage {
      'title': '',
      'location': '',
      'description': '',
+     'useful_notes': '',
      'cancelation_policy': '',
      'class_price': '',
      'fee': '',
@@ -300,12 +316,21 @@ export class NewactPage {
       return ( this.example_forms[indice].selected ? 'likes-element selectedrose' : 'likes-element');
   }
 
-  getActivity(titulo){
-      return ( this.activity_data.categories.activity_type == titulo ? 'likes-element selectedrose' : 'likes-element');
+  getActivity(indice){
+      return ( this.example_activities[indice].selected ? 'likes-element selectedrose' : 'likes-element');
   }
 
-  addActivity(titulo){
-    this.activity_data.categories.activity_type = titulo
+  addActivity(indice){
+    if(!this.example_activities[indice].selected){
+        this.example_activities[indice].selected = true;
+        this.activity_data.categories.activity_type = this.example_activities[indice].title;
+    }
+    else{
+        this.example_activities[indice].selected = false;
+        if(this.example_activities.filter(f=>f.selected).length == 0){
+            this.activity_data.categories.activity_type = '';
+        }
+    }
   }
 
   getCategorie(titulo){

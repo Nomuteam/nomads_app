@@ -165,6 +165,7 @@ public general_loader: any;
             'title_complete': b[key].title,
             'location': b[key].location,
             'description':  b[key].description,
+            'useful_notes': (b[key].useful_notes ? b[key].useful_notes : ''),
             'cancelation_policy':  b[key].cancelation_policy,
             'categories':  b[key].categories,
             'schedule':  b[key].schedule,
