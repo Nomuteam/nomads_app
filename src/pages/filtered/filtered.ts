@@ -162,7 +162,7 @@ public done_a: any = false;
             'description':  b[key].description,
             'cancelation_policy':  b[key].cancelation_policy,
             'categories':  b[key].categories,
-            'tipo': b[key].categories.activity_type,
+            'tipo': b[key].categories.main_category,
             'schedule':  b[key].schedule,
             'img':  b[key].img,
             'cost':  b[key].class_price,
@@ -183,7 +183,7 @@ public done_a: any = false;
 
    if(this.type == 'All Events') this.activities_all = this.activities_all.filter( act => act.isEvent);
    else if (this.type == 'All Activities') this.activities_all = this.activities_all.filter( act => !act.isEvent);
-   else this.activities_all = this.activities_all.filter( act => !act.isEvent && act.tipo == this.type);
+   else this.activities_all = this.activities_all.filter( act => act.tipo == this.type);
 
 
    if(!this.done_a){

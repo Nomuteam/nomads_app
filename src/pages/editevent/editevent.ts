@@ -103,12 +103,13 @@ export class EditeventPage {
   createEvent(){
     this.general_loader = this.loadingCtrl.create({
       spinner: 'bubbles',
-      content: 'Creating...'
+      content: 'Updating...'
     });
     this.general_loader.present();
 
     let indice = this.event_data.index;
     this.event_data.creator = firebase.auth().currentUser.uid;
+    this.event_data.media = [];
 
     this.af.list('Users/'+firebase.auth().currentUser.uid+'/Events').update(indice, {
       'index': indice,

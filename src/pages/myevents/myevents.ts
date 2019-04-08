@@ -108,7 +108,10 @@ public example_events: any = [
           'index':  a[key].index,
           'media': a[key].media,
           'isEvent': true,
-          'nomads': a[key].nomads
+          'nomads': a[key].nomads,
+          'review':( a[key].review ? a[key].review : 5),
+          'reviews': (a[key].reviews ? a[key].reviews : []),
+          'special': (a[key].special ? a[key].special : false)
         });
       }
     }

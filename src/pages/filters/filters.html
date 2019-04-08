@@ -23,7 +23,7 @@
   <div class="segment-container">
    <p (click)="changeSegment('daytime')" class="{{getSegment('daytime')}}" style="margin-left: 0!important;">Categories</p>
    <p (click)="changeSegment('categories')" class="{{getSegment('categories')}}">Daytime</p>
-   <p (click)="changeSegment('others')" class="{{getSegment('others')}}">Others</p>
+   <!-- <p (click)="changeSegment('others')" class="{{getSegment('others')}}">Others</p> -->
   </div>
 
   <div *ngIf="this.segment == 'daytime'">

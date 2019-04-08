@@ -37,7 +37,7 @@
       <ion-grid>
         <ion-row>
           <ion-col col-6>
-           <div (click)="openFiltered('experiences')" class="act-element">
+           <div (click)="openFiltered('Experiences')" class="act-element">
              <p class="act-title">All Experiences</p>
              <p class="act-number">{{this.getExperiences()}}</p>
            </div>
@@ -81,7 +81,7 @@
  <div *ngIf="this.segment == 'events'">
    <div class="overflowing">
      <div >
-       <div (click)="openFiltered(a.type)" class="event-element">
+       <div (click)="openFiltered('All Events')" class="event-element">
          <p class="event-title">All Events</p>
          <p class="event-number">{{this.getEventsN()}}</p>
        </div>

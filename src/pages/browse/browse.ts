@@ -186,7 +186,8 @@ public experiences: any = [];
 
   getExperiences(){
     //return ['hi', 'k'];
-    return this.experiences;
+    console.log(this.experiences.length);
+    return this.experiences.length;
   }
 
   getActivities(){
