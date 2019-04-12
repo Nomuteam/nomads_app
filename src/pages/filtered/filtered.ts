@@ -129,6 +129,7 @@ public done_a: any = false;
         'location': a[key].location,
         'difficulty':  a[key].difficulty,
         'img':  a[key].img,
+        'categories':  (a[key].categories ? a[key].categories : []),
         'cost':  a[key].cost,
         'tipo': 'Evento',
         'about_event':  a[key].about_event,
@@ -183,7 +184,7 @@ public done_a: any = false;
 
    if(this.type == 'All Events') this.activities_all = this.activities_all.filter( act => act.isEvent);
    else if (this.type == 'All Activities') this.activities_all = this.activities_all.filter( act => !act.isEvent);
-   else this.activities_all = this.activities_all.filter( act => act.tipo == this.type);
+   else this.activities_all = this.activities_all.filter( act => act.tipo == this.type || act.categories.activity_type == this.type );
 
 
    if(!this.done_a){

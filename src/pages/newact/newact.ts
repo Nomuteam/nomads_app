@@ -20,7 +20,7 @@ declare var google;
   templateUrl: 'newact.html',
 })
 export class NewactPage {
-  public current_index: any = 3;
+  public current_index: any = 1;
   public user_type: any = '';
   public isAdding: any = false;
   public general_loader: any;
@@ -94,6 +94,14 @@ export class NewactPage {
     },
     {
       'title': 'Endurance',
+      'selected': false
+    },
+    {
+      'title': 'Flexibility',
+      'selected': false
+    },
+    {
+      'title': 'Resistance',
       'selected': false
     },
   ];

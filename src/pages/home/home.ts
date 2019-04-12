@@ -251,8 +251,8 @@ export class HomePage {
         });
     });
   }
-   this.location_loader.dismiss();
-   this.location_loader = null;
+   // this.location_loader.dismiss();
+   // this.location_loader = null;
     }
 
     if(this.general_loader) this.general_loader.dismiss();
@@ -265,7 +265,7 @@ export class HomePage {
      spinner: 'bubbles',
      content: 'Calculating distances...'
    });
-   this.location_loader.present();
+   //this.location_loader.present();
     for(let key in a){
       this.activities.push({
         'title': (a[key].title.length > 50 ? a[key].title.substring(0, 20) + '..' : a[key].title),
