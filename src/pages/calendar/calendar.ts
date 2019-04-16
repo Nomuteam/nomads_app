@@ -132,7 +132,7 @@ export class CalendarPage {
       }
     },
     {
-      text: 'View Details',
+      text: 'View Service Card',
       handler: () => {
        this.seeDetails(e);
       }
