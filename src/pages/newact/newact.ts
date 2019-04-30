@@ -104,6 +104,14 @@ export class NewactPage {
       'title': 'Resistance',
       'selected': false
     },
+    {
+      'title': 'Relaxation',
+      'selected': false
+    },
+    {
+      'title': 'Recovery',
+      'selected': false
+    },
   ];
   public example_days: any = [
     {

@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, LoadingController, AlertController, ModalController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, LoadingController, AlertController, ModalController, ActionSheetController } from 'ionic-angular';
 import { FiltersPage } from '../filters/filters';
 import { AngularFireDatabase, AngularFireObject } from 'angularfire2/database';
 import firebase from 'firebase';
@@ -96,14 +96,19 @@ public users_total: any = 0;
     public stripe: Stripe,
     private http: Http,
     public iab: InAppBrowser,
-    public modalCtrl: ModalController) {
+    public modalCtrl: ModalController,
+    public actionSheetCtrl: ActionSheetController) {
     this.user_type = localStorage.getItem('Tipo');
 
-    this.alertCtrl.create({
-      title: 'Welcome to your wallet!',
-      message: 'Enter the amount you wish to buy or select a predefined package to buy NOMS',
-      buttons: ['Ok']
-    }).present();
+    if(this.user_type == 'nomads'){
+
+          this.alertCtrl.create({
+            title: 'Welcome to your wallet!',
+            message: 'Enter the amount you wish to buy or select a predefined package to buy NOMS',
+            buttons: ['Ok']
+          }).present();
+    }
+
   }
 
   getFriendBalance(){
@@ -247,10 +252,39 @@ public users_total: any = 0;
     prompt.present();
   }
 
+  confirmNew(datos){
+    this.general_loader = this.loadingCtrl.create({
+      spinner: 'bubbles',
+      content: 'Processing Payment...'
+    });
+    this.general_loader.present();
+
+    this.transaction_id = this.generateUUID();
+
+    let card = {
+     number: datos.card,
+     expMonth: datos.month,
+     expYear: datos.year,
+     cvc: datos.cvc
+    };
+
+
+    this.stripe.createCardToken(card)
+       .then(token => {
+         this.af.list('Payments/'+firebase.auth().currentUser.uid).update(this.transaction_id, {'token': token, 'amount': this.cash});
+         this.watchConfirmation();
+       })
+       .catch(error => {
+         console.log(error);
+         this.alertCtrl.create({title: 'Payment Error', message: JSON.stringify(error), buttons: ['Ok']}).present();
+         // this.alertCtrl.create({title: 'Payment Error', message: 'There was an error processing your payment, try again later', buttons: ['Ok']}).present();
+       });
+  }
+
   enterNew(){
     const prompt = this.alertCtrl.create({
-    title: 'Security Gate',
-    message: 'For your security, we need you to enter the CVC of your stored card',
+    title: 'Insert your card',
+    message: 'Please insert the details of your card',
     inputs: [
       {
         name: 'card',
@@ -279,6 +313,7 @@ public users_total: any = 0;
       {
         text: 'Pay',
         handler: data => {
+          this.confirmNew(data);
           console.log(data);
         }
       }
@@ -289,35 +324,72 @@ public users_total: any = 0;
 
 
   selectCard(){
-    let alert = this.alertCtrl.create();
-   alert.setTitle('How would you like to pay?');
 
-   if(this.payment_data.cardnumber != ''){
-     alert.addInput({
-       type: 'radio',
-       label: 'Saved Card *******'+this.payment_data.cardnumber.substring(this.payment_data.cardnumber.length - 4),
-       value: 'saved',
-       checked: true
-     });
-   }
+    const actionSheet = this.actionSheetCtrl.create({
+      title: 'How would you like to pay?',
+      buttons: [
+        {
+          text: 'Saved Card *******'+this.payment_data.cardnumber.substring(this.payment_data.cardnumber.length - 4),
+          handler: () => {
+             this.enterCVC();
+          }
+        },{
+          text: 'New Card',
+          handler: () => {
+            this.enterNew();
+          }
+        },
+        {
+          text: 'Paypal',
+          handler: () => {
+            this.confirmPaypal();
+          }
+        },{
+          text: 'Cancel',
+          role: 'cancel',
+          handler: () => {
+            console.log('Cancel clicked');
+          }
+        }
+      ]
+    });
+    actionSheet.present();
 
-
-   alert.addInput({
-     type: 'radio',
-     label: 'New Card',
-     value: 'new'
-   });
-
-   alert.addButton('Cancel');
-   alert.addButton({
-     text: 'Ok',
-     handler: data => {
-       console.log(data);
-       if(data == 'saved') this.enterCVC();
-       else this.enterNew();
-     }
-   });
-   alert.present();
+   //  let alert = this.alertCtrl.create();
+   // alert.setTitle('How would you like to pay?');
+   //
+   // if(this.payment_data.cardnumber != ''){
+   //   alert.addInput({
+   //     type: 'radio',
+   //     label: 'Saved Card *******'+this.payment_data.cardnumber.substring(this.payment_data.cardnumber.length - 4),
+   //     value: 'saved',
+   //     checked: true
+   //   });
+   // }
+   //
+   // alert.addInput({
+   //   type: 'radio',
+   //   label: 'New Card',
+   //   value: 'new'
+   // });
+   //
+   // alert.addInput({
+   //   type: 'radio',
+   //   label: 'Paypal',
+   //   value: 'paypal'
+   // });
+   //
+   // alert.addButton('Cancel');
+   // alert.addButton({
+   //   text: 'Ok',
+   //   handler: data => {
+   //     console.log(data);
+   //     if(data == 'saved') this.enterCVC();
+   //     else if(data == 'paypal') this.confirmPaypal();
+   //     else this.enterNew();
+   //   }
+   // });
+   // alert.present();
   }
 
   verifyConfirmationPaypal(){

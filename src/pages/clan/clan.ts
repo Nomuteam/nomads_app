@@ -60,6 +60,8 @@ public general_loader: any;
       });
     }
     console.log(this.schedule);
+    let today  = moment();
+    this.schedule = this.schedule.filter( event => !moment(event.day).isBefore(today));
   }
 
   goJoin(){

@@ -50,6 +50,7 @@ export class CalendarPage {
 
  public past_events: any = [];
  public show_pop: any;
+ public balance_creator: any;
  public week_days : any = [
    {
      'day': 'Monday'
@@ -453,8 +454,11 @@ actionSheet.present();
      }).present();
    }
 
-   getBack(evento){
+   doMath(evento){
      if(evento.isEvent){
+       this.af.list('Users/').update(evento.creator, {
+         'noms': parseInt(this.balance_creator) - parseInt(evento.cost)
+       });
        this.af.list('Users/').update(firebase.auth().currentUser.uid, {
          'noms': parseInt(this.noms_balance) + parseInt(evento.cost)
        }).then(()=>{
@@ -462,12 +466,22 @@ actionSheet.present();
        });
      }
      else{
+       this.af.list('Users/').update(evento.creator, {
+         'noms': parseInt(this.balance_creator) - parseInt(evento.class_price)
+       })
        this.af.list('Users/').update(firebase.auth().currentUser.uid, {
          'noms': parseInt(this.noms_balance) + parseInt(evento.class_price)
        }).then(()=>{
          this.goAhead(evento);
        });
      }
+   }
+
+   getBack(evento){
+     this.af.object('Users/'+evento.creator).snapshotChanges().subscribe(action => {
+       this.balance_creator = action.payload.val().noms;
+     });
+     this.doMath(evento);
    }
 
    changeSegment(tipo){

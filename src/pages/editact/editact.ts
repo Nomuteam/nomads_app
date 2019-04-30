@@ -63,6 +63,21 @@ export class EditactPage {
     {
       'title': 'Hiking'
     },
+    {
+      'title': 'Gym'
+    },
+    {
+      'title': 'Spinning'
+    },
+    {
+      'title': 'Box'
+    },
+    {
+      'title': 'Rock Climbing'
+    },
+    {
+      'title': 'Pilates'
+    },
   ];
   public example_forms: any = [
     {
@@ -79,6 +94,22 @@ export class EditactPage {
     },
     {
       'title': 'Endurance',
+      'selected': false
+    },
+    {
+      'title': 'Flexibility',
+      'selected': false
+    },
+    {
+      'title': 'Resistance',
+      'selected': false
+    },
+    {
+      'title': 'Relaxation',
+      'selected': false
+    },
+    {
+      'title': 'Recovery',
       'selected': false
     },
   ];

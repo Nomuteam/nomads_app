@@ -384,7 +384,7 @@ export class HomePage {
 
   getUpcoming(){
     let aux = this.activities.filter(act => act.next_time != 'not today');
-    return aux.sort(function(a, b){
+    aux = aux.sort(function(a, b){
      var keyA = a.next_remaining,
          keyB = b.next_remaining;
      // Compare the 2 dates
@@ -392,6 +392,8 @@ export class HomePage {
      if(keyA > keyB) return 1;
      return 0;
     });
+    aux = aux.filter(a => a.distance_number < 20);
+    return aux;
   }
 
   getRated(){
@@ -405,6 +407,7 @@ export class HomePage {
     return 0;
    });
    aux = this.getClosest();
+   aux = aux.filter(a => a.distance_number < 20);
    //console.log(aux);
    return aux;
   }
@@ -493,6 +496,7 @@ export class HomePage {
      return 0;
     });
 
+    aux =  aux.filter(a => a.distance_number < 20);
     this.filtered_a = aux;
   }
 
