@@ -109,5 +109,5 @@
         <variable name="GOOGLE_API_KEY_FOR_ANDROID" value="AIzaSyDm544BEGbTNNiK-3hx0Hm1gDUj6vjD5eM" />
     </plugin>
     <engine name="android" spec="6.3.0" />
-    <engine name="ios" spec="~4.5.5" />
+    <engine name="ios" spec="4.5.5" />
 </widget>
