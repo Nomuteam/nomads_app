@@ -26,6 +26,7 @@ export class ChatsPage {
   public response$: any;
   public room_chats: any = [];
   public noms_balance: any;
+  public user_schedule: any = [];
   public users$: any;
 
 
@@ -147,6 +148,7 @@ public example_chats: any = [
     this.af.object('Users/'+firebase.auth().currentUser.uid).snapshotChanges().subscribe(action => {
        this.noms_balance = action.payload.val().noms;
        this.user_chats = action.payload.val().Chats;
+       this.user_schedule = action.payload.val();
     });
     this.af.object('Users/').snapshotChanges().subscribe(action => {
        this.users$ = action.payload.val();

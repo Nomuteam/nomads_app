@@ -232,7 +232,7 @@ export class HomePage {
       });
     }
 
-    let today  = moment();
+    let today  = moment().add(1, 'days');
     this.events = this.events.filter( event => !moment(event.day).isBefore(today));
     console.log(this.events.length);
 
@@ -371,6 +371,18 @@ export class HomePage {
   }
 
 
+  getCloserTime(){
+    return this.events.sort(function(a, b){
+     var keyA = a.day,
+         keyB = b.day;
+     // Compare the 2 dates
+     if(keyA < keyB) return -1;
+     if(keyA > keyB) return 1;
+     return 0;
+    });
+  }
+
+
   getClosest(){
     return this.activities.sort(function(a, b){
      var keyA = a.distance_number,
@@ -463,6 +475,22 @@ export class HomePage {
     return false;
   }
 
+  existsS(arre, cual){
+    console.log(arre);
+    for(let key in arre){
+      if(this.hasDay(cual, arre[key].day)) return true;
+    }
+    return false;
+  }
+
+  hasDay(agenda, dia){
+    let a = agenda;
+    for(let key in a){
+      if(a.day == dia) return true;
+    }
+    return false;
+  }
+
   applyFilters(){
     let cats = this.user_preferences.categories.filter(c => c.selected);
     let days = this.user_preferences.days.filter(d => d.selected);
@@ -482,6 +510,14 @@ export class HomePage {
     if(types.length > 0){
       for(let i=0; i<a.length; i++){
         if(this.existsO(types, a[i].categories.activity_type)){
+          aux.push(a[i]);
+        }
+      }
+    }
+
+    if(days.length > 0){
+      for(let i=0; i<a.length; i++){
+        if(this.existsS(days, a[i].schedule)){
           aux.push(a[i]);
         }
       }

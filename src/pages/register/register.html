@@ -25,7 +25,7 @@
          <p class="input-title">Phone Number</p>
          <input type="tel" class="input-field" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" [(ngModel)]="phone">
        </div>
-       <div class="input-group">
+       <div *ngIf="user_type == 'nomads'" class="input-group">
          <p class="input-title">Invitation Code (Optional)</p>
          <input (keyup.enter)="registerMail()" type="text" class="input-field" [(ngModel)]="code" (blur)="checkCode()">
        </div>

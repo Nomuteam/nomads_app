@@ -75,7 +75,7 @@ public example_cats: any = [
 public user_data: any = {
    'first_name': '',
    'last_name': '',
-   'birthdate': '',
+   'birthdate': ' ',
    'country': '',
    'payment':
      {

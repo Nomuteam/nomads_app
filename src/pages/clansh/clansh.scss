@@ -10,6 +10,13 @@ page-clansh {
         border-radius: 15px;
         overflow: scroll;
         //box-shadow: 0px 0px 5px white;
+
+        .card-contenido{
+
+          height: 20vh;
+          padding-bottom: 10%;
+          overflow: scroll;
+        }
         .clan-img{
           background-image: url('../../assets/img/clans_example.png');
           background-repeat: no-repeat;

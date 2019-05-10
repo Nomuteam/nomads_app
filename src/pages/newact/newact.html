@@ -6,7 +6,13 @@
 -->
 
 <ion-header>
-  <ion-navbar color="black1">
+  <ion-navbar hideBackButton color="black1">
+    <ion-buttons navPop start>
+     <button ion-button icon-only color="white">
+       <ion-icon name="ios-arrow-back"></ion-icon>
+       Exit
+     </button>
+   </ion-buttons>
     <p class="title" style="margin-left: -5%;">New Activity</p>
   </ion-navbar>
 </ion-header>
@@ -118,12 +124,14 @@
 
   <div class="option-container" padding>
    <div class="title-option">Duration (hours)</div>
-   <ion-range color="purple" pin="true" [(ngModel)]="schedule.duration" min="1" max="8" step=".5"></ion-range>
+   <input type="tel" class="input-field" [(ngModel)]="schedule.duration">
+   <!-- <ion-range color="purple" pin="true" [(ngModel)]="schedule.duration" min="1" max="8" step=".5"></ion-range> -->
   </div>
 
   <div class="option-container" padding>
    <div class="title-option">Spaces Available</div>
-   <ion-range color="purple" min="2" max="30" pin="true" [(ngModel)]="schedule.spaces_available"></ion-range>
+   <input type="tel" class="input-field" [(ngModel)]="schedule.spaces_available">
+   <!-- <ion-range color="purple" min="2" max="30" pin="true" [(ngModel)]="schedule.spaces_available"></ion-range> -->
   </div>
 
   <div class="option-container" padding>
@@ -153,7 +161,7 @@
 <div *ngIf="this.current_index == 4" class="container-datos w3-animate-right">
 <p class="title-container">Upload Media</p>
 <div class="media-img"></div>
-<div *ngFor="let m of this.activity_data.media" class="media-img" [style.background-image]="sanitizeThis(m.url)"></div>
+<div *ngFor="let m of this.activity_data.media; let in=index" (click)="confirmRF(in)" class="media-img" [style.background-image]="sanitizeThis(m.url)"></div>
 <button (click)="presentOptions()" type="button" class="add-btn" padding>+</button>
 </div>
 

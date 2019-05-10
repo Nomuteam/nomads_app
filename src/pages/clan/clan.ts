@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, LoadingController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, LoadingController, AlertController } from 'ionic-angular';
 import { FiltersPage } from '../filters/filters';
 import { DomSanitizer } from '@angular/platform-browser';
 import { MembersPage } from '../members/members';
@@ -40,10 +40,62 @@ public general_loader: any;
               public sanitizer: DomSanitizer,
               public socialSharing: SocialSharing,
               public loadingCtrl: LoadingController,
-              public af: AngularFireDatabase) {
+              public af: AngularFireDatabase,
+              public alertCtrl: AlertController) {
     this.type = localStorage.getItem('Tipo');
     this.clan = this.navParams.get('Clan');
     if(this.clan.schedule.length != 0) this.getSchedule();
+  }
+
+  salirClan(){
+     this.general_loader = this.loadingCtrl.create({
+       spinner: 'bubbles',
+       content: 'Leaving clan...'
+     });
+     this.general_loader.present();
+
+    //Eliminar el chat del usuario
+    this.af.list('Users/'+firebase.auth().currentUser.uid+'/Chats/'+this.clan.chat).remove();
+
+    //Eliminar al usuario de los miembros del clan
+    this.af.list('Clans/'+this.clan.index+'/members/'+firebase.auth().currentUser.uid).remove();
+
+    //Eliminar mis actividades del schedule del clan
+    for(let key in this.schedule){
+      if(this.schedule[key].nomad_index == firebase.auth().currentUser.uid){
+        this.af.list('Clans/'+this.clan.index+'/schedule/'+key).remove();
+      }
+    }
+
+    //Eliminar de mi lista de clans este clan y salir de esta pantalla
+    this.af.list('Users/'+firebase.auth().currentUser.uid+'/Clans/'+this.clan.index)
+        .remove().then(() => {
+          this.general_loader.dismiss();
+          this.alertCtrl.create({title: 'Succesfully left clan', buttons: ['Ok']}).present();
+          this.navCtrl.pop();
+        })
+  }
+
+  confirmSalir(){
+    this.alertCtrl.create({
+      title: 'Are you sure you want to leave this clan?',
+      message:  'You wont be part of any activity or chat within this clan',
+      buttons: [
+        {
+          text: 'Cancel',
+          handler: () => {
+
+          }
+        },
+        {
+          text: 'Leave Clan',
+          role: 'destructive',
+          handler: () => {
+           this.salirClan();
+          }
+        },
+      ]
+    }).present();
   }
 
   getSchedule(){
@@ -61,7 +113,7 @@ public general_loader: any;
     }
     console.log(this.schedule);
     let today  = moment();
-    this.schedule = this.schedule.filter( event => !moment(event.day).isBefore(today));
+    this.schedule = this.schedule.filter( event => !moment(event.date).isBefore(today));
   }
 
   goJoin(){

@@ -131,7 +131,7 @@
    <p class="category-suggestions">Join events created by the community</p>
    <!-- <p *ngIf="this.events.length == 0" class="category-suggestions">There are not any events available now!</p> -->
    <ion-slides slidesPerView="1.6">
-     <ion-slide (click)="openEvent(e)" *ngFor="let e of this.events">
+     <ion-slide (click)="openEvent(e)" *ngFor="let e of this.getCloserTime()">
        <div class="img-slide" [style.background-image]="sanitizeThis(e.img)"></div>
        <p class="act-first">{{e.type}}  - {{e.distance}}</p>
        <p class="act-title">{{e.title}}</p>

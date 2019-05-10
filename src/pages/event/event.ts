@@ -141,7 +141,27 @@ confirmShare(){
 //       });
 // }
 
+amiMember(clave){
+  let m = this.users$.Clans;
+  for(let key in m){
+    if(m[key].index == clave) return true;
+  }
+  return false;
+}
+
+addClanSchedule(){
+  let c = this.clans$;
+  let s;
+  for(let key in c){
+    if(this.amiMember(c[key].index)){
+      s = {'name': this.users$.first_name, 'nomad_index': firebase.auth().currentUser.uid,'title': this.event_data.title, 'index': this.event_data.index, 'day': this.event_data.day, 'time': this.event_data.time, 'date': this.event_data.day};
+      this.af.list('Clans/'+c[key].index+'/schedule').push(s);
+    }
+  }
+}
+
 sharetoClans(){
+  this.addClanSchedule();
   let c = this.chats_index;
   for(let key in c){
     this.af.list('Chats/'+c[key].index+'/messages').push({
@@ -200,7 +220,7 @@ sharetoClans(){
           this.af.list('Chats/').update(chat_index, chat_room);
 
           //Update this chat room index in both the user and the owner object
-          let chat_ref = {'index': chat_index};
+          let chat_ref = {'index': chat_index, 'activity_index': this.event_data.index};
           this.af.list('Users/'+this.event_data.creator+'/Chats').update(chat_index, chat_ref);
           this.af.list('Users/'+firebase.auth().currentUser.uid+'/Chats').update(chat_index, chat_ref);
 

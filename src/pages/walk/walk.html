@@ -25,7 +25,7 @@
      <p class="input-title">Last Name</p>
      <input type="text" class="input-field" [(ngModel)]="user_data.last_name">
    </div>
-   <div class="input-group">
+   <div *ngIf="user_type == 'nomads'" class="input-group">
      <p class="input-title">Birthdate</p>
      <input type="date" class="input-field" [(ngModel)]="user_data.birthdate">
    </div>
@@ -369,7 +369,7 @@
       <input type="text" class="input-field" style="text-transform: uppercase;" [(ngModel)]="user_data.business.rfc">
     </div>
     <div class="input-group">
-      <p class="input-title">Banco</p>
+      <p class="input-title">Card Number</p>
       <input type="text" class="input-field" [(ngModel)]="user_data.business.bank">
     </div>
     <div class="input-group">

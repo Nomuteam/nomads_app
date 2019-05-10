@@ -457,7 +457,7 @@ actionSheet.present();
    doMath(evento){
      if(evento.isEvent){
        this.af.list('Users/').update(evento.creator, {
-         'noms': parseInt(this.balance_creator) - parseInt(evento.cost)
+         'noms': parseInt(this.balance_creator) - parseInt(evento.cost)*.7
        });
        this.af.list('Users/').update(firebase.auth().currentUser.uid, {
          'noms': parseInt(this.noms_balance) + parseInt(evento.cost)
@@ -467,7 +467,7 @@ actionSheet.present();
      }
      else{
        this.af.list('Users/').update(evento.creator, {
-         'noms': parseInt(this.balance_creator) - parseInt(evento.class_price)
+         'noms': parseInt(this.balance_creator) - parseInt(evento.class_price)*.7
        })
        this.af.list('Users/').update(firebase.auth().currentUser.uid, {
          'noms': parseInt(this.noms_balance) + parseInt(evento.class_price)

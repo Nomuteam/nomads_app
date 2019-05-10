@@ -527,7 +527,7 @@ public users_total: any = 0;
     if(this.cash > 0){
       this.alertCtrl.create({
         title: 'Do you want to buy '+this.noms+' noms?',
-        subTitle: 'You will be charged '+this.cash,
+        subTitle: 'You will be charged '+this.cash+' mxn',
         message: 'A paypal window will popup for you to checkout',
         buttons: [
           {

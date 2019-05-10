@@ -352,7 +352,7 @@ public users_total: any = 0;
          this.general_loader.present();
 
          let new_noms_nomad = parseInt(this.noms_balance) - parseInt(this.activity_data.class_price);
-         let new_noms_ally = parseInt(this.ally_balance) + parseInt(this.activity_data.class_price);
+         let new_noms_ally = parseInt(this.ally_balance) + parseInt(this.activity_data.class_price)*.7;
 
          console.log(new_noms_nomad);
          console.log(new_noms_ally);
@@ -377,7 +377,7 @@ public users_total: any = 0;
          this.af.list('Chats/').update(chat_index, chat_room);
 
          //Update this chat room index in both the user and the owner object
-         let chat_ref = {'index': chat_index};
+         let chat_ref = {'index': chat_index, 'activity_index': this.activity_data.index};
          this.af.list('Users/'+this.activity_data.creator+'/Chats').update(chat_index, chat_ref);
          this.af.list('Users/'+firebase.auth().currentUser.uid+'/Chats').update(chat_index, chat_ref);
 
@@ -387,7 +387,7 @@ public users_total: any = 0;
          });
 
          this.af.list('/').update('Accountance', {
-           'allies': this.allies_total + parseInt(this.activity_data.class_price)
+           'allies': this.allies_total + parseInt(this.activity_data.class_price)*.7
          });
 
          this.af.list('/').update('Accountance', {

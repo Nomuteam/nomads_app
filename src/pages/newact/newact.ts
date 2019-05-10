@@ -78,6 +78,9 @@ export class NewactPage {
     {
       'title': 'Pilates'
     },
+    {
+      'title': 'Capoeira'
+    },
   ];
   public example_forms: any = [
     {
@@ -205,6 +208,33 @@ export class NewactPage {
     this.activity_data.location = item.description;
     this.autocompleteItems = [];
     this.seeCorrect();
+  }
+
+  confirmRF(indice){
+    this.alertCtrl.create({
+      title: 'Do you want to remove this picture?',
+      message:  'It will no longer be available.',
+      buttons: [
+        {
+          text: 'Cancel',
+          handler: () => {
+            //this.openActivity(act);
+          }
+        },
+        {
+          text: 'Remove',
+          role: 'destructive',
+          handler: () => {
+            if(this.activity_data.media.length > 0) this.confirmRemoveP(indice);
+            else this.alertCtrl.create({title: 'Only picture', message: 'You cant delete this picture since it is the only one', buttons: ['Ok']}).present();
+          }
+        },
+      ]
+    }).present();
+  }
+
+  confirmRemoveP(indice){
+    this.activity_data.media.splice(indice, 1);
   }
 
   updateSearchResults(){

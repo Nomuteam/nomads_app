@@ -5,6 +5,7 @@ import { AngularFireDatabase, AngularFireObject } from 'angularfire2/database';
 import firebase from 'firebase';
 import { ActivityPage } from '../activity/activity';
 import { EditactPage } from '../editact/editact';
+import * as moment from 'moment';
 
 /**
  * Generated class for the MyactivitiesPage page.
@@ -33,8 +34,14 @@ public general_loader: any;
   confirmEdit(act){
     this.alertCtrl.create({
       title: 'What would you like to do?',
-      message:  'You can edit this activity or see how its displayed to nomads',
+      message:  'You can view, edit or remove this activity.',
       buttons: [
+        {
+          text: 'View',
+          handler: () => {
+            this.openActivity(act);
+          }
+        },
         {
           text: 'Edit',
           handler: () => {
@@ -42,13 +49,47 @@ public general_loader: any;
           }
         },
         {
-          text: 'View',
+          text: 'Remove',
+          role: 'destructive',
+          handler: () => {
+           if(!this.checkNomdas(act)) this.confirmRemove(act);
+           else this.alertCtrl.create({title: 'There are nomads signed', message: 'You cant delete this activity now', buttons: ['Ok']}).present();
+          }
+        },
+      ]
+    }).present();
+  }
+
+  confirmRemove(act){
+    this.alertCtrl.create({
+      title: 'Are you sure you want to delete this activity?',
+      message:  'It will no longer be available.',
+      buttons: [
+        {
+          text: 'Cancel',
           handler: () => {
             this.openActivity(act);
           }
-        }
+        },
+        {
+          text: 'Remove',
+          role: 'destructive',
+          handler: () => {
+           this.af.list('Activities/'+act.index).remove();
+          }
+        },
       ]
     }).present();
+  }
+
+  checkNomdas(act){
+    console.log(act.nomads);
+    let n = act.nomads;
+    let today  = moment();
+    for(let key in n){
+      if(moment(n.date).isBefore(today)) return true;
+    }
+    return false;
   }
 
 
@@ -68,6 +109,7 @@ public general_loader: any;
         'categories':  a[key].categories,
         'schedule':  a[key].schedule,
         'media':  a[key].media,
+        'nomads': (a[key].nomads ? a[key].nomads : []),
         'img':  a[key].img,
         'creator':  a[key].creator,
         'index':  a[key].index,

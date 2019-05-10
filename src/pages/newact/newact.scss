@@ -57,6 +57,14 @@ page-newact {
        .option-container{
          display: flex;
          justify-content: space-between;
+         .input-field{
+           color: #7D29FB;
+           background-color: transparent;
+           border: 1px solid #7D29FB;
+           width: 75%;
+           padding: 2%;
+           border-radius: 5px!important;
+         }
          .title-option{
 
          }

@@ -151,7 +151,7 @@ export class CalendarioPage {
           'endTime': this.markEnd(a[key].day, a[key].time),
           'allDay': false,
           'time': a[key].time,
-          'nomads': (a[key].nomads != undefined ? a[key].nomads : ''),
+          'nomads': (a[key].nomads != undefined ? a[key].nomads : []),
           'creator':  a[key].creator,
           'index':  a[key].index,
           // 'media': a[key].media,
@@ -201,7 +201,7 @@ export class CalendarioPage {
               'endTime': this.markEnd(b[key].schedule[lla].day, b[key].schedule[lla].start_time),
               'allDay': '',
               'time': b[key].time,
-              'nomads': b[key].nomads,
+              'nomads': (b[key].nomads != undefined ? b[key].nomads : []),
               'creator':  b[key].creator,
               'index':  b[key].index,
               // 'media': b[key].media,
@@ -421,11 +421,17 @@ export class CalendarioPage {
      }
    }
 
+   hacerCosa(fecha, fecha2){
+     let b = moment(fecha);
+     return b.diff(fecha2, 'days') == 0;
+   }
+
   onEventSelected(event) {
     console.log(event);
     let start = moment(event.startTime).format('LLLL');
     let end = moment(event.endTime).format('LLLL');
-    let spaces = Object.keys(event.nomads).length;
+    let n = event.nomads.filter( a => this.hacerCosa(a.date, event.startTime));
+    let spaces = Object.keys(n).length;
 
     let alert = this.alertCtrl.create({
       title: '' + event.title_complete,

@@ -41,12 +41,19 @@
       </div>
       <p class="clan-members">{{a.members.length}} nomads</p>
 
+      <div class="card-contenido">
+        <p class="element-title" style="margin-top: 3%;">Description</p>
+        <p class="element-desc">{{a.description}}</p>
 
-      <p class="element-title" style="margin-top: 3%;">Description</p>
-      <p class="element-desc">{{a.description}}</p>
+        <p class="element-title">Location</p>
+        <p class="element-desc">{{a.location}}</p>
 
-      <p class="element-title">Location</p>
-      <p class="element-desc">{{a.location}}</p>
+        <p class="element-title">Rules</p>
+        <p class="element-desc">{{a.rules}}</p>
+      </div>
+
+
+
 
       <button (click)="canJoin(a.index, a.type, a.secret_code, a.chat, a.name_complete)" type="button" class="join-btn">Join</button>
     </div>

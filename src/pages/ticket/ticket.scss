@@ -33,12 +33,12 @@ page-ticket {
         flex-direction: column;
         justify-content: flex-start;
         align-items: flex-start;
-        font-size: 90%;
+        font-size: 100%;
         color: white;
         .top{
           font-weight: 700;
           text-align: center;
-          font-size: 150%;
+          font-size: 170%;
         }
         .hints{
           font-weight: 400;
@@ -53,7 +53,7 @@ page-ticket {
       align-items: center;
       text-align: center;
       .cost{
-        font-size: 90%;
+        font-size: 100%;
         color: white;
         font-weight: 700;
         text-align: center;
@@ -66,7 +66,7 @@ page-ticket {
       .pay-btn{
         display: block;
         margin: 0 auto;
-        width: 70%;
+        width: 80%;
         border-radius: 30px;
         padding: 1%;
         background-color: #1BBF80;

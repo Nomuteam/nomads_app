@@ -65,10 +65,10 @@
          <input type="text" class="input-field" [(ngModel)]="event_data.difficulty">
        </div>
 
-       <div class="input-group">
+       <!-- <div class="input-group">
          <p class="input-title">Picture</p>
          <button (click)="presentOptions()" type="button" class="add-btn" style="background-color: #7D29FB!important">Select Picture</button>
-       </div>
+       </div> -->
 
        <div class="input-group">
          <p class="input-title">About the Event</p>
@@ -116,7 +116,7 @@
   <div *ngFor="let m of this.event_data.media" class="media-img" [style.background-image]="sanitizeThis(m.url)"></div>
   <button (click)="presentOptions()" type="button" class="add-btn" padding>+</button>
 
-  <button (click)="createEvent()" type="button" class="next-btn">Next</button>
+  <button [disabled]="!needsPic()" (click)="createEvent()" type="button" class="next-btn">Next</button>
   <button (click)="this.current_index = 1" type="button" class="next-btn outline">Back</button>
   </div>
 

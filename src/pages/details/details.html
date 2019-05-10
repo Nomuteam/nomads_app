@@ -12,7 +12,7 @@
   <div class="top-part">
       <img src="{{this.act.img}}" class="img">
       <div *ngIf="!this.act.isEvent" class="text">
-        <div class="top">{{this.act.title}}</div>
+        <div class="top">{{this.act.title_complete}}</div>
         <div *ngIf="this.act.next_time != 'not today'">
           <div class="hints">Next: {{this.act.next_time}}</div>
           <div class="hints">Spaces: {{this.act.next_spaces}}</div>

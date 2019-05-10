@@ -78,6 +78,9 @@ export class EditactPage {
     {
       'title': 'Pilates'
     },
+    {
+      'title': 'Capoeira'
+    },
   ];
   public example_forms: any = [
     {
@@ -184,6 +187,33 @@ export class EditactPage {
     public sanitizer: DomSanitizer,
     public modalCtrl: ModalController) {
     this.activity_data = this.navParams.get('Act');
+  }
+
+  confirmRF(indice){
+    this.alertCtrl.create({
+      title: 'Do you want to remove this picture?',
+      message:  'It will no longer be available.',
+      buttons: [
+        {
+          text: 'Cancel',
+          handler: () => {
+            //this.openActivity(act);
+          }
+        },
+        {
+          text: 'Remove',
+          role: 'destructive',
+          handler: () => {
+            if(this.activity_data.media.length > 0) this.confirmRemoveP(indice);
+            else this.alertCtrl.create({title: 'Only picture', message: 'You cant delete this picture since it is the only one', buttons: ['Ok']}).present();
+          }
+        },
+      ]
+    }).present();
+  }
+
+  confirmRemoveP(indice){
+    this.activity_data.media.splice(indice, 1);
   }
 
   selectSearchResult(item){
@@ -313,7 +343,15 @@ export class EditactPage {
     }
   }
 
+  isForm(forma){
+    for(let key in this.activity_data.categories.workout_form){
+      if(this.activity_data.categories.workout_form[key].title == forma) return true;
+    }
+    return false;
+  }
+
   getForm(indice){
+      if(this.isForm(this.example_forms[indice].title)) this.example_forms[indice].selected = true;
       return ( this.example_forms[indice].selected ? 'likes-element selectedrose' : 'likes-element');
   }
 

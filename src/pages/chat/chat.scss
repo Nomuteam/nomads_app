@@ -66,11 +66,12 @@ page-chat {
     letter-spacing: 0;
     font-weight: 700;
     position: relative;
-    font-size: 85%;
+    font-size: 80%;
     //border: 2px solid black;
 /* Bitmap: */
     p{
       padding: 5%;
+      display: inline;
     }
     img{
       padding: 5%;
@@ -107,11 +108,12 @@ page-chat {
 
     /* ¡Hola! Mi nombre es: */
     font-family: 'Custom';
-    font-size: 85%;
+    font-size: 80%;
     color: #000000;
     letter-spacing: 0;
     p{
       padding: 5%;
+      display: inline;
     }
   }
 
