@@ -196,7 +196,7 @@ actionSheet.present();
     return false;
   }
 
-  checkExistE(clave, llave, review){
+  checkExistE(clave, llave, review, t_id){
     let a = this.e_response$;
     let aux;
     for(let key in a){
@@ -228,7 +228,8 @@ actionSheet.present();
           'reviews': (a[key].reviews ? a[key].reviews : []),
           'eventColor': '#2edbac',
           'actual_day': '',
-          'day_number': 0
+          'day_number': 0,
+          't_id': t_id
         }
         return aux2;
       }
@@ -236,7 +237,7 @@ actionSheet.present();
     return aux;
   }
 
-  checkExistA(clave, llave, review){
+  checkExistA(clave, llave, review, t_id){
     let b = this.response$;
     let aux;
     for(let key in b){
@@ -270,7 +271,8 @@ actionSheet.present();
           'reviews': (b[key].reviews ? b[key].reviews : []),
           'eventColor': '#2edbac',
           'actual_day': '',
-          'day_number': 0
+          'day_number': 0,
+          't_id': t_id
         }
         return aux2;
       }
@@ -300,12 +302,11 @@ actionSheet.present();
   convertActivities(){
 
     for(let i=0; i<this.nomad_schedule.length; i++){
-      if(this.checkExistE(this.nomad_schedule[i].activity_id, this.nomad_schedule[i].key, this.nomad_schedule[i].reviewed) != undefined){
-
-        this.activities_all.push(this.checkExistE(this.nomad_schedule[i].activity_id, this.nomad_schedule[i].key, this.nomad_schedule[i].reviewed));
+      if(this.checkExistE(this.nomad_schedule[i].activity_id, this.nomad_schedule[i].key, this.nomad_schedule[i].reviewed, this.nomad_schedule[i].t_id) != undefined){
+        this.activities_all.push(this.checkExistE(this.nomad_schedule[i].activity_id, this.nomad_schedule[i].key, this.nomad_schedule[i].reviewed, this.nomad_schedule[i].t_id));
       }
-      else if(this.checkExistA(this.nomad_schedule[i].activity_id, this.nomad_schedule[i].key, this.nomad_schedule[i].reviewed) != undefined){
-        let ayuda = this.checkExistA(this.nomad_schedule[i].activity_id, this.nomad_schedule[i].key, this.nomad_schedule[i].reviewed);
+      else if(this.checkExistA(this.nomad_schedule[i].activity_id, this.nomad_schedule[i].key, this.nomad_schedule[i].reviewed, this.nomad_schedule[i].t_id) != undefined){
+        let ayuda = this.checkExistA(this.nomad_schedule[i].activity_id, this.nomad_schedule[i].key, this.nomad_schedule[i].reviewed, this.nomad_schedule[i].t_id);
         ayuda.startTime = this.markStart(this.nomad_schedule[i].date, this.nomad_schedule[i].time);
         ayuda.endTime = this.markEnd(this.nomad_schedule[i].date, this.nomad_schedule[i].time);
         ayuda.allDay = false;
@@ -424,6 +425,7 @@ actionSheet.present();
           'day': a[key].day,
           'time': a[key].time,
           'date': a[key].date,
+          't_id': (a[key].t_id ? a[key].t_id : ''),
           'key': key,
           'reviewed': a[key].reviewed
         });
@@ -457,30 +459,32 @@ actionSheet.present();
    doMath(evento){
      if(evento.isEvent){
        this.af.list('Users/').update(evento.creator, {
-         'noms': parseInt(this.balance_creator) - parseInt(evento.cost)*.7
+         'noms': parseFloat(this.balance_creator) - parseInt(evento.cost)*.7
        });
        this.af.list('Users/').update(firebase.auth().currentUser.uid, {
-         'noms': parseInt(this.noms_balance) + parseInt(evento.cost)
+         'noms': parseFloat(this.noms_balance) + parseInt(evento.cost)
        }).then(()=>{
          this.goAhead(evento);
        });
      }
      else{
        this.af.list('Users/').update(evento.creator, {
-         'noms': parseInt(this.balance_creator) - parseInt(evento.class_price)*.7
+         'noms': parseFloat(this.balance_creator) - parseInt(evento.class_price)*.7
        })
        this.af.list('Users/').update(firebase.auth().currentUser.uid, {
-         'noms': parseInt(this.noms_balance) + parseInt(evento.class_price)
+         'noms': parseFloat(this.noms_balance) + parseInt(evento.class_price)
        }).then(()=>{
          this.goAhead(evento);
        });
      }
+     if(evento.t_id != ''){
+       this.af.list('Users/'+evento.creator+'/transactions/'+evento.t_id).remove();
+       this.af.list('transactions/'+evento.t_id).remove();
+     }
+
    }
 
    getBack(evento){
-     this.af.object('Users/'+evento.creator).snapshotChanges().subscribe(action => {
-       this.balance_creator = action.payload.val().noms;
-     });
      this.doMath(evento);
    }
 
@@ -506,6 +510,9 @@ actionSheet.present();
    }
 
    confirmCancelation(evento){
+     this.af.object('Users/'+evento.creator).snapshotChanges().subscribe(action => {
+       this.balance_creator = action.payload.val().noms;
+     });
      if(evento.cancelation_policy){
        let d = new Date();
        let dif = moment(evento.startTime).fromNow();
@@ -527,6 +534,8 @@ actionSheet.present();
               text: 'Remove',
               handler: () => {
                 this.getBack(evento);
+                console.log(parseInt(this.balance_creator));
+                console.log(parseInt(evento.class_price));
               }
             }
           ]

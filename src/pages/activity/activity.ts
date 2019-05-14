@@ -172,7 +172,7 @@ public time_helper: any = [
 
   openBook(dia, tiempo){
     if(this.activity_data.creator != firebase.auth().currentUser.uid){
-      if(parseInt(this.activity_data.class_price) == 0 || parseInt(this.noms_balance) > parseInt(this.activity_data.class_price)){
+      if(parseInt(this.activity_data.class_price) == 0 || parseInt(this.noms_balance)+1 > parseInt(this.activity_data.class_price)){
         let modal = this.modalCtrl.create(BookPage, {'Activity': this.activity_data, 'Day': dia, 'Time': tiempo});
             modal.onDidDismiss( data => {
               if(data && data.go) this.navCtrl.parent.select(3);
@@ -399,6 +399,7 @@ public time_helper: any = [
   }
 
   getEnd(inicio, dura){
+    dura = parseInt(dura);
     let aux = parseInt(inicio.slice(0, 2)) + dura;
     aux = aux.toString();
     aux = aux.length < 2 ? '0'+aux : aux;

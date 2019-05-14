@@ -191,9 +191,10 @@ sharetoClans(){
                 });
           this.general_loader.present();
 
-          let new_noms_nomad = parseInt(this.noms_balance) - parseInt(this.event_data.cost);
-          let new_noms_ally = parseInt(this.ally_balance) + parseInt(this.event_data.cost);
+          let new_noms_nomad = parseFloat(this.noms_balance) - parseInt(this.event_data.cost);
+          let new_noms_ally = parseFloat(this.ally_balance) + parseInt(this.event_data.cost);
 
+          let t_id = this.generateUUID();
           console.log(new_noms_nomad);
           console.log(new_noms_ally);
 
@@ -204,7 +205,7 @@ sharetoClans(){
           this.af.list('Users').update(this.event_data.creator, {'noms': new_noms_ally});
 
           //Update user schedule with recently added item
-          let schedule_item = {'activity_id': this.event_data.index, 'day': moment(this.event_data.day).format('dddd'), 'time': this.event_data.time, 'date': this.event_data.day};
+          let schedule_item = {'activity_id': this.event_data.index, 'day': moment(this.event_data.day).format('dddd'), 'time': this.event_data.time, 'date': this.event_data.day, 't_id': t_id};
           this.af.list('Users/'+firebase.auth().currentUser.uid+'/schedule').push(schedule_item);
 
           //Update activities attendants with recently joined user
@@ -231,9 +232,9 @@ sharetoClans(){
 
 
           // //Save a description of the transaction
-          let t_id = this.generateUUID();
-          let sender_data = {'index': firebase.auth().currentUser.uid, 'amount': this.event_data.cost, 'pre_balance': this.noms_balance, 'after_balance': parseInt(this.noms_balance) - parseInt(this.event_data.cost)};
-          let receiver_data = {'index': this.event_data.creator, 'amount': this.event_data.cost, 'pre_balance': this.ally_balance, 'after_balance': parseInt(this.ally_balance) + parseInt(this.event_data.cost)};
+
+          let sender_data = {'index': firebase.auth().currentUser.uid, 'amount': this.event_data.cost, 'pre_balance': this.noms_balance, 'after_balance': parseFloat(this.noms_balance) - parseInt(this.event_data.cost)};
+          let receiver_data = {'index': this.event_data.creator, 'amount': this.event_data.cost, 'pre_balance': this.ally_balance, 'after_balance': parseFloat(this.ally_balance) + parseInt(this.event_data.cost)};
           let transaction = {'date': new Date(), 'index': t_id, 'amount': this.event_data.cost, 'type': 'activity', 'sender_id': firebase.auth().currentUser.uid, 'receiver_id': this.event_data.creator, 'sender': sender_data, 'receiver': receiver_data, 'activity_id': this.event_data.index};
           this.af.list('transactions').update(t_id, transaction);
           //
@@ -294,7 +295,7 @@ sharetoClans(){
   }
 
   canJoin(){
-    if(parseInt(this.event_data.cost) == 0 || parseInt(this.noms_balance) > parseInt(this.event_data.cost)){
+    if(parseInt(this.event_data.cost) == 0 || parseInt(this.noms_balance)+1 > parseInt(this.event_data.cost)){
       this.showConfirm();
     }
     else{

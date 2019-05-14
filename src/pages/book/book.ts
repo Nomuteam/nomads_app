@@ -351,9 +351,10 @@ public users_total: any = 0;
                });
          this.general_loader.present();
 
-         let new_noms_nomad = parseInt(this.noms_balance) - parseInt(this.activity_data.class_price);
-         let new_noms_ally = parseInt(this.ally_balance) + parseInt(this.activity_data.class_price)*.7;
+         let new_noms_nomad = parseFloat(this.noms_balance) - parseInt(this.activity_data.class_price);
+         let new_noms_ally = parseFloat(this.ally_balance) + parseInt(this.activity_data.class_price)*.7;
 
+         let t_id = this.generateUUID();
          console.log(new_noms_nomad);
          console.log(new_noms_ally);
 
@@ -365,7 +366,7 @@ public users_total: any = 0;
 
          let date = this.getReal();
          //Update user schedule with recently added item
-         let schedule_item = {'activity_id': this.activity_data.index, 'day': this.selected_day, 'time': this.selected_time, 'date': date};
+         let schedule_item = {'activity_id': this.activity_data.index, 'day': this.selected_day, 'time': this.selected_time, 'date': date, 't_id': t_id};
          this.af.list('Users/'+firebase.auth().currentUser.uid+'/schedule').push(schedule_item);
 
          //Create a chat room with the owner of this activity
@@ -401,9 +402,9 @@ public users_total: any = 0;
          //this.af.list('Activities/'+this.activity_data.index+'/schedule/').update(this.getIndexDay(), attendant);
          //
          // //Save a description of the transaction
-         let t_id = this.generateUUID();
-         let sender_data = {'index': firebase.auth().currentUser.uid, 'amount': this.activity_data.class_price, 'pre_balance': this.noms_balance, 'after_balance': parseInt(this.noms_balance) - parseInt(this.activity_data.class_price)};
-         let receiver_data = {'index': this.activity_data.creator, 'amount': this.activity_data.class_price, 'pre_balance': this.ally_balance, 'after_balance': parseInt(this.ally_balance) + parseInt(this.activity_data.class_price)};
+
+         let sender_data = {'index': firebase.auth().currentUser.uid, 'amount': this.activity_data.class_price, 'pre_balance': this.noms_balance, 'after_balance': parseFloat(this.noms_balance) - parseInt(this.activity_data.class_price)};
+         let receiver_data = {'index': this.activity_data.creator, 'amount': this.activity_data.class_price, 'pre_balance': this.ally_balance, 'after_balance': parseFloat(this.ally_balance) + parseInt(this.activity_data.class_price)*.7};
          let transaction = {'date': new Date(), 'time': this.selected_time, 'index': t_id, 'amount': this.activity_data.class_price, 'type': 'activity', 'sender_id': firebase.auth().currentUser.uid, 'receiver_id': this.activity_data.creator, 'sender': sender_data, 'receiver': receiver_data, 'activity_id': this.activity_data.index};
          this.af.list('transactions').update(t_id, transaction);
          //
