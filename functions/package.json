@@ -15,6 +15,7 @@
     "express": "^4.16.4",
     "firebase-admin": "~6.0.0",
     "firebase-functions": "^2.1.0",
+    "openpay": "^1.0.3",
     "paypal-rest-sdk": "^1.8.1",
     "stripe": "^4.25.0"
   },

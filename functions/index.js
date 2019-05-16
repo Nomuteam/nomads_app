@@ -16,7 +16,12 @@ app.use(bodyParser.urlencoded({extended:true}));
 
 const paypal = require('paypal-rest-sdk');
 
-const stripe = require('stripe')(functions.config().stripe.testkey)
+const stripe = require('stripe')(functions.config().stripe.testkey);
+
+//class
+const Openpay = require('openpay');
+//instantiation
+const openpay = new Openpay('mj4corhvvahpld4kxj7q', 'sk_35c2c669cf874c078eb8b085451f2102', false);
 
 // paypal.configure({
 //   'mode': 'sandbox', //sandbox or live
@@ -136,6 +141,116 @@ app.get('/executePayment/', function(req, res){
 
 //Función cloud que ejecuta el proceso
 exports.process = functions.https.onRequest(app);
+
+exports.opcharge = functions.database
+                                .ref('/Fundings2/{userId}/{paymentId}')
+                                .onCreate((snapshot, context) => {
+
+  const values = snapshot.val();
+
+  const userId = context.params.userId;
+  const paymentId = context.params.paymentId;
+
+
+  return admin.database()
+              .ref(`/Users/${userId}`)
+              .once('value')
+              .then(snapshot => {
+                  return snapshot.val();
+               })
+               .then(customer => {
+
+                 const amount = values.amount;
+                 const idempotency_key = paymentId;  // prevent duplicate charges
+                 const source = values.token;
+                 const session = values.session;
+
+                 var newCustomer = {
+                    "name": customer.name.split(' ')[0],
+                    "email": customer.email,
+                    "last_name": customer.name.split(' ')[1],
+                    "address":{
+                      "city":"Queretaro",
+                      "state":"Queretaro",
+                      "line1":"Calle Morelos no 10",
+                      "line2":"col. san pablo",
+                      "postal_code":"76000",
+                      "country_code":"MX"
+                    },
+                    "phone_number": customer.phone
+                  };
+
+                  openpay.customers.create(newCustomer, function(error, body) {
+                        // admin.database()
+                        //      .ref(`/testing/${customer.index}/datos`)
+                        //      .set(body);
+
+                         var newCharge = {
+                           'source_id' : source,
+                           'method' : 'card',
+                           'amount' : amount,
+                           'description' : 'Fondeo de Movix',
+                           'device_session_id' : session
+                          };
+
+
+                        openpay.customers.charges.create(body.id, newCharge, function(error, charge) {
+                          if (error) admin.database().ref(`/Fundings/${userId}/${paymentId}/errors`).set(error);
+                          else admin.database().ref(`/Fundings/${userId}/${paymentId}/charge`).set(charge);
+                         });
+                  })
+
+                //  var newCharge = {
+                //    'source_id' : source,
+                //    'method' : 'card',
+                //    'amount' : amount,
+                //    'description' : 'Fondeo de Movix',
+                //    'device_session_id' : session,
+                //    'customer' : {
+                //         'name' : customer.name.split(' ')[0],
+                //         'last_name' : customer.name.split(' ')[1],
+                //         'phone_number' : customer.phone,
+                //         'email' : customer.email
+                //   }
+                //
+                //   };
+                //
+                //     admin.database()
+                //          .ref(`/testing/${customer.index}`)
+                //          .set(newCharge);
+                //
+                //
+                //
+                // openpay.customers.charges.create(newCharge, function(error, charge) {
+                //   if (error) throw error;
+                //   console.log(charge);
+                //  });
+                  // if (error) throw error;
+                  // console.log(charge);
+                   // if(error){
+                   //   admin.database()
+                   //        .ref(`/testing/${customer.index}`)
+                   //        .set(error.description);
+                   // }
+                   // else{
+                   //   admin.database()
+                   //        .ref(`/testing/${customer.index}`)
+                   //        .set(charge);
+                   // }
+
+                return true;
+
+               })
+               //
+               // .then(charge => {
+               //
+               //   admin.database()
+               //        .ref(`/Fundings/${userId}/${paymentId}/charge`)
+               //        .set(charge);
+               //
+               //          return true;
+               //    })
+});
 
 
 exports.stripeCharge = functions.database
