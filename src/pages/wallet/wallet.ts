@@ -233,7 +233,7 @@ public users_total: any = 0;
            "country_code":"MX"
         }
   }, (dato)=>{
-     this.af.list('Fundings/'+firebase.auth().currentUser.uid).update(this.transaction_id, {'token': dato.data.id, 'amount': parseInt(this.quantity), 'session': deviceSessionId});
+     this.af.list('Fundings/'+firebase.auth().currentUser.uid).update(this.transaction_id, {'token': dato.data.id, 'amount': parseInt(this.cash), 'session': deviceSessionId});
      this.watchConfirmation2();
   }, (error)=>console.log(error));
 
@@ -293,7 +293,7 @@ public users_total: any = 0;
         {
           text: 'Pay',
           handler: data => {
-            this.goPay(data.cvc);
+            this.goPay();
           }
         }
       ]
