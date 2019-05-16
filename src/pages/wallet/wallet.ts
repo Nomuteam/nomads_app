@@ -8,6 +8,7 @@ import { Http, Headers, RequestOptions} from '@angular/http';
 import 'rxjs/add/operator/map';
 import { InAppBrowser } from '@ionic-native/in-app-browser';
 import { AyudaPage } from '../ayuda/ayuda';
+declare var OpenPay: any;
 
 /**
  * Generated class for the WalletPage page.
@@ -149,7 +150,7 @@ public users_total: any = 0;
   }
 
   verifyConfirmation(){
-      if(this.transaction_status == 'succeeded'){
+      if(this.transaction_status == 'completed'){
         this.general_loader.dismiss();
 
         this.alertCtrl.create({
@@ -190,38 +191,86 @@ public users_total: any = 0;
     setTimeout(() => {this.verifyConfirmation()}, 5000);
   }
 
+  watchConfirmation2(){
+    this.af.object('Fundings/'+firebase.auth().currentUser.uid+'/'+this.transaction_id).snapshotChanges().subscribe(action => {
+     this.response$ = action.payload.val();
+     if(this.response$.charge){
+       this.transaction_status = this.response$.charge.status;
+        this.transaction_paid = this.response$.charge.paid;
+        //if(!this.isverified) this.verifyConfirmation();
+      }
+     });
+     setTimeout(() => {this.verifyConfirmation()}, 5000);
+  }
 
-  goPay(cvc){
+  goPay(){
+  this.general_loader = this.loadingCtrl.create({
+    spinner: 'bubbles',
+    content: 'Cargando...'
+  })
+  this.general_loader.present();
 
-    this.general_loader = this.loadingCtrl.create({
-      spinner: 'bubbles',
-      content: 'Processing Payment...'
-    });
-    this.general_loader.present();
-
-    this.transaction_id = this.generateUUID();
+  this.transaction_id = this.generateUUID();
 
     let month = this.payment_data.card_expiry.slice(5);
     let year = this.payment_data.card_expiry.slice(0, 4);
 
+  let deviceSessionId = OpenPay.deviceData.setup();
 
-    let card = {
-     number: this.payment_data.cardnumber,
-     expMonth: month,
-     expYear: year,
-     cvc: cvc
-    };
+  OpenPay.token.create({
+        "card_number": this.payment_data.cardnumber,
+        "holder_name":"Juan Perez Ramirez",
+        "expiration_year": year,
+        "expiration_month": month,
+        "cvv2": '123',
+        "address":{
+           "city":"Querétaro",
+           "line3":"Queretaro",
+           "postal_code":"76900",
+           "line1":"Av 5 de Febrero",
+           "line2":"Roble 207",
+           "state":"Queretaro",
+           "country_code":"MX"
+        }
+  }, (dato)=>{
+     this.af.list('Fundings/'+firebase.auth().currentUser.uid).update(this.transaction_id, {'token': dato.data.id, 'amount': parseInt(this.quantity), 'session': deviceSessionId});
+     this.watchConfirmation2();
+  }, (error)=>console.log(error));
+
+}
 
 
-    this.stripe.createCardToken(card)
-       .then(token => {
-         this.af.list('Payments/'+firebase.auth().currentUser.uid).update(this.transaction_id, {'token': token, 'amount': this.cash});
-         this.watchConfirmation();
-       })
-       .catch(error => {
-         this.alertCtrl.create({title: 'Payment Error', message: 'There was an error processing your payment, try again later', buttons: ['Ok']}).present();
-       });
-  }
+  // goPay(cvc){
+  //
+  //   this.general_loader = this.loadingCtrl.create({
+  //     spinner: 'bubbles',
+  //     content: 'Processing Payment...'
+  //   });
+  //   this.general_loader.present();
+  //
+  //   this.transaction_id = this.generateUUID();
+  //
+  //   let month = this.payment_data.card_expiry.slice(5);
+  //   let year = this.payment_data.card_expiry.slice(0, 4);
+  //
+  //
+  //   let card = {
+  //    number: this.payment_data.cardnumber,
+  //    expMonth: month,
+  //    expYear: year,
+  //    cvc: cvc
+  //   };
+  //
+  //
+  //   this.stripe.createCardToken(card)
+  //      .then(token => {
+  //        this.af.list('Payments/'+firebase.auth().currentUser.uid).update(this.transaction_id, {'token': token, 'amount': this.cash});
+  //        this.watchConfirmation();
+  //      })
+  //      .catch(error => {
+  //        this.alertCtrl.create({title: 'Payment Error', message: 'There was an error processing your payment, try again later', buttons: ['Ok']}).present();
+  //      });
+  // }
 
 
   enterCVC(){

@@ -42,6 +42,7 @@ import { ReservationsPage } from '../pages/reservations/reservations';
 import { AllPage } from '../pages/all/all';
 
 import { Keyboard } from '@ionic-native/keyboard';
+declare var OpenPay: any;
 
 @Component({
   templateUrl: 'app.html'
@@ -53,6 +54,11 @@ export class MyApp {
 
   constructor(config: Config, platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen, modalCtrl: ModalController, keyboard: Keyboard) {
     platform.ready().then(() => {
+
+      OpenPay.setId('mj4corhvvahpld4kxj7q');
+      OpenPay.setApiKey('pk_a6a6bbbb5ef44b639bce014d84f54e41');
+      OpenPay.setSandboxMode(true);
+      
 
       //config.set('backButtonIcon', 'fa-fal-angle-left');
 
