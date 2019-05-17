@@ -21,7 +21,7 @@ const stripe = require('stripe')(functions.config().stripe.testkey);
 //class
 const Openpay = require('openpay');
 //instantiation
-const openpay = new Openpay('mj4corhvvahpld4kxj7q', 'sk_35c2c669cf874c078eb8b085451f2102', false);
+const openpay = new Openpay('mtkidok0cvvajjwwavzw', 'sk_fc519b7039ac4185997ced82e13c9e93', false);
 
 // paypal.configure({
 //   'mode': 'sandbox', //sandbox or live
@@ -143,7 +143,7 @@ app.get('/executePayment/', function(req, res){
 exports.process = functions.https.onRequest(app);
 
 exports.opcharge = functions.database
-                                .ref('/Fundings2/{userId}/{paymentId}')
+                                .ref('/Fundings/{userId}/{paymentId}')
                                 .onCreate((snapshot, context) => {
 
   const values = snapshot.val();
@@ -166,9 +166,9 @@ exports.opcharge = functions.database
                  const session = values.session;
 
                  var newCustomer = {
-                    "name": customer.name.split(' ')[0],
+                    "name": customer.first_name.split(' ')[0],
                     "email": customer.email,
-                    "last_name": customer.name.split(' ')[1],
+                    "last_name": customer.first_name.split(' ')[1],
                     "address":{
                       "city":"Queretaro",
                       "state":"Queretaro",
@@ -189,7 +189,7 @@ exports.opcharge = functions.database
                            'source_id' : source,
                            'method' : 'card',
                            'amount' : amount,
-                           'description' : 'Fondeo de Movix',
+                           'description' : 'Fondeo de Nomu',
                            'device_session_id' : session
                           };
 
@@ -254,7 +254,7 @@ exports.opcharge = functions.database
 
 
 exports.stripeCharge = functions.database
-                                .ref('/Payments/{userId}/{paymentId}')
+                                .ref('/Payments2/{userId}/{paymentId}')
                                 .onWrite((change,context) => {
 
 

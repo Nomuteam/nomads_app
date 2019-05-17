@@ -518,9 +518,12 @@ actionSheet.present();
        let dif = moment(evento.startTime).fromNow();
 
        //dif = (dif.indexOf('hours') || dif.indexOf('hour'));
-       let dif2 = (dif.indexOf('days') || dif.indexOf('day'));
+       //let dif2 = (dif.indexOf('days') || dif.indexOf('day'));
+       let dif2 =  dif.split(' ')[2] == 'hour';
 
-      if(dif2 > -1){
+       console.log(dif2);
+
+      if(!dif2){
         this.alertCtrl.create({
           title: 'Are you sure you want to remove '+evento.title_complete+' from your schedule?',
           buttons: [

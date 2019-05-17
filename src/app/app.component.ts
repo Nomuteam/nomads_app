@@ -55,10 +55,10 @@ export class MyApp {
   constructor(config: Config, platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen, modalCtrl: ModalController, keyboard: Keyboard) {
     platform.ready().then(() => {
 
-      OpenPay.setId('mj4corhvvahpld4kxj7q');
-      OpenPay.setApiKey('pk_a6a6bbbb5ef44b639bce014d84f54e41');
+      OpenPay.setId('mtkidok0cvvajjwwavzw');
+      OpenPay.setApiKey('pk_a43a8de706ba470fae81b90d8ce0ac5e');
       OpenPay.setSandboxMode(true);
-      
+
 
       //config.set('backButtonIcon', 'fa-fal-angle-left');
 

@@ -88,6 +88,8 @@ public paypal$: any;
 
 public total: any = 0;
 public users_total: any = 0;
+public isverified: any = false;
+public reported: any = false;
 
   constructor(public navCtrl: NavController,
     public navParams: NavParams,
@@ -150,6 +152,7 @@ public users_total: any = 0;
   }
 
   verifyConfirmation(){
+      this.isverified = true;
       if(this.transaction_status == 'completed'){
         this.general_loader.dismiss();
 
@@ -176,8 +179,15 @@ public users_total: any = 0;
         })
       }
       else{
+        this.general_loader.dismiss();
         this.alertCtrl.create({title: 'Payment Error', message: 'There was an error processing your payment, try again later', buttons: ['Ok']}).present();
       }
+  }
+
+  tellUser(){
+    this.reported = true;
+    this.general_loader.dismiss();
+    this.alertCtrl.create({title: 'Payment Error', subTitle:this.response$.errors.description,  message: 'The server responded with the following error: '+this.response$.errors.description, buttons: ['Ok']}).present();
   }
 
   watchConfirmation(){
@@ -197,23 +207,26 @@ public users_total: any = 0;
      if(this.response$.charge){
        this.transaction_status = this.response$.charge.status;
         this.transaction_paid = this.response$.charge.paid;
-        //if(!this.isverified) this.verifyConfirmation();
+        if(!this.isverified) this.verifyConfirmation();
       }
+      if(this.response$.errors){
+         if(!this.reported) this.tellUser();
+       }
      });
-     setTimeout(() => {this.verifyConfirmation()}, 5000);
+     //setTimeout(() => {this.verifyConfirmation()}, 5000);
   }
 
   goPay(){
   this.general_loader = this.loadingCtrl.create({
     spinner: 'bubbles',
-    content: 'Cargando...'
+    content: 'Loading...'
   })
   this.general_loader.present();
 
   this.transaction_id = this.generateUUID();
 
     let month = this.payment_data.card_expiry.slice(5);
-    let year = this.payment_data.card_expiry.slice(0, 4);
+    let year = this.payment_data.card_expiry.slice(2,4);
 
   let deviceSessionId = OpenPay.deviceData.setup();
 
@@ -302,10 +315,11 @@ public users_total: any = 0;
   }
 
   confirmNew(datos){
+
     this.general_loader = this.loadingCtrl.create({
       spinner: 'bubbles',
-      content: 'Processing Payment...'
-    });
+      content: 'Loading...'
+    })
     this.general_loader.present();
 
     this.transaction_id = this.generateUUID();
@@ -313,21 +327,59 @@ public users_total: any = 0;
     let card = {
      number: datos.card,
      expMonth: datos.month,
-     expYear: datos.year,
+     expYear: datos.year.slice(2),
      cvc: datos.cvc
     };
 
+    let deviceSessionId = OpenPay.deviceData.setup();
 
-    this.stripe.createCardToken(card)
-       .then(token => {
-         this.af.list('Payments/'+firebase.auth().currentUser.uid).update(this.transaction_id, {'token': token, 'amount': this.cash});
-         this.watchConfirmation();
-       })
-       .catch(error => {
-         console.log(error);
-         this.alertCtrl.create({title: 'Payment Error', message: JSON.stringify(error), buttons: ['Ok']}).present();
-         // this.alertCtrl.create({title: 'Payment Error', message: 'There was an error processing your payment, try again later', buttons: ['Ok']}).present();
-       });
+    OpenPay.token.create({
+          "card_number": card.number,
+          "holder_name":"Juan Perez Ramirez",
+          "expiration_year": card.expYear,
+          "expiration_month": card.expMonth,
+          "cvv2": card.cvc,
+          "address":{
+             "city":"Querétaro",
+             "line3":"Queretaro",
+             "postal_code":"76900",
+             "line1":"Av 5 de Febrero",
+             "line2":"Roble 207",
+             "state":"Queretaro",
+             "country_code":"MX"
+          }
+    }, (dato)=>{
+       this.af.list('Fundings/'+firebase.auth().currentUser.uid).update(this.transaction_id, {'token': dato.data.id, 'amount': parseInt(this.cash), 'session': deviceSessionId});
+       this.watchConfirmation2();
+    }, (error)=>console.log(error));
+
+
+    // this.general_loader = this.loadingCtrl.create({
+    //   spinner: 'bubbles',
+    //   content: 'Processing Payment...'
+    // });
+    // this.general_loader.present();
+    //
+    // this.transaction_id = this.generateUUID();
+    //
+    // let card = {
+    //  number: datos.card,
+    //  expMonth: datos.month,
+    //  expYear: datos.year,
+    //  cvc: datos.cvc
+    // };
+    //
+    //
+    // this.stripe.createCardToken(card)
+    //    .then(token => {
+    //      this.af.list('Payments/'+firebase.auth().currentUser.uid).update(this.transaction_id, {'token': token, 'amount': this.cash});
+    //      this.watchConfirmation();
+    //    })
+    //    .catch(error => {
+    //      console.log(error);
+    //      this.alertCtrl.create({title: 'Payment Error', message: JSON.stringify(error), buttons: ['Ok']}).present();
+    //      // this.alertCtrl.create({title: 'Payment Error', message: 'There was an error processing your payment, try again later', buttons: ['Ok']}).present();
+    //    });
   }
 
   enterNew(){
@@ -373,7 +425,8 @@ public users_total: any = 0;
 
 
   selectCard(){
-
+    this.isverified = false;
+    this.reported = false;
     const actionSheet = this.actionSheetCtrl.create({
       title: 'How would you like to pay?',
       buttons: [
