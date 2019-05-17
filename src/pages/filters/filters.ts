@@ -213,6 +213,13 @@ public distance: any = 0;
 public response$: any;
 public user_preferences: any = [];
 
+public filters$: any;
+public filters: any = {
+  'categories': [],
+  'activities': [],
+  'forms': []
+};
+
   constructor(  public navCtrl: NavController,
     public navParams: NavParams,
     public af: AngularFireDatabase,
@@ -226,6 +233,14 @@ public user_preferences: any = [];
            content: 'Loading...'
           });
     this.general_loader.present();
+    this.af.object('Filters').snapshotChanges().subscribe(action => {
+      this.filters$ = action.payload.val();
+      this.seeUD();
+    });
+    console.log(this.user_preferences);
+  }
+
+  seeUD(){
     this.af.object('Users/'+firebase.auth().currentUser.uid+'/preferences').snapshotChanges().subscribe(action => {
       this.response$ = action.payload.val();
       this.noms_balance = this.response$.noms;
@@ -234,8 +249,6 @@ public user_preferences: any = [];
       this.markSelected();
       if(this.general_loader) this.general_loader.dismiss();
     });
-    console.log(this.user_preferences);
-
   }
 
   ionViewDidLeave(){
@@ -250,37 +263,98 @@ public user_preferences: any = [];
     this.af.list('Users/'+firebase.auth().currentUser.uid).update('preferences', this.user_preferences);
   }
 
+  existsC(nombre){
+    for(let key in this.example_cats){
+      if(this.example_cats[key].name == nombre) return true;
+    }
+    return false;
+  }
+
+  existsA(nombre){
+    for(let key in this.example_activities){
+      if(this.example_activities[key].title == nombre) return true;
+    }
+    return false;
+  }
+
+  existsF(nombre){
+    for(let key in this.example_forms){
+      if(this.example_forms[key].title == nombre) return true;
+    }
+    return false;
+  }
+
+  isNotRealC(nombre){
+    let f = this.filters$.categories;
+    for(let key in f){
+      if(f.name == nombre) return true;
+    }
+    return false;
+  }
+
   markSelected(){
+  console.log(this.filters$);
   let a = this.response$;
 
   console.log(a);
 
   this.allday = a.allday;
+  let f = this.filters$;
 
   if(a.categories){
     for(let key in a.categories){
+    if(f.categories.filter(c => c.name == a.categories[key].name).length != 0){
       this.example_cats.push({
         'name': a.categories[key].name,
         'selected': a.categories[key].selected
       })
     }
+    }
+    for(let key in f.categories){
+      if(!this.existsC(f.categories[key].name)){
+        this.example_cats.push({
+          'name': f.categories[key].name,
+          'selected': false
+        });
+      }
+    }
   }
 
   if(a.types){
     for(let key in a.types){
-      this.example_activities.push({
-        'title': a.types[key].title,
-        'selected': a.types[key].selected
-      })
+     if(f.activities.filter(c => c.name == a.types[key].title).length != 0){
+       this.example_activities.push({
+         'title': a.types[key].title,
+         'selected': a.types[key].selected
+       })
+     }
+    }
+    for(let key in f.activities){
+      if(!this.existsA(f.activities[key].name)){
+        this.example_activities.push({
+          'title': f.activities[key].name,
+          'selected': false
+        });
+      }
     }
   }
 
   if(a.forms){
     for(let key in a.forms){
-      this.example_forms.push({
-        'title': a.forms[key].title,
-        'selected': a.forms[key].selected
-      })
+      if(f.forms.filter(c => c.name == a.forms[key].title).length != 0){
+        this.example_forms.push({
+          'title': a.forms[key].title,
+          'selected': a.forms[key].selected
+        })
+      }
+    }
+    for(let key in f.forms){
+      if(!this.existsF(f.forms[key].name)){
+        this.example_forms.push({
+          'title': f.forms[key].name,
+          'selected': false
+        });
+      }
     }
   }
 

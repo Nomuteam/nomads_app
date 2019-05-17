@@ -1,0 +1,35 @@
+<!--
+  Generated template for the CardPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<div class="todo" navPop>
+
+</div>
+
+<div class="modal1" padding>
+  <div >
+  <div class="top-container">
+    <div class="top-title">Card Information</div>
+    <div navPop class="top-cancel">Cancel</div>
+  </div>
+
+  <div class="saldo-container">
+    <div class="saldo-msg">Enter your card information</div>
+    <input type="tel" placeholder="Card Number" class="selector" [(ngModel)]="card.number" (ngModelChange)="validateNumber()">
+    <input type="tel" placeholder="Month" class="selector" [(ngModel)]="card.month" (ngModelChange)="validateMonth()">
+    <input type="tel" placeholder="Year" class="selector" [(ngModel)]="card.year" (ngModelChange)="validateYear()">
+    <input type="tel" placeholder="CVC" class="selector" [(ngModel)]="card.cvc" (ngModelChange)="validateCVC()">
+  </div>
+
+  <div class="hint-secure">Secure Payment By</div>
+  <img src="assets/img/openpay.png">
+
+  <button [disabled]="!canAdvance()" (click)="goBack()" type="button" class="pay-btn">
+   <div class="pay-container">
+     <div class="pay-hint">Continue</div>
+   </div>
+  </button>
+</div>
+</div>

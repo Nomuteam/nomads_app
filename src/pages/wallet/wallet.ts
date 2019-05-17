@@ -9,6 +9,7 @@ import 'rxjs/add/operator/map';
 import { InAppBrowser } from '@ionic-native/in-app-browser';
 import { AyudaPage } from '../ayuda/ayuda';
 declare var OpenPay: any;
+import { CardPage } from '../card/card';
 
 /**
  * Generated class for the WalletPage page.
@@ -325,7 +326,7 @@ public reported: any = false;
     this.transaction_id = this.generateUUID();
 
     let card = {
-     number: datos.card,
+     number: datos.number,
      expMonth: datos.month,
      expYear: datos.year.slice(2),
      cvc: datos.cvc
@@ -430,15 +431,23 @@ public reported: any = false;
     const actionSheet = this.actionSheetCtrl.create({
       title: 'How would you like to pay?',
       buttons: [
+        // {
+        //   text: 'Saved Card *******'+this.payment_data.cardnumber.substring(this.payment_data.cardnumber.length - 4),
+        //   handler: () => {
+        //      this.enterCVC();
+        //   }
+        // },
         {
-          text: 'Saved Card *******'+this.payment_data.cardnumber.substring(this.payment_data.cardnumber.length - 4),
+          text: 'Enter Card',
           handler: () => {
-             this.enterCVC();
-          }
-        },{
-          text: 'New Card',
-          handler: () => {
-            this.enterNew();
+            //this.enterNew();
+            let modal = this.modalCtrl.create(CardPage);
+                modal.onDidDismiss( data => {
+                  if(data){
+                  this.confirmNew(data);
+                  }
+                });
+             modal.present();
           }
         },
         {

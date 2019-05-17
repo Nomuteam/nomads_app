@@ -40,6 +40,7 @@ import { EditeventPage } from '../pages/editevent/editevent';
 import { TutorialPage } from '../pages/tutorial/tutorial';
 import { ReservationsPage } from '../pages/reservations/reservations';
 import { AllPage } from '../pages/all/all';
+import { CardPage } from '../pages/card/card';
 
 import { Keyboard } from '@ionic-native/keyboard';
 declare var OpenPay: any;

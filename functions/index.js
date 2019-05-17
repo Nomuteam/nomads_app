@@ -169,6 +169,7 @@ exports.opcharge = functions.database
                     "name": customer.first_name.split(' ')[0],
                     "email": customer.email,
                     "last_name": customer.first_name.split(' ')[1],
+                    "requires_account": false,
                     "address":{
                       "city":"Queretaro",
                       "state":"Queretaro",

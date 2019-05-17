@@ -54,6 +54,7 @@ import { CalendarioPage } from '../pages/calendario/calendario';
 import { TutorialPage } from '../pages/tutorial/tutorial';
 import { ReservationsPage } from '../pages/reservations/reservations';
 import { AllPage } from '../pages/all/all';
+import { CardPage } from '../pages/card/card';
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
@@ -122,7 +123,8 @@ import { FIREBASE_CONFIG } from './firebase.credentials';
     CalendarioPage,
     TutorialPage,
     ReservationsPage,
-    AllPage
+    AllPage,
+    CardPage
   ],
   imports: [
     NgCalendarModule,
@@ -188,7 +190,8 @@ import { FIREBASE_CONFIG } from './firebase.credentials';
     CalendarioPage,
     TutorialPage,
     ReservationsPage,
-    AllPage
+    AllPage,
+    CardPage
   ],
   providers: [
     StatusBar,
