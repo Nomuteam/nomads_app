@@ -21,7 +21,7 @@ const stripe = require('stripe')(functions.config().stripe.testkey);
 //class
 const Openpay = require('openpay');
 //instantiation
-const openpay = new Openpay('mtkidok0cvvajjwwavzw', 'sk_fc519b7039ac4185997ced82e13c9e93', false);
+const openpay = new Openpay('mgq5juixufztsekvsfim', 'sk_40adfdb4cb124a8683697328782764ae', true);
 
 // paypal.configure({
 //   'mode': 'sandbox', //sandbox or live
