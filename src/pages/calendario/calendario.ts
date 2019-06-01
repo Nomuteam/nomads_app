@@ -136,6 +136,10 @@ export class CalendarioPage {
     let aux;
     for(let key in a){
       if(a[key].index == clave){
+
+        // let n = a[key].nomads.filter( b => this.hacerCosa(b.date, this.markStart(a[key].day, a[key].time)));
+        // let spaces = Object.keys(n).length;
+
         let aux2 = {
           'title': a[key].title.substring(0, 10) + '..',
           'title_complete': a[key].title,
@@ -160,7 +164,8 @@ export class CalendarioPage {
           'clave_nomada': this.getClave(a[key].nomads),
           'reviewed': (review != undefined ? review : false),
           'review':( a[key].review ? a[key].review : 5),
-          'reviews': (a[key].reviews ? a[key].reviews : [])
+          'reviews': (a[key].reviews ? a[key].reviews : []),
+          'spaces_available': a[key].spaces_available ? a[key].spaces_available : 0
         }
         return aux2;
       }
@@ -184,9 +189,11 @@ export class CalendarioPage {
       if(this.isMine(b[key].index)){
         if(b[key].schedule){
           for(let lla in b[key].schedule){
+            let n = b[key].nomads.filter( a => this.hacerCosa(a.date, this.markStart(b[key].schedule[lla].day, b[key].schedule[lla].start_time)));
+            let spaces = Object.keys(n).length;
             this.activities_all.push({
               'title': b[key].title.substring(0, 10) + '..',
-              'title_complete': b[key].title,
+              'title_complete': b[key].title + n +'/' + b[key].schedule[lla].spaces_available + ' spaces',
               'location': b[key].location,
               'description':  b[key].description,
               'useful_notes': (b[key].useful_notes ? b[key].useful_notes : ''),

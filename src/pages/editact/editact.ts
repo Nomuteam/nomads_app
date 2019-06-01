@@ -46,6 +46,10 @@ export class EditactPage {
       'name': 'Studios',
       'selected': false
     },
+    {
+      'name': 'Academy',
+      'selected': false
+    },
   ];
   public example_activities: any = [
     {
@@ -80,6 +84,12 @@ export class EditactPage {
     },
     {
       'title': 'Capoeira'
+    },
+    {
+      'title': 'Movement'
+    },
+    {
+      'title': 'Functional Training'
     },
   ];
   public example_forms: any = [

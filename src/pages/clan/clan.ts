@@ -31,6 +31,7 @@ public schedule: any = [];
 
 public e_response$: any;
 public response$: any;
+public people$: any;
 public activities_all: any = [];
 
 public general_loader: any;
@@ -44,6 +45,7 @@ public general_loader: any;
               public alertCtrl: AlertController) {
     this.type = localStorage.getItem('Tipo');
     this.clan = this.navParams.get('Clan');
+    console.log(this.clan);
     if(this.clan.schedule.length != 0) this.getSchedule();
   }
 
@@ -105,15 +107,23 @@ public general_loader: any;
         'date': a[key].date,
         'day': a[key].day,
         'index': a[key].index,
-        'name': a[key].name,
+        'name': this.getName(a[key].nomad_index),
         'nomad_index': a[key].nomad_index,
         'time': a[key].time,
         'title': a[key].title
       });
     }
     console.log(this.schedule);
-    let today  = moment();
+    let today  = moment().add(1, 'days');
     this.schedule = this.schedule.filter( event => !moment(event.date).isBefore(today));
+  }
+
+  getName(indice){
+    let u = this.people$;
+    for(let key in u){
+      if(u[key].index == indice) return u[key].first_name + ' ' + u[key].last_name;
+    }
+    return '';
   }
 
   goJoin(){
@@ -249,6 +259,10 @@ public general_loader: any;
       content: 'Loading...'
     });
     this.general_loader.present();
+
+    this.af.object('Users/').snapshotChanges().subscribe(action => {
+      this.people$ = action.payload.val();
+    });
 
     this.getActivities();
   }

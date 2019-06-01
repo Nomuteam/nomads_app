@@ -260,7 +260,13 @@ public users_total: any = 0;
        good = moment(aux).add(1, 'days').format('YYYY-MM-DD');
      }
      else{
-       let ai = 7 - parseInt(moment(this.selected_day, 'dddd').format('d'));
+       let oi = parseInt(moment().format('d'));
+       let qu = parseInt(moment(this.selected_day, 'dddd').format('d'));
+       qu = (qu<oi ? qu+7 : qu);
+
+       //console.log(moment(this.selected_day, 'dddd').format('d'));
+       //let ai = 7 - parseInt(moment(this.selected_day, 'dddd').format('d'));
+       let ai = qu-oi;
        good = moment(aux, 'YYYY-MM-DD').add(ai, 'days').format('YYYY-MM-DD');
      }
    }
@@ -405,7 +411,7 @@ public users_total: any = 0;
 
          let sender_data = {'index': firebase.auth().currentUser.uid, 'amount': this.activity_data.class_price, 'pre_balance': this.noms_balance, 'after_balance': parseFloat(this.noms_balance) - parseInt(this.activity_data.class_price)};
          let receiver_data = {'index': this.activity_data.creator, 'amount': this.activity_data.class_price, 'pre_balance': this.ally_balance, 'after_balance': parseFloat(this.ally_balance) + parseInt(this.activity_data.class_price)*.7};
-         let transaction = {'date': new Date(), 'time': this.selected_time, 'index': t_id, 'amount': this.activity_data.class_price, 'type': 'activity', 'sender_id': firebase.auth().currentUser.uid, 'receiver_id': this.activity_data.creator, 'sender': sender_data, 'receiver': receiver_data, 'activity_id': this.activity_data.index};
+         let transaction = {'date': date, 'time': this.selected_time, 'index': t_id, 'amount': this.activity_data.class_price, 'type': 'activity', 'sender_id': firebase.auth().currentUser.uid, 'receiver_id': this.activity_data.creator, 'sender': sender_data, 'receiver': receiver_data, 'activity_id': this.activity_data.index};
          this.af.list('transactions').update(t_id, transaction);
          //
          // //Save transaction id in ally db

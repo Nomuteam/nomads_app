@@ -33,9 +33,10 @@
   <ion-row>
     <ion-col col-6 *ngFor="let a of this.activities_all" (click)="seeDetails(a)">
       <div class="img-slide" [style.background-image]="sanitizeThis(a.img)"></div>
-      <p class="act-first">{{a.tipo}} - {{a.distance}}</p>
+      <p class="act-first">{{a.categories.activity_type}} - {{a.distance}}</p>
       <p class="act-title">{{a.title_complete}}</p>
-      <p class="act-distance">{{a.cost}} noms</p>
+      <p *ngIf="a.isEvent" class="act-distance">{{a.cost}} noms</p>
+      <p *ngIf="!a.isEvent" class="act-distance">{{a.class_price}} noms</p>
       <p class="act-rating">{{a.review}} <ion-icon name="star" color="white"></ion-icon> / ({{a.reviews.length}})</p>
     </ion-col>
   </ion-row>

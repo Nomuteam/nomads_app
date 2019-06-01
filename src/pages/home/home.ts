@@ -24,6 +24,7 @@ import { AllPage } from '../all/all';
 export class HomePage {
   public response$: any;
   public activities: any = [];
+  public activities_d: any = [];
   public favorites: any;
   public general_loader: any;
   public users$: any;
@@ -41,6 +42,7 @@ export class HomePage {
   public done_a: any = false;
 
   public location_loader: any;
+  public present_loader: any = true;
 
   constructor(public navCtrl: NavController,
   public navParams: NavParams,
@@ -127,7 +129,7 @@ export class HomePage {
   }
 
   getExperiences(){
-    return this.activities.filter(act => act.categories.main_category == 'Experiences');
+    return this.activities.filter(act => act.distance_number>0 && act.distance_number<20 && act.categories.main_category == 'Experiences');
   }
 
   getFiltersP(){
@@ -166,11 +168,11 @@ export class HomePage {
     let vm = this;
     geocoder.geocode( { 'address' : address}, function( results, status ) {
        if( status == google.maps.GeocoderStatus.OK ) {
-         console.log(results);
+         //console.log(results);
          fn(results[0].formatted_address);
        } else {
-          this.af.list('AppErrors/').push({'type': 'Geocode', 'error': status});
-          // alert( 'Geocode was not successful for the following reason: ' + status );
+          vm.af.list('AppErrors/').push({'type': 'Geocode', 'error': status});
+          console.log( 'Geocode was not successful for the following reason: ' + status );
        }
    });
   }
@@ -192,10 +194,15 @@ export class HomePage {
          if (status !== google.maps.DistanceMatrixStatus.OK) {
              console.log('Error:', status);
          } else {
-           console.log(response);
-           result = response.rows[0].elements[0].distance.value;
-           result2 = response.rows[0].elements[0].distance.text;
-           fn(result, result2);
+           //console.log(response);
+           if(response.rows[0].elements[0].distance.value){
+             result = response.rows[0].elements[0].distance.value;
+             result2 = response.rows[0].elements[0].distance.text;
+             fn(result, result2);
+           }
+           else{
+             location.reload();
+           }
            //vm.activities_all[p].distance = response.rows[0].elements[0].distance.value;
            }
      });
@@ -232,8 +239,11 @@ export class HomePage {
       });
     }
 
-    let today  = moment().add(1, 'days');
-    this.events = this.events.filter( event => !moment(event.day).isBefore(today));
+    console.log(this.events);
+
+    let today  = moment();
+    let hoy = moment().format('dddd');
+    this.events = this.events.filter( event => event.day == hoy || !moment(event.day).isBefore(today));
     console.log(this.events.length);
 
     if(!this.done_e){
@@ -241,19 +251,27 @@ export class HomePage {
     let vm = this;
     for(let i=0; i < this.events.length; i++){
 
-    this.coordenadas(this.events[i], this.events[i].location, this.events[i].title_complete,  function(location){
-        vm.events[i].location = location;
-        let om = vm;
-        vm.getDistance(location, function(distance, text){
-          console.log(distance+' km');
-          vm.events[i].distance = text;
-          vm.events[i].distance_number = distance;
-        });
-    });
+    setTimeout(() => {
+      this.coordenadas(this.events[i], this.events[i].location, this.events[i].title_complete,  function(location){
+          vm.events[i].location = location;
+          let om = vm;
+          vm.getDistance(location, function(distance, text){
+            console.log(distance+' km');
+            vm.events[i].distance = text;
+            vm.events[i].distance_number = distance;
+          });
+      });
+    }, (this.events.length*22)*i);
   }
    // this.location_loader.dismiss();
    // this.location_loader = null;
     }
+
+    setTimeout(()=> {
+      localStorage.setItem('events', JSON.stringify(this.events));
+    }, (this.events.length*22)*this.events.length)
+
+    console.log(this.events);
 
     if(this.general_loader) this.general_loader.dismiss();
     this.getFavorites();
@@ -265,7 +283,7 @@ export class HomePage {
      spinner: 'bubbles',
      content: 'Calculating distances...'
    });
-   //this.location_loader.present();
+
     for(let key in a){
       this.activities.push({
         'title': (a[key].title.length > 50 ? a[key].title.substring(0, 20) + '..' : a[key].title),
@@ -293,6 +311,35 @@ export class HomePage {
         'next_remaining': 0
       });
     }
+
+    //this.activities.shift();
+
+    if(!this.done_a){
+      this.done_a = true;
+      this.location_loader.present();
+      let vm = this;
+      for(let i=0; i < this.activities.length; i++){
+       ///this.activities[i] = this.activities[i];
+
+      setTimeout(()=>{
+        this.coordenadas(this.activities[i], this.activities[i].location, this.activities[i].title_complete,  function(location){
+            vm.activities[i].location = location;
+            let om = vm;
+            vm.getDistance(location, function(distance, text){
+              //console.log(distance+' km');
+              vm.activities[i].distance = text;
+              vm.activities[i].distance_number = distance;
+            });
+        });
+      }, (this.activities.length*23)*i);
+      }
+    }
+
+    setTimeout(()=> {
+      this.activities = this.getClosest();
+      localStorage.setItem('actividades', JSON.stringify(this.activities));
+      if(this.location_loader) this.location_loader.dismiss();
+    }, (this.activities.length*23)*this.activities.length)
 
     for(let i=0; i<this.activities.length; i++){
       let h = this.activities[i].schedule;
@@ -340,24 +387,6 @@ export class HomePage {
       this.activities[i].next_remaining = hours_left;
     }
 
-
-   if(!this.done_a){
-     this.done_a = true;
-     let vm = this;
-     for(let i=0; i < this.activities.length; i++){
-
-     this.coordenadas(this.activities[i], this.activities[i].location, this.activities[i].title_complete,  function(location){
-         vm.activities[i].location = location;
-         let om = vm;
-         vm.getDistance(location, function(distance, text){
-           console.log(distance+' km');
-           vm.activities[i].distance = text;
-           vm.activities[i].distance_number = distance;
-         });
-     });
-     }
-   }
-
    console.log(this.activities);
 
    // this.activities = this.activities.sort(function(a, b){
@@ -404,12 +433,26 @@ export class HomePage {
      if(keyA > keyB) return 1;
      return 0;
     });
-    aux = aux.filter(a => a.distance_number < 20);
+    aux = aux.filter(a => a.distance_number > 0 && a.distance_number < 20);
     return aux;
   }
 
+  //cycle
+  //arte marcial y cultura
+  //movement@FOW
+  //yoga suave@sutra
+  //soul flow@sutra
+  //yoga prenatal
+  //vinyasa flow@sutra yoga
+  //restore@sutra yoga
+  //fullbody
+  //sound healing
+  //sunrise flow@sutra yoga
+
+
   getRated(){
    let aux = [];
+   //console.log(this.activities);
    aux = this.activities.sort(function(a, b){
     var keyA = a.review,
         keyB = b.review;
@@ -419,7 +462,7 @@ export class HomePage {
     return 0;
    });
    aux = this.getClosest();
-   aux = aux.filter(a => a.distance_number < 20);
+   //aux = aux.filter(a =>  a.distance_number < 20);
    //console.log(aux);
    return aux;
   }
@@ -468,7 +511,7 @@ export class HomePage {
   }
 
   existsO(arre, cual){
-    console.log(arre);
+    //console.log(arre);
     for(let key in arre){
       if(arre[key].title == cual) return true;
     }
@@ -532,7 +575,7 @@ export class HomePage {
      return 0;
     });
 
-    aux =  aux.filter(a => a.distance_number < 20);
+    aux =  aux.filter(a => a.distance_number>0 && a.distance_number < 20);
     this.filtered_a = aux;
   }
 

@@ -120,89 +120,92 @@ public done_a: any = false;
   }
 
   convertActivities(){
-    let a = this.e_response$;
+  //   let a = this.e_response$;
+  //
+  //   for(let key in a){
+  //     this.activities_all.push({
+  //       'title': a[key].title.substring(0, 10) + '..',
+  //       'title_complete': a[key].title,
+  //       'location': a[key].location,
+  //       'difficulty':  a[key].difficulty,
+  //       'img':  a[key].img,
+  //       'categories':  (a[key].categories ? a[key].categories : []),
+  //       'cost':  a[key].cost,
+  //       'tipo': 'Evento',
+  //       'about_event':  a[key].about_event,
+  //       'provided':  a[key].provided,
+  //       'about_organizer':  a[key].about_organizer,
+  //       'type':  a[key].type,
+  //       'allDay': false,
+  //       'time': a[key].time,
+  //       'creator':  a[key].creator,
+  //       'index':  a[key].index,
+  //       'media': a[key].media,
+  //       'isEvent': true,
+  //       'day': a[key].day,
+  //       'nomads': (a[key].nomads ? a[key].nomads : []),
+  //       'review': (a[key].review ? a[key].review : 5),
+  //       'reviews': (a[key].reviews ? a[key].reviews : []),
+  //       'distance': '',
+  //       'distance_number': 0
+  //     });
+  // }
+  //
+  // let today  = moment();
+  // this.activities_all = this.activities_all.filter( event => !moment(event.day).isBefore(today));
+  //
+  //   let b = this.response$;
+  //     for(let key in b){
+  //         this.activities_all.push({
+  //           'title': b[key].title.substring(0, 10) + '..',
+  //           'title_complete': b[key].title,
+  //           'location': b[key].location,
+  //           'description':  b[key].description,
+  //           'cancelation_policy':  b[key].cancelation_policy,
+  //           'categories':  b[key].categories,
+  //           'tipo': b[key].categories.main_category,
+  //           'schedule':  b[key].schedule,
+  //           'img':  b[key].img,
+  //           'cost':  b[key].class_price,
+  //           'class_price': b[key].class_price,
+  //           'type':  b[key].type,
+  //           'allDay': false,
+  //           'creator':  b[key].creator,
+  //           'index':  b[key].index,
+  //           'media': b[key].media,
+  //           'isEvent': false,
+  //           'nomads': (b[key].nomads ? b[key].nomads : []),
+  //           'review': (b[key].review ? b[key].review : 5),
+  //           'reviews': (b[key].reviews ? b[key].reviews : []),
+  //           'distance': '',
+  //           'distance_number': 0
+  //         });
+  //     }
 
-    for(let key in a){
-      this.activities_all.push({
-        'title': a[key].title.substring(0, 10) + '..',
-        'title_complete': a[key].title,
-        'location': a[key].location,
-        'difficulty':  a[key].difficulty,
-        'img':  a[key].img,
-        'categories':  (a[key].categories ? a[key].categories : []),
-        'cost':  a[key].cost,
-        'tipo': 'Evento',
-        'about_event':  a[key].about_event,
-        'provided':  a[key].provided,
-        'about_organizer':  a[key].about_organizer,
-        'type':  a[key].type,
-        'allDay': false,
-        'time': a[key].time,
-        'creator':  a[key].creator,
-        'index':  a[key].index,
-        'media': a[key].media,
-        'isEvent': true,
-        'day': a[key].day,
-        'nomads': (a[key].nomads ? a[key].nomads : []),
-        'review': (a[key].review ? a[key].review : 5),
-        'reviews': (a[key].reviews ? a[key].reviews : []),
-        'distance': '',
-        'distance_number': 0
-      });
-  }
-
-  let today  = moment();
-  this.activities_all = this.activities_all.filter( event => !moment(event.day).isBefore(today));
-
-    let b = this.response$;
-      for(let key in b){
-          this.activities_all.push({
-            'title': b[key].title.substring(0, 10) + '..',
-            'title_complete': b[key].title,
-            'location': b[key].location,
-            'description':  b[key].description,
-            'cancelation_policy':  b[key].cancelation_policy,
-            'categories':  b[key].categories,
-            'tipo': b[key].categories.main_category,
-            'schedule':  b[key].schedule,
-            'img':  b[key].img,
-            'cost':  b[key].class_price,
-            'class_price': b[key].class_price,
-            'type':  b[key].type,
-            'allDay': false,
-            'creator':  b[key].creator,
-            'index':  b[key].index,
-            'media': b[key].media,
-            'isEvent': false,
-            'nomads': (b[key].nomads ? b[key].nomads : []),
-            'review': (b[key].review ? b[key].review : 5),
-            'reviews': (b[key].reviews ? b[key].reviews : []),
-            'distance': '',
-            'distance_number': 0
-          });
-      }
+  this.activities_all = JSON.parse(localStorage.getItem('actividades'));
+  this.activities_all = this.activities_all.concat(JSON.parse(localStorage.getItem('events')));
 
    if(this.type == 'All Events') this.activities_all = this.activities_all.filter( act => act.isEvent);
    else if (this.type == 'All Activities') this.activities_all = this.activities_all.filter( act => !act.isEvent);
    else this.activities_all = this.activities_all.filter( act => act.tipo == this.type || act.categories.activity_type == this.type );
 
 
-   if(!this.done_a){
-     this.done_a = true;
-     let vm = this;
-     for(let i=0; i < this.activities_all.length; i++){
-
-     this.coordenadas(this.activities_all[i], this.activities_all[i].location, this.activities_all[i].title_complete,  function(location){
-         vm.activities_all[i].location = location;
-         let om = vm;
-         vm.getDistance(location, function(distance, text){
-           console.log(distance+' km');
-           vm.activities_all[i].distance = text;
-           vm.activities_all[i].distance_number = distance;
-         });
-     });
-     }
-   }
+   // if(!this.done_a){
+   //   this.done_a = true;
+   //   let vm = this;
+   //   for(let i=0; i < this.activities_all.length; i++){
+   //
+   //   this.coordenadas(this.activities_all[i], this.activities_all[i].location, this.activities_all[i].title_complete,  function(location){
+   //       vm.activities_all[i].location = location;
+   //       let om = vm;
+   //       vm.getDistance(location, function(distance, text){
+   //         console.log(distance+' km');
+   //         vm.activities_all[i].distance = text;
+   //         vm.activities_all[i].distance_number = distance;
+   //       });
+   //   });
+   //   }
+   // }
 
    console.log(this.activities_all);
    if(this.general_loader) this.general_loader.dismiss();
@@ -229,7 +232,7 @@ public done_a: any = false;
       content: 'Loading...'
     });
     this.general_loader.present();
-    this.getActivities();
+    this.getEvents();
   }
 
   openFilters(){

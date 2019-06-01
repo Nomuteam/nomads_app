@@ -165,6 +165,7 @@ actionSheet.present();
   }
 
   markStart(inicio, tiempo){
+    console.log(inicio);
     let t = parseInt(tiempo.slice(0,2));
     let m = parseInt(tiempo.slice(3));
     let ayuda = moment(inicio).toDate();
@@ -291,7 +292,7 @@ actionSheet.present();
 
 
   formatoNew(dia){
-    console.log(dia);
+    //console.log(dia);
     return moment(dia).format('LL');
   }
 
@@ -399,7 +400,7 @@ actionSheet.present();
     });
   }
 
-  ionViewDidLoad() {
+  ionViewWillEnter() {
     this.show_pop = true;
     this.general_loader =  this.loadingCtrl.create({
           spinner: 'bubbles',

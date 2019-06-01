@@ -68,9 +68,9 @@
 
   <div class="category-container" style="margin-top: 13%;">
    <div (click)="openAll('Best Rated Activities')" class="category-title best">Best Rated Activities</div>
-   <!-- <p class="category-suggestions">Next ones for you</p> -->
+   <!-- <p *ngIf="this.getRated().length == 0" class="category-suggestions">You'll best rated activities</p> -->
    <ion-slides slidesPerView="1.6">
-    <ion-slide (click)="openActivity(a)" *ngFor="let a of this.getRated()">
+    <ion-slide (click)="openActivity(a)" *ngFor="let a of this.activities">
       <div class="img-slide" [style.background-image]="sanitizeThis(a.img)"></div>
       <p class="act-first">{{a.categories.activity_type}} - {{a.distance}}</p>
       <p class="act-title">{{a.title}}</p>

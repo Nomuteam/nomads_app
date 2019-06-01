@@ -52,7 +52,7 @@ page-reviews {
            width: 100%;
            z-index: 100;
            border-radius: 6px;
-           background-image: linear-gradient(-179deg, rgba(0,244,174,0.00) 7%, #00E676 100%);
+           //background-image: linear-gradient(0deg, rgba(0,0,0,0.00) 48%, rgba(0,0,0,0.66) 100%);
          }
          .cover-gradient2{
            position: absolute;
@@ -61,7 +61,7 @@ page-reviews {
            width: 100%;
            z-index: 99;
            border-radius: 6px;
-           background-image: linear-gradient(0deg, rgba(0,0,0,0.00) 48%, rgba(0,0,0,0.66) 100%);
+           //background-image: linear-gradient(0deg, rgba(0,0,0,0.00) 48%, rgba(0,0,0,0.66) 100%);
          }
          .class-img{
           z-index: 90;
@@ -72,6 +72,7 @@ page-reviews {
           background-repeat: no-repeat;
           background-position: center;
           border-radius: 6px;
+          border: 1px solid rgba(0, 0, 0, 0.2);
          }
        }
        .class-text{
@@ -143,7 +144,7 @@ page-reviews {
        border: 1px solid rgba(151, 151, 151, .38);
        background-color: #F4F4F4;
        // padding-left: 5%;
-       font-weight: 700;
+       font-weight: 400;
        margin-bottom: 2%;
        border-radius: 10px;
        width: 100%;

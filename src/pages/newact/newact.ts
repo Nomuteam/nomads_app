@@ -46,6 +46,10 @@ export class NewactPage {
       'name': 'Studios',
       'selected': false
     },
+    {
+      'name': 'Academy',
+      'selected': false
+    },
   ];
   public example_activities: any = [
     {
@@ -80,6 +84,12 @@ export class NewactPage {
     },
     {
       'title': 'Capoeira'
+    },
+    {
+      'title': 'Movement'
+    },
+    {
+      'title': 'Functional Training'
     },
   ];
   public example_forms: any = [
@@ -202,6 +212,26 @@ export class NewactPage {
     public sanitizer: DomSanitizer,
     public modalCtrl: ModalController) {
 
+  }
+
+  goOut(){
+    this.alertCtrl.create({
+      title: 'Warning',
+      message: 'Do you want to quit creating this activity?',
+      buttons: [{
+        text: 'Cancel',
+        handler: () => {
+
+        }
+      },
+      {
+        text: 'Exit',
+        handler: () => {
+          this.navCtrl.pop();
+        }
+      }
+     ]
+   }).present();
   }
 
   selectSearchResult(item){

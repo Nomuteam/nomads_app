@@ -115,9 +115,12 @@ page-clan {
      color: rgba(255, 255, 255, 1);
      text-align: left;
      padding-left: 5%;
-     margin-top: -2%!important;
+     //margin-top: -2%!important;
      max-height: 15%;
      overflow: scroll;
+   }
+   .loc{
+     margin-top: -2%!important;
    }
    .join-btn{
      width: 40vw;

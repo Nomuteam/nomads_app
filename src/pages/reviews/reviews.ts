@@ -59,6 +59,7 @@ public s_5: any = 'star-outline';
   public sanitizer: DomSanitizer,
   public viewCtrl: ViewController) {
     this.activity_data = this.navParams.get('Activity');
+    console.log(this.activity_data);
     this.activity_data.startTime = moment(this.activity_data.startTime).format('LLLL');
     if(!this.activity_data.isEvent) this.activity_data.schedule.map(x => this.schedule.filter(a => a.day == x.day).length > 0 ? null : this.schedule.push(x));
     console.log(this.schedule);
@@ -111,6 +112,10 @@ public s_5: any = 'star-outline';
   sendReview(){
     let index = this.generateUUID();
     let reviewer = firebase.auth().currentUser.uid;
+
+    if(this.activity_data.cost == undefined) this.activity_data.cost = 0;
+    if(this.activity_data.class_price == undefined) this.activity_data.class_price = 0;
+    if(this.activity_data.type == undefined) this.activity_data.type = 0;
 
     let review = {'stars': this.stars_number, 'details': this.detalles, 'reviewer': reviewer, 'creator': this.activity_data.creator, 'activity': this.activity_data, 'date': new Date(), 'index': index};
     this.af.list('Reviews').update(index, review);
