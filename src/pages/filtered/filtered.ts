@@ -187,7 +187,7 @@ public done_a: any = false;
 
    if(this.type == 'All Events') this.activities_all = this.activities_all.filter( act => act.isEvent);
    else if (this.type == 'All Activities') this.activities_all = this.activities_all.filter( act => !act.isEvent);
-   else this.activities_all = this.activities_all.filter( act => act.tipo == this.type || act.categories.activity_type == this.type );
+   else this.activities_all = this.activities_all.filter( act => act.tipo == this.type || (act.categories && act.categories.activity_type == this.type ));
 
 
    // if(!this.done_a){

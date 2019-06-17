@@ -43,6 +43,7 @@ export class HomePage {
 
   public location_loader: any;
   public present_loader: any = true;
+  public people$: any;
 
   constructor(public navCtrl: NavController,
   public navParams: NavParams,
@@ -316,7 +317,7 @@ export class HomePage {
 
     if(!this.done_a){
       this.done_a = true;
-      this.location_loader.present();
+      //this.location_loader.present();
       let vm = this;
       for(let i=0; i < this.activities.length; i++){
        ///this.activities[i] = this.activities[i];
@@ -433,7 +434,7 @@ export class HomePage {
      if(keyA > keyB) return 1;
      return 0;
     });
-    aux = aux.filter(a => a.distance_number > 0 && a.distance_number < 20);
+    //aux = aux.filter(a => a.distance_number < 20);
     return aux;
   }
 
@@ -594,12 +595,26 @@ export class HomePage {
     });
   }
 
+  getName(clave){
+    let p = this.people$;
+    for(let key in p){
+      if(p[key].index == clave) {
+        console.log(p[key]);
+        return p[key].business.business_name;
+    }
+  }
+    return '';
+  }
+
   ionViewDidLoad() {
     this.general_loader = this.loadingCtrl.create({
       spinner: 'bubbles',
       content: 'Loading...'
     });
     this.general_loader.present();
+    this.af.object('Users').snapshotChanges().subscribe(action => {
+      this.people$ = action.payload.val();
+    });
     this.af.object('Users/'+firebase.auth().currentUser.uid).snapshotChanges().subscribe(action => {
       this.users$ = action.payload.val();
       this.noms_balance = this.users$.noms;

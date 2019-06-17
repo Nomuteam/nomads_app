@@ -29,6 +29,7 @@ export class EditeventPage {
  public isClan: any = false;
  public GoogleAutocomplete: any = new google.maps.places.AutocompleteService();
  public autocompleteItems: any = [];
+ public date_changed: any = false;
 
   constructor( public navCtrl: NavController,
     public navParams: NavParams,
@@ -43,6 +44,7 @@ export class EditeventPage {
      if(this.navParams.get('Clan')) this.isClan = true;
 
      this.event_data = this.navParams.get('Event');
+     console.log(this.event_data);
   }
 
   sanitizeThis(image){
@@ -56,6 +58,7 @@ export class EditeventPage {
   }
 
   updateSearchResults(){
+    console.log('cambiando');
   if (this.event_data.location == '') {
     this.autocompleteItems = [];
     return;
@@ -110,6 +113,10 @@ export class EditeventPage {
     let indice = this.event_data.index;
     this.event_data.creator = firebase.auth().currentUser.uid;
     this.event_data.media = [];
+    if(this.date_changed){
+      this.event_data.nomads = [];
+    }
+
 
     this.af.list('Users/'+firebase.auth().currentUser.uid+'/Events').update(indice, {
       'index': indice,

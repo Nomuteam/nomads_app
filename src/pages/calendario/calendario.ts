@@ -188,9 +188,13 @@ export class CalendarioPage {
     for(let key in b){
       if(this.isMine(b[key].index)){
         if(b[key].schedule){
+          console.log(b[key]);
           for(let lla in b[key].schedule){
-            let n = b[key].nomads.filter( a => this.hacerCosa(a.date, this.markStart(b[key].schedule[lla].day, b[key].schedule[lla].start_time)));
-            let spaces = Object.keys(n).length;
+            let n = '';
+            if(b[key].nomads){
+              n = b[key].nomads.filter( a => this.hacerCosa(a.date, this.markStart(b[key].schedule[lla].day, b[key].schedule[lla].start_time)));
+              let spaces = Object.keys(n).length;
+            }
             this.activities_all.push({
               'title': b[key].title.substring(0, 10) + '..',
               'title_complete': b[key].title + n +'/' + b[key].schedule[lla].spaces_available + ' spaces',

@@ -340,8 +340,11 @@ public time_helper: any = [
   getName(clave){
     let p = this.people$;
     for(let key in p){
-      if(p[key].index == clave) return p[key].first_name + ' ' + p[key].last_name;
+      if(p[key].index == clave) {
+        console.log(p[key]);
+        return p[key].business.business_name;
     }
+  }
     return '';
   }
 

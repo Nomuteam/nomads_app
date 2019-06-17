@@ -91,6 +91,15 @@ export class NewactPage {
     {
       'title': 'Functional Training'
     },
+    {
+      'title': 'Cardio'
+    },
+    {
+      'title': 'Movement'
+    },
+    {
+      'title': 'Martial Arts'
+    },
   ];
   public example_forms: any = [
     {

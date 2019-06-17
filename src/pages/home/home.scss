@@ -17,6 +17,26 @@ page-home {
     position: relative;
   }
 
+  .explore-all3{
+    border-radius: 30px;
+    width: 80%;
+    margin-left: 10%;
+    //margin-top: -2vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    background-color: #1BBF80;
+    padding: 3%;
+    font-family: 'Custom';
+    font-weight: 700!important;
+    color: white;
+    .explore{
+     font-weight: 700;
+     font-size: 140%;
+    }
+  }
+
   .explore-all2{
     border-radius: 30px;
     width: 60%;
@@ -367,6 +387,17 @@ page-home {
         padding-left: 2%;
         margin-top: -7%;
       }
+      .act-creator{
+        font-family: 'Custom';
+        font-weight: 700!important;
+        font-size: 70%;
+        color: white;
+        //border: 1px solid red;
+        text-align: left;
+        padding-left: 2%;
+        margin-top: -8%;
+        opacity: .8;
+      }
       .act-distance{
         font-family: 'Custom';
         font-weight: 600!important;
@@ -375,7 +406,7 @@ page-home {
         //border: 1px solid red;
         text-align: left;
         padding-left: 2%;
-        margin-top: -8%;
+        margin-top: -6%;
         text-transform: uppercase;
         color: #A8A8A8;
         opacity: 1;

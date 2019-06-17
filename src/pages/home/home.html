@@ -17,9 +17,12 @@
     </ion-buttons> -->
     <p class="title">Home</p>
   </ion-navbar>
-  <div class="explore-all2">
+  <!-- <div class="explore-all2">
     <div (click)="openBrowse('activities')" class="explore">Browse All</div>
-  </div>
+  </div> -->
+  <ion-fab (click)="openFilters()" right top>
+   <button ion-fab color="purple"><ion-icon name="ios-switch"></ion-icon></button>
+ </ion-fab>
 </ion-header>
 
 <ion-content padding class="home-page">
@@ -66,7 +69,7 @@
    <button (click)="openBrowse()" type="button" name="button" class="green-btn">Browse all</button>
   </div> -->
 
-  <div class="category-container" style="margin-top: 13%;">
+  <div class="category-container">
    <div (click)="openAll('Best Rated Activities')" class="category-title best">Best Rated Activities</div>
    <!-- <p *ngIf="this.getRated().length == 0" class="category-suggestions">You'll best rated activities</p> -->
    <ion-slides slidesPerView="1.6">
@@ -74,6 +77,7 @@
       <div class="img-slide" [style.background-image]="sanitizeThis(a.img)"></div>
       <p class="act-first">{{a.categories.activity_type}} - {{a.distance}}</p>
       <p class="act-title">{{a.title}}</p>
+      <p class="act-creator">By: {{this.getName(a.creator)}}</p>
       <p class="act-distance">{{a.class_price}} noms</p>
       <p class="act-rating">{{a.review}} <ion-icon name="star" color="white"></ion-icon> / ({{a.reviews.length}})</p>
     </ion-slide>
@@ -88,6 +92,7 @@
       <div class="img-slide" [style.background-image]="sanitizeThis(a.img)"></div>
       <p class="act-first">{{a.categories.activity_type}} - {{a.distance}} - {{a.next_time}}</p>
       <p class="act-title">{{a.title}}</p>
+        <p class="act-creator">By: {{this.getName(a.creator)}}</p>
       <p class="act-distance">{{a.class_price}} noms</p>
       <p class="act-rating">{{a.review}} <ion-icon name="star" color="white"></ion-icon> / ({{a.reviews.length}})</p>
     </ion-slide>
@@ -102,6 +107,7 @@
       <div class="img-slide" [style.background-image]="sanitizeThis(a.img)"></div>
       <p class="act-first">{{a.categories.activity_type}} - {{a.distance}}</p>
       <p class="act-title">{{a.title}}</p>
+      <p class="act-creator">By: {{this.getName(a.creator)}}</p>
       <p class="act-distance">{{a.class_price}} noms</p>
       <p class="act-rating">{{a.review}} <ion-icon name="star" color="white"></ion-icon> / ({{a.reviews.length}})</p>
     </ion-slide>
@@ -149,6 +155,7 @@
       <div class="img-slide" [style.background-image]="sanitizeThis(a.img)"></div>
       <p class="act-first">{{a.categories.activity_type}}  - {{a.distance}}</p>
       <p class="act-title">{{a.title}}</p>
+      <p class="act-creator">By: {{this.getName(a.creator)}}</p>
       <p class="act-distance">{{a.class_price}} noms</p>
       <p class="act-rating">{{a.review}} <ion-icon name="star" color="white"></ion-icon> / ({{a.reviews.length}})</p>
     </ion-slide>
@@ -163,6 +170,7 @@
       <div class="img-slide" [style.background-image]="sanitizeThis(a.img)"></div>
       <p class="act-first">{{a.categories.activity_type}}  - {{a.distance}}</p>
       <p class="act-title">{{a.title}}</p>
+      <p class="act-creator">By: {{this.getName(a.creator)}}</p>
       <p class="act-distance">{{a.class_price}} noms</p>
       <p class="act-rating">{{a.review}} <ion-icon name="star" color="white"></ion-icon> / ({{a.reviews.length}})</p>
     </ion-slide>
@@ -183,9 +191,17 @@
   </ion-slides>
   </div> -->
 
-  <ion-fab (click)="openFilters()" right bottom>
+  <!-- <ion-fab (click)="openFilters()" right top>
    <button ion-fab color="purple"><ion-icon name="ios-switch"></ion-icon></button>
- </ion-fab>
+ </ion-fab> -->
 
 
 </ion-content>
+
+<ion-footer>
+ <ion-toolbar color="transparent">
+   <div class="explore-all3">
+     <div (click)="openBrowse('activities')" class="explore">Browse All</div>
+   </div>
+  </ion-toolbar>
+</ion-footer>

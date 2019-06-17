@@ -41,7 +41,7 @@
        <div class="jc-container">
          <div class="input-group">
            <p class="input-title">Day</p>
-            <ion-item><ion-datetime displayFormat="MM/DD/YYYY" pickerFormat="MM DD YYYY" placeholder="Day/Month" [(ngModel)]="event_data.day"></ion-datetime></ion-item>
+            <ion-item><ion-datetime displayFormat="MM/DD/YYYY" pickerFormat="MM DD YYYY" placeholder="Day/Month" [(ngModel)]="event_data.day" (ngModelChange)="date_changed = true"></ion-datetime></ion-item>
          </div>
 
          <div class="input-group">

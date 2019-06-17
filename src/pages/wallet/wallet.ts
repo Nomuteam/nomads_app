@@ -32,6 +32,12 @@ public noms_balance: any = [];
 public user_type: any='';
 public example_packages: any = [
   {
+    'noms': 20,
+    'bookings_avg': 10,
+    'price': 400,
+    'selected': false
+  },
+  {
     'noms': 50,
     'bookings_avg': 10,
     'price': 1000,
@@ -599,7 +605,13 @@ public reported: any = false;
           handler: () =>{
             this.watchLink();
           }
-        }
+        },
+        {
+          text: 'Cancel',
+          handler: () =>{
+            //this.watchLink();
+          }
+        },
       ]
     }).present();
   }

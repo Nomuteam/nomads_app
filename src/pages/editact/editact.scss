@@ -2,6 +2,9 @@ page-editact {
   .walk-page{
     background-color: #0C0C0C;
     //border: 2px solid white;
+    ion-item{
+      color: white!important;
+    }
     .walk-title{
       font-family: 'Custom';
       color: white;
@@ -66,6 +69,7 @@ page-editact {
          ion-item{
            width: auto;
            border: none!important;
+           color: white!important;
            border-bottom: 1px solid transparent;
          }
          .item-inner{
