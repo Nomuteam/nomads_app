@@ -110,7 +110,7 @@ export class CalendarPage {
   }
 
   shareGeneral(act){
-    this.socialSharing.share('Hey Everybody! I joined '+act.title_complete+'. Join Me on nōmu!', 'Nomads!')
+    this.socialSharing.share('Hey Everybody! I joined '+act.title_complete+'. Join Me on nōmu! http://onelink.to/gztekd', 'Nomads!')
         .then((entries) =>{
           console.log('success ', +JSON.stringify(entries));
         })

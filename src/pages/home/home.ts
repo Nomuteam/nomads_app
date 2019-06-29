@@ -242,9 +242,11 @@ export class HomePage {
 
     console.log(this.events);
 
-    let today  = moment();
+    let today  = moment().subtract(1, 'days');
     let hoy = moment().format('dddd');
-    this.events = this.events.filter( event => event.day == hoy || !moment(event.day).isBefore(today));
+    console.log(hoy);
+    console.log(this.events)
+    this.events = this.events.filter( event => moment().format(event.day, 'dddd') == hoy || !moment(event.day).isBefore(today));
     console.log(this.events.length);
 
     if(!this.done_e){
@@ -276,6 +278,15 @@ export class HomePage {
 
     if(this.general_loader) this.general_loader.dismiss();
     this.getFavorites();
+  }
+
+  getReviewsLength(re){
+    if(re.length != 0){
+      return Object.keys(re).length;
+    }
+    else{
+      return 0;
+    }
   }
 
   convertActivities(){
@@ -599,7 +610,7 @@ export class HomePage {
     let p = this.people$;
     for(let key in p){
       if(p[key].index == clave) {
-        console.log(p[key]);
+        //console.log(p[key]);
         return p[key].business.business_name;
     }
   }

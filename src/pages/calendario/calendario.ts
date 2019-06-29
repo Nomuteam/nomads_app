@@ -192,7 +192,8 @@ export class CalendarioPage {
           for(let lla in b[key].schedule){
             let n = '';
             if(b[key].nomads){
-              n = b[key].nomads.filter( a => this.hacerCosa(a.date, this.markStart(b[key].schedule[lla].day, b[key].schedule[lla].start_time)));
+              console.log(b[key].nomads);
+              //n = b[key].nomads.filter( a => this.hacerCosa(a.date, this.markStart(b[key].schedule[lla].day, b[key].schedule[lla].start_time)));
               let spaces = Object.keys(n).length;
             }
             this.activities_all.push({

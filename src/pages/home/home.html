@@ -79,7 +79,7 @@
       <p class="act-title">{{a.title}}</p>
       <p class="act-creator">By: {{this.getName(a.creator)}}</p>
       <p class="act-distance">{{a.class_price}} noms</p>
-      <p class="act-rating">{{a.review}} <ion-icon name="star" color="white"></ion-icon> / ({{a.reviews.length}})</p>
+      <p class="act-rating">{{a.review}} <ion-icon name="star" color="white"></ion-icon> / ({{getReviewsLength(a.reviews)}})</p>
     </ion-slide>
   </ion-slides>
   </div>
@@ -94,7 +94,7 @@
       <p class="act-title">{{a.title}}</p>
         <p class="act-creator">By: {{this.getName(a.creator)}}</p>
       <p class="act-distance">{{a.class_price}} noms</p>
-      <p class="act-rating">{{a.review}} <ion-icon name="star" color="white"></ion-icon> / ({{a.reviews.length}})</p>
+      <p class="act-rating">{{a.review}} <ion-icon name="star" color="white"></ion-icon> / ({{getReviewsLength(a.reviews)}})</p>
     </ion-slide>
   </ion-slides>
   </div>
@@ -109,7 +109,7 @@
       <p class="act-title">{{a.title}}</p>
       <p class="act-creator">By: {{this.getName(a.creator)}}</p>
       <p class="act-distance">{{a.class_price}} noms</p>
-      <p class="act-rating">{{a.review}} <ion-icon name="star" color="white"></ion-icon> / ({{a.reviews.length}})</p>
+      <p class="act-rating">{{a.review}} <ion-icon name="star" color="white"></ion-icon> / ({{getReviewsLength(a.reviews)}})</p>
     </ion-slide>
   </ion-slides>
   </div>
@@ -157,12 +157,12 @@
       <p class="act-title">{{a.title}}</p>
       <p class="act-creator">By: {{this.getName(a.creator)}}</p>
       <p class="act-distance">{{a.class_price}} noms</p>
-      <p class="act-rating">{{a.review}} <ion-icon name="star" color="white"></ion-icon> / ({{a.reviews.length}})</p>
+      <p class="act-rating">{{a.review}} <ion-icon name="star" color="white"></ion-icon> / ({{getReviewsLength(a.reviews)}})</p>
     </ion-slide>
   </ion-slides>
   </div>
 
-  <div class="category-container">
+  <!-- <div class="category-container">
    <div (click)="openAll('Special Offers')" class="category-title green">Special Offers</div>
    <p *ngIf="this.getSpecial().length == 0" class="category-suggestions">There are no special offers currently!</p>
    <ion-slides slidesPerView="1.6">
@@ -172,10 +172,10 @@
       <p class="act-title">{{a.title}}</p>
       <p class="act-creator">By: {{this.getName(a.creator)}}</p>
       <p class="act-distance">{{a.class_price}} noms</p>
-      <p class="act-rating">{{a.review}} <ion-icon name="star" color="white"></ion-icon> / ({{a.reviews.length}})</p>
+      <p class="act-rating">{{a.review}} <ion-icon name="star" color="white"></ion-icon> / ({{getReviewsLength(a.reviews)}})</p>
     </ion-slide>
   </ion-slides>
-  </div>
+  </div> -->
 
 
   <!-- <div class="category-container">
@@ -201,7 +201,7 @@
 <ion-footer>
  <ion-toolbar color="transparent">
    <div class="explore-all3">
-     <div (click)="openBrowse('activities')" class="explore">Browse All</div>
+     <div (click)="openBrowse('activities')" class="explore">Search All</div>
    </div>
   </ion-toolbar>
 </ion-footer>

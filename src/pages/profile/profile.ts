@@ -63,7 +63,7 @@ public noms_balance: any;
   }
 
   shareGeneral(){
-    this.socialSharing.share('Hey! Join me on nōmu and get amazing gifts with my invitation code. Download the app and use my code: '+this.user_data.my_code, 'Nomads!')
+    this.socialSharing.share('Hey! Join me on nōmu and get amazing gifts with my invitation code. Download the app and use my code: '+this.user_data.my_code+' http://onelink.to/gztekd', 'Nomads!')
         .then((entries) =>{
           console.log('success ', +JSON.stringify(entries));
         })

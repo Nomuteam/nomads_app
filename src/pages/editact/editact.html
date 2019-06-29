@@ -44,17 +44,22 @@
      </div>
 
      <div class="input-group">
+       <p class="input-title">Useful Notes / What is Provided / Recommendations</p>
+       <textarea rows="4" type="text" class="input-field" [(ngModel)]="activity_data.useful_notes" placeholder="(Yoga mats, Transport, Food, Water, etc..)"></textarea>
+     </div>
+
+     <div class="input-group">
        <p class="input-title">Cancelation Policy (hours)</p>
        <input type="tel" class="input-field" [(ngModel)]="activity_data.cancelation_policy">
      </div>
 
      <div class="input-group">
-       <p class="input-title">Price in MXN</p>
+       <p class="input-title">Single Class Price in MXN</p>
        <input type="tel" class="input-field" [(ngModel)]="activity_data.fee" (ngModelChange)="activity_data.class_price = activity_data.fee/20">
      </div>
 
      <div class="input-group">
-       <p class="input-title">Class Price (Noms)</p>
+       <p class="input-title">Single Class Price (Noms)</p>
        <input disabled type="tel" class="input-field" [(ngModel)]="activity_data.class_price">
      </div>
 

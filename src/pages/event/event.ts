@@ -370,7 +370,7 @@ sharetoClans(){
   }
 
   shareGeneral(){
-    this.socialSharing.share('Hey Everybody! I just joined the event '+this.event_data.title_complete+'. Join Me on nōmu!', 'Nomads!')
+    this.socialSharing.share('Hey Everybody! I just joined the event '+this.event_data.title_complete+'. Join Me on nōmu! http://onelink.to/gztekd', 'Nomads!')
         .then((entries) =>{
           console.log('success ', +JSON.stringify(entries));
         })

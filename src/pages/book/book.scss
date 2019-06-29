@@ -111,21 +111,22 @@ page-book {
      justify-content: flex-start;
      align-items: center;
      width: 100%;
-     margin-bottom: 5%;
+     margin-bottom: 10%;
      .compartir{
        display: flex;
        flex-direction: column;
+       align-items: center;
        margin-right: 30px;
      }
      .share-text{
        font-family: 'Custom';
-       font-size: 80%;
+       font-size: 120%;
        font-weight: 700;
      }
      .share{
        padding: 3%;
-       width: 50px;
-       height: 50px;
+       width: 80px;
+       height: 80px;
        border-radius: 50%;
      }
      .facebook{

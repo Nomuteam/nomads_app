@@ -46,7 +46,6 @@ public general_loader: any;
     this.type = localStorage.getItem('Tipo');
     this.clan = this.navParams.get('Clan');
     console.log(this.clan);
-    if(this.clan.schedule.length != 0) this.getSchedule();
   }
 
   salirClan(){
@@ -101,6 +100,7 @@ public general_loader: any;
   }
 
   getSchedule(){
+    this.schedule = [];
     let a = this.clan.schedule;
     for(let key in a){
       this.schedule.push({
@@ -113,9 +113,9 @@ public general_loader: any;
         'title': a[key].title
       });
     }
-    console.log(this.schedule);
     let today  = moment().add(1, 'days');
     this.schedule = this.schedule.filter( event => !moment(event.date).isBefore(today));
+    console.log(this.schedule);
   }
 
   getName(indice){
@@ -132,7 +132,7 @@ public general_loader: any;
   }
 
   shareGeneral(){
-    this.socialSharing.share('Hey! I am member of the clan '+this.clan.name_complete+' with '+Object.keys(this.clan.members).length+' members. Join my clan on nōmu!', 'Nomads!')
+    this.socialSharing.share('Hey! I am member of the clan '+this.clan.name_complete+' with '+Object.keys(this.clan.members).length+' members. Join my clan on nōmu! http://onelink.to/gztekd', 'Nomads!')
         .then((entries) =>{
           console.log('success ', +JSON.stringify(entries));
         })
@@ -249,6 +249,7 @@ public general_loader: any;
           });
       }
 
+   if(this.clan.schedule.length != 0) this.getSchedule();
    if(this.general_loader) this.general_loader.dismiss();
    console.log(this.activities_all);
   }

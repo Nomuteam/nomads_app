@@ -72,7 +72,7 @@ public users_total: any = 0;
   }
 
   shareGeneral(){
-    this.socialSharing.share('Hey Everybody! I just joined '+this.activity_data.title_complete+' at '+this.selected_time+' on '+this.selected_day+'. Join Me on nōmu!', 'Nomads!')
+    this.socialSharing.share('Hey Everybody! I just joined '+this.activity_data.title_complete+' at '+this.selected_time+' on '+this.selected_day+'. Join Me on nōmu! http://onelink.to/gztekd', 'Nomads!')
         .then((entries) =>{
           console.log('success ', +JSON.stringify(entries));
         })
