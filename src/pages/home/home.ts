@@ -246,7 +246,7 @@ export class HomePage {
     let hoy = moment().format('dddd');
     console.log(hoy);
     console.log(this.events)
-    this.events = this.events.filter( event => moment().format(event.day, 'dddd') == hoy || !moment(event.day).isBefore(today));
+    this.events = this.events.filter( event => moment(event.day).format('dddd') == hoy || !moment(event.day).isBefore(today));
     console.log(this.events.length);
 
     if(!this.done_e){
