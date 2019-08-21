@@ -4,22 +4,45 @@
   See http://ionicframework.com/docs/components/#navigation for more info on
   Ionic pages and navigation.
 -->
-<ion-header>
+<!-- <ion-header>
   <ion-navbar color="black1">
     <p class="title">Your Activities</p>
   </ion-navbar>
-</ion-header>
+</ion-header> -->
 
 
-<ion-content padding>
+<ion-content>
+
+  <div class="justify-row">
+    <div class="title-page">Your services</div>
+    <!-- <div class="freeze">
+      <div class="f-title">
+        Freeze Day
+      </div>
+      <ion-toggle [(ngModel)]="freeze" (ngModelChange)="confirmFreeze()" checked="false" color="purple"></ion-toggle>
+    </div> -->
+  </div>
+
+  <div (click)="openTypes()" class="justify-center">
+    <div class="plus-sign">+</div>
+    <div class="plus-add">Add Service</div>
+  </div>
+
 
 <div *ngFor="let a of this.activities" (click)="confirmEdit(a)" class="activity-container" padding>
-  <div class="activity-title">{{a.title}}</div>
+  <img *ngIf="!studio" src="{{a.img}}" alt="">
+  <img *ngIf="studio" src="{{a.logo}}" alt="">
+  <div class="justify-column">
+    <div class="activity-title">{{a.title}}</div>
+    <div class="activity-title down">{{a.location}}</div>
+    <div class="activity-title type">Type: {{getTipo(a.isStudio, a.studio, a.isEvent)}}</div>
+  </div>
+
   <!-- <div class="activity-time">{{a.schedule[0].start_time}}</div> -->
 </div>
 
-<ion-fab (click)="openNew()" right bottom>
+<!-- <ion-fab (click)="openNew()" right bottom>
     <button ion-fab color="green"><ion-icon name="add" color="white"></ion-icon></button>
-</ion-fab>
+</ion-fab> -->
 
 </ion-content>

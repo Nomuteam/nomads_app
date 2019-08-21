@@ -41,6 +41,8 @@ import { TutorialPage } from '../pages/tutorial/tutorial';
 import { ReservationsPage } from '../pages/reservations/reservations';
 import { AllPage } from '../pages/all/all';
 import { CardPage } from '../pages/card/card';
+import { TypesPage } from '../pages/types/types';
+import { NewstudioPage } from '../pages/newstudio/newstudio';
 
 import { Keyboard } from '@ionic-native/keyboard';
 declare var OpenPay: any;

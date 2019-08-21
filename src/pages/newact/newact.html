@@ -51,7 +51,7 @@
      </div>
 
      <div class="input-group">
-       <p class="input-title">Useful Notes / What is Provided / Recommendations</p>
+       <p class="input-title">Recommendations</p>
        <textarea rows="4" type="text" class="input-field" [(ngModel)]="activity_data.useful_notes" placeholder="(Yoga mats, Transport, Food, Water, etc..)"></textarea>
      </div>
 
@@ -74,10 +74,10 @@
 </div>
 
 <div *ngIf="this.current_index == 1" class="container-datos w3-animate-right">
-  <p class="title-container">Main Category</p>
+  <!-- <p class="title-container">Main Category</p>
   <div class="likes-container">
       <div *ngFor="let c of this.example_cats; let in=index" (click)="addCategorie(c.name)" class="{{getCategorie(c.name)}}">{{c.name}}</div>
-  </div>
+  </div> -->
 
   <p class="title-container">Type of Activity</p>
   <div class="likes-container">
@@ -166,7 +166,7 @@
 
 <div *ngIf="this.current_index == 4" class="container-datos w3-animate-right">
 <p class="title-container">Upload Media</p>
-<div class="media-img"></div>
+<!-- <div class="media-img"></div> -->
 <div *ngFor="let m of this.activity_data.media; let in=index" (click)="confirmRF(in)" class="media-img" [style.background-image]="sanitizeThis(m.url)"></div>
 <button (click)="presentOptions()" type="button" class="add-btn" padding>+</button>
 </div>

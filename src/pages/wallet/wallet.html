@@ -5,7 +5,7 @@
   Ionic pages and navigation.
 -->
 <ion-header>
-  <ion-navbar color="black1">
+  <ion-navbar color="transparent">
     <ion-buttons *ngIf="this.user_type == 'nomads'" start style="margin-left: 3%!important;">
      <!-- <div class="circles-noms">
        <div class="div1"></div>
@@ -29,9 +29,9 @@
 </ion-header>
 
 
-<ion-content padding>
+<ion-content padding class="wallet-page">
 
- <div class="card-container">
+ <div class="card-container" *ngIf="this.user_type != 'nomads'">
   <div class="card-top-container" padding>
    <div class="items-container">
      <div class="balance-hint">Current Balance</div>
@@ -50,28 +50,6 @@
  </div>
 
  <div *ngIf="this.user_type == 'nomads'">
-   <div class="buy-hint">Select any amount you wish to buy</div>
-   <div class="amounts-container">
-     <div class="amount-container">
-       <div class="input-group">
-         <p class="input-title">Set amount of Cash</p>
-         <input (click)="cash = ''" placeholder="$" type="text" class="input-field" [(ngModel)]="cash" (ngModelChange)="noms = cash/20">
-       </div>
-       <!-- <div class="amount-hint">Amount of cash</div>
-       <div class="amount-text" contenteditable="true">$0</div> -->
-     </div>
-     <div class="amount-container" style="margin-left: 3%;">
-       <div class="input-group">
-         <p class="input-title">Amount of Noms</p>
-         <input disabled type="text" class="input-field" [(ngModel)]="noms">
-       </div>
-       <!-- <div class="amount-hint">Amount of NOMS</div>
-       <div class="amount-text">{{95}}</div> -->
-     </div>
-   </div>
-   <div class="booking-avg"><b>{{this.getMenor()}}</b> to <b>{{this.getMayor()}}</b> bookings</div>
-
-   <button [disabled]="!canPay()" (click)="selectCard()" type="button" class="pay-btn" padding>Get NOMS</button>
 
    <div class="buy-hint">Packages</div>
 
@@ -86,6 +64,7 @@
             <div class="div3"></div>
           </div>
         </div>
+        <div class="offer">Special Offer!</div>
         <div class="btm-slide">
           <!-- <div class="bookings-avg">{{s.bookings_avg}} Bookings avg.</div> -->
           <div class="slide-price">$ {{s.price}} MXN</div>
@@ -93,6 +72,33 @@
       </div>
      </ion-slide>
    </ion-slides>
+
+
+   <div class="buy-hint">Or select any amount</div>
+   <div class="amounts-container">
+
+     <div class="amount-container" style="margin-left: 3%;">
+       <div class="input-group">
+         <p class="input-title">Amount of Noms</p>
+         <input (click)="noms = ''" placeholder="NOMs" (ngModelChange)="cash = noms*20" type="text" class="input-field" [(ngModel)]="noms">
+       </div>
+       <!-- <div class="amount-hint">Amount of NOMS</div>
+       <div class="amount-text">{{95}}</div> -->
+     </div>
+
+
+     <div class="amount-container">
+       <div class="input-group">
+         <p class="input-title">Amount of Cash</p>
+         <input (click)="cash = ''" placeholder="$" type="text" class="input-field" [(ngModel)]="cash" (ngModelChange)="noms = cash/20">
+       </div>
+       <!-- <div class="amount-hint">Amount of cash</div>
+       <div class="amount-text" contenteditable="true">$0</div> -->
+     </div>
+   </div>
+   <div class="booking-avg"><b>{{this.getMenor()}}</b> to <b>{{this.getMayor()}}</b> bookings</div>
+
+   <button [disabled]="!canPay()" (click)="selectCard()" type="button" class="pay-btn" padding>Pay NOMS</button>
  </div>
 
  <div *ngIf="this.user_type == 'allies'">

@@ -26,7 +26,8 @@ public user_type: any;
 
   getClass(number){
     let aux = 'div' + number;
-    return ( this.circles_color != 'purple' && this.user_type == 'nomads' ? aux+' green' : aux);
+    return aux+' green';
+    // return ( this.circles_color != 'purple' && this.user_type == 'nomads' ? aux+' green' : aux);
   }
 
   ionViewDidLoad() {

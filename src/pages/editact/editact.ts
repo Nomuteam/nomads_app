@@ -310,6 +310,7 @@ export class EditactPage {
          'start_time': a.start_time,
          'duration': a.duration,
          'spaces_available': a.spaces_available,
+         'space': a.space,
          'gender': a.gender,
          'level': a.level,
          'min_age': a.min_age,
@@ -408,7 +409,7 @@ export class EditactPage {
       return (this.activity_data.title != '' && this.activity_data.location != '' && this.activity_data.description != '' && this.activity_data.cancelation_policy != '' && this.activity_data.class_price != '');
     }
     else if(this.current_index == 1){
-      return (this.activity_data.categories.main_category != '' && this.activity_data.categories.activity_type  != '' && this.activity_data.categories.workout_form  != '')
+      return ( this.activity_data.categories.activity_type  != '' && this.activity_data.categories.workout_form  != '')
     }
     else if(this.current_index == 3){
       return (this.activity_data.schedule.length > 0);

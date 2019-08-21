@@ -11,7 +11,7 @@ page-activity {
   .main-card{
     //height: 50vh;
     background-color: rgba(74, 74, 74, .3);
-    border-radius: 15px;
+    //border-radius: 15px;
     font-family: 'Custom';
     color: white;
     position: relative;
@@ -173,20 +173,27 @@ page-activity {
   }
   .section-title{
     font-family: 'Custom';
+    font-size: 130%;
     color: rgba(255, 255, 255, .8);
-    border-bottom: 1px solid rgba(255, 255, 255, .3);
+    //border-bottom: 1px solid rgba(255, 255, 255, .3);
     font-weight: 700;
-    margin-bottom: 2%;
+    //margin-bottom: 2%;
+    background-color: rgba(74, 74, 74, .3);
+    padding: 3%;
+    padding-left: 6%;
   }
   .description-area{
     font-family: 'Custom';
-    color: rgba(255, 255, 255, .6);
-    font-weight: 90%;
+    color: rgba(255, 255, 255, .7);
+    font-size: 110%;
     font-weight: 400;
     max-height: 25%;
     overflow: hidden;
     margin-bottom: 5%;
+    background-color: rgba(74, 74, 74, .3);
     //border: 1px solid red;
+    padding: 3%;
+    padding-left: 5%;
   }
 
   .friends-container{
@@ -195,6 +202,7 @@ page-activity {
     flex-wrap: wrap;
     align-items: center;
     margin-bottom: 5%;
+    background-color: rgba(74, 74, 74, .3);
 
     .friend{
       display: flex;
@@ -235,6 +243,9 @@ page-activity {
     font-family: 'Custom';
     color: white;
     padding: 3%;
+    padding-left: 5%;
+    background-color: rgba(74, 74, 74, .3);
+    //border: 1px solid red;
     .row-day{
       font-weight: 700;
       margin-bottom: 1em;
@@ -286,7 +297,10 @@ page-activity {
     color: rgba(255, 255, 255, .6);
     font-weight: 90%;
     font-weight: 400;
-    width: 60%;
+    //width: 60%;
+    background-color: rgba(74, 74, 74, .3);
+    padding: 3%;
+    padding-left: 6%;
   }
 
   .scroll {

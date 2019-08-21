@@ -11,6 +11,51 @@ page-newevent {
       color: white!important;
     }
 
+    .week-days{
+      padding: 2%;
+      //margin-top: 5%;
+      //margin-bottom: 5%;
+      flex-wrap: wrap;
+    }
+
+    .day{
+      border-radius: 12px;
+      padding: .6em;
+      border: 2px solid #7D29FB;
+      background-color: #7D29FB;
+    }
+
+    .no{
+     border: none!important;
+     background: transparent;
+    }
+
+    .title-page{
+      font-size: 130%;
+    }
+
+    .types-row{
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      flex-wrap: wrap;
+      margin-top: 5%;
+      .type{
+        color: white;
+        font-size: 120%;
+        padding: .8em;
+        border-radius: 12px;
+        border: 1px solid white;
+        margin: 1.2em;
+        width: 30vw;
+        text-align: center;
+      }
+      .selected{
+        border: none!important;
+        background-color: #7D29FB;
+      }
+    }
+
     .next-btn{
       width: 95%;
       padding: 5%;
@@ -199,8 +244,9 @@ page-newevent {
       .input-group{
         padding-top: 1%;
         .input-title{
-          font-size: 90%;
-          color: rgba(255, 255, 255, .5);
+          font-size: 120%;
+          font-weight: 700;
+          color: rgba(255, 255, 255, 1);
         }
         .input-field{
           color: white;

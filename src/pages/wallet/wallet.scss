@@ -1,4 +1,15 @@
 page-wallet {
+  .wallet-page{
+    background: linear-gradient(#640C8B, #0C0C0C 90%)!important;
+  }
+
+  ion-header{
+      border: none!important;
+    ion-navbar{
+      border: none!important;
+    }
+  }
+
   .circles-noms{
     width: 8vw;
     position: relative;
@@ -103,10 +114,10 @@ page-wallet {
 
   .buy-hint{
     font-family: 'Custom';
-    font-size: 110%;
-    font-weight: 400!important;
+    font-size: 160%;
+    font-weight: 700!important;
     color: white;
-    margin-top: 5%;
+    margin-top: 8%;
   }
 
   .gold{
@@ -153,8 +164,8 @@ page-wallet {
       .input-group{
         padding-top: 1%;
         .input-title{
-          font-size: 90%;
-          color: rgba(255, 255, 255, .5);
+          font-size: 95%;
+          color: rgba(255, 255, 255, 1);
         }
         .input-field{
           color: white;
@@ -240,6 +251,11 @@ page-wallet {
            font-weight: 700!important;
            color: white;
          }
+       }
+       .offer{
+         color: white;
+         font-weight: 700;
+         font-size: 60%;
        }
        .btm-slide{
          height: 40%;

@@ -55,6 +55,12 @@ import { TutorialPage } from '../pages/tutorial/tutorial';
 import { ReservationsPage } from '../pages/reservations/reservations';
 import { AllPage } from '../pages/all/all';
 import { CardPage } from '../pages/card/card';
+import { DayPage } from '../pages/day/day';
+import { TypesPage } from '../pages/types/types';
+import { NewstudioPage } from '../pages/newstudio/newstudio';
+import { StudioPage } from '../pages/studio/studio';
+import { EditstudioPage } from '../pages/editstudio/editstudio';
+import { AttendantsPage } from '../pages/attendants/attendants';
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
@@ -124,7 +130,13 @@ import { FIREBASE_CONFIG } from './firebase.credentials';
     TutorialPage,
     ReservationsPage,
     AllPage,
-    CardPage
+    CardPage,
+    DayPage,
+    TypesPage,
+    NewstudioPage,
+    StudioPage,
+    EditstudioPage,
+    AttendantsPage
   ],
   imports: [
     NgCalendarModule,
@@ -191,7 +203,13 @@ import { FIREBASE_CONFIG } from './firebase.credentials';
     TutorialPage,
     ReservationsPage,
     AllPage,
-    CardPage
+    CardPage,
+    DayPage,
+    TypesPage,
+    NewstudioPage,
+    StudioPage,
+    EditstudioPage,
+    AttendantsPage
   ],
   providers: [
     StatusBar,

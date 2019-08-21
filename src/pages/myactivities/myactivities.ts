@@ -6,6 +6,11 @@ import firebase from 'firebase';
 import { ActivityPage } from '../activity/activity';
 import { EditactPage } from '../editact/editact';
 import * as moment from 'moment';
+import { TypesPage } from '../types/types';
+import { StudioPage } from '../studio/studio';
+import { EditeventPage } from '../editevent/editevent';
+import { EventPage } from '../event/event';
+import { EditstudioPage } from '../editstudio/editstudio';
 
 /**
  * Generated class for the MyactivitiesPage page.
@@ -21,7 +26,13 @@ import * as moment from 'moment';
 })
 export class MyactivitiesPage {
 public response$: any;
+public responseS$: any;
+public responseE$: any;
+
 public activities: any = [];
+public studios: any = [];
+public events: any = [];
+
 public general_loader: any;
 
   constructor(public navCtrl: NavController,
@@ -31,33 +42,139 @@ public general_loader: any;
   public alertCtrl: AlertController) {
   }
 
+  openTypes(){
+    this.navCtrl.push(TypesPage);
+  }
+
+  getTipo(ess, studio, tipo){
+    return tipo ? 'Event' : ess ? 'Studio' : studio != '' ? 'Studio activity' : 'Singular activity';
+  }
+
+  addStudio(acti){
+    let alert = this.alertCtrl.create();
+    alert.setTitle('Add activity to studio');
+
+    for(let key in this.studios){
+      alert.addInput({
+        type: 'radio',
+        label: this.studios[key].title,
+        value: this.studios[key].index,
+        checked: false
+      });
+    }
+
+    alert.addButton('Cancel');
+    alert.addButton({
+      text: 'Add',
+      handler: data => {
+        console.log(data);
+        this.af.list('Activities').update(acti.index, {
+          'studio': data
+        });
+        this.af.list('Studios/'+data+'/activities').update(acti.index, {
+          'index': acti.index
+        });
+      }
+    });
+    alert.present();
+  }
+
   confirmEdit(act){
-    this.alertCtrl.create({
-      title: 'What would you like to do?',
-      message:  'You can view, edit or remove this activity.',
-      buttons: [
-        {
-          text: 'View',
-          handler: () => {
-            this.openActivity(act);
-          }
-        },
-        {
-          text: 'Edit',
-          handler: () => {
-           this.navCtrl.push(EditactPage, {'Act': act});
-          }
-        },
-        {
-          text: 'Remove',
-          role: 'destructive',
-          handler: () => {
-           if(!this.checkNomdas(act)) this.confirmRemove(act);
-           else this.alertCtrl.create({title: 'There are nomads signed', message: 'You cant delete this activity now', buttons: ['Ok']}).present();
-          }
-        },
-      ]
-    }).present();
+    if(!act.isEvent){
+      if(!act.isStudio){
+        this.alertCtrl.create({
+          title: 'What would you like to do?',
+          message:  'You can view, edit or remove this activity.',
+          buttons: [
+            {
+              text: 'View',
+              handler: () => {
+                this.openActivity(act);
+              }
+            },
+            {
+              text: 'Edit',
+              handler: () => {
+               this.navCtrl.push(EditactPage, {'Act': act});
+              }
+            },
+            {
+              text: 'Add to Studio',
+              handler: () => {
+                this.addStudio(act);
+               //this.navCtrl.push(EditactPage, {'Act': act});
+              }
+            },
+            {
+              text: 'Remove',
+              role: 'destructive',
+              handler: () => {
+               if(!this.checkNomdas(act)) this.confirmRemove(act);
+               else this.alertCtrl.create({title: 'There are nomads signed', message: 'You cant delete this activity now', buttons: ['Ok']}).present();
+              }
+            },
+          ]
+        }).present();
+      }
+      else{
+        this.alertCtrl.create({
+          title: 'What would you like to do?',
+          message:  'You can view, edit or remove this studio.',
+          buttons: [
+            {
+              text: 'View',
+              handler: () => {
+                this.navCtrl.push(StudioPage, {'Studio': act});
+                //this.openActivity(act);
+              }
+            },
+            {
+              text: 'Edit',
+              handler: () => {
+                this.navCtrl.push(EditstudioPage, {'Studio': act});
+               //this.navCtrl.push(EditactPage, {'Act': act});
+              }
+            },
+            {
+              text: 'Remove',
+              role: 'destructive',
+              handler: () => {
+               if(!this.checkNomdas(act)) this.confirmRemove(act);
+               else this.alertCtrl.create({title: 'There are nomads signed', message: 'You cant delete this activity now', buttons: ['Ok']}).present();
+              }
+            },
+          ]
+        }).present();
+      }
+    }
+    else if(act.isEvent){
+      this.alertCtrl.create({
+        title: 'What would you like to do?',
+        message:  'You can view, edit or remove this event.',
+        buttons: [
+          {
+            text: 'View',
+            handler: () => {
+              this.navCtrl.push(EventPage, {'Event': act});
+            }
+          },
+          {
+            text: 'Edit',
+            handler: () => {
+             this.navCtrl.push(EditeventPage, {'Event': act});
+            }
+          },
+          {
+            text: 'Remove',
+            role: 'destructive',
+            handler: () => {
+             if(!this.checkNomdas(act)) this.confirmRemove(act);
+             else this.alertCtrl.create({title: 'There are nomads signed', message: 'You cant delete this activity now', buttons: ['Ok']}).present();
+            }
+          },
+        ]
+      }).present();
+    }
   }
 
   confirmRemove(act){
@@ -115,16 +232,110 @@ public general_loader: any;
         'index':  a[key].index,
         'isEvent': false,
         'review': (a[key].review ? a[key].review : 5),
-        'reviews': (a[key].reviews ? a[key].reviews : [])
+        'reviews': (a[key].reviews ? a[key].reviews : []),
+        'studio': (a[key].studio ? a[key].studio : '')
       });
     }
+    this.getStudios();
     this.activities = this.activities.filter( a => a.creator == firebase.auth().currentUser.uid);
-    this.general_loader.dismiss();
     console.log(this.activities);
   }
 
   openActivity(actividad){
     this.navCtrl.push(ActivityPage, {'Activity': actividad});
+  }
+
+  getUnique(arr, comp) {
+
+  const unique = arr
+       .map(e => e[comp])
+
+     // store the keys of the unique objects
+    .map((e, i, final) => final.indexOf(e) === i && i)
+
+    // eliminate the dead keys & store unique objects
+    .filter(e => arr[e]).map(e => arr[e]);
+
+   return unique;
+}
+
+  convertEvents(){
+    let a = this.responseE$;
+    for(let key in a){
+      if(a[key].creator == firebase.auth().currentUser.uid){
+      this.activities.push({
+        'title': a[key].title.substring(0, 10) + '..',
+        'title_complete': a[key].title,
+        'location': a[key].location,
+        'difficulty':  a[key].difficulty,
+        'img':  a[key].img,
+        'cost':  a[key].cost,
+        'about_event':  a[key].about_event,
+        'provided':  a[key].provided,
+        'about_organizer':  a[key].about_organizer,
+        'type':  a[key].type,
+        'allDay': false,
+        'time': a[key].time,
+        'nomads': (a[key].nomads != undefined ? a[key].nomads : []),
+        'creator':  a[key].creator,
+        'index':  a[key].index,
+        // 'media': a[key].media,
+        'isEvent': true,
+        'review':( a[key].review ? a[key].review : 5),
+        'reviews': (a[key].reviews ? a[key].reviews : []),
+        'spaces_available': a[key].spaces_available ? a[key].spaces_available : 0
+      })
+    }
+    }
+    this.activities = this.getUnique(this.activities, 'index');
+    this.general_loader.dismiss();
+  }
+
+  getEvents(){
+    this.af.object('Events').snapshotChanges().subscribe(action => {
+      this.responseE$ = action.payload.val();
+      this.events = [];
+      this.convertEvents();
+    });
+  }
+
+  convertStudios(){
+    let s = this.responseS$;
+    for(let key in s){
+      if(s[key].creator == firebase.auth().currentUser.uid){
+        this.activities.push({
+          'amenities': s[key].amenities,
+          'closing': s[key].closing,
+          'creator': s[key].creator,
+          'description': s[key].description,
+          'index': s[key].index,
+          'location': s[key].location,
+          'logo': s[key].logo,
+          'membership_cost': s[key].membership_cost,
+          'title': s[key].name,
+          'opening': s[key].opening,
+          'schedule': s[key].schedule,
+          'useful_notes': s[key].useful_notes,
+          'isStudio': true,
+          'activities': (s[key].activities ? s[key].activities : [])
+        });
+        this.studios.push({
+          'title': s[key].name,
+          'index': s[key].index
+        });
+      }
+    }
+
+    this.getEvents();
+    console.log(this.activities);
+  }
+
+  getStudios(){
+    this.af.object('Studios').snapshotChanges().subscribe(action => {
+      this.responseS$ = action.payload.val();
+      this.studios = [];
+      this.convertStudios();
+    });
   }
 
 

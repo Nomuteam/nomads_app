@@ -7,15 +7,21 @@
 <ion-header>
   <ion-navbar color="black1">
     <p class="title">Event</p>
-    <ion-buttons *ngIf="isOwner()" end>
+    <!-- <ion-buttons *ngIf="isOwner()" end>
       <ion-icon color="white" name="create-outline" style="margin-right: 5%;"></ion-icon>
+    </ion-buttons> -->
+    <ion-buttons (click)="presentActionSheet()" *ngIf="isOwner()" end>
+
+     <button ion-button icon-only>
+       <ion-icon style="background-color: black!important; box-shadow: none!important;" name="md-more" color="white"></ion-icon>
+     </button>
     </ion-buttons>
   </ion-navbar>
 </ion-header>
 
 
 
-<ion-content padding>
+<ion-content>
   <div class="main-card">
     <img (click)="changeFav()" *ngIf="!isFavorite()" src="assets/img/heart.png" class="heart">
     <img (click)="changeFav()" *ngIf="isFavorite()" src="assets/img/hearth_filled.png" class="heart">

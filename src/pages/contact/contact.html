@@ -20,9 +20,9 @@
 
 <ion-content>
 
-  <ion-fab (click)="openFilters()" right top>
+  <!-- <ion-fab (click)="openFilters()" right top>
    <button ion-fab mini color="purple"><ion-icon name="ios-switch"></ion-icon></button>
- </ion-fab>
+ </ion-fab> -->
 
   <div #map id="map"></div>
 
@@ -39,10 +39,10 @@
         <div class="text">Nearby and Upcoming</div>
         <!-- <div class="text hint">Classes and Events</div> -->
       </div>
-      <div class="number">{{this.filtered_a.length}}</div>
+      <div class="number">{{this.getUpcoming().length}}</div>
     </div>
     <ion-slides [hidden]="this.class_slides" slidesPerView="2.5">
-     <ion-slide *ngFor="let a of this.filtered_a" (click)="seeDetails(a)">
+     <ion-slide *ngFor="let a of this.getUpcoming()" (click)="seeDetails(a)">
        <img src="{{a.img}}" class="img-slide">
        <!-- <div class="img-slide" [style.background-image]="sanitizeThis(a.img)"></div> -->
        <p class="act-title">{{a.title}}</p>

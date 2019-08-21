@@ -112,6 +112,20 @@ public filtered_a: any = [];
    return false;
  }
 
+ getUpcoming(){
+   let aux = this.activities_all.filter(act => act.next_time != 'not today' && !act.isEvent);
+   aux = aux.sort(function(a, b){
+    var keyA = a.next_remaining,
+        keyB = b.next_remaining;
+    // Compare the 2 dates
+    if(keyA < keyB) return -1;
+    if(keyA > keyB) return 1;
+    return 0;
+   });
+   //aux = aux.filter(a => a.distance_number < 20);
+   return aux;
+ }
+
  applyFilters(){
    let cats = this.user_preferences.categories.filter(c => c.selected);
    let days = this.user_preferences.days.filter(d => d.selected);

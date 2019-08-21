@@ -1,5 +1,5 @@
 import { Component, ViewChild, ElementRef } from '@angular/core';
-import { IonicPage, NavController, NavParams, LoadingController, AlertController, ModalController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, LoadingController, AlertController, ModalController, ActionSheetController } from 'ionic-angular';
 declare var google;
 import { Geolocation } from '@ionic-native/geolocation';
 import { FiltersPage } from '../filters/filters';
@@ -65,7 +65,8 @@ public chats_index: any = [];
     public sanitizer: DomSanitizer,
     public modalCtrl: ModalController,
     public socialSharing: SocialSharing,
-    public launchNavigator: LaunchNavigator) {
+    public launchNavigator: LaunchNavigator,
+    public actionSheetCtrl: ActionSheetController) {
       this.event_data = this.navParams.get('Event');
       console.log(this.event_data);
   }
@@ -110,6 +111,33 @@ public chats_index: any = [];
 
  spacesA(){
   return parseInt(this.event_data.spaces_available) > 0;
+}
+
+presentActionSheet(){
+  const actionSheet = this.actionSheetCtrl.create({
+title: 'Choose an Option',
+buttons: [
+  {
+    text: 'Edit Event',
+    handler: () => {
+      //this.shareGeneral(e);
+    }
+  },
+  {
+    text: 'See Reservations',
+    handler: () => {
+      //this.goNavigate(e.location)
+    }
+  },{
+    text: 'Back',
+    role: 'cancel',
+    handler: () => {
+      console.log('Cancel clicked');
+    }
+  }
+]
+});
+actionSheet.present();
 }
 
 confirmShare(){

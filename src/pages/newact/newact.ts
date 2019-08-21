@@ -194,7 +194,8 @@ export class NewactPage {
        'workout_form': [],
      },
      'schedule': [],
-     'media': []
+     'media': [],
+     'studio': ''
    };
 
   public schedule: any = {
@@ -220,7 +221,9 @@ export class NewactPage {
     public camera: Camera,
     public sanitizer: DomSanitizer,
     public modalCtrl: ModalController) {
-
+     this.activity_data.studio = localStorage.getItem('studio-index');
+     console.log(this.activity_data.studio);
+     if(this.navParams.get('location')) this.activity_data.location = this.navParams.get('location');
   }
 
   goOut(){
@@ -345,6 +348,7 @@ export class NewactPage {
          'start_time': a.start_time,
          'duration': a.duration,
          'spaces_available': a.spaces_available,
+         'space': a.space,
          'gender': a.gender,
          'level': a.level,
          'min_age': a.min_age,
@@ -444,7 +448,7 @@ export class NewactPage {
       return (this.activity_data.title != '' && this.activity_data.location != '' && this.activity_data.description != '' && this.activity_data.cancelation_policy != '' && this.activity_data.class_price != '');
     }
     else if(this.current_index == 1){
-      return (this.activity_data.categories.main_category != '' && this.activity_data.categories.activity_type  != '' && this.activity_data.categories.workout_form  != '')
+      return (this.activity_data.categories.activity_type  != '' && this.activity_data.categories.workout_form  != '')
     }
     else if(this.current_index == 3){
       return (this.activity_data.schedule.length > 0);
@@ -455,7 +459,7 @@ export class NewactPage {
   doMagic(){
     if(this.activity_data.media.length == 0){
       this.activity_data.media.push({
-        'url': 'https://images.pexels.com/photos/685534/pexels-photo-685534.jpeg?cs=srgb&dl=athletes-endurance-energy-685534.jpg&fm=jpg'
+        'url': 'https://firebasestorage.googleapis.com/v0/b/dev-nomads.appspot.com/o/nomu%20blanco%20333%20(1).png?alt=media&token=54ee504d-91b8-4eaf-a637-27e59a3de25b'
       });
     }
     this.activity_data.img = this.activity_data.media[0].url;
@@ -470,12 +474,14 @@ export class NewactPage {
     });
     this.af.list('Activities').update(indice, this.activity_data)
       .then( () =>{
+        if(this.activity_data.studio != '') localStorage.removeItem('studio-index');
         this.general_loader.dismiss();
         this.alertCtrl.create({
           title: 'Activity Created',
           message: 'Your activity was created succesfully',
           buttons: ['Ok']
         }).present();
+        localStorage.setItem('studio-act', JSON.stringify(this.activity_data));
         this.navCtrl.pop();
       })
   }

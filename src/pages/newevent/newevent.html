@@ -5,49 +5,40 @@
   Ionic pages and navigation.
 -->
 <ion-header>
-  <ion-navbar color="black1">
-    <ion-buttons *ngIf="type == 'nomads'" start style="margin-left: 3%!important;">
-     <!-- <div class="circles-noms">
-       <div class="div1"></div>
-       <div class="div2"></div>
-       <div class="div3"></div></div> -->
-     <!-- <p class="noms-hint">Noms</p>
-     <p class="noms-qty">{{this.noms_balance}}</p> -->
-    </ion-buttons>
-    <ion-buttons *ngIf="type == 'nomads'" (click)="openFilters()" end>
-     <!-- <div class="filters-noms">
-       <div class="div1"></div>
-       <div class="div2"></div>
-       <div class="div3"></div>
-     </div> -->
-     <!-- <button ion-button icon-only>
-       <ion-icon name="ios-options" color="white"></ion-icon>
-     </button> -->
-    </ion-buttons>
-    <p class="title">New Event</p>
+  <ion-navbar hideBackButton color="black1">
+    <ion-buttons (click)="goOut()" start>
+     <button ion-button icon-only color="white">
+       <ion-icon name="ios-arrow-back"></ion-icon>
+        Exit
+     </button>
+   </ion-buttons>
+    <p class="title" style="margin-left: -5%;">New Experience</p>
   </ion-navbar>
 </ion-header>
 
 
 <ion-content padding>
+
+  <div *ngIf="this.current_index == 0" class="container-datos w3-animate-right">
+    <div class="title-page">Main Category</div>
+
+    <div class="types-row">
+      <div (click)="changeTypeE('retreat')" class="{{getClassType('retreat')}}">Retreat</div>
+      <!-- <div (click)="changeTypeE('resort')" class="{{getClassType('resort')}}">Resort</div> -->
+      <div (click)="changeTypeE('event')" class="{{getClassType('event')}}">Event</div>
+      <div (click)="changeTypeE('adventure')" class="{{getClassType('adventure')}}">Adventure</div>
+    </div>
+
+    <button [disabled]="!canAdvance()" (click)="this.current_index = 1" type="button" class="next-btn">Next</button>
+  </div>
+
+
   <div *ngIf="this.current_index == 1" class="container-datos w3-animate-right">
 
      <div class="card-container">
        <div class="input-group">
-         <p class="input-title">Event Name</p>
+         <p class="input-title">Name</p>
          <input type="text" class="input-field" [(ngModel)]="event_data.title">
-       </div>
-
-       <div class="jc-container">
-         <div class="input-group">
-           <p class="input-title">Day</p>
-            <ion-item><ion-datetime displayFormat="MM/DD/YYYY" pickerFormat="MM DD YYYY" placeholder="Day/Month" [(ngModel)]="event_data.day"></ion-datetime></ion-item>
-         </div>
-
-         <div class="input-group">
-           <p class="input-title">Start Time</p>
-           <ion-item><ion-datetime displayFormat="h:mm A" pickerFormat="H mm" placeholder="06:00" [(ngModel)]="event_data.time"></ion-datetime></ion-item>
-         </div>
        </div>
 
        <div class="input-group">
@@ -71,7 +62,7 @@
        </div> -->
 
        <div class="input-group">
-         <p class="input-title">About the Event</p>
+         <p class="input-title">About it</p>
          <textarea rows="4" type="text" class="input-field" [(ngModel)]="event_data.about_event"></textarea>
        </div>
 
@@ -97,13 +88,13 @@
          </div>
        </div>
 
-       <div *ngIf="!isClan" class="input-group">
+       <!-- <div *ngIf="!isClan" class="input-group">
          <p class="input-title">Type of Event</p>
          <div class="types-container">
            <div (click)="changeType('public')" class="{{getType('public')}}">Public</div>
            <div (click)="changeType('private')" class="{{getType('private')}}">Private</div>
          </div>
-       </div>
+       </div> -->
 
      <button [disabled]="!canAdvance()" (click)="this.current_index = 2" type="button" class="next-btn">Next</button>
      </div>
@@ -111,8 +102,38 @@
   </div>
 
   <div *ngIf="this.current_index == 2" class="container-datos w3-animate-right">
+    <div class="title-page">Select Date</div>
+    <div class="card-container">
+      <div class="input-group">
+        <p class="input-title">Day</p>
+         <ion-item><ion-datetime displayFormat="MM/DD/YYYY" pickerFormat="MM DD YYYY" placeholder="Day/Month" [(ngModel)]="event_data.day"></ion-datetime></ion-item>
+      </div>
+
+
+      <div class="jc-container">
+        <div class="input-group">
+          <p class="input-title">Start Time</p>
+          <ion-item><ion-datetime displayFormat="h:mm A" pickerFormat="H mm" placeholder="06:00" [(ngModel)]="event_data.time"></ion-datetime></ion-item>
+        </div>
+        <div class="input-group">
+          <p class="input-title">Ending Time</p>
+          <ion-item><ion-datetime displayFormat="h:mm A" pickerFormat="H mm" placeholder="06:00"></ion-datetime></ion-item>
+        </div>
+      </div>
+    </div>
+
+    <div class="title-page">Does this experience repeat on a weekly basis?</div>
+    <div class="week-days">
+      <div *ngFor="let d of this.days; let in = index">
+        <div class="{{getClass(d.selected)}}" (click)="changeSelected(in)">{{d.ab}}</div>
+      </div>
+    </div>
+         <button [disabled]="!canAdvance()" (click)="this.current_index = 3" type="button" class="next-btn">Next</button>
+  </div>
+
+  <div *ngIf="this.current_index == 3" class="container-datos w3-animate-right">
   <p class="title-container">Upload Media</p>
-  <div class="media-img"></div>
+  <!-- <div class="media-img"></div> -->
   <div *ngFor="let m of this.event_data.media" class="media-img" [style.background-image]="sanitizeThis(m.url)"></div>
   <button (click)="presentOptions()" type="button" class="add-btn" padding>+</button>
 

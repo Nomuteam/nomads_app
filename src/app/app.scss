@@ -19,6 +19,55 @@ input{
  border-radius: 0!important;
 }
 
+.justify-row{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8%;
+}
+
+.no-mg{
+  justify-content: space-around;
+  margin-bottom: 0;
+}
+
+.freeze{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  .f-title{
+    font-family: 'Custom';
+    font-size: 80%;
+    font-weight: 400!important;
+    color: rgba(255, 255, 255, 1);
+  }
+}
+
+.week-days{
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  overflow-x: scroll;
+  margin-bottom: 5%;
+  .day{
+    font-weight: 700;
+    color: white;
+  }
+  .no{
+    opacity: .5;
+  }
+}
+
+.title-page{
+  font-family: 'Custom';
+  font-size: 200%;
+  font-weight: 700!important;
+  color: rgba(255, 255, 255, 1);
+  text-align: left;
+  margin-left: 5%;
+  margin-top: 5%;
+}
+
 ion-grid {
       min-height: 100%!important;
      }
@@ -62,8 +111,8 @@ ion-navbar{
       border-radius: 50%;
       // width: 25px;
       padding: 5px;
-      background-color: #007C6E;
-      box-shadow: 0px 0px 5px #007C6E;
+      //background-color: #007C6E;
+      //box-shadow: 0px 0px 5px #007C6E;
     }
     .cancel-hint{
       font-family: 'Montserrat', sans-serif;

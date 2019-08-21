@@ -1,0 +1,102 @@
+<!--
+  Generated template for the StudioPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+  <ion-navbar color="transparent">
+    <p class="title">Studio</p>
+  </ion-navbar>
+</ion-header>
+
+
+<ion-content>
+
+  <div class="main-card">
+
+    <ion-slides>
+      <ion-slide >
+    <div class="cover-gradient1">
+      <div class="class-title">{{this.studio_data.title}} <br>
+      <div class="class-creator">Open from: {{this.studio_data.opening}} till {{this.studio_data.closing}}</div>
+    </div>
+    <div class="cover-gradient2"></div>
+    <div class="cover-img" [style.background-image]="sanitizeThis(this.studio_data.logo)"></div>
+    </div>
+  </ion-slide>
+</ion-slides>
+
+    <div class="main-info">
+        <ion-segment color="purple" [(ngModel)]="segment">
+          <ion-segment-button value="info">
+            Info
+         </ion-segment-button>
+         <ion-segment-button value="classes">
+           Activities
+         </ion-segment-button>
+       </ion-segment>
+
+    </div>
+  </div>
+
+  <div *ngIf="segment == 'info'">
+
+    <div class="section-title">Description</div>
+    <div class="description-area">
+      {{this.studio_data.description}}
+    </div>
+
+    <div class="section-title">Amenities</div>
+    <div class="description-area">
+      {{this.studio_data.amenities}}
+    </div>
+
+    <div class="section-title">Useful Notes</div>
+    <div class="description-area">
+      {{this.studio_data.useful_notes}}
+    </div>
+
+    <div class="section-title" style="margin-top: 5%;">Location</div>
+    <div class="location-row">
+      <div (click)="goNavigate()" class="location-hint">{{this.studio_data.location}}</div>
+      <div (click)="goNavigate()" class="location-btn">Take me There!</div>
+    </div>
+
+  </div>
+
+  <div *ngIf="segment == 'classes'">
+    <div *ngIf="this.studio_data.activities.length == 0" class="section-title" style="margin-top: 5%;">There are no activities created in this studio yet!</div>
+    <div *ngIf="this.studio_data.activities.length != 0">
+      <div class="week-days">
+        <div *ngFor="let d of this.days">
+          <div class="{{getClass(d.number)}}" (click)="changeSelected(d.number)">{{d.ab}}</div>
+        </div>
+      </div>
+
+      <div class="day-area">
+        <div *ngFor="let a of this.activities">
+          <div class="day-element" *ngIf="isSameDay(a.startTime)">
+            <div class="scheduled-container">
+               <img src="{{a.img}}">
+               <div class="text-area">
+                 <div class="text-title">{{a.title}}</div>
+                 <div class="text-time">{{a.categories.activity_type}}</div>
+               </div>
+               <div (click)="presentActionSheet(a)" class="green-btn">Click for More</div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+
+    <!-- <div #map id="map"></div> -->
+
+
+
+
+
+</ion-content>

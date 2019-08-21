@@ -16,6 +16,8 @@ declare var google;
 import { Geolocation } from '@ionic-native/geolocation';
 import { MyeventsPage } from '../myevents/myevents';
 import { AllPage } from '../all/all';
+import { DayPage } from '../day/day';
+import { StudioPage } from '../studio/studio';
 
 @Component({
   selector: 'page-home',
@@ -23,6 +25,8 @@ import { AllPage } from '../all/all';
 })
 export class HomePage {
   public response$: any;
+  public responses$: any;
+  public responsec$: any;
   public activities: any = [];
   public activities_d: any = [];
   public favorites: any;
@@ -44,6 +48,9 @@ export class HomePage {
   public location_loader: any;
   public present_loader: any = true;
   public people$: any;
+  public studios: any = [];
+  public my_clans: any = [];
+  public schedule: any = [];
 
   constructor(public navCtrl: NavController,
   public navParams: NavParams,
@@ -86,14 +93,23 @@ export class HomePage {
 
   }
 
+  getClanS(){
+    return [];
+  }
+
+
 
   openFiltered(tipo){
     this.navCtrl.push(FilteredPage, {'Tipo': tipo});
   }
 
+  openDay(){
+    this.navCtrl.push(DayPage, {'Activities': this.activities});
+  }
+
   openAll(tipo){
     if(tipo == 'Best Rated Activities') this.navCtrl.push(AllPage, {'Tipo': tipo, 'Acts': this.getRated()});
-    else if(tipo == 'Nearby and Upcoming') this.navCtrl.push(AllPage, {'Tipo': tipo, 'Acts': this.getUpcoming()});
+    else if(tipo == "Nearby and Upcoming") this.navCtrl.push(AllPage, {'Tipo': "Today's Activities", 'Acts': this.getUpcoming()});
     else if(tipo == 'Suggestions for you') this.navCtrl.push(AllPage, {'Tipo': tipo, 'Acts': this.filtered_a});
     else if(tipo == 'Your Favorites') this.navCtrl.push(AllPage, {'Tipo': tipo, 'Acts': this.favoritos});
     else if(tipo == 'Events') this.navCtrl.push(AllPage, {'Tipo': tipo, 'Acts': this.events});
@@ -195,7 +211,7 @@ export class HomePage {
          if (status !== google.maps.DistanceMatrixStatus.OK) {
              console.log('Error:', status);
          } else {
-           //console.log(response);
+           console.log(response);
            if(response.rows[0].elements[0].distance.value){
              result = response.rows[0].elements[0].distance.value;
              result2 = response.rows[0].elements[0].distance.text;
@@ -204,7 +220,7 @@ export class HomePage {
            else{
              location.reload();
            }
-           //vm.activities_all[p].distance = response.rows[0].elements[0].distance.value;
+           vm.activities_all[p].distance = response.rows[0].elements[0].distance.value;
            }
      });
 
@@ -242,11 +258,12 @@ export class HomePage {
 
     console.log(this.events);
 
-    let today  = moment().subtract(1, 'days');
+    let today  = moment();
     let hoy = moment().format('dddd');
     console.log(hoy);
+    // this.events = this.events.filter( event => moment(event.day).format('dddd') == hoy || !moment(event.day).isBefore(today));
+    this.events = this.events.filter( event => !moment(event.day).isBefore(today) );
     console.log(this.events)
-    this.events = this.events.filter( event => moment(event.day).format('dddd') == hoy || !moment(event.day).isBefore(today));
     console.log(this.events.length);
 
     if(!this.done_e){
@@ -496,6 +513,34 @@ export class HomePage {
     this.navCtrl.push(EventPage, {'Event': event});
   }
 
+  openStudio(studio){
+    this.navCtrl.push(StudioPage, {'Studio': studio});
+  }
+
+
+  convertStudios(){
+    let s = this.responses$;
+    for(let key in s){
+      this.studios.push({
+        'amenities': s[key].amenities,
+        'closing': s[key].closing,
+        'creator': s[key].creator,
+        'description': s[key].description,
+        'index': s[key].index,
+        'location': s[key].location,
+        'logo': s[key].logo,
+        'membership_cost': s[key].membership_cost,
+        'title': s[key].name,
+        'opening': s[key].opening,
+        'schedule': s[key].schedule,
+        'useful_notes': s[key].useful_notes,
+        'isStudio': true,
+        'activities': (s[key].activities ? s[key].activities : [])
+      });
+    console.log(this.studios);
+  }
+}
+
 
   getActivities(){
     this.af.object('Activities').snapshotChanges().subscribe(action => {
@@ -507,6 +552,11 @@ export class HomePage {
       this.e_response$ = action.payload.val();
       this.events = [];
       this.convertEvents();
+    });
+    this.af.object('Studios').snapshotChanges().subscribe(action => {
+      this.responses$ = action.payload.val();
+      this.studios = [];
+      this.convertStudios();
     });
   }
 
@@ -606,15 +656,84 @@ export class HomePage {
     });
   }
 
-  getName(clave){
-    let p = this.people$;
-    for(let key in p){
-      if(p[key].index == clave) {
-        //console.log(p[key]);
-        return p[key].business.business_name;
+  isMember(miembros){
+    for(let key in miembros){
+      if(miembros[key].index == firebase.auth().currentUser.uid){
+        return true;
+      }
     }
+    return false;
   }
+
+  viewSchedule(){
+    this.navCtrl.parent.select(1);
+  }
+
+  getSchedule(){
+    let c = this.my_clans;
+    let a;
+    for(let lla in c){
+      if(c[lla].schedule){
+        a = c[lla].schedule;
+        for(let key in a){
+          this.schedule.push({
+            'date': a[key].date,
+            'day': a[key].day,
+            'index': a[key].index,
+            'name': this.getName(a[key].nomad_index),
+            'nomad_index': a[key].nomad_index,
+            'time': a[key].time,
+            'title': a[key].title
+          });
+        }
+      }
+    }
+    let today  = moment().add(1, 'days');
+    this.schedule = this.schedule.filter( event => !moment(event.date).isBefore(today));
+    console.log(this.schedule);
+  }
+
+  getName(indice){
+    let u = this.people$;
+    for(let key in u){
+      if(u[key].index == indice) return u[key].first_name + ' ' + u[key].last_name;
+    }
     return '';
+  }
+
+  convertClans(){
+    let a = this.responsec$;
+    for(let key in a){
+      if(this.isMember(a[key].members)){
+        this.my_clans.push({
+          'name': (a[key].name.length > 14 ? a[key].name.substring(0, 13) + '..' : a[key].name),
+          'name_complete': a[key].name,
+          'location': a[key].location,
+          'description':  a[key].description,
+          'owner':  a[key].owner,
+          'rules':  a[key].rules,
+          'type':  a[key].type,
+          'secret_code':  a[key].secret_code,
+          'members':  a[key].members,
+          'members_n': Object.keys(a[key].members).length,
+          'img':  a[key].img,
+          'index':  a[key].index,
+          'schedule': (a[key].schedule ? a[key].schedule : [])
+        });
+      }
+    }
+    //this.general_loader.dismiss();
+    this.getSchedule();
+    console.log(this.my_clans);
+  }
+
+
+  getClans(){
+    this.af.object('Clans').snapshotChanges().subscribe(action => {
+      this.responsec$ = action.payload.val();
+      this.my_clans = [];
+      this.convertClans();
+    });
   }
 
   ionViewDidLoad() {
@@ -632,6 +751,7 @@ export class HomePage {
       this.favorites = this.users$.favorites;
     });
     this.getActivities();
+      this.getClans();
   }
 
   openBrowse(segmento){

@@ -29,6 +29,8 @@ public general_loader: any;
 
 public mail: any = '';
 public pw: any = '';
+public pw_type = 'password';
+public pw_text = 'View';
 
   constructor(
     public navCtrl: NavController,
@@ -38,6 +40,10 @@ public pw: any = '';
     public loadingCtrl: LoadingController,
     public alertCtrl: AlertController) {
     this.user_type = this.navParams.get('User');
+  }
+
+  getText(){
+    return this.pw_type == 'password' ? 'View' : 'Hide';
   }
 
   ionViewDidLoad() {

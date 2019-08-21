@@ -24,13 +24,13 @@
        <ion-icon name="ios-options" color="white"></ion-icon>
      </button> -->
     </ion-buttons>
-    <p class="title">My Events</p>
+    <p class="title">My Experiences</p>
   </ion-navbar>
 </ion-header>
 
 
 <ion-content padding>
- <button (click)="openNew()" type="button" class="new-event" padding>New Event</button>
+ <button (click)="openNew()" type="button" class="new-event" padding>New Experience</button>
 
  <div (click)="confirmEdit(e)" class="event-element" *ngFor="let e of this.events">
      <div class="user-img" [style.background-image]="sanitizeThis(e.img)"></div>

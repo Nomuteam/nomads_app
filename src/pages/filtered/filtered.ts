@@ -232,7 +232,14 @@ public done_a: any = false;
       content: 'Loading...'
     });
     this.general_loader.present();
-    this.getEvents();
+    if(!this.navParams.get('Activities')){
+     this.getEvents();
+    }
+    else{
+      this.activities_all = this.navParams.get('Activities');
+      console.log(this.activities_all);
+      this.general_loader.dismiss();
+    }
   }
 
   openFilters(){

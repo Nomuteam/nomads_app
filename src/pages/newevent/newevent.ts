@@ -24,26 +24,75 @@ declare var google;
 export class NeweventPage {
  public general_loader: any;
  public type: any;
- public current_index: any = 1;
+ public current_index: any = 0;
  public event_data: any = {
    'title': '',
    'day': '',
    'time': '',
    'location': '',
    'difficulty': '',
-   'img': 'https://images.pexels.com/photos/1246953/pexels-photo-1246953.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260',
+   'img': 'https://firebasestorage.googleapis.com/v0/b/dev-nomads.appspot.com/o/nomu%20blanco%20333%20(1).png?alt=media&token=54ee504d-91b8-4eaf-a637-27e59a3de25b',
    'about_event': '',
    'provided': '',
    'about_organizer': '',
    'spaces_available': '',
-   'cost': '0',
+   'cost': '',
    'type': 'public',
    'media': [],
-   'nomads': []
+   'nomads': [],
+   'e_type': '',
+   'repeats': ''
  }
  public isClan: any = false;
  public GoogleAutocomplete: any = new google.maps.places.AutocompleteService();
  public autocompleteItems: any = [];
+
+ public days: any = [
+   {
+     'day': 'Monday',
+     'ab': 'Mon',
+     'selected': false,
+     'number': 0
+   },
+   {
+     'day': 'Tuesday',
+     'ab': 'Tue',
+     'selected': false,
+     'number': 1
+   },
+   {
+     'day': 'Wednesday',
+     'ab': 'Wed',
+     'selected': false,
+     'number': 2
+   },
+   {
+     'day': 'Thursday',
+     'ab': 'Thu',
+     'selected': false,
+     'number': 3
+   },
+   {
+     'day': 'Friday',
+     'ab': 'Fri',
+     'selected': false,
+     'number': 4
+   },
+   {
+     'day': 'Saturday',
+     'ab': 'Sat',
+     'selected': false,
+     'number': 5
+   },
+   {
+     'day': 'Sunday',
+     'ab': 'Sun',
+     'selected': false,
+     'number': 6
+   },
+ ]
+
+ public e_type: any = '';
 
   constructor( public navCtrl: NavController,
     public navParams: NavParams,
@@ -58,8 +107,44 @@ export class NeweventPage {
      if(this.navParams.get('Clan')) this.isClan = true;
   }
 
+  getClass(element){
+    return element ? 'day' : 'day no';
+  }
+
+  changeSelected(indice){
+   this.days[indice].selected ? this.days[indice].selected = false : this.days[indice].selected = true;
+  }
+
+  goOut(){
+    this.alertCtrl.create({
+      title: 'Warning',
+      message: 'Do you want to quit creating this activity?',
+      buttons: [{
+        text: 'Cancel',
+        handler: () => {
+
+        }
+      },
+      {
+        text: 'Exit',
+        handler: () => {
+          this.navCtrl.pop();
+        }
+      }
+     ]
+   }).present();
+  }
+
   sanitizeThis(image){
     return this.sanitizer.bypassSecurityTrustStyle('url('+image+')');
+  }
+
+  getClassType(tipo){
+    return this.event_data.e_type == tipo ? 'type selected' : 'type';
+  }
+
+  changeTypeE(tipo){
+    this.event_data.e_type = tipo;
   }
 
   selectSearchResult(item){
@@ -116,7 +201,15 @@ export class NeweventPage {
   }
 
   canAdvance(){
-    return this.event_data.title != '' && this.event_data.day != '' && this.event_data.location != '' && this.event_data.img != '' && this.event_data.about_event != '' && this.event_data.provided != '' && this.event_data.about_organizer != '' && this.event_data.spaces_available != '' && this.event_data.cost != '';
+    if(this.current_index == 0){
+      return this.event_data.e_type != '';
+    }
+    else if(this.current_index == 1){
+      return this.event_data.title != '' && this.event_data.location != '' && this.event_data.img != '' && this.event_data.about_event != '' && this.event_data.provided != '' && this.event_data.about_organizer != '' && this.event_data.spaces_available != '' && this.event_data.cost != '';
+    }
+    else if(this.current_index == 2){
+      return this.event_data.day != '' && this.event_data.time != '';
+    }
   }
 
   ionViewDidLoad() {

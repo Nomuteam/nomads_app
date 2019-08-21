@@ -55,12 +55,6 @@ public example_packages: any = [
     'price': 2000,
     'selected': false
   },
-  {
-    'noms': 120,
-    'bookings_avg': 16,
-    'price': 2400,
-    'selected': false
-  },
 ];
 public selected: any = 0;
 public cash: any = 0;

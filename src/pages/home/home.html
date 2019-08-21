@@ -20,9 +20,9 @@
   <!-- <div class="explore-all2">
     <div (click)="openBrowse('activities')" class="explore">Browse All</div>
   </div> -->
-  <ion-fab (click)="openFilters()" right top>
+  <!-- <ion-fab (click)="openFilters()" right top>
    <button ion-fab color="purple"><ion-icon name="ios-switch"></ion-icon></button>
- </ion-fab>
+ </ion-fab> -->
 </ion-header>
 
 <ion-content padding class="home-page">
@@ -70,22 +70,7 @@
   </div> -->
 
   <div class="category-container">
-   <div (click)="openAll('Best Rated Activities')" class="category-title best">Best Rated Activities</div>
-   <!-- <p *ngIf="this.getRated().length == 0" class="category-suggestions">You'll best rated activities</p> -->
-   <ion-slides slidesPerView="1.6">
-    <ion-slide (click)="openActivity(a)" *ngFor="let a of this.activities">
-      <div class="img-slide" [style.background-image]="sanitizeThis(a.img)"></div>
-      <p class="act-first">{{a.categories.activity_type}} - {{a.distance}}</p>
-      <p class="act-title">{{a.title}}</p>
-      <p class="act-creator">By: {{this.getName(a.creator)}}</p>
-      <p class="act-distance">{{a.class_price}} noms</p>
-      <p class="act-rating">{{a.review}} <ion-icon name="star" color="white"></ion-icon> / ({{getReviewsLength(a.reviews)}})</p>
-    </ion-slide>
-  </ion-slides>
-  </div>
-
-  <div class="category-container">
-   <div (click)="openAll('Nearby and Upcoming')" class="category-title blue">Nearby and Upcoming</div>
+   <div (click)="openAll('Nearby and Upcoming')" class="category-title blue">Today's Activities<small>View all</small></div>
    <p *ngIf="this.getUpcoming().length == 0" class="category-suggestions">You'll find the upcoming classes for today here</p>
    <ion-slides slidesPerView="1.6">
     <ion-slide (click)="openActivity(a)" *ngFor="let a of this.getUpcoming()">
@@ -100,10 +85,9 @@
   </div>
 
   <div class="category-container">
-   <div (click)="openAll('Suggestions for you')" class="category-title sug">Suggestions for you</div>
-   <p *ngIf="this.filtered_a.length == 0" class="category-suggestions">Add your preferences so we can suggest activities for you</p>
+   <div (click)="viewSchedule()" class="category-title best">Clan Schedule<small>View all</small></div>
    <ion-slides slidesPerView="1.6">
-    <ion-slide (click)="openActivity(a)" *ngFor="let a of this.filtered_a">
+    <ion-slide (click)="openActivity(a)" *ngFor="let a of this.getClanS()">
       <div class="img-slide" [style.background-image]="sanitizeThis(a.img)"></div>
       <p class="act-first">{{a.categories.activity_type}} - {{a.distance}}</p>
       <p class="act-title">{{a.title}}</p>
@@ -115,7 +99,37 @@
   </div>
 
   <div class="category-container">
-   <div (click)="openAll('Your Favorites')" class="category-title fav">Your Favorites</div>
+   <div class="category-title sug">Studios</div>
+
+   <ion-slides slidesPerView="1.6">
+    <ion-slide (click)="openStudio(a)" *ngFor="let a of this.studios">
+      <div class="img-slide" [style.background-image]="sanitizeThis(a.logo)"></div>
+      <p class="act-first">Studio</p>
+      <p class="act-title">{{a.title}}</p>
+      <p class="act-creator">{{a.amenities}}</p>
+      <p class="act-distance">{{a.membership_cost}} noms</p>
+      <p class="act-rating"> <ion-icon name="star" color="white"></ion-icon> </p>
+    </ion-slide>
+  </ion-slides>
+  </div>
+
+  <!-- <div class="category-container">
+   <div (click)="openAll('Suggestions for you')" class="category-title sug">Suggestions for you<small>View all</small></div>
+   <p *ngIf="this.filtered_a.length == 0" class="category-suggestions">Add your preferences so we can suggest activities for you</p>
+   <ion-slides slidesPerView="1.6">
+    <ion-slide (click)="openActivity(a)" *ngFor="let a of this.filtered_a">
+      <div class="img-slide" [style.background-image]="sanitizeThis(a.img)"></div>
+      <p class="act-first">{{a.categories.activity_type}} - {{a.distance}}</p>
+      <p class="act-title">{{a.title}}</p>
+      <p class="act-creator">By: {{this.getName(a.creator)}}</p>
+      <p class="act-distance">{{a.class_price}} noms</p>
+      <p class="act-rating">{{a.review}} <ion-icon name="star" color="white"></ion-icon> / ({{getReviewsLength(a.reviews)}})</p>
+    </ion-slide>
+  </ion-slides>
+  </div> -->
+
+  <div class="category-container">
+   <div (click)="openAll('Your Favorites')" class="category-title fav">Your Favorites<small>View all</small></div>
    <!-- <p class="category-suggestions">These are your favorite activities</p> -->
    <!-- <p *ngIf="this.favoritos.length == 0" class="category-suggestions">You don't have favorites yet!</p> -->
    <p *ngIf="this.favoritos.length == 0" class="category-suggestions">You don't have any favorite activities selected. Click on the heart to add them!</p>
@@ -148,7 +162,7 @@
   </div>
 
   <div class="category-container">
-   <div (click)="openAll('Experiences')" class="category-title rose">Experiences</div>
+   <div (click)="openAll('Experiences')" class="category-title rose">Experiences<small>View all</small></div>
       <p *ngIf="this.getExperiences().length == 0" class="category-suggestions">There are no experiences created currently!</p>
    <ion-slides slidesPerView="1.6">
     <ion-slide (click)="openActivity(a)" *ngFor="let a of this.getExperiences()">
@@ -200,8 +214,13 @@
 
 <ion-footer>
  <ion-toolbar color="transparent">
-   <div class="explore-all3">
-     <div (click)="openBrowse('activities')" class="explore">Search All</div>
+   <div class="justify-row no-mg">
+     <div class="explore-all3">
+       <div (click)="openDay()" class="explore">Day and Time</div>
+     </div>
+     <div class="explore-all3 purple">
+       <div (click)="openBrowse('activities')" class="explore">Explore Categories</div>
+     </div>
    </div>
   </ion-toolbar>
 </ion-footer>

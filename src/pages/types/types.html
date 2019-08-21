@@ -1,0 +1,42 @@
+<!--
+  Generated template for the TypesPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+
+<ion-content padding>
+
+  <div class="justify-row">
+    <div class="title-page">Type of service</div>
+  </div>
+
+  <div class="pick-hint">Pick One</div>
+
+  <div (click)="selectThis('1')" class="{{getClass('1')}}">
+    <div class="service-title">Fitness class</div>
+    <div class="service-description">Fixed schedule and determined availability</div>
+  </div>
+
+  <div (click)="selectThis('2')" class="{{getClass('2')}}">
+    <div class="service-title">Studio</div>
+    <div class="service-description">Multiple fitness classes within a same studio</div>
+  </div>
+
+  <div (click)="selectThis('3')" class="{{getClass('3')}}">
+    <div class="service-title">Experiences</div>
+    <div class="service-description">One time services that offer an unforgettable experience</div>
+  </div>
+
+  <!-- <div (click)="selectThis('3')" class="{{getClass('3')}}">
+    <div class="service-title">Health</div>
+    <div class="service-description">Healthy food, health centers, spas, massages</div>
+  </div> -->
+
+  <div class="jc-container">
+    <button (click)="back()" type="button" name="button" class="back-btn">Back</button>
+    <button [disabled]="!canAdvance()" (click)="next()" type="button" name="button" class="next-btn">Next</button>
+  </div>
+
+
+</ion-content>

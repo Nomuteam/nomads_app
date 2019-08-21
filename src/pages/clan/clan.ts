@@ -35,6 +35,7 @@ public people$: any;
 public activities_all: any = [];
 
 public general_loader: any;
+public segment: any = 'schedule';
 
   constructor(public navCtrl: NavController,
               public navParams: NavParams,

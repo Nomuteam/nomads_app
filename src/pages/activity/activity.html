@@ -14,7 +14,7 @@
 </ion-header>
 
 
-<ion-content padding class="activity-page">
+<ion-content class="activity-page">
 
   <div class="main-card">
     <img (click)="changeFav()" *ngIf="!isFavorite()" src="assets/img/heart.png" class="heart">
@@ -60,10 +60,10 @@
       </div>
     </div>
     <div class="ht-text">
-      <div class="hashtags">
+      <!-- <div class="hashtags">
         <div class="hashtag">#{{this.activity_data.categories.activity_type}}</div>
         <div *ngIf="this.activity_data.categories.workout_form" class="hashtag">#{{this.activity_data.categories.workout_form[0].title}}</div>
-      </div>
+      </div> -->
       <!-- <div class="share-btn">
         <img src="assets/img/share_icon.png">
       </div> -->

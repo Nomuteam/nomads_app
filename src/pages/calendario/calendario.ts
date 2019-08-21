@@ -9,6 +9,7 @@ import { WalletPage } from '../wallet/wallet';
 import { ActivityPage } from '../activity/activity';
 import { EventPage } from '../event/event';
 import { ReviewsPage } from '../reviews/reviews';
+import { AttendantsPage } from '../attendants/attendants';
 
 /**
  * Generated class for the CalendarPage page.
@@ -46,8 +47,54 @@ export class CalendarioPage {
 
  public past_events: any = [];
  public show_pop: any;
+ public reservations: any = [];
 
-
+ public days: any = [
+   {
+     'day': 'Monday',
+     'ab': 'Mon',
+     'selected': true,
+     'number': 0
+   },
+   {
+     'day': 'Tuesday',
+     'ab': 'Tue',
+     'selected': false,
+     'number': 1
+   },
+   {
+     'day': 'Wednesday',
+     'ab': 'Wed',
+     'selected': false,
+     'number': 2
+   },
+   {
+     'day': 'Thursday',
+     'ab': 'Thu',
+     'selected': false,
+     'number': 3
+   },
+   {
+     'day': 'Friday',
+     'ab': 'Fri',
+     'selected': false,
+     'number': 4
+   },
+   {
+     'day': 'Saturday',
+     'ab': 'Sat',
+     'selected': false,
+     'number': 5
+   },
+   {
+     'day': 'Sunday',
+     'ab': 'Sun',
+     'selected': false,
+     'number': 6
+   },
+ ]
+ public selected: any = 0;
+ public freeze: any = false;
 
   constructor(public navCtrl: NavController,
   public navParams: NavParams,
@@ -68,12 +115,59 @@ export class CalendarioPage {
       'allDay': false
     });
 
+    this.selected = this.cualHoy();
+
     this.alertCtrl.create({
       title: 'Welcome to your calendar!',
       message: 'Wanna know how many spots are left in your classes? Click in any of them to see!',
       buttons: ['Ok']
     }).present();
   }
+
+  confirmFreeze(){
+    if(this.freeze){
+
+      this.alertCtrl.create({
+        title: 'Warning!',
+        subTitle: 'Are you sure you want to freeze this day',
+        message: 'This will erase all the reservations',
+        buttons: [
+          {
+          text: 'Freeze',
+          handler: ()=>{
+            this.freeze = true;
+          }},
+          {
+          text: 'Cancel',
+          handler: ()=>{
+            this.freeze = false;
+          }},
+        ]
+      }).present();
+    }
+  }
+
+  cualHoy(){
+    let hoy = moment().format('dddd');
+    if(hoy == 'Monday') return 0;
+    if(hoy == 'Tuesday') return 1;
+    if(hoy == 'Wednesday') return 2;
+    if(hoy == 'Thursday') return 3;
+    if(hoy == 'Friday') return 4;
+    if(hoy == 'Saturday') return 5;
+    if(hoy == 'Sunday') return 6;
+  }
+
+  getClass(element){
+    return element == this.selected ? 'day' : 'day no';
+  }
+
+  changeSelected(element){
+    this.selected = element;
+    this.freeze = false;
+  }
+
+
 
   giveReview(evento){
     let modal = this.modalCtrl.create(ReviewsPage, {'Activity': evento});
@@ -90,6 +184,7 @@ export class CalendarioPage {
   }
 
   isDespues(fecha){
+    console.log(fecha);
     let today  = moment();
     return moment(fecha).isBefore(today);
   }
@@ -102,7 +197,7 @@ export class CalendarioPage {
     ayuda.setMinutes(m);
 
     if(this.isDespues(ayuda)) ayuda = (moment(ayuda).add(7, 'days')).toDate();
-    //ayuda = moment(ayuda).toDate();
+    ayuda = moment(ayuda).toDate();
 
     return ayuda;
   }
@@ -173,9 +268,55 @@ export class CalendarioPage {
     return aux;
   }
 
+  openAttendants(){
+    this.navCtrl.push(AttendantsPage, {'Reservations': this.reservations});
+  }
+
+  isSameDay(dia, rsv){
+
+    let aux = moment(dia).format('YYYY-MM-DD');
+    this.reservations = [];
+    //console.log(aux);
+
+    let dia2 = this.cualHoy();
+    //console.log(dia2);
+    let suma = (this.selected-dia2 >= 0 ? this.selected-dia2 : (7-dia2+this.selected));
+    let hoy = moment().add(suma, 'days').format("YYYY-MM-DD");
+    //console.log(hoy);
+
+
+
+      this.reservations = [];
+      for(let key in rsv){
+        if(rsv[key].date == hoy.toString()){
+          this.reservations[this.reservations.length] = rsv[key];
+        }
+      }
+      //console.log(this.reservations);
+
+
+    return hoy == moment(dia).format("YYYY-MM-DD")
+  }
+
+  getRsv(){
+    if(this.reservations != []){
+      let count = 0;
+       for(let key in this.reservations){
+         for(let lla in this.reservations[0].nomads){
+           count++;
+         }
+       }
+      return count;
+      // return Object.keys(this.reservations[0].nomads).length;
+    }
+    else{
+      return 0;
+    }
+  }
+
   isMine(clave){
     let a = this.users$.Activities_created;
-    console.log(a);
+    //console.log(a);
     for(let key in a){
       if(a[key].index == clave) return true;
     }
@@ -196,9 +337,10 @@ export class CalendarioPage {
               //n = b[key].nomads.filter( a => this.hacerCosa(a.date, this.markStart(b[key].schedule[lla].day, b[key].schedule[lla].start_time)));
               let spaces = Object.keys(n).length;
             }
+            console.log(lla);
             this.activities_all.push({
               'title': b[key].title.substring(0, 10) + '..',
-              'title_complete': b[key].title + n +'/' + b[key].schedule[lla].spaces_available + ' spaces',
+              'title_complete': b[key].title,
               'location': b[key].location,
               'description':  b[key].description,
               'useful_notes': (b[key].useful_notes ? b[key].useful_notes : ''),
@@ -212,21 +354,50 @@ export class CalendarioPage {
               'startTime': this.markStart(b[key].schedule[lla].day, b[key].schedule[lla].start_time),
               'endTime': this.markEnd(b[key].schedule[lla].day, b[key].schedule[lla].start_time),
               'allDay': '',
-              'time': b[key].time,
+              'time': b[key].schedule[lla].start_time,
               'nomads': (b[key].nomads != undefined ? b[key].nomads : []),
               'creator':  b[key].creator,
               'index':  b[key].index,
-              // 'media': b[key].media,
+              'media': b[key].media,
               'isEvent': false,
               'clave_nomada': this.getClave(b[key].nomads),
               'review':( b[key].review ? b[key].review : 5),
               'reviews': (b[key].reviews ? b[key].reviews : []),
-              'spaces_available': b[key].schedule[lla].spaces_available
+              'spaces_available': b[key].schedule[lla].spaces_available,
+              'space': (b[key].schedule[lla].space ? b[key].schedule[lla].space : 10),
+              'reservations': []
           });
           }
         }
       }
     }
+    this.getAssistants();
+    this.activities_all = this.activities_all.filter(a=>a.startTime != 'Invalid Date');
+  }
+
+  getAssistants(){
+    let reservations = [];
+    let a = this.activities_all;
+    for(let key in a){
+      if(!a[key].isEvent && a[key].nomads){
+        for(let key2 in a[key].nomads){
+          if(!this.isDespues(a[key].nomads[key2].date)){
+            for(let lla in a[key].schedule){
+              console.log(a[key].schedule[lla].day == a[key].nomads[key2].day);
+              console.log(a[key].schedule[lla].start_time == a[key].nomads[key2].start_time)
+              if(a[key].schedule[lla].day == a[key].nomads[key2].day && a[key].schedule[lla].start_time == a[key].nomads[key2].time){
+                if(reservations[a[key].nomads[key2].date.toString()] = []){
+                    reservations[a[key].nomads[key2].date.toString()] = {'date': a[key].nomads[key2].date, 'day': a[key].nomads[key2].day, 'nomads': []};
+                }
+                reservations[a[key].nomads[key2].date.toString()].nomads.push({'index': a[key].nomads[key2].index});
+                a[key].reservations = reservations;
+              }
+            }
+          }
+        }
+      }
+    }
+    console.log(reservations);
   }
 
   getClave(nomadas){
@@ -250,7 +421,7 @@ export class CalendarioPage {
     this.checkExistA();
 
    console.log(this.activities_all);
-   console.log(this.past_events);
+   //console.log(this.past_events);
   }
 
   getEvents(){
@@ -438,24 +609,56 @@ export class CalendarioPage {
      return b.diff(fecha2, 'days') == 0;
    }
 
+   confirmFull(evento){
+     this.alertCtrl.create({
+       title: 'Are you sure you mark this class as full?',
+       message: 'This means you will not take more reservations on nomu for this weeks class',
+       buttons: [
+         {
+           text: 'Cancel',
+           handler: () => {
+
+           }
+         },
+         {
+           text: 'Mark full',
+           handler: () => {
+             //this.goAhead(evento);
+           }
+         }
+       ]
+     }).present();
+   }
+
   onEventSelected(event) {
     console.log(event);
     let start = moment(event.startTime).format('LLLL');
     let end = moment(event.endTime).format('LLLL');
-    let n = event.nomads.filter( a => this.hacerCosa(a.date, event.startTime));
-    let spaces = Object.keys(n).length;
+
 
     let alert = this.alertCtrl.create({
       title: '' + event.title_complete,
-      subTitle: spaces + '/'+ event.spaces_available + ' spaces taken',
       message: 'From: ' + start + '<br>To: ' + end,
       buttons: [
+        {
+          text: 'Full class',
+          handler: () => {
+           this.confirmFull(event)
+          }
+        },
+        {
+          text: 'View Assistants',
+          handler: () => {
+            this.openAttendants();
+          }
+        },
         {
           text: 'View Details',
           handler: () => {
             this.seeDetails(event);
           }
-        }]
+        }
+      ]
     })
     alert.present();
 

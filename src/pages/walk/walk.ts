@@ -56,7 +56,7 @@ public user_data: any = {
    'first_name': '',
    'last_name': '',
    'birthdate': ' ',
-   'country': '',
+   'country': 'MX',
    'payment':
      {
        'cardholder': 'John Doe',

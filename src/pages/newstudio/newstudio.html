@@ -1,0 +1,121 @@
+<!--
+  Generated template for the NewstudioPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+  <ion-navbar color="black1">
+    <p class="title">New Studio</p>
+  </ion-navbar>
+</ion-header>
+
+
+<ion-content padding>
+  <div class="status-container">
+    <div class="{{getClass(1)}}"></div>
+    <div class="{{getClass(2)}}"></div>
+    <div class="{{getClass(3)}}"></div>
+    <div class="{{getClass(4)}}"></div>
+  </div>
+
+  <div *ngIf="current_index == 1" class="container-datos w3-animate-right">
+     <div class="card-container">
+
+       <div class="input-group">
+         <p class="input-title">Studio Logo</p>
+         <img *ngIf="studio_data.logo == ''" (click)="presentOptions()" src="assets/img/upload.png" alt="">
+         <img *ngIf="studio_data.logo != ''" src="{{studio_data.logo}}" class="actual-logo">
+       </div>
+
+       <div class="input-group">
+         <p class="input-title">Studio Name</p>
+         <input type="text" class="input-field" [(ngModel)]="studio_data.name">
+       </div>
+
+       <div class="input-group">
+         <p class="input-title">Studio Location</p>
+         <input (click)="this.studio_data.location = ''" (blur)="this.studio_data.location = '';" type="text" (ngModelChange)="updateSearchResults()" class="input-field" [(ngModel)]="studio_data.location">
+         <ion-list [hidden]="autocompleteItems.length == 0">
+          <ion-item *ngFor="let item of autocompleteItems" tappable (click)="selectSearchResult(item)">
+            {{ item.description }}
+          </ion-item>
+          </ion-list>
+       </div>
+
+
+       <div class="input-group">
+         <p class="input-title">Description</p>
+         <textarea rows="4" type="text" class="input-field" [(ngModel)]="studio_data.description"></textarea>
+       </div>
+
+       <div class="input-group">
+         <p class="input-title">Amenities</p>
+         <textarea rows="4" type="text" class="input-field" [(ngModel)]="studio_data.amenities"></textarea>
+       </div>
+
+       <div class="input-group">
+         <p class="input-title">Useful Notes / Recommendations</p>
+         <textarea rows="4" type="text" class="input-field" [(ngModel)]="studio_data.useful_notes" placeholder="(Yoga mats, Transport, Food, Water, etc..)"></textarea>
+       </div>
+
+       <div class="input-group">
+         <p class="input-title">Membership Cost</p>
+         <input type="tel" class="input-field" [(ngModel)]="studio_data.membership_cost">
+       </div>
+
+
+
+       <!-- <div class="jc-container">
+         <div class="input-group">
+           <p class="input-title">Spaces Available</p>
+           <input type="tel" class="input-field" [(ngModel)]="event_data.spaces_available" (blur)="verifyMini()">
+         </div>
+
+
+       </div> -->
+
+     <button [disabled]="!canAdvance()" (click)="saveStudio()" type="button" class="next-btn">Next</button>
+     </div>
+  </div>
+
+  <div *ngIf="current_index == 2" class="container-datos w3-animate-right">
+     <div class="card-container">
+
+       <div class="input-group">
+         <p class="input-title">Studio Schedule</p>
+         <div class="week-days">
+          <div *ngFor="let d of studio_data.schedule; let in = index" (click)="(d.selected ? d.selected = false : d.selected = true)" class="{{getClass2(d.selected)}}">{{d.letter}}</div>
+         </div>
+       </div>
+
+       <div class="jc-container">
+         <div class="input-group">
+           <p class="input-title">Opening Time</p>
+           <ion-item><ion-datetime displayFormat="h:mm A" pickerFormat="H mm" placeholder="06:00" [(ngModel)]="studio_data.opening"></ion-datetime></ion-item>
+         </div>
+
+         <div class="input-group">
+           <p class="input-title">Closing Time</p>
+           <ion-item><ion-datetime displayFormat="h:mm A" pickerFormat="H mm" placeholder="06:00" [(ngModel)]="studio_data.closing"></ion-datetime></ion-item>
+         </div>
+       </div>
+
+       <div class="input-group">
+         <p class="input-title">Studio Classes</p>
+         <div *ngFor="let c of this.classes" class="studio-class">
+           <div class="class-time">{{c.start_time}} - {{c.end_time}}</div>
+           <div class="class-title">{{c.title}}</div>
+         </div>
+         <button (click)="addClass()" type="button" class="add-btn" style="background-color: #7D29FB!important; font-weight: 700; font-size: 120%">Add Class</button>
+       </div>
+
+
+
+       <div class="jc-container">
+         <button [disabled]="this.current_index == 1" (click)="this.current_index = 1" type="button" name="button" class="back-btn">Back</button>
+         <button [disabled]="!canAdvance()" (click)="guardarStudio()" type="button" name="button" class="next-btn2">Next</button>
+       </div>
+     </div>
+  </div>
+</ion-content>

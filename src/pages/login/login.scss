@@ -46,6 +46,13 @@ page-login {
         .input-group{
           padding-left: 5%;
           padding-top: 2%;
+          position: relative;
+          .input-hint{
+            color: white;
+            position: absolute;
+            right: 10%;
+            bottom: 5%;
+          }
           .input-title{
             font-size: 90%;
             color: rgba(255, 255, 255, .5);

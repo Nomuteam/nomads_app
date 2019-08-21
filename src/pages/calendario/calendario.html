@@ -4,34 +4,57 @@
   See http://ionicframework.com/docs/components/#navigation for more info on
   Ionic pages and navigation.
 -->
-<ion-header>
+<!-- <ion-header>
   <ion-navbar color="black1">
     <ion-buttons (click)="testWallet()" *ngIf="type == 'nomads'" start style="margin-left: 3%!important;">
-     <!-- <div class="circles-noms">
-       <div class="div1"></div>
-       <div class="div2"></div>
-       <div class="div3"></div></div> -->
+
        <div class="noms-ctr">
          <div class="noms-hint">NOMS</div>
          <div class="noms-qty">{{this.noms_balance}}</div>
        </div>
     </ion-buttons>
     <ion-buttons *ngIf="type == 'nomads'" (click)="openFilters()" end>
-     <!-- <div class="filters-noms">
-       <div class="div1"></div>
-       <div class="div2"></div>
-       <div class="div3"></div>
-     </div> -->
+
      <button ion-button>
        <ion-icon name="ios-options" color="white"></ion-icon>
      </button>
     </ion-buttons>
     <p class="title">Calendar</p>
   </ion-navbar>
-</ion-header>
+</ion-header> -->
 
 <ion-content padding>
-  <p class="page-hint"> {{ viewTitle }}</p>
+
+  <div class="justify-row">
+    <div class="title-page">Your week</div>
+    <div class="freeze">
+      <div class="f-title">
+        Freeze Day
+      </div>
+      <ion-toggle [(ngModel)]="freeze" (ngModelChange)="confirmFreeze()" checked="false" color="purple"></ion-toggle>
+    </div>
+  </div>
+
+  <div class="week-days">
+    <div *ngFor="let d of this.days">
+      <div class="{{getClass(d.number)}}" (click)="changeSelected(d.number)">{{d.ab}}</div>
+    </div>
+  </div>
+
+  <div class="day-area">
+    <div *ngFor="let a of this.activities_all">
+      <div class="day-element" *ngIf="isSameDay(a.startTime, a.reservations)" (click)="onEventSelected(a)">
+        <div class="time-element">{{a.time}}</div>
+        <div class="details">
+          <div class="d-title">{{a.title_complete}}</div>
+          <div class="d-spaces">{{this.getRsv()}}/{{a.space}} spaces available</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- <p class="page-hint"> {{ viewTitle }}</p>
   <calendar [eventSource]="activities_all"
          [calendarMode]="calendar.mode"
          [currentDate]="calendar.currentDate"
@@ -40,5 +63,5 @@
          (onTimeSelected)="onTimeSelected($event)"
          step="30"
          class="calendar-nomads">
-       </calendar>
+       </calendar> -->
 </ion-content>

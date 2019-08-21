@@ -170,7 +170,7 @@ constructor(
         'user_type': this.user_type,
         'created_at': new Date(),
         'info_complete': false,
-        'noms': (this.code_user != '' ? 7 : 0)
+        'noms': (this.user_type == 'nomads' ? 10 : 0)
       }).then( () => {
         this.general_loader.dismiss();
         //this.openCircles();
