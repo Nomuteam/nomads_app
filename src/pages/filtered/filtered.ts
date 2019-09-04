@@ -46,6 +46,7 @@ public activitites_example: any = [
   },
 ];
 public type: any;
+public people$: any;
 
 public general_loader: any;
 public response$: any;
@@ -110,8 +111,15 @@ public done_a: any = false;
              console.log('Error:', status);
          } else {
            console.log(response);
-           result = response.rows[0].elements[0].distance.value;
+           try{
+            result = response.rows[0].elements[0].distance.value;
            result2 = response.rows[0].elements[0].distance.text;
+           }
+           catch(ioe){
+            result = 9999;
+            result2 = '';
+           }
+           
            fn(result, result2);
            //vm.activities_all[p].distance = response.rows[0].elements[0].distance.value;
            }
@@ -207,7 +215,15 @@ public done_a: any = false;
    //   }
    // }
 
-   console.log(this.activities_all);
+   
+    this.activities_all.forEach(element => {
+      console.log('eventi', element);
+      this.getDistance(element.location, (data1, data2)=>{
+        element.distancia = data1;
+        element.distance = data2;
+        this.activities_all = this.activities_all.sort((a, b) => a.distancia - b.distancia);
+      })
+    });
    if(this.general_loader) this.general_loader.dismiss();
   }
 
@@ -226,19 +242,73 @@ public done_a: any = false;
     });
   }
 
+  getName(indice){
+    let u = this.people$;
+    for(let key in u){
+      if(u[key].index == indice) return u[key].business.business_name;
+    }
+    return '';
+  }
+
   ionViewDidLoad() {
+   
+    this.af.object('Users').snapshotChanges().subscribe(action => {
+      this.people$ = action.payload.val();
+    });
+
     this.general_loader = this.loadingCtrl.create({
       spinner: 'bubbles',
       content: 'Loading...'
     });
     this.general_loader.present();
+
     if(!this.navParams.get('Activities')){
-     this.getEvents();
+     
+  
+      this.geolocation.getCurrentPosition().then((position) => {
+  
+        this.posicion = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
+        //Obtenemos las actividades
+        //this.activities_all = this.navParams.get('Activities');
+        console.log('posicion', this.posicion);
+        this.getEvents();
+        /* 
+        getDistance
+        */
+      }, (err) => {
+        this.posicion = new google.maps.LatLng(25.638233, -100.3622394);
+        this.getEvents();
+        //this.general_loader.dismiss();
+      });
     }
     else{
-      this.activities_all = this.navParams.get('Activities');
-      console.log(this.activities_all);
-      this.general_loader.dismiss();
+      this.geolocation.getCurrentPosition().then((position) => {
+  
+        this.posicion = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
+        this.activities_all = this.navParams.get('Activities');
+        this.activities_all.forEach(element => {
+          this.getDistance(element.location, (data1, data2)=>{
+            element.distancia = data1;
+            element.distance = data2;
+            this.activities_all = this.activities_all.sort((a, b) => a.distancia - b.distancia);
+          })
+        });
+        this.general_loader.dismiss();
+      }, (err) => {
+        this.posicion = new google.maps.LatLng(25.638233, -100.3622394);
+        this.activities_all = this.navParams.get('Activities');
+        this.activities_all.forEach(element => {
+          console.log('eventi', element);
+          this.getDistance(element.location, (data1, data2)=>{
+            element.distancia = data1;
+            element.distance = data2;
+            this.activities_all = this.activities_all.sort((a, b) => a.distancia - b.distancia);
+          })
+        });
+        this.general_loader.dismiss();
+      });
+
+      
     }
   }
 

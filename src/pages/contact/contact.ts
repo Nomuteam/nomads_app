@@ -17,6 +17,7 @@ import { DetailsPage } from '../details/details';
   templateUrl: 'contact.html'
 })
 export class ContactPage {
+public todayActivities:any[]=[];
 public general_loader: any;
 
 //For the user
@@ -123,6 +124,7 @@ public filtered_a: any = [];
     return 0;
    });
    //aux = aux.filter(a => a.distance_number < 20);
+   this.todayActivities = aux;
    return aux;
  }
 
@@ -243,14 +245,26 @@ public filtered_a: any = [];
          travelMode: google.maps.TravelMode.DRIVING
          },
      function (response, status) {
+        
+      console.log(vm.map.getCenter(), address,google.maps.TravelMode.DRIVING);
          // check status from google service call
          if (status !== google.maps.DistanceMatrixStatus.OK) {
              console.log('Error:', status);
          } else {
-           console.log(response);
-           result = response.rows[0].elements[0].distance.value;
+           console.log('Error!',response, result = response.rows[0].elements[0].distance.value, result = response.rows[0].elements[0].distance.text);
+           try{
+            result = response.rows[0].elements[0].distance.value;
            result2 = response.rows[0].elements[0].distance.text;
            fn(result, result2);
+           }
+           catch{
+            result = -1;
+            result2 = '-1';
+            fn(result, result2);
+         }
+           
+           
+           
            //vm.activities_all[p].distance = response.rows[0].elements[0].distance.value;
            }
      });
@@ -419,7 +433,19 @@ public filtered_a: any = [];
         this.map = new google.maps.Map(this.mapElement.nativeElement, mapOptions);
         this.addMarker();
       }, (err) => {
-        console.log(err);
+        console.log('error',err);
+        let latLng = new google.maps.LatLng(25.638233, 25.638233);
+
+        let mapOptions = {
+          center: latLng,
+          zoom: 12,
+          mapTypeId: google.maps.MapTypeId.ROADMAP,
+          disableDefaultUI: true
+        }
+
+        this.map = new google.maps.Map(this.mapElement.nativeElement, mapOptions);
+        this.addMarker();
+
       });
 
     }

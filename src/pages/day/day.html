@@ -17,7 +17,7 @@
 
   <div class="week-days">
     <div *ngFor="let d of this.days">
-      <div class="{{getClass(d.number)}}" (click)="changeSelected(d.number)">{{d.ab}}</div>
+      <div class="{{getClass(d.number)}}" (click)="changeSelected(d.number, d.day)">{{d.ab}}</div>
     </div>
   </div>
 

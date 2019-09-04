@@ -37,6 +37,8 @@ public selected: any = '';
       this.navCtrl.push(NewactPage);
     }
     else if(this.selected == '2'){
+      let acts : any[]=[];
+      //localStorage.setItem('studio-act', JSON.stringify([]));
       this.navCtrl.push(NewstudioPage);
     }
     else if(this.selected == '3'){

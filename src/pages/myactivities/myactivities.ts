@@ -177,6 +177,9 @@ public general_loader: any;
     }
   }
 
+  DeleteActivity(act, type){
+    this.af.list(type+'/'+act.index).remove();
+  }
   confirmRemove(act){
     this.alertCtrl.create({
       title: 'Are you sure you want to delete this activity?',
@@ -192,7 +195,11 @@ public general_loader: any;
           text: 'Remove',
           role: 'destructive',
           handler: () => {
-           this.af.list('Activities/'+act.index).remove();
+            console.log('actividad a borrar', act.index);
+            this.af.list('Events/'+act.index).remove();
+            this.af.list('Studios/'+act.index).remove();
+            this.af.list('Activities/'+act.index).remove();
+            this.getActivities();
           }
         },
       ]

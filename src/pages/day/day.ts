@@ -61,6 +61,7 @@ export class DayPage {
     },
   ]
   public selected: any = 0;
+  public selectedDayString: any = '';
   public selectedDay = new Date();
   public tiempo: any = '';
 
@@ -205,8 +206,13 @@ goFiltered(){
     this.filtered = [];
     let aux = [];
     let a = this.activities;
+    console.log('dia',this.selectedDayString);
+    //console.log(moment().add(this.selected, 'days').format('dddd'));
+    this.activities.forEach(element => {
+      //console.log()
+    });
     for(let key in a){
-      if(a[key].schedule.filter(s => s.day == moment().add(this.selected-1, 'days').format('dddd')).length > 0){
+      if(a[key].schedule.filter(s => s.day == this.selectedDayString).length > 0){
         this.filtered[this.filtered.length] = a[key];
       }
     }
@@ -217,8 +223,9 @@ goFiltered(){
     return this.tiempo == this.times[selected].time ? 'time yes' : 'time';
   }
 
-  changeSelected(element){
+  changeSelected(element, day){
     this.selected = element;
+    this.selectedDayString = day;
     this.filterByDay();
   }
 

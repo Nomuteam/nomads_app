@@ -105,6 +105,40 @@ export class EditstudioPage {
   }
 
   ionViewWillEnter(){
+    console.log(1);
+    if(localStorage.getItem('studio-act')){
+      let aux = JSON.parse(localStorage.getItem('studio-act'));
+      console.log(aux);
+      
+
+      let flag = true;
+      /*
+      this.studio_data.activities.forEach(element => {
+        if(element.index != null){
+          arrayAux.push(element);
+        }
+      });
+      
+      this.studio_data.activities= arrayAux;
+      */
+      this.studio_data.activities.forEach(element => {
+        
+        if(element.index == aux.index){
+          flag = false;
+        }
+        
+      });
+      if(flag && aux.index != null){
+        this.classes.push(aux);
+        this.studio_data.activities.push({
+          'index': aux.index
+        });
+      }
+      
+    }
+  }
+  /*
+  ionViewWillEnter(){
     if(localStorage.getItem('studio-act')){
       let aux = JSON.parse(localStorage.getItem('studio-act'));
       console.log(aux);
@@ -114,6 +148,7 @@ export class EditstudioPage {
       });
     }
   }
+  */
 
   avisarNoms(){
     console.log('hi');
@@ -220,6 +255,24 @@ export class EditstudioPage {
         return (c == 'x' ? r : (r & 0x3 | 0x8)).toString(16);
      });
     return uuid;
+  }
+
+  guardarStudio(){
+    this.general_loader = this.loadingCtrl.create({
+      content: 'Creating studio...',
+      spinner: 'bubbles'
+    });
+    console.log('studio a guardar', this.studio_data);
+    //this.general_loader.present();
+    this.af.list('Studios').update(this.studio_data.index, this.studio_data)
+        .then(()=>{
+          this.general_loader.dismiss();
+          this.alertCtrl.create({
+            title: 'Studio created!',
+            message: 'You will find the details and classes inside the event'
+          }).present();
+          this.navCtrl.pop();
+        });
   }
 
 }

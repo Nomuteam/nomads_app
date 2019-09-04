@@ -24,6 +24,8 @@ import { StudioPage } from '../studio/studio';
   templateUrl: 'home.html'
 })
 export class HomePage {
+  public todayActivities:any[]=[];
+
   public response$: any;
   public responses$: any;
   public responsec$: any;
@@ -109,7 +111,8 @@ export class HomePage {
 
   openAll(tipo){
     if(tipo == 'Best Rated Activities') this.navCtrl.push(AllPage, {'Tipo': tipo, 'Acts': this.getRated()});
-    else if(tipo == "Nearby and Upcoming") this.navCtrl.push(AllPage, {'Tipo': "Today's Activities", 'Acts': this.getUpcoming()});
+    //else if(tipo == "Nearby and Upcoming") this.navCtrl.push(AllPage, {'Tipo': "Today's Activities", 'Acts': this.getUpcoming()});
+    else if(tipo == "Nearby and Upcoming") this.navCtrl.push(AllPage, {'Tipo': "Today's Activities", 'Acts': this.todayActivities});
     else if(tipo == 'Suggestions for you') this.navCtrl.push(AllPage, {'Tipo': tipo, 'Acts': this.filtered_a});
     else if(tipo == 'Your Favorites') this.navCtrl.push(AllPage, {'Tipo': tipo, 'Acts': this.favoritos});
     else if(tipo == 'Events') this.navCtrl.push(AllPage, {'Tipo': tipo, 'Acts': this.events});
@@ -146,7 +149,8 @@ export class HomePage {
   }
 
   getExperiences(){
-    return this.activities.filter(act => act.distance_number>0 && act.distance_number<20 && act.categories.main_category == 'Experiences');
+    //console.log('todas las actividades',this.activities);
+    return this.activities.filter(act => act.distance_number >=0 && act.distance_number <= 20 && act.categories.main_category == 'Experiences');
   }
 
   getFiltersP(){
@@ -200,7 +204,7 @@ export class HomePage {
     let distance = new google.maps.DistanceMatrixService();
     let result = 0;
     let result2 = '';
-
+    console.log('distancia',distance);
     return distance.getDistanceMatrix({
          origins: [this.posicion],
          destinations: [address],
@@ -211,7 +215,7 @@ export class HomePage {
          if (status !== google.maps.DistanceMatrixStatus.OK) {
              console.log('Error:', status);
          } else {
-           console.log(response);
+           
            if(response.rows[0].elements[0].distance.value){
              result = response.rows[0].elements[0].distance.value;
              result2 = response.rows[0].elements[0].distance.text;
@@ -220,7 +224,7 @@ export class HomePage {
            else{
              location.reload();
            }
-           vm.activities_all[p].distance = response.rows[0].elements[0].distance.value;
+           //vm.activities_all[p].distance = response.rows[0].elements[0].distance.value;
            }
      });
 
@@ -271,6 +275,7 @@ export class HomePage {
     let vm = this;
     for(let i=0; i < this.events.length; i++){
 
+    /*
     setTimeout(() => {
       this.coordenadas(this.events[i], this.events[i].location, this.events[i].title_complete,  function(location){
           vm.events[i].location = location;
@@ -282,6 +287,7 @@ export class HomePage {
           });
       });
     }, (this.events.length*22)*i);
+    */
   }
    // this.location_loader.dismiss();
    // this.location_loader = null;
@@ -313,7 +319,9 @@ export class HomePage {
      content: 'Calculating distances...'
    });
 
+   
     for(let key in a){
+      
       this.activities.push({
         'title': (a[key].title.length > 50 ? a[key].title.substring(0, 20) + '..' : a[key].title),
         'title_complete': a[key].title,
@@ -349,7 +357,7 @@ export class HomePage {
       let vm = this;
       for(let i=0; i < this.activities.length; i++){
        ///this.activities[i] = this.activities[i];
-
+        /*
       setTimeout(()=>{
         this.coordenadas(this.activities[i], this.activities[i].location, this.activities[i].title_complete,  function(location){
             vm.activities[i].location = location;
@@ -361,6 +369,8 @@ export class HomePage {
             });
         });
       }, (this.activities.length*23)*i);
+
+      */
       }
     }
 
@@ -369,7 +379,7 @@ export class HomePage {
       localStorage.setItem('actividades', JSON.stringify(this.activities));
       if(this.location_loader) this.location_loader.dismiss();
     }, (this.activities.length*23)*this.activities.length)
-
+    
     for(let i=0; i<this.activities.length; i++){
       let h = this.activities[i].schedule;
       let today =  moment().format('dddd');
@@ -426,6 +436,7 @@ export class HomePage {
    //  if(keyA > keyB) return 1;
    //  return 0;
    // });
+   this.getUpcoming();
   }
 
 
@@ -462,8 +473,16 @@ export class HomePage {
      if(keyA > keyB) return 1;
      return 0;
     });
+
     //aux = aux.filter(a => a.distance_number < 20);
-    return aux;
+    this.todayActivities = aux;
+    this.todayActivities.forEach(element => {
+      this.getDistance(element.location, (data1, data2)=>{
+        element.distancia = data1;
+        element.distance = data2;
+      })
+    });
+    //return aux;
   }
 
   //cycle
@@ -696,7 +715,7 @@ export class HomePage {
   getName(indice){
     let u = this.people$;
     for(let key in u){
-      if(u[key].index == indice) return u[key].first_name + ' ' + u[key].last_name;
+      if(u[key].index == indice) return u[key].business.business_name;
     }
     return '';
   }
@@ -750,8 +769,18 @@ export class HomePage {
       this.noms_balance = this.users$.noms;
       this.favorites = this.users$.favorites;
     });
-    this.getActivities();
+
+    this.geolocation.getCurrentPosition().then((position) => {
+      this.posicion = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
+      this.getActivities();
       this.getClans();
+    }, (err) => {
+      this.posicion = new google.maps.LatLng(25.638233, -100.3622394);
+      this.getActivities();
+      this.getClans();
+    });
+
+    
   }
 
   openBrowse(segmento){

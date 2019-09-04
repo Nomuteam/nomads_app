@@ -348,7 +348,7 @@ export class NewactPage {
          'start_time': a.start_time,
          'duration': a.duration,
          'spaces_available': a.spaces_available,
-         'space': a.space,
+         //'space': a.space,
          'gender': a.gender,
          'level': a.level,
          'min_age': a.min_age,

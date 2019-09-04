@@ -27,8 +27,8 @@ export class LoginPage {
 public user_type: any;
 public general_loader: any;
 
-public mail: any = '';
-public pw: any = '';
+public mail: any = 'dcgt@nomu.com';
+public pw: any = '123456';
 public pw_type = 'password';
 public pw_text = 'View';
 

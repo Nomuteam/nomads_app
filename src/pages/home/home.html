@@ -71,11 +71,11 @@
 
   <div class="category-container">
    <div (click)="openAll('Nearby and Upcoming')" class="category-title blue">Today's Activities<small>View all</small></div>
-   <p *ngIf="this.getUpcoming().length == 0" class="category-suggestions">You'll find the upcoming classes for today here</p>
+   <p *ngIf="todayActivities.length == 0" class="category-suggestions">You'll find the upcoming classes for today here</p>
    <ion-slides slidesPerView="1.6">
-    <ion-slide (click)="openActivity(a)" *ngFor="let a of this.getUpcoming()">
+    <ion-slide (click)="openActivity(a)" *ngFor="let a of todayActivities">
       <div class="img-slide" [style.background-image]="sanitizeThis(a.img)"></div>
-      <p class="act-first">{{a.categories.activity_type}} - {{a.distance}} - {{a.next_time}}</p>
+      <p class="act-first">{{a.categories.activity_type}} - {{a.next_time}} - {{a.distance}}</p>
       <p class="act-title">{{a.title}}</p>
         <p class="act-creator">By: {{this.getName(a.creator)}}</p>
       <p class="act-distance">{{a.class_price}} noms</p>
@@ -139,6 +139,7 @@
       <p *ngIf="!f.isEvent" class="act-first">{{f.categories.activity_type}} - {{f.distance}}</p>
       <p *ngIf="f.isEvent" class="act-first">{{f.type}}</p>
       <p class="act-title">{{f.title}}</p>
+      <p class="act-creator">By: {{this.getName(f.creator)}}</p>
       <p *ngIf="!f.isEvent" class="act-distance">{{f.class_price}} noms</p>
       <p *ngIf="f.isEvent" class="act-distance">{{f.cost}} noms</p>
       <p class="act-rating">{{f.review}} <ion-icon name="star" color="white"></ion-icon> / ({{f.reviews.length}})</p>
@@ -147,7 +148,7 @@
   </div>
 
   <div class="category-container">
-   <div (click)="openAll('Events')" class="category-title events">Events <small (click)="createEvent()">Create one</small></div>
+   <div (click)="openAll('Events')" class="category-title events">Experiences <small (click)="createEvent()">Create one</small></div>
    <p class="category-suggestions">Join events created by the community</p>
    <!-- <p *ngIf="this.events.length == 0" class="category-suggestions">There are not any events available now!</p> -->
    <ion-slides slidesPerView="1.6">
@@ -161,7 +162,7 @@
   </ion-slides>
   </div>
 
-  <div class="category-container">
+  <div class="category-container" style="display:none">
    <div (click)="openAll('Experiences')" class="category-title rose">Experiences<small>View all</small></div>
       <p *ngIf="this.getExperiences().length == 0" class="category-suggestions">There are no experiences created currently!</p>
    <ion-slides slidesPerView="1.6">

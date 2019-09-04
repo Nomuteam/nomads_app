@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { IonicPage, NavController, NavParams, LoadingController, AlertController, ActionSheetController, ModalController } from 'ionic-angular';
 import { AngularFireDatabase, AngularFireObject } from 'angularfire2/database';
 import firebase from 'firebase';
@@ -21,7 +21,7 @@ import { NewactPage } from '../newact/newact';
   selector: 'page-newstudio',
   templateUrl: 'newstudio.html',
 })
-export class NewstudioPage {
+export class NewstudioPage implements OnInit{
   public current_index: any = 1;
   public general_loader: any;
   public type: any;
@@ -91,7 +91,7 @@ export class NewstudioPage {
     'creator': firebase.auth().currentUser.uid,
     'opening': '',
     'closing': '',
-    'activities': ''
+    'activities': []
   };
   public GoogleAutocomplete: any = new google.maps.places.AutocompleteService();
   public autocompleteItems: any = [];
@@ -161,7 +161,8 @@ export class NewstudioPage {
       content: 'Creating studio...',
       spinner: 'bubbles'
     });
-    this.general_loader.present();
+    console.log('studio a guardar', this.studio_data);
+    //this.general_loader.present();
     this.af.list('Studios').update(this.studio_data.index, this.studio_data)
         .then(()=>{
           this.general_loader.dismiss();
@@ -198,14 +199,42 @@ export class NewstudioPage {
   }
 
   ionViewWillEnter(){
+    console.log(1);
     if(localStorage.getItem('studio-act')){
       let aux = JSON.parse(localStorage.getItem('studio-act'));
       console.log(aux);
-      this.classes.push(aux);
-      this.studio_data.activities.push({
-        'index': aux.index
+      
+
+      let flag = true;
+      /*
+      this.studio_data.activities.forEach(element => {
+        if(element.index != null){
+          arrayAux.push(element);
+        }
       });
+      
+      this.studio_data.activities= arrayAux;
+      */
+      this.studio_data.activities.forEach(element => {
+        
+        if(element.index == aux.index){
+          flag = false;
+        }
+        
+      });
+      if(flag && aux.index != null){
+        this.classes.push(aux);
+        this.studio_data.activities.push({
+          'index': aux.index
+        });
+      }
+      
     }
+  }
+
+  ngOnInit() {
+    console.log(2);
+    localStorage.setItem('studio-act', JSON.stringify([]));;
   }
 
   avisarNoms(){

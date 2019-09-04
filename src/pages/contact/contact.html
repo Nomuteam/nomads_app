@@ -42,7 +42,7 @@
       <div class="number">{{this.getUpcoming().length}}</div>
     </div>
     <ion-slides [hidden]="this.class_slides" slidesPerView="2.5">
-     <ion-slide *ngFor="let a of this.getUpcoming()" (click)="seeDetails(a)">
+     <ion-slide *ngFor="let a of todayActivities" (click)="seeDetails(a)">
        <img src="{{a.img}}" class="img-slide">
        <!-- <div class="img-slide" [style.background-image]="sanitizeThis(a.img)"></div> -->
        <p class="act-title">{{a.title}}</p>

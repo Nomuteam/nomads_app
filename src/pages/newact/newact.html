@@ -166,7 +166,7 @@
 
 <div *ngIf="this.current_index == 4" class="container-datos w3-animate-right">
 <p class="title-container">Upload Media</p>
-<!-- <div class="media-img"></div> -->
+<!-- <div class="media-img"></div>  Issue#2 se queda loading al dar click en next-->
 <div *ngFor="let m of this.activity_data.media; let in=index" (click)="confirmRF(in)" class="media-img" [style.background-image]="sanitizeThis(m.url)"></div>
 <button (click)="presentOptions()" type="button" class="add-btn" padding>+</button>
 </div>

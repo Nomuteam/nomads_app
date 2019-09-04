@@ -289,6 +289,9 @@ export class NeweventPage {
 
    avisarNoms(){
      console.log('hi');
+     return;
+
+     /*
      if(this.event_data.cost){
        this.alertCtrl.create({
          title: 'Cost in NOMS',
@@ -304,6 +307,8 @@ export class NeweventPage {
            ]
        }).present();
      }
+
+     */
    }
 
 

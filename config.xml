@@ -3,7 +3,7 @@
     <name>nomu</name>
     <description>Mexico</description>
     <author email="hi@ionicframework" href="http://ionicframework.com/">Ionic Framework Team</author>
-    <content src="index.html" />
+    <content original-src="index.html" src="http://192.168.43.29:8100" />
     <access origin="*" />
     <allow-intent href="http://*/*" />
     <allow-intent href="https://*/*" />
@@ -108,6 +108,7 @@
     <plugin name="uk.co.workingedge.phonegap.plugin.launchnavigator" spec="^5.0.4">
         <variable name="GOOGLE_API_KEY_FOR_ANDROID" value="AIzaSyDm544BEGbTNNiK-3hx0Hm1gDUj6vjD5eM" />
     </plugin>
+    <allow-navigation href="http://192.168.43.29:8100" sessionid="afcbc88a" />
     <engine name="android" spec="6.3.0" />
     <engine name="ios" spec="4.5.5" />
 </widget>
