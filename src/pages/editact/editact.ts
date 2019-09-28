@@ -1,10 +1,11 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { IonicPage, NavController, NavParams, LoadingController, AlertController, ActionSheetController, ModalController } from 'ionic-angular';
 import { AngularFireDatabase, AngularFireObject } from 'angularfire2/database';
 import firebase from 'firebase';
 import { Camera, CameraOptions } from '@ionic-native/camera';
 import { DomSanitizer } from '@angular/platform-browser';
 import { LocatePage } from '../locate/locate';
+import { Content } from 'ionic-angular';
 declare var google;
 
 /**
@@ -20,6 +21,7 @@ declare var google;
   templateUrl: 'editact.html',
 })
 export class EditactPage {
+  @ViewChild(Content) content: Content;
   public current_index: any = 1;
   public user_type: any = '';
   public isAdding: any = false;
@@ -186,8 +188,8 @@ export class EditactPage {
      'start_time': '06:00',
      'duration': '',
      'spaces_available': '',
-     'gender': 'Female',
-     'level': 'Beginner',
+     'gender': 'Both',
+     'level': 'All',
      'min_age': '',
      'max_age': ''
    }
@@ -206,6 +208,11 @@ export class EditactPage {
     public sanitizer: DomSanitizer,
     public modalCtrl: ModalController) {
     this.activity_data = this.navParams.get('Act');
+  }
+
+  addButtonClick(){
+    this.isAdding = true;
+    this.content.scrollToTop();
   }
 
   confirmRF(indice){
@@ -456,7 +463,11 @@ export class EditactPage {
   }
 
   back(){
+    if(this.current_index == 1){
+      this.navCtrl.pop();
+    }
     this.current_index--;
+    //console.log(this.current_index);
   }
 
   presentOptions() {

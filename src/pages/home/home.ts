@@ -143,7 +143,7 @@ export class HomePage {
       else this.favoritos[this.favoritos.length] =  this.events.filter( act => act.index == a[key].index)[0];
     }
 
-    console.log(this.favoritos);
+    console.log('favoritos',this.favoritos);
     this.getFiltersP();
     // return this.favoritos;
   }
@@ -156,7 +156,7 @@ export class HomePage {
   getFiltersP(){
     this.af.object('Users/'+firebase.auth().currentUser.uid+'/preferences').snapshotChanges().subscribe(action => {
       this.user_preferences = action.payload.val();
-      console.log(this.user_preferences);
+      console.log('preferencias',this.user_preferences);
       this.applyFilters();
     });
   }
@@ -260,7 +260,7 @@ export class HomePage {
       });
     }
 
-    console.log(this.events);
+    console.log('eventos',this.events);
 
     let today  = moment();
     let hoy = moment().format('dddd');
@@ -297,7 +297,7 @@ export class HomePage {
       localStorage.setItem('events', JSON.stringify(this.events));
     }, (this.events.length*22)*this.events.length)
 
-    console.log(this.events);
+    console.log('1',this.events);
 
     if(this.general_loader) this.general_loader.dismiss();
     this.getFavorites();
@@ -426,7 +426,7 @@ export class HomePage {
       this.activities[i].next_remaining = hours_left;
     }
 
-   console.log(this.activities);
+   console.log('2',this.activities);
 
    // this.activities = this.activities.sort(function(a, b){
    //  var keyA = a.distance_number,
@@ -556,7 +556,7 @@ export class HomePage {
         'isStudio': true,
         'activities': (s[key].activities ? s[key].activities : [])
       });
-    console.log(this.studios);
+    console.log('3',this.studios);
   }
 }
 
@@ -756,6 +756,9 @@ export class HomePage {
   }
 
   ionViewDidLoad() {
+
+    console.log('usuario',firebase.auth().currentUser.uid);
+
     this.general_loader = this.loadingCtrl.create({
       spinner: 'bubbles',
       content: 'Loading...'

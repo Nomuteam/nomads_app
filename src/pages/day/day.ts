@@ -64,6 +64,7 @@ export class DayPage {
   public selectedDayString: any = '';
   public selectedDay = new Date();
   public tiempo: any = '';
+  public agregados:any[]=[];
 
   public times: any = [
     {
@@ -145,19 +146,29 @@ export class DayPage {
   }
 
   filterByTime(){
+    this.agregados = [];
+    console.log('filtro');
     this.tfiltered = [];
     let aux = [];
     let a = this.filtered;
     let t = this.times.filter(t=>t.selected);
-    console.log(this.tiempo);
+    //console.log('actividades filtradas', a);
     let filtro = [];
     for(let key in a){
       let s = a[key].schedule;
       for(let lla in s){
-        console.log(moment().add(this.selected-1, 'days').format('dddd'));
-        if(s[lla].day == moment().add(this.selected-1, 'days').format('dddd') && s[lla].start_time == this.tiempo){
+        let timeNumber = Number(this.tiempo.replace(':',''));
+        let timeNumerEnd = timeNumber + 100;
+        
+        if(s[lla].day == moment().add(this.selected-1, 'days').format('dddd') && 
+        Number(s[lla].start_time.replace(':','')) >= timeNumber &&
+        Number(s[lla].start_time.replace(':','')) < timeNumerEnd &&
+        this.agregados.indexOf(a[key]) == -1){
+          a[key].fechaProxima = s[lla].start_time
+          this.agregados.push(a[key]);
           this.tfiltered[this.tfiltered.length] = a[key];
-          console.log(a[key].title);
+          //this.tfiltered[this.tfiltered.length].fechaProxima = s[lla].start_time;
+          //console.log(a[key].title);
         }
       }
         // filtro = a[key].schedule.filter(s => s.startTime == t[t.length-1].time );
@@ -174,6 +185,7 @@ export class DayPage {
       // }
    }
     //this.tfiltered = this.getUnique(this.tfiltered, 'index');
+    
     console.log(this.tfiltered);
   }
 
@@ -193,6 +205,7 @@ export class DayPage {
 
 goFiltered(){
   let t = this.times.filter(t=>t.selected);
+  
   if(t.length > 0){
     this.navCtrl.push(FilteredPage, {'Activities': this.tfiltered});
   }
@@ -211,6 +224,8 @@ goFiltered(){
     this.activities.forEach(element => {
       //console.log()
     });
+
+    console.log('Actividades',this.activities);
     for(let key in a){
       if(a[key].schedule.filter(s => s.day == this.selectedDayString).length > 0){
         this.filtered[this.filtered.length] = a[key];
@@ -224,6 +239,7 @@ goFiltered(){
   }
 
   changeSelected(element, day){
+    console.log(element, day);
     this.selected = element;
     this.selectedDayString = day;
     this.filterByDay();
@@ -236,7 +252,12 @@ goFiltered(){
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad DayPage');
+    let diaActual = this.cualHoy();
+    this.days.forEach(element => {
+      if(element.number == diaActual){
+        this.changeSelected(element.number, element.day);
+      }
+    });
   }
 
 }

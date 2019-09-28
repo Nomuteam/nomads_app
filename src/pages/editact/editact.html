@@ -5,7 +5,7 @@
   Ionic pages and navigation.
 -->
 <ion-header>
-  <ion-navbar color="black1">
+  <ion-navbar hideBackButton color="black1">
     <p class="title" style="margin-left: -5%;">Edit Activity</p>
   </ion-navbar>
 </ion-header>
@@ -99,9 +99,9 @@
       <div class="comp-text">{{s.start_time}}</div>
     </div>
     <div class="main-text">{{s.spaces_available}}</div>
-    <img (click)="eraseSchedule(in)" src="assets/img/edit_icon.png" class="edit-btn">
+    <img (click)="eraseSchedule(in)" src="assets/img/erase_icon.png" class="edit-btn">
   </div>
-  <button (click)="isAdding = true" type="button" class="add-btn" padding>+</button>
+  <button (click)="addButtonClick()" type="button" class="add-btn" padding>+</button>
 </div>
 
 
@@ -111,15 +111,21 @@
   <div class="likes-container" style="margin-bottom: 3%;"><div *ngFor="let c of this.example_days; let in=index" (click)="selectDay(in)" class="{{getSelected(c.selected)}}">{{c.day}}</div></div>
 
   <div class="option-container" padding>
-   <div class="title-option">Start Time</div>
-   <ion-item><ion-datetime displayFormat="h:mm A" pickerFormat="H mm" placeholder="06:00" [(ngModel)]="schedule.start_time"></ion-datetime></ion-item>
-  </div>
+    <div class="title-option">Start Time</div>
+    <ion-item><ion-datetime style="color: black" displayFormat="h:mm A" pickerFormat="H mm" placeholder="06:00" [(ngModel)]="schedule.start_time"></ion-datetime></ion-item>
+   </div>
 
   <div class="option-container" padding>
    <div class="title-option">Duration (hours)</div>
    <input type="tel" class="input-field" [(ngModel)]="schedule.duration">
    <!-- <ion-range color="purple" pin="true" [(ngModel)]="schedule.duration" min="1" max="8"></ion-range> -->
   </div>
+
+  <div class="option-container" padding>
+    <div class="title-option">Duration (minutes)</div>
+    <input type="tel" class="input-field" [(ngModel)]="schedule.duration2">
+    <!-- <ion-range color="purple" pin="true" [(ngModel)]="schedule.duration" min="1" max="8" step=".5"></ion-range> -->
+   </div>
 
   <div class="option-container" padding>
    <div class="title-option">Spaces Available</div>
@@ -146,8 +152,9 @@
    <div class="title-option">Max Age</div>
    <ion-range color="purple" pin="true" [(ngModel)]="schedule.max_age"></ion-range>
   </div>
-
-  <button (click)="withMagic()" type="button" class="next-btn add">Add</button>
+  
+  <button (click)="withMagic()" type="button" class="next-btn">Add</button>
+  <button (click)="isAdding = false" type="button" name="button" class="back-btn" style="color: black; border-color: black">Cancel</button>
 </div>
 </div>
 
@@ -159,7 +166,7 @@
 </div>
 
 <div *ngIf="!isAdding" class="jc-container">
-  <button [disabled]="this.current_index == 1" (click)="back()" type="button" name="button" class="back-btn">Back</button>
+  <button (click)="back()" type="button" name="button" class="back-btn">Back</button>
   <button [disabled]="!canAdvance()" (click)="next()" type="button" name="button" class="next-btn">Next</button>
 </div>
 

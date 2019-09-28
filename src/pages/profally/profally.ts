@@ -14,6 +14,7 @@ import * as moment from 'moment';
 import { WelcomePage } from '../welcome/welcome';
 import { AyudaPage } from '../ayuda/ayuda';
 import { ReservationsPage } from '../reservations/reservations';
+import { AllactivitiesPage } from '../allactivities/allactivities';
 
 /**
  * Generated class for the ProfallyPage page.
@@ -168,7 +169,8 @@ actionSheet.present();
       this.navCtrl.push(WalletPage);
     }
     else if(pagina == 'e'){
-      this.navCtrl.push(MyeventsPage);
+      //this.navCtrl.push(MyeventsPage);
+      this.navCtrl.push(AllactivitiesPage);
     }
     else if(pagina == 'cl'){
       this.navCtrl.push(MynomadsPage);

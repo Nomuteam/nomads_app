@@ -97,6 +97,7 @@ public pw_text = 'View';
   }
 
   findUser(){
+   
     let indice = firebase.auth().currentUser.uid;
     let reference =  firebase.database().ref('Users').orderByChild('index').equalTo(indice);
     this.general_loader.dismiss();

@@ -26,6 +26,7 @@ export class NeweventPage {
  public type: any;
  public current_index: any = 0;
  public event_data: any = {
+  'cancelation_policy': '',
    'title': '',
    'day': '',
    'time': '',
@@ -36,12 +37,14 @@ export class NeweventPage {
    'provided': '',
    'about_organizer': '',
    'spaces_available': '',
-   'cost': '',
+   'cost': '0',
    'type': 'public',
+   'end_time':'',
    'media': [],
    'nomads': [],
    'e_type': '',
-   'repeats': ''
+   'repeats': '',
+   'noms': 0,
  }
  public isClan: any = false;
  public GoogleAutocomplete: any = new google.maps.places.AutocompleteService();

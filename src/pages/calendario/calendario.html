@@ -43,11 +43,13 @@
 
   <div class="day-area">
     <div *ngFor="let a of this.activities_all">
+      
       <div class="day-element" *ngIf="isSameDay(a.startTime, a.reservations)" (click)="onEventSelected(a)">
         <div class="time-element">{{a.time}}</div>
         <div class="details">
           <div class="d-title">{{a.title_complete}}</div>
-          <div class="d-spaces">{{this.getRsv()}}/{{a.space}} spaces available</div>
+          <div class="d-spaces" *ngIf="a.isEvent">{{a.reservations}}/{{a.spaces_available}} spaces available</div>
+          <div class="d-spaces"  *ngIf="a.isEvent==false">{{this.getRsv(a)}}/{{a.space}} spaces available</div>
         </div>
       </div>
     </div>

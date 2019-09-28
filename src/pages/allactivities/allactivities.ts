@@ -14,9 +14,8 @@ import { EditstudioPage } from '../editstudio/editstudio';
 import { AttendantsPage } from '../attendants/attendants';
 import { Editeventv2Page } from '../editeventv2/editeventv2';
 import { CloneeventPage } from '../cloneevent/cloneevent';
-
 /**
- * Generated class for the MyactivitiesPage page.
+ * Generated class for the AllactivitiesPage page.
  *
  * See https://ionicframework.com/docs/components/#navigation for more info on
  * Ionic pages and navigation.
@@ -24,10 +23,10 @@ import { CloneeventPage } from '../cloneevent/cloneevent';
 
 @IonicPage()
 @Component({
-  selector: 'page-myactivities',
-  templateUrl: 'myactivities.html',
+  selector: 'page-allactivities',
+  templateUrl: 'allactivities.html',
 })
-export class MyactivitiesPage {
+export class AllactivitiesPage {
   public response$: any;
   public responseS$: any;
   public responseE$: any;
@@ -180,26 +179,25 @@ export class MyactivitiesPage {
             }
           },
           {
-            text: 'Edit Event',
+            text: 'Clone',
+            handler: () => {
+              //this.navCtrl.push(EditeventPage, { 'Event': act });
+              this.navCtrl.push(CloneeventPage, { 'Event': act });
+            }
+          },
+          {
+            text: 'Edit',
             handler: () => {
               //this.navCtrl.push(EditeventPage, { 'Event': act });
               this.navCtrl.push(Editeventv2Page, { 'Event': act });
             }
           },
           {
-            text: 'Recreate Event',
-            handler: () => {
-              //this.navCtrl.push(EditeventPage, { 'Event': act });
-              this.navCtrl.push(CloneeventPage, { 'Event': act });
-            }
-          },
-          
-          {
             text: 'Remove',
             role: 'destructive',
             handler: () => {
               if (!this.checkNomdas(act)) this.confirmRemove(act);
-              else this.alertCtrl.create({ title: 'There are nomads signed', message: 'You cant delete this activity now, please contact a@nomu.fit', buttons: ['Ok'] }).present();
+              else this.alertCtrl.create({ title: 'There are nomads signed', message: 'You cant delete this activity now', buttons: ['Ok'] }).present();
             }
           },
         ]

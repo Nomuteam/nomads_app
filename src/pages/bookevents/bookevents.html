@@ -1,0 +1,63 @@
+<!--
+  Generated template for the BookPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+
+
+<div class="todo" navPop>
+
+</div>
+
+
+
+<div  class="modal1 w3-animate-right">
+
+  <div class="top-container">
+    <div class="top-title">You are all set!</div>
+  </div>
+
+  <div class="class-container">
+    <div class="left-side">
+      <!-- <div class="cover-gradient1"></div> -->
+      <div class="cover-gradient2"></div>
+      <div class="class-img"></div>
+      </div>
+      <div class="class-text">
+        <div class="class-title">{{this.activity_data.title_complete}}</div>
+        <div class="class-hint">{{this.activity_data.categories.activity_type}}</div>
+        <div class="class-hint">{{getDay()}}</div>
+        <div class="class-hint">{{getTime()}}</div>
+    </div>
+  </div>
+
+  <div class="section-title">Share with...</div>
+
+  <div class="share-container">
+    <div class="compartir">
+      <div (click)="confirmShare()" class="share nomads"></div>
+      <div class="share-text">My Clans</div>
+    </div>
+
+    <div class="compartir">
+      <div (click)="shareGeneral()" class="share link"></div>
+      <div class="share-text">Social Media</div>
+    </div>
+
+  </div>
+
+  <button navPop type="button" class="pay-btn rose" padding>
+   <div class="pay-container" padding>
+     <div class="pay-hint">Back</div>
+   </div>
+  </button>
+
+  <button (click)="openSchedule()" type="button" class="pay-btn" padding>
+   <div class="pay-container" padding>
+     <div class="pay-hint">Check my Schedule</div>
+   </div>
+  </button>
+
+
+</div>

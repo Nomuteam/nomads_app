@@ -78,6 +78,10 @@ import { AngularFireModule } from 'angularfire2';
 import { AngularFireDatabaseModule } from 'angularfire2/database';
 import { AngularFireAuthModule } from 'angularfire2/auth';
 import { FIREBASE_CONFIG } from './firebase.credentials';
+import { BookEventsPage } from '../pages/bookevents/bookevents';
+import { Editeventv2Page } from '../pages/editeventv2/editeventv2';
+import { CloneeventPage } from '../pages/cloneevent/cloneevent';
+import { AllactivitiesPage } from '../pages/allactivities/allactivities';
 
 @NgModule({
   declarations: [
@@ -116,6 +120,7 @@ import { FIREBASE_CONFIG } from './firebase.credentials';
     NewclanPage,
     MembersPage,
     BookPage,
+    BookEventsPage,
     NeweventPage,
     LocatePage,
     EventPage,
@@ -126,6 +131,7 @@ import { FIREBASE_CONFIG } from './firebase.credentials';
     TicketPage,
     EditactPage,
     EditeventPage,
+    Editeventv2Page,
     CalendarioPage,
     TutorialPage,
     ReservationsPage,
@@ -136,7 +142,9 @@ import { FIREBASE_CONFIG } from './firebase.credentials';
     NewstudioPage,
     StudioPage,
     EditstudioPage,
-    AttendantsPage
+    AttendantsPage,
+    CloneeventPage,
+    AllactivitiesPage
   ],
   imports: [
     NgCalendarModule,
@@ -189,6 +197,7 @@ import { FIREBASE_CONFIG } from './firebase.credentials';
     NewclanPage,
     MembersPage,
     BookPage,
+    BookEventsPage,
     NeweventPage,
     LocatePage,
     EventPage,
@@ -199,6 +208,7 @@ import { FIREBASE_CONFIG } from './firebase.credentials';
     TicketPage,
     EditactPage,
     EditeventPage,
+    Editeventv2Page,
     CalendarioPage,
     TutorialPage,
     ReservationsPage,
@@ -209,7 +219,9 @@ import { FIREBASE_CONFIG } from './firebase.credentials';
     NewstudioPage,
     StudioPage,
     EditstudioPage,
-    AttendantsPage
+    AttendantsPage,
+    CloneeventPage,
+    AllactivitiesPage
   ],
   providers: [
     StatusBar,

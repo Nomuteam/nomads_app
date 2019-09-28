@@ -184,15 +184,60 @@ export class CalendarioPage {
   }
 
   isDespues(fecha){
-    console.log(fecha);
     let today  = moment();
     return moment(fecha).isBefore(today);
+  }
+
+  
+  markStartEvent(inicio, tiempo){
+    let t = parseInt(tiempo.slice(0,2));
+    let m = parseInt(tiempo.slice(3));
+    
+    let ayuda = moment(inicio).toDate();
+    ayuda.setHours(t);
+    ayuda.setMinutes(m);
+
+    /*
+    if(this.isDespues(ayuda)) ayuda = (moment(ayuda).add(7, 'days')).toDate();
+    ayuda = moment(ayuda).toDate();
+    */
+   
+    return ayuda;
+  }
+
+  markEndEvent(inicio, tiempo){
+    let t = parseInt(tiempo.slice(0,2));
+    let m = parseInt(tiempo.slice(3));
+    let ayuda:any;
+    try{
+      ayuda = moment(inicio).toDate();
+    }
+    catch{
+      ayuda = moment(inicio).toDate();
+    }
+    
+    ayuda.setHours(t+2);
+    ayuda.setMinutes(m);
+    if(this.isDespues(ayuda)) ayuda = (moment(ayuda).add(7, 'days')).toDate();
+    //ayuda = moment(ayuda).toDate();
+
+
+    return ayuda;
   }
 
   markStart(inicio, tiempo){
     let t = parseInt(tiempo.slice(0,2));
     let m = parseInt(tiempo.slice(3));
-    let ayuda = moment(inicio, 'dddd').toDate();
+    
+    let ayuda:any;
+    try{
+      ayuda = moment(inicio, 'dddd').toDate();
+    }
+    catch{
+      //2019-09-15
+      ayuda = moment(inicio,'yyyy-mm-dd').toDate();
+    }
+
     ayuda.setHours(t);
     ayuda.setMinutes(m);
 
@@ -205,10 +250,16 @@ export class CalendarioPage {
   markEnd(inicio, tiempo){
     let t = parseInt(tiempo.slice(0,2));
     let m = parseInt(tiempo.slice(3));
-    let ayuda = moment(inicio, 'dddd').toDate();
+    let ayuda:any;
+    try{
+      ayuda = moment(inicio, 'dddd').toDate();
+    }
+    catch{
+      ayuda = moment(inicio).toDate();
+    }
+    
     ayuda.setHours(t+2);
     ayuda.setMinutes(m);
-
     if(this.isDespues(ayuda)) ayuda = (moment(ayuda).add(7, 'days')).toDate();
     //ayuda = moment(ayuda).toDate();
 
@@ -217,7 +268,6 @@ export class CalendarioPage {
   }
 
   checkExist(clave){
-     console.log(this.nomad_schedule.length);
     for(let i=0; i<this.nomad_schedule.length; i++){
       if(this.nomad_schedule[i].activity_id == clave){
         return true;
@@ -229,12 +279,28 @@ export class CalendarioPage {
   checkExistE(clave, llave, review){
     let a = this.e_response$;
     let aux;
+    let inscritos:any=0;
     for(let key in a){
       if(a[key].index == clave){
 
-        // let n = a[key].nomads.filter( b => this.hacerCosa(b.date, this.markStart(a[key].day, a[key].time)));
-        // let spaces = Object.keys(n).length;
+        let fechaInicio = this.markStartEvent(a[key].day, a[key].time);
+        
 
+         let nomads = [];
+         if(a[key].nomads != null){
+          var keys = Object.keys(a[key].nomads);
+          for (var i = 0; i < keys.length; i++) {
+            var key_2 = keys[i];
+            nomads.push(a[key].nomads[key_2]);
+            inscritos++;
+          }
+          let reservation = [{
+            nomads:nomads
+          }];
+          
+          
+         }
+             
         let aux2 = {
           'title': a[key].title.substring(0, 10) + '..',
           'title_complete': a[key].title,
@@ -246,11 +312,11 @@ export class CalendarioPage {
           'provided':  a[key].provided,
           'about_organizer':  a[key].about_organizer,
           'type':  a[key].type,
-          'startTime': this.markStart(a[key].day, a[key].time),
-          'endTime': this.markEnd(a[key].day, a[key].time),
+          'startTime': fechaInicio,
+          'endTime': this.markEndEvent(a[key].day, a[key].time),
           'allDay': false,
           'time': a[key].time,
-          'nomads': (a[key].nomads != undefined ? a[key].nomads : []),
+          'nomads': (a[key].nomads != undefined ? nomads : []),
           'creator':  a[key].creator,
           'index':  a[key].index,
           // 'media': a[key].media,
@@ -260,29 +326,40 @@ export class CalendarioPage {
           'reviewed': (review != undefined ? review : false),
           'review':( a[key].review ? a[key].review : 5),
           'reviews': (a[key].reviews ? a[key].reviews : []),
-          'spaces_available': a[key].spaces_available ? a[key].spaces_available : 0
+          'spaces_available': a[key].spaces_available ? a[key].spaces_available : 0,
+          'reservations': inscritos
         }
+
+        
         return aux2;
       }
     }
     return aux;
   }
 
-  openAttendants(){
-    this.navCtrl.push(AttendantsPage, {'Reservations': this.reservations});
+  openAttendants(event){
+    
+    if(event.isEvent == true){
+      
+      this.navCtrl.push(AttendantsPage, {'Reservations': [event]});
+    }
+    else{
+      this.navCtrl.push(AttendantsPage, {'Reservations': this.reservations});
+    }
+    
   }
 
   isSameDay(dia, rsv){
 
     let aux = moment(dia).format('YYYY-MM-DD');
     this.reservations = [];
-    //console.log(aux);
+    
 
     let dia2 = this.cualHoy();
-    //console.log(dia2);
+    
     let suma = (this.selected-dia2 >= 0 ? this.selected-dia2 : (7-dia2+this.selected));
     let hoy = moment().add(suma, 'days').format("YYYY-MM-DD");
-    //console.log(hoy);
+    
 
 
 
@@ -292,13 +369,14 @@ export class CalendarioPage {
           this.reservations[this.reservations.length] = rsv[key];
         }
       }
-      //console.log(this.reservations);
+      
 
 
     return hoy == moment(dia).format("YYYY-MM-DD")
   }
 
-  getRsv(){
+  getRsv(element){
+    
     if(this.reservations != []){
       let count = 0;
        for(let key in this.reservations){
@@ -316,7 +394,7 @@ export class CalendarioPage {
 
   isMine(clave){
     let a = this.users$.Activities_created;
-    //console.log(a);
+    
     for(let key in a){
       if(a[key].index == clave) return true;
     }
@@ -325,19 +403,16 @@ export class CalendarioPage {
 
   checkExistA(){
     let b = this.response$;
-    console.log(b);
     for(let key in b){
       if(this.isMine(b[key].index)){
         if(b[key].schedule){
-          console.log(b[key]);
           for(let lla in b[key].schedule){
             let n = '';
             if(b[key].nomads){
-              console.log(b[key].nomads);
               //n = b[key].nomads.filter( a => this.hacerCosa(a.date, this.markStart(b[key].schedule[lla].day, b[key].schedule[lla].start_time)));
               let spaces = Object.keys(n).length;
             }
-            console.log(lla);
+            
             this.activities_all.push({
               'title': b[key].title.substring(0, 10) + '..',
               'title_complete': b[key].title,
@@ -383,8 +458,6 @@ export class CalendarioPage {
         for(let key2 in a[key].nomads){
           if(!this.isDespues(a[key].nomads[key2].date)){
             for(let lla in a[key].schedule){
-              console.log(a[key].schedule[lla].day == a[key].nomads[key2].day);
-              console.log(a[key].schedule[lla].start_time == a[key].nomads[key2].start_time)
               if(a[key].schedule[lla].day == a[key].nomads[key2].day && a[key].schedule[lla].start_time == a[key].nomads[key2].time){
                 if(reservations[a[key].nomads[key2].date.toString()] = []){
                     reservations[a[key].nomads[key2].date.toString()] = {'date': a[key].nomads[key2].date, 'day': a[key].nomads[key2].day, 'nomads': []};
@@ -397,7 +470,6 @@ export class CalendarioPage {
         }
       }
     }
-    console.log(reservations);
   }
 
   getClave(nomadas){
@@ -413,15 +485,14 @@ export class CalendarioPage {
 
     for(let i=0; i<this.nomad_schedule.length; i++){
       if(this.checkExistE(this.nomad_schedule[i].activity_id, this.nomad_schedule[i].key, this.nomad_schedule[i].reviewed) != undefined){
-
+        
         this.activities_all.push(this.checkExistE(this.nomad_schedule[i].activity_id, this.nomad_schedule[i].key, this.nomad_schedule[i].reviewed));
       }
     }
 
     this.checkExistA();
 
-   console.log(this.activities_all);
-   //console.log(this.past_events);
+   
   }
 
   getEvents(){
@@ -463,7 +534,6 @@ export class CalendarioPage {
       this.nomad_schedule = [];
       this.convertSchedule();
     });
-    console.log(this.noms_balance);
   }
 
   convertSchedule(){
@@ -478,7 +548,6 @@ export class CalendarioPage {
           'reviewed': a[key].reviewed
         });
     }
-    console.log(this.nomad_schedule);
     this.getActivities();
     if(this.general_loader) this.general_loader.dismiss();
   }
@@ -631,7 +700,6 @@ export class CalendarioPage {
    }
 
   onEventSelected(event) {
-    console.log(event);
     let start = moment(event.startTime).format('LLLL');
     let end = moment(event.endTime).format('LLLL');
 
@@ -649,7 +717,7 @@ export class CalendarioPage {
         {
           text: 'View Assistants',
           handler: () => {
-            this.openAttendants();
+            this.openAttendants(event);
           }
         },
         {

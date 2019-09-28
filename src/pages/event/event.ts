@@ -10,6 +10,8 @@ import * as moment from 'moment';
 import { ChatsPage } from '../chats/chats';
 import { SocialSharing } from '@ionic-native/social-sharing';
 import { LaunchNavigator, LaunchNavigatorOptions } from '@ionic-native/launch-navigator';
+import { BookPage } from '../book/book';
+import { BookEventsPage } from '../bookevents/bookevents';
 
 /**
  * Generated class for the EventPage page.
@@ -269,6 +271,8 @@ sharetoClans(){
           // //Save transaction id in ally db
           let t_reference = {'index': t_id};
           this.af.list('Users/'+firebase.auth().currentUser.uid+'/transactions').update(t_id, t_reference);
+         
+         /*
           this.af.list('Users/'+this.event_data.creator+'/transactions').update(t_id, t_reference)
               .then(()=>{
                 this.af.list('Notifications').push({'title': 'Someone joined your event!', 'subtitle': this.name+' just joined your event '+this.event_data.title_complete, 'index': this.event_data.creator});
@@ -295,6 +299,15 @@ sharetoClans(){
                 this.navCtrl.parent.select(3);
               });
 
+              */
+//vamos a poner la nueva pantalla
+this.event_data.categories={};
+let modal = this.modalCtrl.create(BookEventsPage, {'Activity': this.event_data, 'Day': moment(this.event_data.day).format('dddd'), 'Time': this.event_data.time});
+            modal.onDidDismiss( data => {
+              this.general_loader.dismiss();
+              if(data && data.go) this.navCtrl.parent.select(3);
+            });
+         modal.present();
         }
         else{
           this.alertCtrl.create({

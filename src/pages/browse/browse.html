@@ -37,11 +37,31 @@
       <ion-grid>
         <ion-row>
           <ion-col col-6>
-           <div (click)="openFiltered('Experiences')" class="act-element">
+           <div (click)="openFilteredEvento('Experiences',0)" class="act-element">
              <p class="act-title">All Experiences</p>
-             <p class="act-number">{{this.getExperiences()}}</p>
+             <p class="act-number">{{this.events.length}}</p>
            </div>
           </ion-col>
+          <ion-col col-6>
+            <div (click)="openFilteredEvento('Experiences',1)" class="act-element">
+              <p class="act-title">Event</p>
+              <p class="act-number">{{this.eventsEvent.length}}</p>
+            </div>
+           </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col col-6>
+           <div (click)="openFilteredEvento('Experiences',2)" class="act-element">
+             <p class="act-title">Adventure</p>
+             <p class="act-number">{{this.eventsAdventure.length}}</p>
+           </div>
+          </ion-col>
+          <ion-col col-6>
+            <div (click)="openFilteredEvento('Experiences',3)" class="act-element">
+              <p class="act-title">Retreat</p>
+              <p class="act-number">{{this.eventsRetreat.length}}</p>
+            </div>
+           </ion-col>
         </ion-row>
       </ion-grid>
     </div>

@@ -8,6 +8,7 @@ import { ProfilePage } from '../profile/profile';
 import { ProfallyPage } from '../profally/profally';
 import { MyactivitiesPage } from '../myactivities/myactivities';
 import { CalendarioPage } from '../calendario/calendario';
+import { AllactivitiesPage } from '../allactivities/allactivities';
 
 @Component({
   templateUrl: 'tabs.html'
@@ -22,6 +23,7 @@ export class TabsPage {
   tab6Root = ProfallyPage;
   tab7Root = MyactivitiesPage;
   tab8Root = CalendarioPage;
+  tab9Root = AllactivitiesPage;
 
   public type: any;
   public selected: any;

@@ -3,7 +3,13 @@
     <name>nomu</name>
     <description>Mexico</description>
     <author email="hi@ionicframework" href="http://ionicframework.com/">Ionic Framework Team</author>
-    <content original-src="index.html" src="http://192.168.43.29:8100" />
+    <universal-links>
+        <host name="example.page.link" scheme="https" />
+        <host name="dev-nomads.firebaseapp.com" scheme="https">
+            <path url="/__/auth/callback"/>
+        </host>
+    </universal-links>
+    <content src="index.html" />
     <access origin="*" />
     <allow-intent href="http://*/*" />
     <allow-intent href="https://*/*" />
@@ -104,11 +110,19 @@
         <variable name="GEOLOCATION_USAGE_DESCRIPTION" value="To locate you" />
     </plugin>
     <plugin name="cordova-plugin-x-socialsharing" spec="^5.4.4" />
-    <plugin name="cordova-plugin-inappbrowser" spec="^3.0.0" />
     <plugin name="uk.co.workingedge.phonegap.plugin.launchnavigator" spec="^5.0.4">
         <variable name="GOOGLE_API_KEY_FOR_ANDROID" value="AIzaSyDm544BEGbTNNiK-3hx0Hm1gDUj6vjD5eM" />
     </plugin>
-    <allow-navigation href="http://192.168.43.29:8100" sessionid="afcbc88a" />
     <engine name="android" spec="6.3.0" />
     <engine name="ios" spec="4.5.5" />
+    <plugin name="cordova-plugin-buildinfo" spec="4.0.0" />
+    <plugin name="cordova-universal-links-plugin" spec="~1.2.1" />
+    <plugin name="cordova-plugin-browsertab" spec="0.2.0" />
+    <plugin name="cordova-plugin-inappbrowser" spec="^3.1.0" />
+    <plugin name="cordova-plugin-customurlscheme" spec="4.4.0">
+        <variable name="URL_SCHEME" value="neuron.mx.nomu" />
+        <variable name="ANDROID_SCHEME" value=" " />
+        <variable name="ANDROID_HOST" value=" " />
+        <variable name="ANDROID_PATHPREFIX" value="/" />
+    </plugin>
 </widget>

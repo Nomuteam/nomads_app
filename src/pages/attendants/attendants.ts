@@ -40,6 +40,11 @@ public members: any = [];
   }
 
   isMember(indice){
+    
+    if(this.reservations[0] == null){
+      return false;
+    }
+    
     let r = this.reservations[0].nomads
     for(let key in r){
       if(r[key].index == indice){
@@ -50,6 +55,7 @@ public members: any = [];
   }
 
   convertMembers(){
+    
     let a = this.response$;
     for(let key in a){
       if(this.isMember(a[key].index)){
@@ -61,7 +67,7 @@ public members: any = [];
         });
       }
     }
-    console.log(this.actual_members);
+    
     this.general_loader.dismiss();
   }
 
@@ -74,6 +80,7 @@ public members: any = [];
   }
 
   ionViewDidLoad() {
+    console.log('reservaciones',this.reservations);
     this.general_loader = this.loadingCtrl.create({
       spinner: 'bubbles',
       content: 'Loading...'

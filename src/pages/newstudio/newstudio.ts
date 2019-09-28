@@ -48,7 +48,7 @@ export class NewstudioPage implements OnInit{
     'description': '',
     'amenities': '',
     'useful_notes': '',
-    'membership_cost': '',
+    'membership_cost': '0',
     'logo': '',
     'index': '',
     'schedule': [
@@ -177,7 +177,7 @@ export class NewstudioPage implements OnInit{
 
   canAdvance(){
     if(this.current_index == 1){
-      return this.studio_data.name != '' && this.studio_data.location != '' && this.studio_data.description != '' && this.studio_data.amenities != '' && this.studio_data.useful_notes != '' && this.studio_data.membership_cost != '';
+      return this.studio_data.name != '' && this.studio_data.location != '' && this.studio_data.description != '' && this.studio_data.amenities != '' && this.studio_data.useful_notes != '';
     }
     else if(this.current_index == 2){
       return this.studio_data.opening != '' && this.studio_data.closing != '' && this.studio_data.schedule.filter(d => d.selected).length > 0;

@@ -13,14 +13,14 @@
 
   <div class="pick-hint">Pick One</div>
 
-  <div (click)="selectThis('1')" class="{{getClass('1')}}">
-    <div class="service-title">Fitness class</div>
-    <div class="service-description">Fixed schedule and determined availability</div>
-  </div>
-
   <div (click)="selectThis('2')" class="{{getClass('2')}}">
     <div class="service-title">Studio</div>
     <div class="service-description">Multiple fitness classes within a same studio</div>
+  </div>
+
+  <div (click)="selectThis('1')" class="{{getClass('1')}}">
+    <div class="service-title">Fitness class</div>
+    <div class="service-description">Fixed schedule and determined availability</div>
   </div>
 
   <div (click)="selectThis('3')" class="{{getClass('3')}}">

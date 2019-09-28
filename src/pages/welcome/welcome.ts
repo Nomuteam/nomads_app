@@ -75,6 +75,16 @@ public general_loader: any;
     this.navCtrl.push(LoginPage, {'User': 'nomads'});
   }
 
+  openLoginFB(){
+    var provider = new firebase.auth.FacebookAuthProvider();
+    firebase.auth().signInWithPopup(provider).then(result=>{
+      console.log(result);
+      alert('ok');
+    }).catch(error=>{
+      console.log(error);
+      alert('error');
+    })
+  }
   openRegister(){
     this.navCtrl.push(RegisterPage, {'User': 'nomads'});
   }

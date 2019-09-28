@@ -104,6 +104,9 @@ public segment: any = 'schedule';
     this.schedule = [];
     let a = this.clan.schedule;
     for(let key in a){
+
+      
+
       this.schedule.push({
         'date': a[key].date,
         'day': a[key].day,
@@ -115,6 +118,9 @@ public segment: any = 'schedule';
       });
     }
     let today  = moment().add(1, 'days');
+
+    console.log('fecha', today);
+
     this.schedule = this.schedule.filter( event => !moment(event.date).isBefore(today));
     console.log(this.schedule);
   }

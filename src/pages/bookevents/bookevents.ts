@@ -17,9 +17,9 @@ import { SocialSharing } from '@ionic-native/social-sharing';
 @IonicPage()
 @Component({
   selector: 'page-book',
-  templateUrl: 'book.html',
+  templateUrl: 'bookevents.html',
 })
-export class BookPage {
+export class BookEventsPage {
 public general_loader: any;
 public section: any = '1';
 public selected_day: any = '';

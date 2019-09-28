@@ -127,6 +127,33 @@ public done_a: any = false;
 
   }
 
+  convertActivitiesEvents(){
+  
+    this.activities_all = JSON.parse(localStorage.getItem('events'));
+    /*
+    console.log('Actividades filtradas', this.activities_all);
+    this.activities_all = this.activities_all.concat(JSON.parse(localStorage.getItem('events')));
+    
+  
+     if(this.type == 'All Events') this.activities_all = this.activities_all.filter( act => act.isEvent);
+     else if (this.type == 'All Activities') this.activities_all = this.activities_all.filter( act => !act.isEvent);
+     else this.activities_all = this.activities_all.filter( act => act.tipo == this.type || (act.categories && act.categories.activity_type == this.type ));
+  */
+  
+  
+     console.log('Actividades', this.activities_all);
+      this.activities_all.forEach(element => {
+        console.log('eventi', element);
+        element.categories={};
+        this.getDistance(element.location, (data1, data2)=>{
+          element.distancia = data1;
+          element.distance = data2;
+          this.activities_all = this.activities_all.sort((a, b) => a.distancia - b.distancia);
+        })
+      });
+     if(this.general_loader) this.general_loader.dismiss();
+    }
+
   convertActivities(){
   //   let a = this.e_response$;
   //
@@ -191,6 +218,7 @@ public done_a: any = false;
   //     }
 
   this.activities_all = JSON.parse(localStorage.getItem('actividades'));
+  console.log('Actividades filtradas', this.activities_all);
   this.activities_all = this.activities_all.concat(JSON.parse(localStorage.getItem('events')));
 
    if(this.type == 'All Events') this.activities_all = this.activities_all.filter( act => act.isEvent);
@@ -215,7 +243,7 @@ public done_a: any = false;
    //   }
    // }
 
-   
+   console.log('Actividades', this.activities_all);
     this.activities_all.forEach(element => {
       console.log('eventi', element);
       this.getDistance(element.location, (data1, data2)=>{
@@ -230,8 +258,9 @@ public done_a: any = false;
   getEvents(){
     this.af.object('Events').snapshotChanges().subscribe(action => {
       this.e_response$ = action.payload.val();
+      console.log('Eventos!!', this.e_response$)
       this.activities_all = [];
-      this.convertActivities();
+      this.convertActivitiesEvents();
     });
   }
 
@@ -264,7 +293,6 @@ public done_a: any = false;
 
     if(!this.navParams.get('Activities')){
      
-  
       this.geolocation.getCurrentPosition().then((position) => {
   
         this.posicion = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
@@ -277,6 +305,7 @@ public done_a: any = false;
         */
       }, (err) => {
         this.posicion = new google.maps.LatLng(25.638233, -100.3622394);
+        console.log('4');
         this.getEvents();
         //this.general_loader.dismiss();
       });
@@ -286,23 +315,33 @@ public done_a: any = false;
   
         this.posicion = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
         this.activities_all = this.navParams.get('Activities');
+        //preguntas.sort((a, b) => a.orden - b.orden);
+        this.activities_all = this.activities_all.sort((a, b) => Number(a.fechaProxima.replace(':','')) - Number(b.fechaProxima.replace(':','')));
+        
+        /*
         this.activities_all.forEach(element => {
           this.getDistance(element.location, (data1, data2)=>{
             element.distancia = data1;
             element.distance = data2;
-            this.activities_all = this.activities_all.sort((a, b) => a.distancia - b.distancia);
+            
+            //Number(a.fechaProxima.replace(':',''))
+            this.activities_all = this.activities_all.sort((a) => Number(a.fechaProxima.replace(':','')));
+            //this.activities_all = this.activities_all.sort((a, b) => a.fechaProxima - b.fechaProxima);
+            console.log('evento, ordenamos por fecha proxima', this.activities_all);
           })
         });
+        */
         this.general_loader.dismiss();
       }, (err) => {
         this.posicion = new google.maps.LatLng(25.638233, -100.3622394);
         this.activities_all = this.navParams.get('Activities');
         this.activities_all.forEach(element => {
-          console.log('eventi', element);
+          
           this.getDistance(element.location, (data1, data2)=>{
             element.distancia = data1;
             element.distance = data2;
-            this.activities_all = this.activities_all.sort((a, b) => a.distancia - b.distancia);
+            //this.activities_all = this.activities_all.sort((a, b) => a.fechaProxima - b.fechaProxima);
+            this.activities_all = this.activities_all.sort((a, b) => Number(a.fechaProxima.replace(':','')) - Number(b.fechaProxima.replace(':','')));
           })
         });
         this.general_loader.dismiss();

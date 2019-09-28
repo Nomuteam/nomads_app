@@ -12,7 +12,7 @@
         Exit
      </button>
    </ion-buttons>
-    <p class="title" style="margin-left: -5%;">New Experience</p>
+    <p class="title" style="margin-left: -5%;">Edit Experience</p>
   </ion-navbar>
 </ion-header>
 
@@ -140,8 +140,8 @@
       </div>
     </div>
 
-    <div style="display: none" class="title-page">Does this experience repeat on a weekly basis?</div>
-    <div style="display: none" class="week-days">
+    <div class="title-page" style="display: none">Does this experience repeat on a weekly basis?</div>
+    <div class="week-days" style="display: none">
       <div *ngFor="let d of this.days; let in = index">
         <div class="{{getClass(d.selected)}}" (click)="changeSelected(in)">{{d.ab}}</div>
       </div>

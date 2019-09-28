@@ -98,6 +98,11 @@ public event_type: any = '';
 
 public e_response$: any;
 public events: any = [];
+
+public eventsEvent: any = [];
+public eventsAdventure: any = [];
+public eventsRetreat: any = [];
+//this.events.filter(x=>x.e_type == 'adventure').length
 public response$: any;
 public activities: any = [];
 public categorias: any = [];
@@ -131,6 +136,12 @@ public experiences: any = [];
     for(let key in a){
       if(!moment(a[key].day).isBefore(today)) this.events.push(a[key]);
     }
+    console.log('eventos',this.events);
+    this.eventsEvent = this.events.filter(x=>x.e_type == 'event');
+    this.eventsAdventure = this.events.filter(x=>x.e_type == 'adventure');
+    this.eventsRetreat = this.events.filter(x=>x.e_type == 'retreat');
+
+    console.log(this.eventsEvent);
     //
     // let today  = moment();
     // this.events = this.events.filter( event => !moment(event.day).isBefore(today));
@@ -179,14 +190,14 @@ public experiences: any = [];
     }
     this.activities = this.activities.filter(act => act.type != 'cacaca');
     this.categorias = this.categorias.filter(act => act.type != 'cacaca');
-    console.log(this.activities);
-    console.log(this.categorias);
+    //console.log(this.activities);
+    //console.log(this.categorias);
   }
 
 
   getExperiences(){
     //return ['hi', 'k'];
-    console.log(this.experiences.length);
+    //console.log(this.experiences.length);
     return this.experiences.length;
   }
 
@@ -218,6 +229,28 @@ public experiences: any = [];
   }
 
   openFiltered(tipo){
+    this.navCtrl.push(FilteredPage, {'Tipo': tipo});
+  }
+
+  openFilteredEvento(tipo, EventType){
+    //Todos
+    if(EventType == 0){
+      localStorage.setItem('events', JSON.stringify(this.events));
+    }
+    //evento
+    if(EventType == 1){
+      localStorage.setItem('events', JSON.stringify(this.eventsEvent));
+    }
+    //aventuras
+    if(EventType == 2){
+      localStorage.setItem('events', JSON.stringify(this.eventsAdventure));
+    }
+    //retreats
+    if(EventType == 3){
+      localStorage.setItem('events', JSON.stringify(this.eventsRetreat));
+    }
+    
+    
     this.navCtrl.push(FilteredPage, {'Tipo': tipo});
   }
 
