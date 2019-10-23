@@ -36,7 +36,7 @@
    <div class="items-container">
      <div class="balance-hint">Current Balance</div>
     <div class="balance-container">
-     <div *ngIf="this.user_type == 'nomads'" class="number">{{this.noms_balance}}</div>
+     <div *ngIf="this.user_type == 'nomads'" class="number">{{this.noms_balance.toFixed(2)}}</div>
      <div *ngIf="this.user_type != 'nomads'" class="number">${{this.noms_balance * 20}}</div>
      <div *ngIf="this.user_type == 'nomads'" class="currency">NOMS</div>
      <div *ngIf="this.user_type != 'nomads'" class="currency">MXN</div>

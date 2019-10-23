@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, LoadingController, AlertController, ActionSheetController, ModalController } from 'ionic-angular';
+import { Component, ViewChild } from '@angular/core';
+import { IonicPage, NavController, NavParams, LoadingController, AlertController, ActionSheetController, ModalController, Content } from 'ionic-angular';
 import { AngularFireDatabase, AngularFireObject } from 'angularfire2/database';
 import firebase from 'firebase';
 import { Camera, CameraOptions } from '@ionic-native/camera';
@@ -53,7 +53,16 @@ export class NewactPage {
   ];
   public example_activities: any = [
     {
+      'title': 'Gym'
+    },
+    {
       'title': 'Yoga'
+    },
+     {
+      'title': 'Hiking'
+    },
+    {
+      'title': 'Martial Arts'
     },
     {
       'title': 'Muay Thai'
@@ -63,12 +72,6 @@ export class NewactPage {
     },
     {
       'title': 'HIIT'
-    },
-    {
-      'title': 'Hiking'
-    },
-    {
-      'title': 'Gym'
     },
     {
       'title': 'Spinning'
@@ -95,11 +98,57 @@ export class NewactPage {
       'title': 'Cardio'
     },
     {
-      'title': 'Movement'
+      'title': 'Wakeboarding'
     },
     {
-      'title': 'Martial Arts'
+      'title': 'MTB / Downhill'
     },
+    {
+      'title': 'MMA'
+    },
+    {
+      'title': 'Swimming'
+    },
+    {
+      'title': 'Tennis'
+    },
+    {
+      'title': 'Paddle'
+    },
+    {
+      'title': 'Soccer'
+    },
+    {
+      'title': 'TRX'
+    },
+    {
+      'title': 'Meditation'
+    },
+    {
+      'title': 'Surfing'
+    },
+    {
+      'title': 'Kite Boarding'
+    },
+    {
+      'title': 'Running'
+    },
+    {
+      'title': 'Trial Running'
+    },
+    {
+      'title': 'SPA'
+    },
+    {
+      'title': 'Extreme'
+    },
+    {
+      'title': 'Public Green Spaces'
+    },
+
+
+
+
   ];
   public example_forms: any = [
     {
@@ -486,6 +535,8 @@ export class NewactPage {
       })
   }
 
+  @ViewChild(Content) content: Content;
+
   next(){
     if(this.current_index == 4){
       this.general_loader = this.loadingCtrl.create({
@@ -496,7 +547,12 @@ export class NewactPage {
       this.doMagic();
     }
     else{
+
       this.current_index++;
+
+      let yOffset = document.getElementById('top').offsetTop;
+      this.content.scrollTo(0, yOffset, 0)
+
     }
   }
 

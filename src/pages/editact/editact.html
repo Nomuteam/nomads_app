@@ -12,163 +12,192 @@
 
 
 <ion-content class="walk-page">
-<div class="status-container">
-  <div class="{{getClass(1)}}"></div>
-  <div class="{{getClass(2)}}"></div>
-  <div class="{{getClass(3)}}"></div>
-  <div class="{{getClass(4)}}"></div>
-</div>
+  <div class="status-container">
+    <div class="{{getClass(1)}}"></div>
+    <div class="{{getClass(2)}}"></div>
+    <div class="{{getClass(3)}}"></div>
+    <div class="{{getClass(4)}}"></div>
+  </div>
 
-<div *ngIf="this.current_index == 2" class="container-datos w3-animate-right">
-  <p class="title-container">General Info</p>
+  <div *ngIf="this.current_index == 2" class="container-datos w3-animate-right">
+    <p class="title-container">General Info</p>
 
-   <div class="card-container">
-     <div class="input-group">
-       <p class="input-title">Title</p>
-       <input type="text" class="input-field" [(ngModel)]="activity_data.title">
-     </div>
+    <div class="card-container">
+      <div class="input-group">
+        <p class="input-title">Title</p>
+        <input type="text" class="input-field" [(ngModel)]="activity_data.title">
+      </div>
 
-     <div class="input-group">
-       <p class="input-title">Location</p>
-       <input (click)="this.activity_data.location = ''" type="text" class="input-field" (blur)="this.activity_data.location = '';" [(ngModel)]="activity_data.location" (ngModelChange)="updateSearchResults()">
-       <ion-list [hidden]="autocompleteItems.length == 0">
-        <ion-item *ngFor="let item of autocompleteItems" tappable (click)="selectSearchResult(item)">
-          {{ item.description }}
-        </ion-item>
+      <div class="input-group">
+        <p class="input-title">Location</p>
+        <input (click)="this.activity_data.location = ''" type="text" class="input-field"
+          (blur)="this.activity_data.location = '';" [(ngModel)]="activity_data.location"
+          (ngModelChange)="updateSearchResults()">
+        <ion-list [hidden]="autocompleteItems.length == 0">
+          <ion-item *ngFor="let item of autocompleteItems" tappable (click)="selectSearchResult(item)">
+            {{ item.description }}
+          </ion-item>
         </ion-list>
-     </div>
+      </div>
 
-     <div class="input-group">
-       <p class="input-title">Description</p>
-       <textarea rows="4" type="text" class="input-field" [(ngModel)]="activity_data.description"></textarea>
-     </div>
+      <div class="input-group">
+        <p class="input-title">Description</p>
+        <textarea rows="4" type="text" class="input-field" [(ngModel)]="activity_data.description"></textarea>
+      </div>
 
-     <div class="input-group">
-       <p class="input-title">Recommendations</p>
-       <textarea rows="4" type="text" class="input-field" [(ngModel)]="activity_data.useful_notes" placeholder="(Yoga mats, Transport, Food, Water, etc..)"></textarea>
-     </div>
+      <div class="input-group">
+        <p class="input-title">Recommendations</p>
+        <textarea rows="4" type="text" class="input-field" [(ngModel)]="activity_data.useful_notes"
+          placeholder="(Yoga mats, Transport, Food, Water, etc..)"></textarea>
+      </div>
 
-     <div class="input-group">
-       <p class="input-title">Cancelation Policy (hours)</p>
-       <input type="tel" class="input-field" [(ngModel)]="activity_data.cancelation_policy">
-     </div>
+      <div class="input-group">
+        <p class="input-title">Cancelation Policy (hours)</p>
+        <input type="tel" class="input-field" [(ngModel)]="activity_data.cancelation_policy">
+      </div>
 
-     <div class="input-group">
-       <p class="input-title">Single Class Price in MXN</p>
-       <input type="tel" class="input-field" [(ngModel)]="activity_data.fee" (ngModelChange)="activity_data.class_price = activity_data.fee/20">
-     </div>
+      <div class="input-group">
+        <p class="input-title">Single Class Price in MXN</p>
+        <input type="tel" class="input-field" [(ngModel)]="activity_data.fee"
+          (ngModelChange)="activity_data.class_price = activity_data.fee/20">
+      </div>
 
-     <div class="input-group">
-       <p class="input-title">Single Class Price (Noms)</p>
-       <input disabled type="tel" class="input-field" [(ngModel)]="activity_data.class_price">
-     </div>
+      <div class="input-group">
+        <p class="input-title">Single Class Price (Noms)</p>
+        <input disabled type="tel" class="input-field" [(ngModel)]="activity_data.class_price">
+      </div>
 
-   </div>
-</div>
+    </div>
+  </div>
 
-<div *ngIf="this.current_index == 1" class="container-datos w3-animate-right">
-  <!-- <p class="title-container">Main Category</p>
+  <div *ngIf="this.current_index == 1" class="container-datos w3-animate-right">
+    <!-- <p class="title-container">Main Category</p>
   <div class="likes-container">
       <div *ngFor="let c of this.example_cats; let in=index" (click)="addCategorie(c.name)" class="{{getCategorie(c.name)}}">{{c.name}}</div>
   </div> -->
 
-  <p class="title-container">Type of Activity</p>
-  <div class="likes-container">
-      <div *ngFor="let c of this.example_activities; let in=index" (click)="addActivity(c.title)" class="{{getActivity(c.title)}}">{{c.title}}</div>
-  </div>
-
-  <p class="title-container">Workout Form</p>
-  <div class="likes-container">
-      <div *ngFor="let c of this.example_forms; let in=index" (click)="addForm(in)" class="{{getForm(in)}}">{{c.title}}</div>
-  </div>
-</div>
-
-<div *ngIf="this.current_index == 3" class="container-datos w3-animate-right">
-
-<div *ngIf="!isAdding">
-  <p class="title-container">Activity Schedule</p>
-  <div *ngIf="this.activity_data.schedule.length > 0" class="activities-container">
-    <div class="a-title">Time</div>
-    <div class="a-title">Spaces</div>
-    <div class="a-title">Edit</div>
-  </div>
-
-  <div *ngFor="let s of this.activity_data.schedule; let in=index" class="activity-container" padding>
-    <div class="left-cont">
-      <div class="main-text">{{s.day}}</div>
-      <div class="comp-text">{{s.start_time}}</div>
+    <p class="title-container">Type of Activity</p>
+    <div class="likes-container">
+      <div *ngFor="let c of this.example_activities; let in=index" (click)="addActivity(c.title)"
+        class="{{getActivity(c.title)}}">{{c.title}}</div>
     </div>
-    <div class="main-text">{{s.spaces_available}}</div>
-    <img (click)="eraseSchedule(in)" src="assets/img/erase_icon.png" class="edit-btn">
-  </div>
-  <button (click)="addButtonClick()" type="button" class="add-btn" padding>+</button>
-</div>
 
-
-<div *ngIf="isAdding" class="white-container w3-animate-bottom" padding>
-
-  <p class="title-container" style="color: black">Days</p>
-  <div class="likes-container" style="margin-bottom: 3%;"><div *ngFor="let c of this.example_days; let in=index" (click)="selectDay(in)" class="{{getSelected(c.selected)}}">{{c.day}}</div></div>
-
-  <div class="option-container" padding>
-    <div class="title-option">Start Time</div>
-    <ion-item><ion-datetime style="color: black" displayFormat="h:mm A" pickerFormat="H mm" placeholder="06:00" [(ngModel)]="schedule.start_time"></ion-datetime></ion-item>
-   </div>
-
-  <div class="option-container" padding>
-   <div class="title-option">Duration (hours)</div>
-   <input type="tel" class="input-field" [(ngModel)]="schedule.duration">
-   <!-- <ion-range color="purple" pin="true" [(ngModel)]="schedule.duration" min="1" max="8"></ion-range> -->
+    <p class="title-container">Workout Form</p>
+    <div class="likes-container">
+      <div *ngFor="let c of this.example_forms; let in=index" (click)="addForm(in)" class="{{getForm(in)}}">{{c.title}}
+      </div>
+    </div>
   </div>
 
-  <div class="option-container" padding>
-    <div class="title-option">Duration (minutes)</div>
-    <input type="tel" class="input-field" [(ngModel)]="schedule.duration2">
-    <!-- <ion-range color="purple" pin="true" [(ngModel)]="schedule.duration" min="1" max="8" step=".5"></ion-range> -->
-   </div>
+  <div *ngIf="this.current_index == 3" class="container-datos w3-animate-right">
 
-  <div class="option-container" padding>
-   <div class="title-option">Spaces Available</div>
-   <input type="tel" class="input-field" [(ngModel)]="schedule.spaces_available">
-   <!-- <ion-range color="purple" pin="true" [(ngModel)]="schedule.spaces_available"></ion-range> -->
+    <div *ngIf="!isAdding">
+      <p class="title-container">Activity Schedule</p>
+      <div *ngIf="this.activity_data.schedule.length > 0" class="activities-container">
+        <div class="a-title">Time</div>
+        <div class="a-title">Spaces</div>
+        <div class="a-title">Delete</div>
+      </div>
+
+      <div *ngFor="let s of this.activity_data.schedule; let in=index" class="activity-container" padding>
+        <div class="left-cont">
+          <div class="main-text">{{s.day}}</div>
+          <div class="comp-text">{{s.start_time}}</div>
+        </div>
+        <div class="main-text">{{s.spaces_available}}</div>
+        <img (click)="eraseSchedule(in)" src="assets/img/erase_icon.png" class="edit-btn">
+      </div>
+      <button (click)="addButtonClick()" type="button" class="add-btn" padding>+</button>
+    </div>
+
+
+    <div *ngIf="isAdding" class="white-container w3-animate-bottom" padding>
+
+      <p class="title-container" style="color: black">Days</p>
+      <div class="likes-container" style="margin-bottom: 3%;">
+        <div *ngFor="let c of this.example_days; let in=index" (click)="selectDay(in)"
+          class="{{getSelected(c.selected)}}">{{c.day}}</div>
+      </div>
+
+      <div class="option-container" padding>
+        <table>
+          <tr>
+            <td>
+              <div class="title-option">Start Time</div>
+            </td>
+            <td>
+              <ion-item>
+                <ion-datetime style="color: black; width: 150px;;" displayFormat="h:mm a" pickerFormat="h:mm a"
+                  [(ngModel)]="schedule.start_time"></ion-datetime>
+              </ion-item>
+            </td>
+          </tr>
+          <tr>
+            <td>
+                <div class="title-option">Duration (hours)</div>
+            </td>
+            <td>
+                <input type="tel" class="input-field" [(ngModel)]="schedule.duration" style="width: 100%;">
+            </td>
+          </tr>
+          <tr>
+            <td> 
+                <div class="title-option">Duration (minutes)</div>
+            </td>
+            <td>
+                <input type="tel" class="input-field" [(ngModel)]="schedule.duration2" style="width: 100%;">
+            </td>
+          </tr>
+          <tr>
+            <td>
+                <div class="title-option">Spaces Available</div>
+            </td>
+            <td>
+                <input type="tel" class="input-field" [(ngModel)]="schedule.spaces_available" style="width: 100%;">
+            </td>
+          </tr>
+        </table>
+      </div>
+
+      <div class="option-container" padding>
+        <div class="title-option">Gender</div>
+        <div (click)="changeGender()" class="option-selector">{{schedule.gender}}</div>
+      </div>
+
+      <div class="option-container" padding>
+        <div class="title-option">Level</div>
+        <div (click)="changeLevel()" class="option-selector">{{schedule.level}}</div>
+      </div>
+
+      <div class="option-container" padding>
+        <div class="title-option">Min Age</div>
+        <ion-range color="purple" pin="true" [(ngModel)]="schedule.min_age"></ion-range>
+      </div>
+
+      <div class="option-container" padding>
+        <div class="title-option">Max Age</div>
+        <ion-range color="purple" pin="true" [(ngModel)]="schedule.max_age"></ion-range>
+      </div>
+
+
+      <button (click)="isAdding = false" type="button" name="button" class="back-btn"
+        style="color: black; border-color: black">Cancel</button>
+      <button (click)="withMagic()" type="button" class="next-btn">Add</button>
+    </div>
   </div>
 
-  <div class="option-container" padding>
-   <div class="title-option">Gender</div>
-   <div (click)="changeGender()" class="option-selector">{{schedule.gender}}</div>
+  <div *ngIf="this.current_index == 4" class="container-datos w3-animate-right">
+    <p class="title-container">Upload Media</p>
+    <div class="media-img"></div>
+    <div *ngFor="let m of this.activity_data.media; let in=index" (click)="confirmRF(in)" class="media-img"
+      [style.background-image]="sanitizeThis(m.url)"></div>
+    <button (click)="presentOptions()" type="button" class="add-btn" padding>+</button>
   </div>
 
-  <div class="option-container" padding>
-   <div class="title-option">Level</div>
-   <div (click)="changeLevel()" class="option-selector">{{schedule.level}}</div>
+  <div *ngIf="!isAdding" class="jc-container">
+    <button (click)="back()" type="button" name="button" class="back-btn">Back</button>
+    <button [disabled]="!canAdvance()" (click)="next()" type="button" name="button" class="next-btn">Next</button>
   </div>
-
-  <div class="option-container" padding>
-   <div class="title-option">Min Age</div>
-   <ion-range color="purple" pin="true" [(ngModel)]="schedule.min_age"></ion-range>
-  </div>
-
-  <div class="option-container" padding>
-   <div class="title-option">Max Age</div>
-   <ion-range color="purple" pin="true" [(ngModel)]="schedule.max_age"></ion-range>
-  </div>
-  
-  <button (click)="withMagic()" type="button" class="next-btn">Add</button>
-  <button (click)="isAdding = false" type="button" name="button" class="back-btn" style="color: black; border-color: black">Cancel</button>
-</div>
-</div>
-
-<div *ngIf="this.current_index == 4" class="container-datos w3-animate-right">
-<p class="title-container">Upload Media</p>
-<div class="media-img"></div>
-<div *ngFor="let m of this.activity_data.media; let in=index" (click)="confirmRF(in)" class="media-img" [style.background-image]="sanitizeThis(m.url)"></div>
-<button (click)="presentOptions()" type="button" class="add-btn" padding>+</button>
-</div>
-
-<div *ngIf="!isAdding" class="jc-container">
-  <button (click)="back()" type="button" name="button" class="back-btn">Back</button>
-  <button [disabled]="!canAdvance()" (click)="next()" type="button" name="button" class="next-btn">Next</button>
-</div>
 
 
 </ion-content>

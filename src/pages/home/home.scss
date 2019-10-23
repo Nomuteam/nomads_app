@@ -1,5 +1,11 @@
 page-home {
 
+  ion-searchbar{
+    .searchbar-input{
+    border-radius: 30px;
+    }
+    }
+    
   .home-page{
     background: linear-gradient(#6C6C6C, #0C0C0C 70%)!important;
   }
@@ -8,9 +14,22 @@ page-home {
     border-style: none!important;
   }
 
-  ion-navbar{
-    //border: 3px solid red!important;
+  .clan-search{
+    height: 40px;
+    padding: 3%;
+    font-family: 'Custom';
+    font-size: 100%;
+    color: white;
+    //border: 1px solid #9073CB;
+    border: none!important;
+    border-radius: 12px!important;
+    background-color: transparent;
+    width: 95%;
+    margin-left: 2.5%;
+    background-color: rgba(0, 0, 0, .3);
   }
+
+
 
   ion-header{
     //border: 3px solid red!important;

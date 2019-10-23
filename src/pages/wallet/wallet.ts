@@ -4,7 +4,7 @@ import { FiltersPage } from '../filters/filters';
 import { AngularFireDatabase, AngularFireObject } from 'angularfire2/database';
 import firebase from 'firebase';
 import { Stripe } from '@ionic-native/stripe';
-import { Http, Headers, RequestOptions} from '@angular/http';
+import { Http, Headers, RequestOptions } from '@angular/http';
 import 'rxjs/add/operator/map';
 import { InAppBrowser } from '@ionic-native/in-app-browser';
 import { AyudaPage } from '../ayuda/ayuda';
@@ -24,73 +24,73 @@ import { CardPage } from '../card/card';
   templateUrl: 'wallet.html',
 })
 export class WalletPage {
-public general_loader: any;
-//For the user
-public users$: any;
-public noms_balance: any = [];
+  public general_loader: any;
+  //For the user
+  public users$: any;
+  public noms_balance: any = [];
 
-public user_type: any='';
-public example_packages: any = [
-  {
-    'noms': 20,
-    'bookings_avg': 10,
-    'price': 400,
-    'selected': false
-  },
-  {
-    'noms': 50,
-    'bookings_avg': 10,
-    'price': 1000,
-    'selected': false
-  },
-  {
-    'noms': 75,
-    'bookings_avg': 12,
-    'price': 1500,
-    'selected': false
-  },
-  {
-    'noms': 100,
-    'bookings_avg': 14,
-    'price': 2000,
-    'selected': false
-  },
-];
-public selected: any = 0;
-public cash: any = 0;
-public noms: any = 0;
-public user_code: any = '';
-public friend_balance: any = '';
+  public user_type: any = '';
+  public example_packages: any = [
+    {
+      'noms': 20,
+      'bookings_avg': 10,
+      'price': 400,
+      'selected': false
+    },
+    {
+      'noms': 50,
+      'bookings_avg': 10,
+      'price': 1000,
+      'selected': false
+    },
+    {
+      'noms': 75,
+      'bookings_avg': 12,
+      'price': 1500,
+      'selected': false
+    },
+    {
+      'noms': 100,
+      'bookings_avg': 14,
+      'price': 2000,
+      'selected': false
+    },
+  ];
+  public selected: any = 0;
+  public cash: any = 0;
+  public noms: any = 0;
+  public user_code: any = '';
+  public friend_balance: any = '';
 
-public payment_data: any = {
-  'card_address': '',
-  'card_ccv': '',
-  'card_expiry': '',
-  'cardholder': '',
-  'cardnumber': ''
-};
+  public payment_data: any = {
+    'card_address': '',
+    'card_ccv': '',
+    'card_expiry': '',
+    'cardholder': '',
+    'cardnumber': ''
+  };
 
-public transaction_id: any;
+  public transaction_id: any;
 
-public response$: any;
-public transaction_status: any;
-public transaction_paid: any;
+  public response$: any;
+  public transaction_status: any;
+  public transaction_paid: any;
 
-public a_response$: any;
-public my_activities: any = [];
-public activities: any = [];
+  public a_response$: any;
+  public my_activities: any = [];
+  public activities: any = [];
 
-public t_response$: any;
-public transactions: any = [];
+  public t_response$: any;
+  public transactions: any = [];
 
-public link_payment: any;
+  public link_payment: any;
 
-public paypal$: any;
+  public paypal$: any;
 
-public total: any = 0;
-public users_total: any = 0;
-public isverified: any = false;
-public reported: any = false;
+  public total: any = 0;
+  public users_total: any = 0;
+  public isverified: any = false;
+  public reported: any = false;
 
   constructor(public navCtrl: NavController,
     public navParams: NavParams,
@@ -104,154 +104,172 @@ public reported: any = false;
     public actionSheetCtrl: ActionSheetController) {
     this.user_type = localStorage.getItem('Tipo');
 
-    if(this.user_type == 'nomads'){
+    if (this.user_type == 'nomads') {
 
-          this.alertCtrl.create({
-            title: 'Welcome to your wallet!',
-            message: 'Enter the amount you wish to buy or select a predefined package to buy NOMS',
-            buttons: ['Ok']
-          }).present();
+      this.alertCtrl.create({
+        title: 'Welcome to your wallet!',
+        message: 'Enter the amount you wish to buy or select a predefined package to buy NOMS',
+        buttons: ['Ok']
+      }).present();
     }
 
   }
 
-  getFriendBalance(){
-    if(this.user_code != undefined){
-      this.af.object('Users/'+this.user_code).snapshotChanges().subscribe(action => {
-      this.friend_balance = action.payload.val().noms;
+  getFriendBalance() {
+    if (this.user_code != undefined) {
+      this.af.object('Users/' + this.user_code).snapshotChanges().subscribe(action => {
+        this.friend_balance = action.payload.val().noms;
       });
       this.giveFriend();
     }
   }
 
-  giveFriend(){
-      let transaction = {'date': new Date(), 'index': this.generateUUID(), 'amount': Math.ceil(this.noms*.05)/20, 'type': 'noms-referral', 'sender_id': firebase.auth().currentUser.uid, 'receiver_id': this.user_code};
-      this.af.list('transactions').update(this.transaction_id, transaction);
+  giveFriend() {
+    let transaction = { 'date': new Date(), 'index': this.generateUUID(), 'amount': Math.ceil(this.noms * .05) / 20, 'type': 'noms-referral', 'sender_id': firebase.auth().currentUser.uid, 'receiver_id': this.user_code };
+    this.af.list('transactions').update(this.transaction_id, transaction);
 
-      this.af.list('Users/').update(this.user_code, {
-        'noms': parseInt(this.friend_balance)+this.noms
-      }).then( () => {
-        this.alertCtrl.create({
-          title: 'Good Friend!',
-          subTitle: 'This transaction just gave the friend who gave you his code a 5% noms bonus',
-          message: 'Tell him about it!',
-          buttons: ['Ok']
-        }).present();
-      })
+    this.af.list('Users/').update(this.user_code, {
+      'noms': parseInt(this.friend_balance) + this.noms
+    }).then(() => {
+      this.alertCtrl.create({
+        title: 'Good Friend!',
+        subTitle: 'This transaction just gave the friend who gave you his code a 5% noms bonus',
+        message: 'Tell him about it!',
+        buttons: ['Ok']
+      }).present();
+    })
   }
 
-  canPay(){
+  canPay() {
     return this.cash != 0;
   }
 
-  getMenor(){
-    return Math.ceil(this.noms/9);
+  getMenor() {
+    return Math.ceil(this.noms / 9);
   }
 
-  getMayor(){
-    return Math.ceil(this.noms/3.5);
+  getMayor() {
+    return Math.ceil(this.noms / 3.5);
   }
 
-  verifyConfirmation(){
-      this.isverified = true;
-      if(this.transaction_status == 'completed'){
-        this.general_loader.dismiss();
+  verifyConfirmation() {
+    this.isverified = true;
+    if (this.transaction_status == 'completed') {
+      this.general_loader.dismiss();
 
-        this.alertCtrl.create({
-          title: 'Transaction Succesful!',
-          subTitle: 'You paid '+this.cash+' for '+this.noms+' noms',
-          message: 'Enjoy your noms!',
-          buttons: ['Ok']
-        }).present();
+      this.alertCtrl.create({
+        title: 'Transaction Succesful!',
+        subTitle: 'You paid ' + this.cash + ' for ' + this.noms + ' noms',
+        message: 'Enjoy your noms!',
+        buttons: ['Ok']
+      }).present();
 
-        //this.getFriendBalance();
+      //this.getFriendBalance();
 
-        let transaction = {'date': new Date(), 'index': this.transaction_id, 'amount': this.cash, 'type': 'noms', 'sender_id': firebase.auth().currentUser.uid};
-        this.af.list('transactions').update(this.transaction_id, transaction);
+      let transaction = { 'date': new Date(), 'index': this.transaction_id, 'amount': this.cash, 'type': 'noms', 'sender_id': firebase.auth().currentUser.uid };
+      this.af.list('transactions').update(this.transaction_id, transaction);
 
-        this.af.list('Users/'+firebase.auth().currentUser.uid+'/transactions').update(this.transaction_id, {
-          'index': this.transaction_id
-        });
+      this.af.list('Users/' + firebase.auth().currentUser.uid + '/transactions').update(this.transaction_id, {
+        'index': this.transaction_id
+      });
 
-        this.af.list('Users/').update(firebase.auth().currentUser.uid, {
-          'noms': this.noms_balance+this.noms
-        }).then( () => {
-          this.navCtrl.pop();
+      this.af.list('Users/').update(firebase.auth().currentUser.uid, {
+        'noms': this.noms_balance + this.noms
+      }).then(() => {
+        //this.navCtrl.pop();
+        this.af.object('Users/' + firebase.auth().currentUser.uid).snapshotChanges().subscribe(action => {
+          this.users$ = action.payload.val();
+          this.af.list('Users/').update(this.users$.code, {
+            'noms': this.noms_balance + (this.noms * .03)
+          }).then(() => {
+            this.navCtrl.pop();
+          })
         })
-      }
-      else{
-        this.general_loader.dismiss();
-        this.alertCtrl.create({title: 'Payment Error', message: 'There was an error processing your payment, try again later', buttons: ['Ok']}).present();
-      }
+      })
+
+
+      /*
+      //Codigo d verificacion
+      this.af.list('Users/').update(firebase.auth().idrefenciado, {
+        'noms': this.noms_balance+(this.noms * .03 )
+      }).then( () => {
+        this.navCtrl.pop();
+      })
+      */
+    }
+    else {
+      this.general_loader.dismiss();
+      this.alertCtrl.create({ title: 'Payment Error', message: 'There was an error processing your payment, try again later', buttons: ['Ok'] }).present();
+    }
   }
 
-  tellUser(){
+  tellUser() {
     this.reported = true;
     this.general_loader.dismiss();
-    this.alertCtrl.create({title: 'Payment Error', subTitle:this.response$.errors.description,  message: 'The server responded with the following error: '+this.response$.errors.description, buttons: ['Ok']}).present();
+    this.alertCtrl.create({ title: 'Payment Error', subTitle: this.response$.errors.description, message: 'The server responded with the following error: ' + this.response$.errors.description, buttons: ['Ok'] }).present();
   }
 
-  watchConfirmation(){
-    this.af.object('Payments/'+firebase.auth().currentUser.uid+'/'+this.transaction_id).snapshotChanges().subscribe(action => {
+  watchConfirmation() {
+    this.af.object('Payments/' + firebase.auth().currentUser.uid + '/' + this.transaction_id).snapshotChanges().subscribe(action => {
       this.response$ = action.payload.val();
-      if(this.response$.charge){
+      if (this.response$.charge) {
         this.transaction_status = this.response$.charge.status;
         this.transaction_paid = this.response$.charge.paid;
       }
     });
-    setTimeout(() => {this.verifyConfirmation()}, 5000);
+    setTimeout(() => { this.verifyConfirmation() }, 5000);
   }
 
-  watchConfirmation2(){
-    this.af.object('Fundings/'+firebase.auth().currentUser.uid+'/'+this.transaction_id).snapshotChanges().subscribe(action => {
-     this.response$ = action.payload.val();
-     if(this.response$.charge){
-       this.transaction_status = this.response$.charge.status;
+  watchConfirmation2() {
+    this.af.object('Fundings/' + firebase.auth().currentUser.uid + '/' + this.transaction_id).snapshotChanges().subscribe(action => {
+      this.response$ = action.payload.val();
+      if (this.response$.charge) {
+        this.transaction_status = this.response$.charge.status;
         this.transaction_paid = this.response$.charge.paid;
-        if(!this.isverified) this.verifyConfirmation();
+        if (!this.isverified) this.verifyConfirmation();
       }
-      if(this.response$.errors){
-         if(!this.reported) this.tellUser();
-       }
-     });
-     //setTimeout(() => {this.verifyConfirmation()}, 5000);
+      if (this.response$.errors) {
+        if (!this.reported) this.tellUser();
+      }
+    });
+    //setTimeout(() => {this.verifyConfirmation()}, 5000);
   }
 
-  goPay(){
-  this.general_loader = this.loadingCtrl.create({
-    spinner: 'bubbles',
-    content: 'Loading...'
-  })
-  this.general_loader.present();
+  goPay() {
+    this.general_loader = this.loadingCtrl.create({
+      spinner: 'bubbles',
+      content: 'Loading...'
+    })
+    this.general_loader.present();
 
-  this.transaction_id = this.generateUUID();
+    this.transaction_id = this.generateUUID();
 
     let month = this.payment_data.card_expiry.slice(5);
-    let year = this.payment_data.card_expiry.slice(2,4);
+    let year = this.payment_data.card_expiry.slice(2, 4);
 
-  let deviceSessionId = OpenPay.deviceData.setup();
+    let deviceSessionId = OpenPay.deviceData.setup();
 
-  OpenPay.token.create({
-        "card_number": this.payment_data.cardnumber,
-        "holder_name":"Juan Perez Ramirez",
-        "expiration_year": year,
-        "expiration_month": month,
-        "cvv2": '123',
-        "address":{
-           "city":"Querétaro",
-           "line3":"Queretaro",
-           "postal_code":"76900",
-           "line1":"Av 5 de Febrero",
-           "line2":"Roble 207",
-           "state":"Queretaro",
-           "country_code":"MX"
-        }
-  }, (dato)=>{
-     this.af.list('Fundings/'+firebase.auth().currentUser.uid).update(this.transaction_id, {'token': dato.data.id, 'amount': parseInt(this.cash), 'session': deviceSessionId});
-     this.watchConfirmation2();
-  }, (error)=>console.log(error));
+    OpenPay.token.create({
+      "card_number": this.payment_data.cardnumber,
+      "holder_name": "Juan Perez Ramirez",
+      "expiration_year": year,
+      "expiration_month": month,
+      "cvv2": '123',
+      "address": {
+        "city": "Querétaro",
+        "line3": "Queretaro",
+        "postal_code": "76900",
+        "line1": "Av 5 de Febrero",
+        "line2": "Roble 207",
+        "state": "Queretaro",
+        "country_code": "MX"
+      }
+    }, (dato) => {
+      this.af.list('Fundings/' + firebase.auth().currentUser.uid).update(this.transaction_id, { 'token': dato.data.id, 'amount': parseInt(this.cash), 'session': deviceSessionId });
+      this.watchConfirmation2();
+    }, (error) => console.log(error));
 
-}
+  }
 
 
   // goPay(cvc){
@@ -287,7 +305,7 @@ public reported: any = false;
   // }
 
 
-  enterCVC(){
+  enterCVC() {
     const prompt = this.alertCtrl.create({
       title: 'Security Gate',
       message: 'For your security, we need you to enter the CVC of your stored card',
@@ -315,7 +333,7 @@ public reported: any = false;
     prompt.present();
   }
 
-  confirmNew(datos){
+  confirmNew(datos) {
 
     this.general_loader = this.loadingCtrl.create({
       spinner: 'bubbles',
@@ -326,33 +344,33 @@ public reported: any = false;
     this.transaction_id = this.generateUUID();
 
     let card = {
-     number: datos.number,
-     expMonth: datos.month,
-     expYear: datos.year.slice(2),
-     cvc: datos.cvc
+      number: datos.number,
+      expMonth: datos.month,
+      expYear: datos.year.slice(2),
+      cvc: datos.cvc
     };
 
     let deviceSessionId = OpenPay.deviceData.setup();
 
     OpenPay.token.create({
-          "card_number": card.number,
-          "holder_name":"Juan Perez Ramirez",
-          "expiration_year": card.expYear,
-          "expiration_month": card.expMonth,
-          "cvv2": card.cvc,
-          "address":{
-             "city":"Querétaro",
-             "line3":"Queretaro",
-             "postal_code":"76900",
-             "line1":"Av 5 de Febrero",
-             "line2":"Roble 207",
-             "state":"Queretaro",
-             "country_code":"MX"
-          }
-    }, (dato)=>{
-       this.af.list('Fundings/'+firebase.auth().currentUser.uid).update(this.transaction_id, {'token': dato.data.id, 'amount': parseInt(this.cash), 'session': deviceSessionId});
-       this.watchConfirmation2();
-    }, (error)=>console.log(error));
+      "card_number": card.number,
+      "holder_name": "Juan Perez Ramirez",
+      "expiration_year": card.expYear,
+      "expiration_month": card.expMonth,
+      "cvv2": card.cvc,
+      "address": {
+        "city": "Querétaro",
+        "line3": "Queretaro",
+        "postal_code": "76900",
+        "line1": "Av 5 de Febrero",
+        "line2": "Roble 207",
+        "state": "Queretaro",
+        "country_code": "MX"
+      }
+    }, (dato) => {
+      this.af.list('Fundings/' + firebase.auth().currentUser.uid).update(this.transaction_id, { 'token': dato.data.id, 'amount': parseInt(this.cash), 'session': deviceSessionId });
+      this.watchConfirmation2();
+    }, (error) => console.log(error));
 
 
     // this.general_loader = this.loadingCtrl.create({
@@ -383,49 +401,49 @@ public reported: any = false;
     //    });
   }
 
-  enterNew(){
+  enterNew() {
     const prompt = this.alertCtrl.create({
-    title: 'Insert your card',
-    message: 'Please insert the details of your card',
-    inputs: [
-      {
-        name: 'card',
-        placeholder: 'Card Number'
-      },
-      {
-        name: 'month',
-        placeholder: 'Expiry Month (Number)'
-      },
-      {
-        name: 'year',
-        placeholder: 'Expiry Year (Year 4 digits)'
-      },
-      {
-        name: 'cvc',
-        placeholder: 'CVC'
-      },
-    ],
-    buttons: [
-      {
-        text: 'Cancel',
-        handler: data => {
-          console.log('Cancel clicked');
+      title: 'Insert your card',
+      message: 'Please insert the details of your card',
+      inputs: [
+        {
+          name: 'card',
+          placeholder: 'Card Number'
+        },
+        {
+          name: 'month',
+          placeholder: 'Expiry Month (Number)'
+        },
+        {
+          name: 'year',
+          placeholder: 'Expiry Year (Year 4 digits)'
+        },
+        {
+          name: 'cvc',
+          placeholder: 'CVC'
+        },
+      ],
+      buttons: [
+        {
+          text: 'Cancel',
+          handler: data => {
+            console.log('Cancel clicked');
+          }
+        },
+        {
+          text: 'Pay',
+          handler: data => {
+            this.confirmNew(data);
+            console.log(data);
+          }
         }
-      },
-      {
-        text: 'Pay',
-        handler: data => {
-          this.confirmNew(data);
-          console.log(data);
-        }
-      }
-    ]
-  });
-  prompt.present();
+      ]
+    });
+    prompt.present();
   }
 
 
-  selectCard(){
+  selectCard() {
     this.isverified = false;
     this.reported = false;
     const actionSheet = this.actionSheetCtrl.create({
@@ -442,12 +460,12 @@ public reported: any = false;
           handler: () => {
             //this.enterNew();
             let modal = this.modalCtrl.create(CardPage);
-                modal.onDidDismiss( data => {
-                  if(data){
-                  this.confirmNew(data);
-                  }
-                });
-             modal.present();
+            modal.onDidDismiss(data => {
+              if (data) {
+                this.confirmNew(data);
+              }
+            });
+            modal.present();
           }
         },
         {
@@ -455,7 +473,7 @@ public reported: any = false;
           handler: () => {
             this.confirmPaypal();
           }
-        },{
+        }, {
           text: 'Cancel',
           role: 'cancel',
           handler: () => {
@@ -466,120 +484,120 @@ public reported: any = false;
     });
     actionSheet.present();
 
-   //  let alert = this.alertCtrl.create();
-   // alert.setTitle('How would you like to pay?');
-   //
-   // if(this.payment_data.cardnumber != ''){
-   //   alert.addInput({
-   //     type: 'radio',
-   //     label: 'Saved Card *******'+this.payment_data.cardnumber.substring(this.payment_data.cardnumber.length - 4),
-   //     value: 'saved',
-   //     checked: true
-   //   });
-   // }
-   //
-   // alert.addInput({
-   //   type: 'radio',
-   //   label: 'New Card',
-   //   value: 'new'
-   // });
-   //
-   // alert.addInput({
-   //   type: 'radio',
-   //   label: 'Paypal',
-   //   value: 'paypal'
-   // });
-   //
-   // alert.addButton('Cancel');
-   // alert.addButton({
-   //   text: 'Ok',
-   //   handler: data => {
-   //     console.log(data);
-   //     if(data == 'saved') this.enterCVC();
-   //     else if(data == 'paypal') this.confirmPaypal();
-   //     else this.enterNew();
-   //   }
-   // });
-   // alert.present();
+    //  let alert = this.alertCtrl.create();
+    // alert.setTitle('How would you like to pay?');
+    //
+    // if(this.payment_data.cardnumber != ''){
+    //   alert.addInput({
+    //     type: 'radio',
+    //     label: 'Saved Card *******'+this.payment_data.cardnumber.substring(this.payment_data.cardnumber.length - 4),
+    //     value: 'saved',
+    //     checked: true
+    //   });
+    // }
+    //
+    // alert.addInput({
+    //   type: 'radio',
+    //   label: 'New Card',
+    //   value: 'new'
+    // });
+    //
+    // alert.addInput({
+    //   type: 'radio',
+    //   label: 'Paypal',
+    //   value: 'paypal'
+    // });
+    //
+    // alert.addButton('Cancel');
+    // alert.addButton({
+    //   text: 'Ok',
+    //   handler: data => {
+    //     console.log(data);
+    //     if(data == 'saved') this.enterCVC();
+    //     else if(data == 'paypal') this.confirmPaypal();
+    //     else this.enterNew();
+    //   }
+    // });
+    // alert.present();
   }
 
-  verifyConfirmationPaypal(){
-      if(this.transaction_status == 'completed'){
-        this.general_loader.dismiss();
+  verifyConfirmationPaypal() {
+    if (this.transaction_status == 'completed') {
+      this.general_loader.dismiss();
 
-        this.alertCtrl.create({
-          title: 'Transaction Succesful!',
-          subTitle: 'You paid '+this.cash+' for '+this.noms+' noms',
-          message: 'Enjoy your noms!',
-          buttons: ['Ok']
-        }).present();
+      this.alertCtrl.create({
+        title: 'Transaction Succesful!',
+        subTitle: 'You paid ' + this.cash + ' for ' + this.noms + ' noms',
+        message: 'Enjoy your noms!',
+        buttons: ['Ok']
+      }).present();
 
-        //this.getFriendBalance();
+      //this.getFriendBalance();
 
-        this.af.list('/').update('Accountance', {
-          'total': this.total + parseInt(this.cash)
-        });
+      this.af.list('/').update('Accountance', {
+        'total': this.total + parseInt(this.cash)
+      });
 
-         this.af.list('/').update('Accountance', {
-           'nomads': this.users_total + parseInt(this.cash)
-         });
+      this.af.list('/').update('Accountance', {
+        'nomads': this.users_total + parseInt(this.cash)
+      });
 
-        this.af.list('Payments/'+firebase.auth().currentUser.uid).update(this.transaction_id, {'amount': this.cash});
+      this.af.list('Payments/' + firebase.auth().currentUser.uid).update(this.transaction_id, { 'amount': this.cash });
 
-        let transaction = {'date': new Date(), 'index': this.transaction_id, 'amount': this.cash, 'type': 'noms', 'sender_id': firebase.auth().currentUser.uid};
-        this.af.list('transactions').update(this.transaction_id, transaction);
+      let transaction = { 'date': new Date(), 'index': this.transaction_id, 'amount': this.cash, 'type': 'noms', 'sender_id': firebase.auth().currentUser.uid };
+      this.af.list('transactions').update(this.transaction_id, transaction);
 
-        this.af.list('Users/'+firebase.auth().currentUser.uid+'/transactions').update(this.transaction_id, {
-          'index': this.transaction_id
-        });
+      this.af.list('Users/' + firebase.auth().currentUser.uid + '/transactions').update(this.transaction_id, {
+        'index': this.transaction_id
+      });
 
-        this.af.list('Users/').update(firebase.auth().currentUser.uid, {
-          'noms': this.noms_balance+this.noms
-        }).then( () => {
-          this.navCtrl.pop();
-        })
-      }
-      else{
-        this.general_loader.dismiss();
-        this.alertCtrl.create({title: 'Payment Error', message: 'There was an error processing your payment, try again later', buttons: ['Ok']}).present();
-      }
-  }
-
-
-
-  verifyPayment(){
-  this.general_loader.dismiss();
-  this.general_loader = null;
-
-  this.general_loader = this.loadingCtrl.create({
-    spinner: 'bubbles',
-    content: 'Verifying Payment...'
-  })
-  this.general_loader.present();
-  this.verifyConfirmationPaypal();
-}
-
-  watchLink(){
-
-  this.af.object('Fundings/currentProcess').snapshotChanges().subscribe(action => {
-    if(action.payload.val()){
-    console.log(action.payload.val());
-    let a = action.payload.val();
-    for(let key in a){
-      this.paypal$ = a[key];
-
-        if(this.paypal$.paid == true) this.transaction_status = 'completed';
-        this.verifyPayment();
-
+      this.af.list('Users/').update(firebase.auth().currentUser.uid, {
+        'noms': this.noms_balance + this.noms
+      }).then(() => {
+        this.navCtrl.pop();
+      })
+    }
+    else {
+      this.general_loader.dismiss();
+      this.alertCtrl.create({ title: 'Payment Error', message: 'There was an error processing your payment, try again later', buttons: ['Ok'] }).present();
     }
   }
-  else{
-    // this.verifyPayment();
-  }
-  });
-}
 
-  paypalDone(){
+
+
+  verifyPayment() {
+    this.general_loader.dismiss();
+    this.general_loader = null;
+
+    this.general_loader = this.loadingCtrl.create({
+      spinner: 'bubbles',
+      content: 'Verifying Payment...'
+    })
+    this.general_loader.present();
+    this.verifyConfirmationPaypal();
+  }
+
+  watchLink() {
+
+    this.af.object('Fundings/currentProcess').snapshotChanges().subscribe(action => {
+      if (action.payload.val()) {
+        console.log(action.payload.val());
+        let a = action.payload.val();
+        for (let key in a) {
+          this.paypal$ = a[key];
+
+          if (this.paypal$.paid == true) this.transaction_status = 'completed';
+          this.verifyPayment();
+
+        }
+      }
+      else {
+        // this.verifyPayment();
+      }
+    });
+  }
+
+  paypalDone() {
     this.alertCtrl.create({
       title: 'Was everything ok with the paypal checkout?',
       message: 'We are asking this question so we can verify the payment and add the noms to your balance.',
@@ -590,19 +608,19 @@ public reported: any = false;
           handler: () => {
             this.general_loader.dismiss();
             this.navCtrl.pop()
-                .then(()=> this.modalCtrl.create(AyudaPage).present());
+              .then(() => this.modalCtrl.create(AyudaPage).present());
 
           }
         },
         {
           text: 'Payment correct',
-          handler: () =>{
+          handler: () => {
             this.watchLink();
           }
         },
         {
           text: 'Cancel',
-          handler: () =>{
+          handler: () => {
             //this.watchLink();
           }
         },
@@ -610,41 +628,41 @@ public reported: any = false;
     }).present();
   }
 
-  chargePaypal(){
-  this.general_loader = this.loadingCtrl.create({
-    spinner: 'bubbles',
-    content: 'Loading...'
-  })
-  this.general_loader.present();
-  this.af.list('Fundings/currentProcess').remove();
-  this.af.list('paypal/current').remove();
+  chargePaypal() {
+    this.general_loader = this.loadingCtrl.create({
+      spinner: 'bubbles',
+      content: 'Loading...'
+    })
+    this.general_loader.present();
+    this.af.list('Fundings/currentProcess').remove();
+    this.af.list('paypal/current').remove();
 
-  this.transaction_id = this.generateUUID();
-  let qty = parseInt(this.cash);
-  console.log(qty);
+    this.transaction_id = this.generateUUID();
+    let qty = parseInt(this.cash);
+    console.log(qty);
 
-  let data = {
-    amount: qty,
-    uid: firebase.auth().currentUser.uid,
-    t_id: this.transaction_id
-  };
+    let data = {
+      amount: qty,
+      uid: firebase.auth().currentUser.uid,
+      t_id: this.transaction_id
+    };
 
     this.http.post('https://us-central1-dev-nomads.cloudfunctions.net/pay/createPayment', data)
-    .map(res => res.json())
-    .subscribe(data => {
-      //data = JSON.stringify(data);
-      console.log('Response From Server: ' + data.links[1].href);
-      this.link_payment = data.links[1].href;
-      const browser = this.iab.create(data.links[1].href, '_blank');
-      this.paypalDone();
-    });
-}
+      .map(res => res.json())
+      .subscribe(data => {
+        //data = JSON.stringify(data);
+        console.log('Response From Server: ' + data.links[1].href);
+        this.link_payment = data.links[1].href;
+        const browser = this.iab.create(data.links[1].href, '_blank');
+        this.paypalDone();
+      });
+  }
 
-  confirmPaypal(){
-    if(this.cash > 0){
+  confirmPaypal() {
+    if (this.cash > 0) {
       this.alertCtrl.create({
-        title: 'Do you want to buy '+this.noms+' noms?',
-        subTitle: 'You will be charged '+this.cash+' mxn',
+        title: 'Do you want to buy ' + this.noms + ' noms?',
+        subTitle: 'You will be charged ' + this.cash + ' mxn',
         message: 'A paypal window will popup for you to checkout',
         buttons: [
           {
@@ -655,14 +673,14 @@ public reported: any = false;
           },
           {
             text: 'Proceed',
-            handler: () =>{
+            handler: () => {
               this.chargePaypal();
             }
           }
         ]
       }).present();
     }
-    else{
+    else {
       this.alertCtrl.create({
         title: 'Enter an amount of cash',
         message: 'In order to buy noms you need to enter the amount of cash you want to pay',
@@ -671,11 +689,11 @@ public reported: any = false;
     }
   }
 
-  confirmPay(){
-    if(this.cash > 0){
+  confirmPay() {
+    if (this.cash > 0) {
       this.alertCtrl.create({
-        title: 'Do you want to buy '+this.noms+' noms?',
-        message: 'You will be charged '+this.cash+' to your prefered card',
+        title: 'Do you want to buy ' + this.noms + ' noms?',
+        message: 'You will be charged ' + this.cash + ' to your prefered card',
         buttons: [
           {
             text: 'Cancel',
@@ -685,14 +703,14 @@ public reported: any = false;
           },
           {
             text: 'Proceed',
-            handler: () =>{
+            handler: () => {
               this.selectCard();
             }
           }
         ]
       }).present();
     }
-    else{
+    else {
       this.alertCtrl.create({
         title: 'Enter an amount of cash',
         message: 'In order to buy noms you need to enter the amount of cash you want to pay',
@@ -701,24 +719,24 @@ public reported: any = false;
     }
   }
 
-  openFilters(){
+  openFilters() {
     this.navCtrl.push(FiltersPage);
   }
 
-  selectP(indice){
+  selectP(indice) {
     this.selected = indice;
     this.cash = this.example_packages[indice].price;
-    this.noms = this.cash/20;
+    this.noms = this.cash / 20;
   }
 
-  isSelected(indice){
-    return ( this.selected == indice ? 'slide-card selected' : 'slide-card');
+  isSelected(indice) {
+    return (this.selected == indice ? 'slide-card selected' : 'slide-card');
   }
 
-  checkExistA(indice){
+  checkExistA(indice) {
     let a = this.activities;
-    for(let key in a){
-      if(a[key].index == indice){
+    for (let key in a) {
+      if (a[key].index == indice) {
         return true;
       }
     }
@@ -726,20 +744,20 @@ public reported: any = false;
   }
 
 
-  getEarned(indice){
+  getEarned(indice) {
     let amount = 0;
-    for(let i=0; i<this.transactions.length; i++){
-      if(this.transactions[i].activity_id == indice){
-        amount+= parseInt(this.transactions[i].amount);
+    for (let i = 0; i < this.transactions.length; i++) {
+      if (this.transactions[i].activity_id == indice) {
+        amount += parseInt(this.transactions[i].amount);
       }
     }
     return amount;
   }
 
-  convertActivities(){
+  convertActivities() {
     let a = this.a_response$;
-    for(let key in a){
-      if(this.checkExistA(a[key].index)){
+    for (let key in a) {
+      if (this.checkExistA(a[key].index)) {
         this.my_activities.push({
           'index': a[key].index,
           'title': a[key].title,
@@ -753,7 +771,7 @@ public reported: any = false;
     console.log(this.my_activities);
   }
 
-  getActivities(){
+  getActivities() {
     this.af.object('Activities').snapshotChanges().subscribe(action => {
       this.a_response$ = action.payload.val();
       this.my_activities = [];
@@ -761,11 +779,11 @@ public reported: any = false;
     });
   }
 
-  convertTransactions(){
+  convertTransactions() {
     let a = this.t_response$;
-    for(let key in a){
+    for (let key in a) {
       this.transactions.push({
-        'activity_id': (a[key].activity_id ? a[key].activity_id  : ''),
+        'activity_id': (a[key].activity_id ? a[key].activity_id : ''),
         'amount': a[key].amount,
         'index': a[key].index,
         'receiver_id': a[key].receiver_id
@@ -775,7 +793,7 @@ public reported: any = false;
     console.log(this.transactions);
   }
 
-  getTransactions(){
+  getTransactions() {
     this.af.object('transactions').snapshotChanges().subscribe(action => {
       this.t_response$ = action.payload.val();
       this.transactions = [];
@@ -783,7 +801,7 @@ public reported: any = false;
     });
   }
 
-  ionViewDidLoad(){
+  ionViewDidLoad() {
     this.general_loader = this.loadingCtrl.create({
       spinner: 'bubbles',
       content: 'Loading...'
@@ -791,41 +809,41 @@ public reported: any = false;
     this.general_loader.present();
 
     this.af.object('Accountance/').snapshotChanges().subscribe(action => {
-     this.total = action.payload.val().total;
-     this.total = parseInt(this.total);
-     this.users_total = action.payload.val().nomads;
-     this.users_total = parseInt(this.users_total);
+      this.total = action.payload.val().total;
+      this.total = parseInt(this.total);
+      this.users_total = action.payload.val().nomads;
+      this.users_total = parseInt(this.users_total);
     });
 
-    this.af.object('Users/'+firebase.auth().currentUser.uid).snapshotChanges().subscribe(action => {
+    this.af.object('Users/' + firebase.auth().currentUser.uid).snapshotChanges().subscribe(action => {
       this.users$ = action.payload.val();
       this.noms_balance = this.users$.noms;
       this.user_code = this.users$.code;
 
-      if(this.users$.payment){
+      if (this.users$.payment) {
         this.payment_data.cardnumber = this.users$.payment.cardnumber;
         this.payment_data.card_expiry = this.users$.payment.card_expiry;
         this.payment_data.cardholder = this.users$.payment.cardholder;
         this.payment_data.card_address = this.users$.payment.card_address;
       }
 
-      if(this.users$.Activities_created){
+      if (this.users$.Activities_created) {
         this.activities = this.users$.Activities_created;
       }
 
-      if(this.general_loader) this.general_loader.dismiss();
+      if (this.general_loader) this.general_loader.dismiss();
     });
     this.getTransactions();
-    if(this.activities != []) this.getActivities();
+    if (this.activities != []) this.getActivities();
   }
 
   private generateUUID(): any {
     var d = new Date().getTime();
     var uuid = 'xxxxxxxx-xxxx-4xxx-yxxx'.replace(/[xy]/g, function (c) {
-    var r = (d + Math.random() * 16) % 16 | 0;
-        d = Math.floor(d / 16);
-        return (c == 'x' ? r : (r & 0x3 | 0x8)).toString(16);
-     });
+      var r = (d + Math.random() * 16) % 16 | 0;
+      d = Math.floor(d / 16);
+      return (c == 'x' ? r : (r & 0x3 | 0x8)).toString(16);
+    });
     return uuid;
   }
 

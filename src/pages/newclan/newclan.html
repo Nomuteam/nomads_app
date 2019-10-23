@@ -62,12 +62,12 @@
        <div class="types-container">
          <div (click)="changeType('public')" class="{{getType('public')}}">Public</div>
          <div (click)="changeType('private')" class="{{getType('private')}}">Private</div>
-         <div (click)="changeType('secret')" class="{{getType('secret')}}">Secret</div>
+         <div (click)="changeType('secret')" class="{{getType('secret')}}" style="display: none">Secret</div>
        </div>
      </div>
 
      <div class="input-group">
-       <p class="input-title">Secret Code</p>
+       <p class="input-title">Private Clan Code</p>
        <input [disabled]="this.clan_data.type == 'public'" type="text" class="input-field" [(ngModel)]="clan_data.secret_code">
      </div>
 

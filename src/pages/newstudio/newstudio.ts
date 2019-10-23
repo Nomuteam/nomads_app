@@ -162,7 +162,8 @@ export class NewstudioPage implements OnInit{
       spinner: 'bubbles'
     });
     console.log('studio a guardar', this.studio_data);
-    //this.general_loader.present();
+    this.general_loader.present();
+    
     this.af.list('Studios').update(this.studio_data.index, this.studio_data)
         .then(()=>{
           this.general_loader.dismiss();
@@ -172,6 +173,7 @@ export class NewstudioPage implements OnInit{
           }).present();
           this.navCtrl.pop();
         });
+        
   }
 
 
@@ -186,7 +188,8 @@ export class NewstudioPage implements OnInit{
 
   saveStudio(){
     this.studio_data.index = this.generateUUID();
-    this.current_index = 2;
+    this.guardarStudio();
+    //this.current_index = 2;
   }
 
   addClass(){

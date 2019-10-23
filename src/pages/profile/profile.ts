@@ -138,7 +138,7 @@ actionSheet.present();
       this.navCtrl.push(WalletPage);
     }
     else if(pagina == 'e'){
-      this.navCtrl.push(MyeventsPage);
+      //this.navCtrl.push(MyeventsPage);
     }
     else if(pagina == 'cl'){
       this.navCtrl.parent.select(1);

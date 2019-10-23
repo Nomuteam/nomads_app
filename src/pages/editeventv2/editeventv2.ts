@@ -109,6 +109,14 @@ export class Editeventv2Page {
       if(this.navParams.get('Clan')) this.isClan = true;
 
       this.event_data = this.navParams.get('Event');
+      if(this.event_data.media == null){
+        this.event_data.media = [{'url': this.event_data.img}];
+      }
+
+      if(this.event_data.media.length == 0){
+        this.event_data.media = [{'url': this.event_data.img}];
+      }
+
       console.log('evento seleccionado',this.event_data);
    }
  
@@ -223,6 +231,9 @@ export class Editeventv2Page {
    }
  
    needsPic(){
+     if(this.event_data.media == null){
+       return false;
+     }
      return this.event_data.media.length > 0;
    }
  

@@ -6,7 +6,7 @@
     <universal-links>
         <host name="example.page.link" scheme="https" />
         <host name="dev-nomads.firebaseapp.com" scheme="https">
-            <path url="/__/auth/callback"/>
+            <path url="/__/auth/callback" />
         </host>
     </universal-links>
     <content src="index.html" />
@@ -113,8 +113,6 @@
     <plugin name="uk.co.workingedge.phonegap.plugin.launchnavigator" spec="^5.0.4">
         <variable name="GOOGLE_API_KEY_FOR_ANDROID" value="AIzaSyDm544BEGbTNNiK-3hx0Hm1gDUj6vjD5eM" />
     </plugin>
-    <engine name="android" spec="6.3.0" />
-    <engine name="ios" spec="4.5.5" />
     <plugin name="cordova-plugin-buildinfo" spec="4.0.0" />
     <plugin name="cordova-universal-links-plugin" spec="~1.2.1" />
     <plugin name="cordova-plugin-browsertab" spec="0.2.0" />
@@ -125,4 +123,6 @@
         <variable name="ANDROID_HOST" value=" " />
         <variable name="ANDROID_PATHPREFIX" value="/" />
     </plugin>
+    <engine name="android" spec="6.3.0" />
+    <engine name="ios" spec="4.5.5" />
 </widget>

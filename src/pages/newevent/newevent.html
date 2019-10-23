@@ -42,7 +42,7 @@
        </div>
 
        <div class="input-group">
-         <p class="input-title">Where?</p>
+         <p class="input-title">Meeting spot?</p>
          <input (click)="this.event_data.location = ''" (blur)="this.event_data.location = '';" type="text" (ngModelChange)="updateSearchResults()" class="input-field" [(ngModel)]="event_data.location">
          <ion-list [hidden]="autocompleteItems.length == 0">
           <ion-item *ngFor="let item of autocompleteItems" tappable (click)="selectSearchResult(item)">
@@ -62,7 +62,7 @@
        </div> -->
 
        <div class="input-group">
-         <p class="input-title">About it</p>
+         <p class="input-title">Description</p>
          <textarea rows="4" type="text" class="input-field" [(ngModel)]="event_data.about_event"></textarea>
        </div>
 
@@ -158,7 +158,9 @@
 
   <button 
   
-  (click)="createEvent()" [disabled]="!needsPic()"  type="button" class="next-btn">Next</button>
+  (click)="createEvent()" 
+  [disabled]="!needsPic()"  
+  type="button" class="next-btn">Next</button>
   <button (click)="this.current_index = 1" type="button" class="next-btn outline">Back</button>
   </div>
 

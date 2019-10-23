@@ -5,6 +5,7 @@ import { AngularFireDatabase, AngularFireObject } from 'angularfire2/database';
 import firebase from 'firebase';
 import { Stripe } from '@ionic-native/stripe';
 import { TutorialPage } from '../tutorial/tutorial';
+import { Http, Headers, RequestOptions } from '@angular/http';
 
 /**
  * Generated class for the WalkPage page.
@@ -242,6 +243,7 @@ public class_type = 'input-field card';
 
   constructor(  public navCtrl: NavController,
     public navParams: NavParams,
+    private http: Http,
     public af: AngularFireDatabase,
     public loadingCtrl: LoadingController,
     public alertCtrl: AlertController,
@@ -326,6 +328,32 @@ public class_type = 'input-field card';
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad WalkPage');
+    let titulo = 'Bienvenido a Nomu!';
+              let texto = '<p>\
+              Hola, bienvenido a Nomu! <br/><br/>\
+              Gracias por unirte a Nomu! Te invitamos a que explores toda la oferta que hay cerca de ti! <br/><br/>\
+              1. Explora las mejores clases, studios, gyms, eventos, instructores, actividades y mucho mas!<br/><br/>\
+              2. Reserva lo que quieras!<br/><br/>\
+              3. Paga lo que usas. Ve a tu perfil, entra en tu ‘wallet’ y compra NOMS! Aceptamos Tarjeta o Paypal<br/><br/>\
+              4. Asiste! Diviértete y cualquier cosa has no lo saber!<br/><br/>\
+              Nomu Team<br/><br/>\
+              hola@nomu.fit</p>';
+              let data = {
+                dest: firebase.auth().currentUser.email,
+                texto: texto,
+                titulo: titulo
+              }
+
+              console.log('mandamos correo', data);
+              this.http.post('https://us-central1-dev-nomads.cloudfunctions.net/sendMail', data)
+              .map(res => res.json())
+                .subscribe(data => {
+                  //data = JSON.stringify(data);
+                  console.log('Response From Server:', data);
+                  //this.saveData();
+                });
+
+    
   }
 
 

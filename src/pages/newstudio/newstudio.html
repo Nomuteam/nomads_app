@@ -75,7 +75,7 @@
 
        </div> -->
 
-     <button [disabled]="!canAdvance()" (click)="saveStudio()" type="button" class="next-btn">Next</button>
+     <button [disabled]="!canAdvance()" (click)="saveStudio()" type="button" class="next-btn">Save</button>
      </div>
   </div>
 
@@ -102,12 +102,14 @@
        </div>
 
        <div class="input-group">
-         <p class="input-title">Studio Classes</p>
+         <p class="input-title" style="display: none;">Studio Classes</p>
          <div *ngFor="let c of this.classes" class="studio-class">
            <div class="class-time">{{c.start_time}} - {{c.end_time}}</div>
            <div class="class-title">{{c.title}}</div>
          </div>
-         <button (click)="addClass()" type="button" class="add-btn" style="background-color: #7D29FB!important; font-weight: 700; font-size: 120%">Add Class</button>
+         <!--
+         <button  style="display: none;" (click)="addClass()" type="button" class="add-btn" style="background-color: #7D29FB!important; font-weight: 700; font-size: 120%">Add Class</button>
+         -->
        </div>
 
 

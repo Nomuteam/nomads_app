@@ -1,5 +1,5 @@
 import { Component, ViewChild, ElementRef } from '@angular/core';
-import { IonicPage, NavController, NavParams, LoadingController, AlertController, ModalController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, LoadingController, AlertController, ModalController, Content } from 'ionic-angular';
 declare var google;
 import { Geolocation } from '@ionic-native/geolocation';
 import { FiltersPage } from '../filters/filters';
@@ -75,6 +75,7 @@ public time_helper: any = [
     @ViewChild('map') mapElement: ElementRef;
      map: any;
 
+     public phone :any;
   constructor( public navCtrl: NavController,
     public navParams: NavParams,
     public af: AngularFireDatabase,
@@ -86,7 +87,13 @@ public time_helper: any = [
     public launchNavigator: LaunchNavigator) {
     this.activity_data = this.navParams.get('Activity');
     this.formatSchedule();
-    console.log(this.activity_data)
+    console.log('actividad',this.activity_data)
+
+    this.af.object('Users/' + this.activity_data.creator).snapshotChanges().subscribe(action => {
+      this.phone = action.payload.val().phone;
+      console.log(this.phone);
+    });
+
   }
 
   goNavigate(){
@@ -138,6 +145,13 @@ public time_helper: any = [
     console.log(this.temp_schedule);
 
     this.fillHelper();
+  }
+
+  @ViewChild(Content) content: Content;
+
+  scrollTo(element:string) {
+    let yOffset = document.getElementById(element).offsetTop;
+    this.content.scrollTo(0, yOffset, 1000)
   }
 
   getNomadsjoined(){

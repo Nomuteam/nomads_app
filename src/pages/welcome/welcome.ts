@@ -8,7 +8,7 @@ import { WalkPage } from '../walk/walk';
 import { AngularFireAuth } from 'angularfire2/auth';
 import { AngularFireDatabase, AngularFireObject } from 'angularfire2/database';
 import firebase from 'firebase';
-
+import { Facebook, FacebookLoginResponse } from '@ionic-native/facebook/ngx';
 /**
  * Generated class for the WelcomePage page.
  *
@@ -26,6 +26,7 @@ export class WelcomePage {
 public general_loader: any;
 
   constructor(
+    private fb: Facebook,
     public navCtrl: NavController,
     public navParams: NavParams,
     public af: AngularFireDatabase,
@@ -85,6 +86,38 @@ public general_loader: any;
       alert('error');
     })
   }
+
+  facebookCordova() {
+    this.fb.login(['email']).then( (response) => {
+      console.log('respuesta',response);
+        const facebookCredential = firebase.auth.FacebookAuthProvider
+            .credential(response.authResponse.accessToken);
+        firebase.auth().signInWithCredential(facebookCredential)
+        .then((success) => {
+            console.log('Info Facebook: ' + JSON.stringify(success));
+            //this.nav.navigateRoot('tabs');
+            let indice = firebase.auth().currentUser.uid;
+            let reference =  firebase.database().ref('Users').orderByChild('index').equalTo(indice);
+            reference.once('value', snapshot => {
+            let aux = snapshot.val()[indice];
+
+              console.log(aux.user_type);
+              localStorage.setItem('Tipo', aux.user_type);
+              if(!aux.info_complete){
+                this.navCtrl.push(CirclesPage, {'Color': 'green', 'User': aux.user_type});
+              }
+              else{
+                this.navCtrl.setRoot(TabsPage);
+              }
+              });
+
+
+        }).catch((error) => {
+            console.log('Erreur: ' + JSON.stringify(error));
+        });
+    }).catch((error) => { console.log(error); });
+  }
+
   openRegister(){
     this.navCtrl.push(RegisterPage, {'User': 'nomads'});
   }

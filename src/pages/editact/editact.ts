@@ -185,7 +185,7 @@ export class EditactPage {
   public activity_data: any;
 
   public schedule: any = {
-     'start_time': '06:00',
+     'start_time': '',
      'duration': '',
      'spaces_available': '',
      'gender': 'Both',
@@ -317,7 +317,7 @@ export class EditactPage {
          'start_time': a.start_time,
          'duration': a.duration,
          'spaces_available': a.spaces_available,
-         'space': a.space,
+         //'space': a.space,
          'gender': a.gender,
          'level': a.level,
          'min_age': a.min_age,
@@ -436,6 +436,8 @@ export class EditactPage {
     this.activity_data.categories.workout_form = this.example_forms.filter(form => form.selected);
     this.activity_data.creator = firebase.auth().currentUser.uid;
 
+    console.log(this.activity_data);
+    
     this.af.list('Activities').update(indice, this.activity_data)
       .then( () =>{
         this.general_loader.dismiss();
@@ -446,6 +448,7 @@ export class EditactPage {
         }).present();
         this.navCtrl.pop();
       })
+      
   }
 
   next(){
@@ -454,7 +457,7 @@ export class EditactPage {
         spinner: 'bubbles',
         content: 'Updating...'
       });
-      this.general_loader.present();
+      //this.general_loader.present();
       this.doMagic();
     }
     else{

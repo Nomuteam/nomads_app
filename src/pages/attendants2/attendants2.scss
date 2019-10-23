@@ -1,0 +1,57 @@
+page-attendants2 {
+    .nomad-element{
+      display: flex;
+      justify-content: flex-start;
+      align-items: center;
+      height: 12vh;
+      padding-left: 5%;
+      border-bottom: 1px solid rgba(255, 255, 255, .3);
+      .user-img{
+        width: 15%;
+        height: 50%;
+        border-radius: 50%;
+        //border: 1px solid red;
+        background-color: #00B0FF;
+        //background-image: url('../../assets/img/imanol.png');
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-position: center;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 180%;
+        color: white;
+      }
+      .nomad-texts{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        //border: 1px solid red;
+        height: 50%;
+        width: 80%;
+        padding-left: 3%;
+        .nomad-name{
+          font-family: 'Custom';
+          font-size: 100%;
+          font-weight: 700!important;
+          color: white;
+          display: inline-block;
+          overflow: hidden;
+        }
+      }
+      .nomad-chat{
+        //border: 1px solid red;
+        font-family: 'Custom';
+        font-size: 100%;
+        font-weight: 700!important;
+        width: 10%;
+        height: 25%;
+        //color: #50E3C2;
+        background-image: url('../../assets/img/chats_icon.png');
+        background-size: contain;
+        background-repeat: no-repeat;
+        background-position: center;
+      }
+    }
+  }
+  

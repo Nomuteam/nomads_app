@@ -9,6 +9,7 @@ import { AngularFireAuth } from 'angularfire2/auth';
 import { AngularFireDatabase, AngularFireObject } from 'angularfire2/database';
 import firebase from 'firebase';
 import { WelcomePage } from '../welcome/welcome';
+import { Facebook, FacebookLoginResponse } from '@ionic-native/facebook/ngx';
 
 /**
  * Generated class for the LoginPage page.
@@ -33,6 +34,7 @@ public pw_type = 'password';
 public pw_text = 'View';
 
   constructor(
+    private fb: Facebook,
     public navCtrl: NavController,
     public navParams: NavParams,
     public af: AngularFireDatabase,
@@ -51,6 +53,22 @@ public pw_text = 'View';
   }
 
   //Login con email usando FIREBASE
+  facebookCordova() {
+    this.fb.login(['email']).then( (response) => {
+      console.log('respuesta',response);
+        const facebookCredential = firebase.auth.FacebookAuthProvider
+            .credential(response.authResponse.accessToken);
+        firebase.auth().signInWithCredential(facebookCredential)
+        .then((success) => {
+            console.log('Info Facebook: ' + JSON.stringify(success));
+            //this.nav.navigateRoot('tabs');
+            this.findUser()
+        }).catch((error) => {
+            console.log('Erreur: ' + JSON.stringify(error));
+        });
+    }).catch((error) => { console.log(error); });
+  }
+
   loginMail(){
   let vm = this;
     if(this.mail != '' && this.pw != ''){

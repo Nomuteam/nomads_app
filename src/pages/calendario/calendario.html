@@ -27,7 +27,7 @@
 
   <div class="justify-row">
     <div class="title-page">Your week</div>
-    <div class="freeze">
+    <div class="freeze" style="display: none;">
       <div class="f-title">
         Freeze Day
       </div>
@@ -48,7 +48,7 @@
         <div class="time-element">{{a.time}}</div>
         <div class="details">
           <div class="d-title">{{a.title_complete}}</div>
-          <div class="d-spaces" *ngIf="a.isEvent">{{a.reservations}}/{{a.spaces_available}} spaces available</div>
+          <div class="d-spaces" *ngIf="a.isEvent">{{a.reservations}}/{{a.spaces_available + a.reservations}} spaces available</div>
           <div class="d-spaces"  *ngIf="a.isEvent==false">{{this.getRsv(a)}}/{{a.space}} spaces available</div>
         </div>
       </div>

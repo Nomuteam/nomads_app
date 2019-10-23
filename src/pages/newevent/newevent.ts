@@ -220,6 +220,10 @@ export class NeweventPage {
   }
 
   needsPic(){
+    if(this.event_data.media == null){
+      return false;
+    }
+
     return this.event_data.media.length > 0;
   }
 

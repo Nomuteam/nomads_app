@@ -1,0 +1,87 @@
+<!--
+  Generated template for the AllPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+  <ion-navbar color="transparent">
+    <!-- <ion-buttons start style="margin-left: 3%!important;"> -->
+     <!-- <div class="circles-noms">
+       <div class="div1"></div>
+       <div class="div2"></div>
+       <div class="div3"></div></div> -->
+     <!-- <p class="noms-hint">Noms</p>
+     <p class="noms-qty">120</p>
+    </ion-buttons> -->
+    <!-- <ion-buttons (click)="openFilters()" end>
+
+     <button ion-button icon-only>
+       <ion-icon name="ios-options" color="white"></ion-icon>
+     </button>
+    </ion-buttons> -->
+    <!-- <p class="title">{{type}}</p> -->
+  </ion-navbar>
+</ion-header>
+
+
+<ion-content padding class="filtered-page">
+  <div style="display: none">
+      <ion-searchbar style="display: none !important" [(ngModel)]="searchInput" (ionChange)="filtraActividades()" no-padding style="background-color: transparent"></ion-searchbar>
+  </div>
+  
+  <input type="text" placeholder="Search" class="clan-search" [(ngModel)]="searchInput" (ionChange)="filtraActividades()">
+  <div class="title" *ngIf="searchInput.length > 0 && totalActividades > 0">Activities</div>
+  <ion-grid style="min-height:0px !important" *ngIf="searchInput.length > 0 && totalActividades > 0">
+    <ion-row>
+      <ion-col col-6 *ngFor="let a of actividadesFiltradas" (click)="openActivity(a)">
+        <div class="img-slide" [style.background-image]="sanitizeThis(a.img)"></div>
+        <p class="act-first">{{a.categories.activity_type}} - {{a.distance}}</p>
+      <p class="act-title">{{a.title}}</p>
+        <p class="act-title">By: {{this.getName(a.creator)}}</p>
+      <p class="act-distance">{{a.class_price}} noms</p>
+      <p class="act-rating">{{a.review}} <ion-icon name="star" color="white"></ion-icon> / ({{getReviewsLength(a.reviews)}})</p>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+  <div class="title" *ngIf="searchInput.length > 0 && totalEventos > 0">Events</div>
+
+  <ion-grid style="min-height:0px !important" *ngIf="searchInput.length > 0 && totalEventos > 0">
+    <ion-row>
+      <ion-col col-6 *ngFor="let a of eventosFiltrados" (click)="openEvent(a)">
+        <div class="img-slide" [style.background-image]="sanitizeThis(a.img)"></div>
+        <p class="act-first">{{a.type}}  - {{a.distance}}</p>
+       <p class="act-title">{{a.title}}</p>
+       <p class="act-distance">{{a.cost}} noms</p>
+       <p class="act-rating">{{a.review}} <ion-icon name="star" color="white"></ion-icon> / ({{a.reviews.length}})</p>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+  <div class="title" *ngIf="searchInput.length > 0 && totalStudios > 0">Studios</div>
+
+  <ion-grid style="min-height:0px !important" *ngIf="searchInput.length > 0 && totalStudios > 0">
+    <ion-row>
+      <ion-col col-6 *ngFor="let a of studiosFiltrados" (click)="openStudio(a)">
+        <div class="img-slide" [style.background-image]="sanitizeThis(a.logo)"></div>
+        <p class="act-first">{{a.title}} <br> {{a.distance}}</p>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+  <!--
+<div>
+<div class="{{this.getClass()}}">{{type}}</div>
+<p class="title-page">{{this.activities_all.length}} results</p>
+<ion-grid>
+  <ion-row>
+    <ion-col col-6 *ngFor="let a of this.activities_all" (click)="openStudio(a)">
+      <div class="img-slide" [style.background-image]="sanitizeThis(a.logo)"></div>
+      <p class="act-first">{{a.title}}</p>
+    </ion-col>
+  </ion-row>
+</ion-grid>
+</div>
+-->
+
+
+</ion-content>

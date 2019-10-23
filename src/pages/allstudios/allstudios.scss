@@ -1,0 +1,295 @@
+page-allstudios {
+    .filtered-page{
+      background: linear-gradient(#6C6C6C, #0C0C0C 70%)!important;
+    }
+  
+    .toolbar-background-ios{
+      border-style: none!important;
+    }
+  
+    .category-title{
+      border-radius: 5px;
+      //background-color: gray;
+      font-family: 'Custom';
+      font-weight: 700!important;
+      font-size: 125%;
+      color: white;
+      height: 40px;
+      padding: 3%;
+      padding-left: 3%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 5%;
+      small{
+        padding-right: 5%;
+        color: white;
+      }
+    }
+  
+    // .best{
+    //   background-image: linear-gradient(to right, #442068, #0A5353)!important;
+    // }
+  
+    .sug{
+      background-image: linear-gradient(to right, #5B00C4, #008379)!important;
+    }
+  
+    .fav{
+      background-image: linear-gradient(to right, #1B5074, #24DBDB)!important;
+    }
+  
+    .best{
+      background-image: linear-gradient(to right, #4400C4, #1AA3AF)!important;
+      //background-image: linear-gradient(to right, #65655C, #d2d2d2)!important;
+    }
+  
+    .events{
+      background-image: linear-gradient(to right, #2a433c, #2edbac)!important;
+    }
+  
+    .experiences{
+      //background-image: linear-gradient(to right, #146474 40%, #C10777)!important;
+      background-image: linear-gradient(to right, #146474 50%, #8141CB)!important;
+    }
+  
+    .blue{
+      //background-color: #5C77F6;
+      background-image: linear-gradient(to right, #973EF0, #007C5B)!important;
+    }
+    .rose{
+      //background-color: #FF6B84;
+      background-image: linear-gradient(to right, #5E99B9, #274D61)!important;
+    }
+    .cool{
+      background-image: linear-gradient(to right, #05974A, #F2E51E)!important;
+    }
+    .green{
+      //background-color: #229B86;
+      background-image: linear-gradient(to right, #A53535, #8A15AD)!important;
+    }
+    .purple{
+      //background-color: #7D29FB;
+      background-image: linear-gradient(to left, #CDF4FB, #007C6E 60%)!important;
+    }
+  
+    .title-page{
+      font-family: 'Custom';
+      font-size: 80%;
+      font-weight: 400!important;
+      color: rgba(255, 255, 255, 1);
+      text-align: center;
+      margin-top: -3%!important;
+    }
+  
+    ion-grid{
+      ion-row{
+        ion-col{
+          padding: 3%;
+          position: relative;
+          .noms-coins{
+            //border: 1px solid red;
+            display: flex;
+            justify-content: flex-end;
+            margin-top: -32%!important;
+            p{
+              font-family: 'Custom';
+              font-weight: 600!important;
+              font-size: 80%;
+              color: white;
+              padding: 0!important;
+              //border: 1px solid white;
+              margin-top: -4%!important;
+            }
+            .circles-noms{
+              float: right;
+              width: 20%;
+              position: relative;
+              height: 2vh;
+              //border: 1px solid yellow;
+              .div1{
+                position: absolute;
+                top: 15%;
+                left: 25%;
+                height: 70%;
+                border: 1px solid #229B86;
+                width: 50%;
+                border-radius: 50%;
+              }
+              .div2{
+                position: absolute;
+                top: 7.5%;
+                left: 17.5%;
+                height: 85%;
+                border: 1px solid #229B86;
+                width: 65%;
+                border-radius: 50%;
+              }
+              .div3{
+                position: absolute;
+                left: 12.5%;
+                height: 100%;
+                border: 1px solid #229B86;
+                width: 75%;
+                border-radius: 50%;
+              }
+            }
+          }
+          .img-slide{
+            height: 100px;
+            border-radius: 10px;
+            background-image: url('../../assets/img/example.png');
+            background-repeat: no-repeat;
+            background-size: cover;
+            background-position: center;
+            filter: opacity(.8);
+          }
+          .act-first{
+            font-family: 'Custom';
+            font-weight: 600!important;
+            font-size: 80%;
+            color: white;
+            //border: 1px solid red;
+            text-align: left;
+            padding-left: 2%;
+            margin-top: 3%;
+            text-transform: uppercase;
+            color: #55D1AC;
+            opacity: .6;
+          }
+          .act-title{
+            font-family: 'Custom';
+            font-weight: 700!important;
+            font-size: 80%;
+            color: white;
+            //border: 1px solid red;
+            text-align: left;
+            padding-left: 2%;
+            margin-top: -7%;
+          }
+          .act-distance{
+            font-family: 'Custom';
+            font-weight: 600!important;
+            font-size: 80%;
+            color: white;
+            //border: 1px solid red;
+            text-align: left;
+            padding-left: 2%;
+            margin-top: -8%;
+            text-transform: uppercase;
+            color: #A8A8A8;
+            opacity: 1;
+          }
+          .act-rating{
+            font-family: 'Custom';
+            font-weight: 600!important;
+            font-size: 60%;
+            color: white;
+            //border: 1px solid red;
+            text-align: left;
+            padding-left: 2%;
+            margin-top: -6%;
+            text-transform: uppercase;
+            color: #A8A8A8;
+            opacity: .7;
+          }
+        }
+      }
+    }
+  
+    .event-element{
+      //border: 1px solid red;
+      display: flex;
+      justify-content: flex-start;
+      padding: 3%;
+      border-bottom: 1px solid rgba( 255, 255, 255, .3);
+      .event-img{
+        height: 100px;
+        width: 30%;
+        border-radius: 10px;
+        background-image: url('../../assets/img/example.png');
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-position: center;
+        filter: opacity(.8);
+        //border: 1px solid white;
+      }
+      .event-info{
+        height: 100px;
+        width: 65%;
+        padding-left: 3%;
+        overflow: scroll;
+        .event-title{
+          font-family: 'Custom';
+          font-weight: 600!important;
+          font-size: 80%;
+          color: white;
+          text-align: left;
+          margin-top: 3%!important;
+        }
+        .event-desc{
+          font-family: 'Custom';
+          font-weight: 400!important;
+          font-size: 70%;
+          color: white;
+          opacity: .6;
+          text-align: left;
+          margin-top: 3%!important;
+        }
+        //border: 1px solid white;
+      }
+      .event-cost{
+        width: 7%;
+        height: 30px;
+        .noms-coins{
+          //border: 1px solid red;
+          display: flex;
+          justify-content: flex-end;
+          margin-top: -23%!important;
+          p{
+            font-family: 'Custom';
+            font-weight: 600!important;
+            font-size: 80%;
+            color: white;
+            padding: 0!important;
+            //border: 1px solid white;
+            margin-top: -1%!important;
+          }
+          .circles-noms{
+            float: right;
+            width: 100%;
+            position: relative;
+            height: 2vh;
+            //border: 1px solid yellow;
+            .div1{
+              position: absolute;
+              top: 15%;
+              left: 25%;
+              height: 70%;
+              border: 1px solid #229B86;
+              width: 50%;
+              border-radius: 50%;
+            }
+            .div2{
+              position: absolute;
+              top: 7.5%;
+              left: 20%;
+              height: 85%;
+              border: 1px solid #229B86;
+              width: 60%;
+              border-radius: 50%;
+            }
+            .div3{
+              position: absolute;
+              left: 15%;
+              height: 100%;
+              border: 1px solid #229B86;
+              width: 70%;
+              border-radius: 50%;
+            }
+          }
+        }
+      }
+    }
+  }
+  

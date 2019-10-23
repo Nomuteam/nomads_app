@@ -64,6 +64,7 @@ public done_a: any = false;
   public sanitizer: DomSanitizer,
   public geolocation: Geolocation) {
    this.type = this.navParams.get('Tipo');
+   console.log(this.type);
   }
 
   sanitizeThis(image){
@@ -256,11 +257,12 @@ public done_a: any = false;
   }
 
   getEvents(){
-    this.af.object('Events').snapshotChanges().subscribe(action => {
+    this.af.object('Activities').snapshotChanges().subscribe(action => {
       this.e_response$ = action.payload.val();
       console.log('Eventos!!', this.e_response$)
       this.activities_all = [];
-      this.convertActivitiesEvents();
+      //this.convertActivitiesEvents();
+      this.convertActivities();
     });
   }
 
@@ -292,7 +294,7 @@ public done_a: any = false;
     this.general_loader.present();
 
     if(!this.navParams.get('Activities')){
-     
+     console.log(111);
       this.geolocation.getCurrentPosition().then((position) => {
   
         this.posicion = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
@@ -311,6 +313,7 @@ public done_a: any = false;
       });
     }
     else{
+      console.log(222);
       this.geolocation.getCurrentPosition().then((position) => {
   
         this.posicion = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);

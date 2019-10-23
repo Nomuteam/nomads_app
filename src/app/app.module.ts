@@ -82,6 +82,10 @@ import { BookEventsPage } from '../pages/bookevents/bookevents';
 import { Editeventv2Page } from '../pages/editeventv2/editeventv2';
 import { CloneeventPage } from '../pages/cloneevent/cloneevent';
 import { AllactivitiesPage } from '../pages/allactivities/allactivities';
+import { AllstudiosPage } from '../pages/allstudios/allstudios';
+import { SearchPage } from '../pages/search/search';
+import { Facebook } from '@ionic-native/facebook/ngx';
+import { Attendants2Page } from '../pages/attendants2/attendants2';
 
 @NgModule({
   declarations: [
@@ -136,6 +140,7 @@ import { AllactivitiesPage } from '../pages/allactivities/allactivities';
     TutorialPage,
     ReservationsPage,
     AllPage,
+    AllstudiosPage,
     CardPage,
     DayPage,
     TypesPage,
@@ -143,8 +148,10 @@ import { AllactivitiesPage } from '../pages/allactivities/allactivities';
     StudioPage,
     EditstudioPage,
     AttendantsPage,
+    Attendants2Page,
     CloneeventPage,
-    AllactivitiesPage
+    AllactivitiesPage,
+    SearchPage
   ],
   imports: [
     NgCalendarModule,
@@ -213,6 +220,7 @@ import { AllactivitiesPage } from '../pages/allactivities/allactivities';
     TutorialPage,
     ReservationsPage,
     AllPage,
+    AllstudiosPage,
     CardPage,
     DayPage,
     TypesPage,
@@ -220,10 +228,13 @@ import { AllactivitiesPage } from '../pages/allactivities/allactivities';
     StudioPage,
     EditstudioPage,
     AttendantsPage,
+    Attendants2Page,
     CloneeventPage,
-    AllactivitiesPage
+    AllactivitiesPage,
+    SearchPage
   ],
   providers: [
+    Facebook,
     StatusBar,
     SplashScreen,
     Keyboard,

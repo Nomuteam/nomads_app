@@ -10,6 +10,7 @@ import { ActivityPage } from '../activity/activity';
 import { EventPage } from '../event/event';
 import { ReviewsPage } from '../reviews/reviews';
 import { AttendantsPage } from '../attendants/attendants';
+import { Attendants2Page } from '../attendants2/attendants2';
 
 /**
  * Generated class for the CalendarPage page.
@@ -344,7 +345,12 @@ export class CalendarioPage {
       this.navCtrl.push(AttendantsPage, {'Reservations': [event]});
     }
     else{
-      this.navCtrl.push(AttendantsPage, {'Reservations': this.reservations});
+      let nomads;
+      for(let key in event.reservations){
+        nomads = event.reservations[key];
+      }
+      
+      this.navCtrl.push(Attendants2Page, {'Reservations': nomads.nomads});
     }
     
   }

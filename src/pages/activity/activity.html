@@ -38,9 +38,12 @@
 
         </div>
       </div>
-      <div *ngIf="!isAlready()" (click)="openBook()" class="right-side green">
+      <div *ngIf="!isAlready()" 
+      (click)="scrollTo('Calendario')" 
+      
+      class="right-side green">
         <div *ngIf="!isCreator() && activity_data.class_price != 0" class="noms-qty">
-          Join <br> {{this.activity_data.class_price}} noms
+          Join <br> {{this.activity_data.class_price}} NOMS
         </div>
         <div *ngIf="isCreator()" class="noms-qty">
           Joined <br> {{this.getNomadsjoined()}} nomads
@@ -76,7 +79,9 @@
     </div>
       </div>
 
-  <div class="section-title">Description</div>
+  <div class="section-title">Description 
+      
+    </div>
   <div class="description-area">
     {{this.activity_data.description}}
   </div>
@@ -105,7 +110,7 @@
     </div>
   </div> -->
 
-  <div class="section-title">Availability</div>
+  <div class="section-title" id='Calendario'>Availability</div>
   <div *ngFor="let s of this.time_helper; let in = index" >
     <div *ngIf="s.times.length > 0"  class="row-times">
       <div class="row-day">{{s.title}}</div>
@@ -120,7 +125,7 @@
 
 
 
-  <div class="section-title" style="margin-top: 5%;">Location</div>
+  <div class="section-title" style="margin-top: 5%;">Location <a style="color: #1BBF80" href="tel:{{this.phone}}">Call:{{this.phone}}</a></div>
   <div class="location-row">
     <div (click)="goNavigate()" class="location-hint">{{this.activity_data.location}}</div>
     <!--

@@ -104,7 +104,7 @@ export class StudioPage {
   }
 
   isSameDay(dia){
-    let hoy = moment().add(this.selected-1, 'days').format("MMM Do YY");
+    let hoy = moment().add(this.selected, 'days').format("MMM Do YY");
     return hoy == moment(dia).format("MMM Do YY")
   }
 

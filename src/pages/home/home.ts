@@ -18,6 +18,8 @@ import { MyeventsPage } from '../myevents/myevents';
 import { AllPage } from '../all/all';
 import { DayPage } from '../day/day';
 import { StudioPage } from '../studio/studio';
+import { AllstudiosPage } from '../allstudios/allstudios';
+import { SearchPage } from '../search/search';
 
 @Component({
   selector: 'page-home',
@@ -118,6 +120,7 @@ export class HomePage {
     else if(tipo == 'Events') this.navCtrl.push(AllPage, {'Tipo': tipo, 'Acts': this.events});
     else if(tipo == 'Experiences') this.navCtrl.push(AllPage, {'Tipo': tipo, 'Acts': this.getExperiences()});
     else if(tipo == 'Special Offers') this.navCtrl.push(AllPage, {'Tipo': tipo, 'Acts': this.getSpecial()});
+    else if(tipo == 'Studios') this.navCtrl.push(AllstudiosPage, {'Tipo': tipo, 'Acts': this.studios});
   }
 
   getFavorites(){
@@ -243,7 +246,7 @@ export class HomePage {
         'provided':  a[key].provided,
         'about_organizer':  a[key].about_organizer,
         'spaces_available':  a[key].spaces_available,
-        'cost':  a[key].cost,
+        'cost':  a[key].cost/20,
         'type':  a[key].type,
         'day': a[key].day,
         'distance': '',
@@ -794,4 +797,28 @@ export class HomePage {
     this.navCtrl.push(FiltersPage);
   }
 
+  openSearch(){
+    this.navCtrl.push(SearchPage);
+  }
+
+
+  /* 
+  async showModalFilter() {
+    console.log('mostramos filtros');
+    const modal = await this.modalController.create({
+      component: FiltrobusquedaPage
+    });
+
+    modal.onDidDismiss()
+      .then((data) => {
+        const filtros = data['data']; // Here's your selected user!
+        console.log(filtros);
+        //Aplicamos el filtro
+        this.buscaSalones(filtros.distancia, filtros.filtros);
+
+      });
+
+    return await modal.present();
+  }
+  */
 }
