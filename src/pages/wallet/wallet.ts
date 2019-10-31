@@ -159,6 +159,26 @@ export class WalletPage {
   verifyConfirmation() {
     this.isverified = true;
     if (this.transaction_status == 'completed') {
+
+      //mandamos correo al confirmar la orden
+      let titulo = 'Servicio agendado!';
+      let texto = '<p>\
+      Hola, has comprado '+this.noms.toString()+' por '+this.cash.toString();+'! <br/><br/>\
+      Nomu Team<br/><br/>\
+      hola@nomu.fit</p>';
+      let data = {
+        dest: firebase.auth().currentUser.email,
+        texto: texto,
+        titulo: titulo
+      }
+
+      this.http.post('https://us-central1-dev-nomads.cloudfunctions.net/sendMail', data)
+              .map(res => res.json())
+                .subscribe(data => {
+                  //data = JSON.stringify(data);
+                  console.log('Response From Server:', data);
+                  //this.saveData();
+                });
       this.general_loader.dismiss();
 
       this.alertCtrl.create({
@@ -270,6 +290,8 @@ export class WalletPage {
       }
     }, (dato) => {
       this.af.list('Fundings/' + firebase.auth().currentUser.uid).update(this.transaction_id, { 'token': dato.data.id, 'amount': parseInt(this.cash), 'session': deviceSessionId });
+      
+      
       this.watchConfirmation2();
     }, (error) => console.log(error));
 
@@ -791,7 +813,7 @@ export class WalletPage {
     this.my_events.push({
       'index': event.index,
       'title': event.title,
-      'nomads': event.nomads.length,
+      'nomads': Number(event.nomads.length),
       'schedule': '',
       'fee': 70,
       'cost': Number(event.cost),

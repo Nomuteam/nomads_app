@@ -6,6 +6,7 @@ import { DomSanitizer } from '@angular/platform-browser';
 import * as moment from 'moment';
 import { ChatsPage } from '../chats/chats';
 import { SocialSharing } from '@ionic-native/social-sharing';
+import { Http } from '@angular/http';
 
 /**
  * Generated class for the BookPage page.
@@ -34,6 +35,8 @@ public name: any = '';
 //For the activity_owner
 public owners$: any;
 public ally_balance: any = [];
+public ally_mail: any;
+public ally_bussiness :any;
 
 //For the activities
 public response$: any;
@@ -53,6 +56,7 @@ public users_total: any = 0;
 
   constructor(public navCtrl: NavController,
   public navParams: NavParams,
+  private http: Http,
   public af: AngularFireDatabase,
   public loadingCtrl: LoadingController,
   public alertCtrl: AlertController,
@@ -135,13 +139,18 @@ public users_total: any = 0;
       this.owners$ = action.payload.val();
 
       this.ally_balance = this.owners$.noms;
+      this.ally_mail = this.owners$.email;
+      this.ally_bussiness = this.owners$.business.business_name;
+
+      console.log('Creador',this.owners$);
     });
     this.af.object('Users/'+firebase.auth().currentUser.uid).snapshotChanges().subscribe(action => {
       this.users$ = action.payload.val();
 
       this.noms_balance = this.users$.noms;
-      this.name = this.users$.name;
+      this.name = this.users$.first_name + ' '+this.users$.last_name;
       this.nomad_schedule = [];
+      console.log('usuaio', this.users$);
       this.convertSchedule();
       this.getClans();
     });
@@ -353,6 +362,67 @@ public users_total: any = 0;
    if(this.spacesA() && this.selected_key != '' && this.c_available != ''){
      if(!this.isBusy()){
        if(!this.isAlready()){
+
+
+         //mandamos correo al confirmar la orden
+         let titulo = 'Servicio agendado!';
+         let texto = '<p>\
+         Hola, gacias por agendar en Nomu! <br/><br/>\
+         Nombre: '+this.name+'<br/><br/>\
+         Clase: '+this.activity_data.title+'<br/><br/>\
+         Lugar: '+this.ally_bussiness+'<br/><br/>\
+         Dia: '+this.selected_day+'<br/><br/>\
+         Hora: '+this.selected_time+'Hrs.<br/><br/>\
+         Cualquier duda escribenos a hola@nomu.fit</p><br/><br/>\
+         - Nomu Team';
+
+         let texto2 = '<p>\
+         Hola, un nomada reservo en tu servicio! <br/><br/>\
+         Nombre: '+this.name+'<br/><br/>\
+         Clase: '+this.activity_data.title+'<br/><br/>\
+         Dia: '+this.selected_day+'<br/><br/>\
+         Hora: '+this.selected_time+'Hrs.<br/><br/>\
+         Cualquier duda escribenos a hola@nomu.fit</p><br/><br/>\
+         - Nomu Team';
+
+         let data = {
+           dest: firebase.auth().currentUser.email,
+           texto: texto,
+           titulo: titulo
+         }
+         
+         console.log(texto);
+         console.log(this.activity_data);
+         
+         console.log('mandamos correo', data);
+         this.http.post('https://us-central1-dev-nomads.cloudfunctions.net/sendMail', data)
+         .map(res => res.json())
+           .subscribe(data => {
+             //data = JSON.stringify(data);
+             console.log('Response From Server:', data);
+             //this.saveData();
+           });
+
+           let titulo2 = 'Servicio agendado!';
+         
+         let data2 = {
+           dest: this.ally_mail,
+           texto: texto2,
+           titulo: 'Nueva reservacion en nomu!'
+         }
+
+         console.log('mandamos correo creador', data2);
+         this.http.post('https://us-central1-dev-nomads.cloudfunctions.net/sendMail', data2)
+         .map(res => res.json())
+           .subscribe(data => {
+             //data = JSON.stringify(data);
+             console.log('Response From Server:', data);
+             //this.saveData();
+           });
+
+
+
+           //return;
          this.general_loader = null;
          this.general_loader =  this.loadingCtrl.create({
                spinner: 'bubbles',
@@ -430,7 +500,10 @@ public users_total: any = 0;
                }).present();
                this.section = '2';
              });
+
+            
          this.general_loader.dismiss();
+        
        }
        else{
          this.alertCtrl.create({

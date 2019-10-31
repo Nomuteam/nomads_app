@@ -87,11 +87,11 @@ public time_helper: any = [
     public launchNavigator: LaunchNavigator) {
     this.activity_data = this.navParams.get('Activity');
     this.formatSchedule();
-    console.log('actividad',this.activity_data)
+    //console.log('actividad',this.activity_data)
 
     this.af.object('Users/' + this.activity_data.creator).snapshotChanges().subscribe(action => {
       this.phone = action.payload.val().phone;
-      console.log(this.phone);
+      //console.log(this.phone);
     });
 
   }
@@ -117,7 +117,7 @@ public time_helper: any = [
       else if(a[key].day == 'Sunday') this.time_helper[6].times.push({'start_time': a[key].start_time, 'duration': a[key].duration});
     }
 
-    console.log(this.time_helper);
+    //console.log(this.time_helper);
   }
 
   formatSchedule(){
@@ -142,7 +142,7 @@ public time_helper: any = [
        return 0;
     });
 
-    console.log(this.temp_schedule);
+    //console.log(this.temp_schedule);
 
     this.fillHelper();
   }
@@ -163,7 +163,7 @@ public time_helper: any = [
   }
 
   confirmEdit(){
-    console.log('clicked k');
+    //console.log('clicked k');
     this.alertCtrl.create({
       title: 'Do you want to edit this activity?',
       message:  'You can edit the info, schedule and location',
@@ -355,7 +355,7 @@ public time_helper: any = [
     let p = this.people$;
     for(let key in p){
       if(p[key].index == clave) {
-        console.log(p[key]);
+        //console.log(p[key]);
         return p[key].business.business_name;
     }
   }
@@ -373,7 +373,7 @@ public time_helper: any = [
       if(this.isFriend(a[key].index)) this.makeAmigo(a[key]);
     }
 
-    console.log(this.amigos);
+    //console.log(this.amigos);
   }
 
   ionViewDidLoad(){

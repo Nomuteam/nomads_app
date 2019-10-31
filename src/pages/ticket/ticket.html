@@ -18,7 +18,16 @@
       </div>
   </div>
   <div class="btm-part">
-    <div class="cost">Confirmation Code: <br> <br>  <b style="opacity: 1!important">{{this.act.index}}</b> <br> <br> Remember to take an ID with you! <br> <br> Date: {{this.act.date}} <br> <br> <span *ngIf="this.act.time != ''">Time: {{this.act.time}}</span> </div>
+    <div class="cost"> 
+        <span *ngIf="this.act.time != ''">Time: {{this.act.time}}</span> 
+        Date: {{this.act.date}} <br> <br> 
+      <br> <br> Remember to take an ID with you! <br> <br> 
+    
+    
+    <br><br>
+    Confirmation Code: <br> <br>  <b style="opacity: 1!important">{{this.act.index}}
+    </b>
+  </div>
     <button *ngIf="this.act.location != ''" (click)="goNavigate()" type="button" class="pay-btn" padding>
      <div class="pay-container" padding>
        <div class="pay-hint">See Location</div>
