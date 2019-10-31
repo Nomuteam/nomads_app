@@ -161,10 +161,11 @@ export class WalletPage {
     if (this.transaction_status == 'completed') {
 
       //mandamos correo al confirmar la orden
-      let titulo = 'Servicio agendado!';
+      let titulo = 'Gracias por tu compra!';
       let texto = '<p>\
-      Hola, has comprado '+this.noms.toString()+' por '+this.cash.toString();+'! <br/><br/>\
-      Nomu Team<br/><br/>\
+      Hola, has adquirido '+this.noms.toString()+' NOMS por '+this.cash.toString();+'MXN! <br/><br/>\
+      Muchas garcias por tu compra, explora y disfruta lo que nomu tiene para ti.<br/><br/>\
+      - Nomu Team<br/><br/>\
       hola@nomu.fit</p>';
       let data = {
         dest: firebase.auth().currentUser.email,
