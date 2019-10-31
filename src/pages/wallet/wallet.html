@@ -36,8 +36,8 @@
    <div class="items-container">
      <div class="balance-hint">Current Balance</div>
     <div class="balance-container">
-     <div *ngIf="this.user_type == 'nomads'" class="number">{{this.noms_balance.toFixed(2)}}</div>
-     <div *ngIf="this.user_type != 'nomads'" class="number">${{this.noms_balance * 20}}</div>
+     <div *ngIf="this.user_type == 'nomads'" class="number">{{this.noms_balance | currency}}</div>
+     <div *ngIf="this.user_type != 'nomads'" class="number">{{this.noms_balance * 20 | currency}}</div>
      <div *ngIf="this.user_type == 'nomads'" class="currency">NOMS</div>
      <div *ngIf="this.user_type != 'nomads'" class="currency">MXN</div>
     </div>
@@ -67,7 +67,7 @@
         <div class="offer">Special Offer!</div>
         <div class="btm-slide">
           <!-- <div class="bookings-avg">{{s.bookings_avg}} Bookings avg.</div> -->
-          <div class="slide-price">$ {{s.price}} MXN</div>
+          <div class="slide-price">{{s.price | currency}} MXN</div>
         </div>
       </div>
      </ion-slide>
@@ -110,11 +110,21 @@
           <div class="btm-text">Lessons: {{a.schedule.length}}</div>
         </div>
         <div class="texts-container">
-          <div class="top-text">{{a.total_earned*.7}} NOMS</div>
-          <div class="btm-text">${{a.total_earned * 20 * .7}} MXN</div>
+          <div class="top-text">{{a.total_earned*1 | currency}} NOMS</div>
+          <div class="btm-text">{{a.total_earned * 20 * .7 | currency}} MXN</div>
         </div>
     </div>
-
+    <div class="buy-hint gold">My Events</div>
+    <div *ngFor="let a of this.my_events" class="activities-container" padding>
+      <div class="texts-container">
+        <div class="top-text">{{a.title}}</div>
+        <div class="btm-text">Nomads: {{a.nomads}}</div>
+      </div>
+      <div class="texts-container">
+        <div class="top-text">{{(((a.cost)/20)*1)*(a.nomads) | currency}} NOMS</div>
+        <div class="btm-text">{{(a.cost * .7)*(a.nomads) | currency}} MXN</div>
+      </div>
+  </div>
  </div>
 
 </ion-content>

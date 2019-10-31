@@ -238,6 +238,9 @@ export class Editeventv2Page {
    }
  
    createEvent(){
+
+      console.log('editamosevento');
+
      this.general_loader = this.loadingCtrl.create({
        spinner: 'bubbles',
        content: 'Creating...'
@@ -247,7 +250,8 @@ export class Editeventv2Page {
      let indice = this.generateUUID();
      this.event_data.img = this.event_data.media[0].url;
      this.event_data.creator = firebase.auth().currentUser.uid;
-     this.event_data.index = indice;
+     //this.event_data.index = indice;
+     /*
      this.event_data.nomads.push({
        'index': this.event_data.creator,
        'isOwner': true,
@@ -255,6 +259,8 @@ export class Editeventv2Page {
        'day': moment(this.event_data.day).format('dddd'),
        'time': this.event_data.time
      });
+
+     */
      this.af.list('Users/'+firebase.auth().currentUser.uid+'/schedule').push({
        'activity_id': indice,
        'date': this.event_data.day,
@@ -265,6 +271,8 @@ export class Editeventv2Page {
        'index': indice,
        'isOwner': true
      });
+
+     console.log('actualizamos', indice);
      this.af.list('Events').update(indice, this.event_data)
          .then(() => {
            this.general_loader.dismiss();

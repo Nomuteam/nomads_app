@@ -77,7 +77,11 @@ export class WalletPage {
   public transaction_paid: any;
 
   public a_response$: any;
+  public e_response$: any;
+  public allEvents:any;
+
   public my_activities: any = [];
+  public my_events: any = [];
   public activities: any = [];
 
   public t_response$: any;
@@ -771,6 +775,52 @@ export class WalletPage {
     console.log(this.my_activities);
   }
 
+  convertEvent(event) {
+    let nomads:any[]=[];
+    /*
+    event.nomads.forEach(element => {
+      //buscamos que sea diferente
+      if(element.index != firebase.auth().currentUser.uid){
+        if(nomads.indexOf(element.index) == -1){
+          nomads.push(element.index);
+        }
+      }
+    });
+    */
+   console.log
+    this.my_events.push({
+      'index': event.index,
+      'title': event.title,
+      'nomads': event.nomads.length,
+      'schedule': '',
+      'fee': 70,
+      'cost': Number(event.cost),
+      'total_earned': 0
+    });
+  }
+
+  GetEvents(){
+    this.af.object('Events').snapshotChanges().subscribe(action => {
+      this.e_response$ = action.payload.val();
+      this.allEvents = [];
+      console.log('Eventos!!!',this.allEvents, this.e_response$);
+      for (let key in this.e_response$) {
+        if(this.e_response$[key].creator == firebase.auth().currentUser.uid){
+          console.log('agregamos elevento', this.e_response$[key]);
+          this.convertEvent(this.e_response$[key])
+        }
+        /*this.transactions.push({
+          'activity_id': (a[key].activity_id ? a[key].activity_id : ''),
+          'amount': a[key].amount,
+          'index': a[key].index,
+          'receiver_id': a[key].receiver_id
+        });
+        */
+      }
+
+      //this.convertActivities();
+    });
+  }
   getActivities() {
     this.af.object('Activities').snapshotChanges().subscribe(action => {
       this.a_response$ = action.payload.val();
@@ -827,9 +877,13 @@ export class WalletPage {
         this.payment_data.card_address = this.users$.payment.card_address;
       }
 
+
       if (this.users$.Activities_created) {
         this.activities = this.users$.Activities_created;
       }
+
+      //buscamos los eventos
+      this.GetEvents();
 
       if (this.general_loader) this.general_loader.dismiss();
     });

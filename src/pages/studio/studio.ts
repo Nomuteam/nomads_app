@@ -78,7 +78,7 @@ export class StudioPage {
 
   @ViewChild('map') mapElement: ElementRef;
    map: any;
-
+   public phone :any;
   constructor(public navCtrl: NavController,
     public navParams: NavParams,
     public af: AngularFireDatabase,
@@ -91,6 +91,7 @@ export class StudioPage {
     public actionSheetCtrl: ActionSheetController,
     public socialSharing: SocialSharing) {
       this.studio_data = this.navParams.get('Studio');
+      this.phone = this.studio_data.phone;
       if(this.studio_data.logo == '') this.studio_data.logo = 'https://firebasestorage.googleapis.com/v0/b/dev-nomads.appspot.com/o/nomu%20blanco%20333%20(1).png?alt=media&token=54ee504d-91b8-4eaf-a637-27e59a3de25b';
       console.log(this.studio_data);
   }

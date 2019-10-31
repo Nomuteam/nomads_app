@@ -238,6 +238,8 @@ export class NeweventPage {
     this.event_data.img = this.event_data.media[0].url;
     this.event_data.creator = firebase.auth().currentUser.uid;
     this.event_data.index = indice;
+    this.event_data.nomads=[];
+    /*
     this.event_data.nomads.push({
       'index': this.event_data.creator,
       'isOwner': true,
@@ -245,6 +247,7 @@ export class NeweventPage {
       'day': moment(this.event_data.day).format('dddd'),
       'time': this.event_data.time
     });
+    */
     this.af.list('Users/'+firebase.auth().currentUser.uid+'/schedule').push({
       'activity_id': indice,
       'date': this.event_data.day,

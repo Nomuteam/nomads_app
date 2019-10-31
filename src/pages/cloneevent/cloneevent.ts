@@ -114,6 +114,12 @@ export class CloneeventPage {
       this.event_data.day = '';
       this.event_data.end_time='';
       this.event_data.time='';
+
+      if(this.event_data.media == null){
+        this.event_data.media = []
+        this.event_data.media.push({'url': this.event_data.img});
+      }
+      
    }
  
 
@@ -227,6 +233,10 @@ export class CloneeventPage {
    }
  
    needsPic(){
+    if(this.event_data.media == null){
+      return false;
+    }
+
      return this.event_data.media.length > 0;
    }
  
@@ -241,6 +251,7 @@ export class CloneeventPage {
      this.event_data.img = this.event_data.media[0].url;
      this.event_data.creator = firebase.auth().currentUser.uid;
      this.event_data.index = indice;
+     this.event_data.nomads = [];
      this.event_data.nomads.push({
        'index': this.event_data.creator,
        'isOwner': true,

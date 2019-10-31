@@ -176,10 +176,11 @@
    <ion-slides slidesPerView="1.6">
      <ion-slide (click)="openEvent(e)" *ngFor="let e of this.getCloserTime()">
        <div class="img-slide" [style.background-image]="sanitizeThis(e.img)"></div>
-       <p class="act-first">{{e.type}}  - {{e.distance}}</p>
+       <p class="act-first">{{e.e_type}}</p>
+       <p class="act-title">by: {{e.name}}</p>
        <p class="act-title">{{e.title}}</p>
        <p class="act-distance">{{e.cost}} noms</p>
-       <p class="act-rating">{{e.review}} <ion-icon name="star" color="white"></ion-icon> / ({{e.reviews.length}})</p>
+       <!--<p class="act-rating">{{e.review}} <ion-icon name="star" color="white"></ion-icon> / ({{e.reviews.length}})</p>-->
      </ion-slide>
   </ion-slides>
   </div>

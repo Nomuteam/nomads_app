@@ -269,7 +269,7 @@ public done_a: any = false;
   getActivities(){
     this.af.object('Activities').snapshotChanges().subscribe(action => {
       this.response$ = action.payload.val();
-      this.getEvents();
+      this.convertActivitiesEvents();
     });
   }
 
@@ -301,7 +301,17 @@ public done_a: any = false;
         //Obtenemos las actividades
         //this.activities_all = this.navParams.get('Activities');
         console.log('posicion', this.posicion);
-        this.getEvents();
+
+        console.log(this.navParams.get('Type'),'!!!!');
+        if(this.navParams.get('Type') == 'a'){
+          this.getEvents();
+        }
+
+        if(this.navParams.get('Type') == 'e'){
+          this.getActivities();
+        }
+        
+
         /* 
         getDistance
         */

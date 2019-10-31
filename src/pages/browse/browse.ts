@@ -229,7 +229,7 @@ public experiences: any = [];
   }
 
   openFiltered(tipo){
-    this.navCtrl.push(FilteredPage, {'Tipo': tipo});
+    this.navCtrl.push(FilteredPage, {'Tipo': tipo, 'Type':'a'});
   }
 
   openFilteredEvento(tipo, EventType){
@@ -251,7 +251,7 @@ public experiences: any = [];
     }
     
     
-    this.navCtrl.push(FilteredPage, {'Tipo': tipo});
+    this.navCtrl.push(FilteredPage, {'Tipo': tipo, 'Type':'e'});
   }
 
   changeType(tipo){

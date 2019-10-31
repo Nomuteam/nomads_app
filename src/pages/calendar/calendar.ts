@@ -335,7 +335,7 @@ export class CalendarPage {
       this.past_events = this.activities_all.filter(event => moment(moment(event.startTime).format('LLLL')).isBefore(today) && !event.reviewed);
       if (this.past_events.length > 0) {
         this.changeSegment('history');
-        this.alertCtrl.create({ title: 'Review your activities and events', message: 'It seems like you have past events and activities waiting for review. <br> Click on them and select the review option!', buttons: ['Ok'] }).present();
+        //this.alertCtrl.create({ title: 'Review your activities and events', message: 'It seems like you have past events and activities waiting for review. <br> Click on them and select the review option!', buttons: ['Ok'] }).present();
       }
 
       this.show_pop = false;
@@ -564,6 +564,10 @@ export class CalendarPage {
   }
 
   confirmCancelation(evento) {
+
+    //let evento_Aux = evento;
+    evento.cost = Number(evento.cost)/20;
+
     this.af.object('Users/' + evento.creator).snapshotChanges().subscribe(action => {
       this.balance_creator = action.payload.val().noms;
     });

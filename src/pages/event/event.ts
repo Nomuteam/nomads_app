@@ -57,7 +57,7 @@ public chats_index: any = [];
 
 @ViewChild('map') mapElement: ElementRef;
  map: any;
-
+ public phone :any;
   constructor(public navCtrl: NavController,
     public navParams: NavParams,
     public af: AngularFireDatabase,
@@ -70,7 +70,11 @@ public chats_index: any = [];
     public launchNavigator: LaunchNavigator,
     public actionSheetCtrl: ActionSheetController) {
       this.event_data = this.navParams.get('Event');
-      console.log(this.event_data);
+
+      this.phone = this.event_data.phone;
+
+      this.event_data.cost = Number(this.event_data.cost);
+      console.log('Event',this.event_data);
   }
 
   goNavigate(){

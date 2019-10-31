@@ -281,6 +281,9 @@ export class CalendarioPage {
     let a = this.e_response$;
     let aux;
     let inscritos:any=0;
+
+    let model = [];
+
     for(let key in a){
       if(a[key].index == clave){
 
@@ -293,7 +296,13 @@ export class CalendarioPage {
           for (var i = 0; i < keys.length; i++) {
             var key_2 = keys[i];
             nomads.push(a[key].nomads[key_2]);
-            inscritos++;
+
+            
+            if(model.indexOf(a[key].nomads[key_2].index) == -1){
+              model.push(a[key].nomads[key_2].index);
+              inscritos++;
+            }
+            
           }
           let reservation = [{
             nomads:nomads
@@ -327,8 +336,8 @@ export class CalendarioPage {
           'reviewed': (review != undefined ? review : false),
           'review':( a[key].review ? a[key].review : 5),
           'reviews': (a[key].reviews ? a[key].reviews : []),
-          'spaces_available': a[key].spaces_available ? a[key].spaces_available : 0,
-          'reservations': inscritos
+          'spaces_available': Number(a[key].spaces_available ? a[key].spaces_available : 0),
+          'reservations': Number(inscritos)
         }
 
         
@@ -444,7 +453,7 @@ export class CalendarioPage {
               'clave_nomada': this.getClave(b[key].nomads),
               'review':( b[key].review ? b[key].review : 5),
               'reviews': (b[key].reviews ? b[key].reviews : []),
-              'spaces_available': b[key].schedule[lla].spaces_available,
+              'spaces_available': Number(b[key].schedule[lla].spaces_available),
               'space': (b[key].schedule[lla].space ? b[key].schedule[lla].space : 10),
               'reservations': []
           });

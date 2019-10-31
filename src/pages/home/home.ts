@@ -235,13 +235,20 @@ export class HomePage {
 
   convertEvents(){
     let a = this.e_response$;
+
+    //merol
+    console.log('usuarios', this.people$);
+    
     for(let key in a){
+
+
       this.events.push({
         'title': (a[key].title.length > 100 ? a[key].title.substring(0, 15) + '..' : a[key].title),
         'title_complete': a[key].title,
         'location': a[key].location,
         'difficulty':  a[key].difficulty,
         'img':  a[key].img,
+        'e_type':  a[key].e_type,
         'about_event':  a[key].about_event,
         'provided':  a[key].provided,
         'about_organizer':  a[key].about_organizer,
@@ -249,6 +256,8 @@ export class HomePage {
         'cost':  a[key].cost/20,
         'type':  a[key].type,
         'day': a[key].day,
+        'name': this.getName(a[key].creator),
+        'phone': this.getPhone(a[key].creator),
         'distance': '',
         'distance_number': 0,
         'time': a[key].time,
@@ -444,6 +453,7 @@ export class HomePage {
 
 
   getCloserTime(){
+    //console.log('eventos', this.events);
     return this.events.sort(function(a, b){
      var keyA = a.day,
          keyB = b.day;
@@ -551,6 +561,7 @@ export class HomePage {
         'index': s[key].index,
         'location': s[key].location,
         'logo': s[key].logo,
+        'phone': this.getPhone(s[key].creator),
         'membership_cost': s[key].membership_cost,
         'title': s[key].name,
         'opening': s[key].opening,
@@ -722,6 +733,16 @@ export class HomePage {
     }
     return '';
   }
+
+  getPhone(indice){
+    let u = this.people$;
+    for(let key in u){
+      if(u[key].index == indice) return u[key].phone;
+    }
+    return '';
+  }
+
+  
 
   convertClans(){
     let a = this.responsec$;
