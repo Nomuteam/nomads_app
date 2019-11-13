@@ -379,6 +379,23 @@ export class WalletPage {
 
     let deviceSessionId = OpenPay.deviceData.setup();
 
+    let model = {
+    "card_number": card.number,
+    "holder_name": "Juan Perez Ramirez",
+    "expiration_year": card.expYear,
+    "expiration_month": card.expMonth,
+    "cvv2": card.cvc,
+    "address": {
+      "city": "Querétaro",
+      "line3": "Queretaro",
+      "postal_code": "76900",
+      "line1": "Av 5 de Febrero",
+      "line2": "Roble 207",
+      "state": "Queretaro",
+      "country_code": "MX"
+    }
+  }
+    console.log('modelo', model);
     OpenPay.token.create({
       "card_number": card.number,
       "holder_name": "Juan Perez Ramirez",
@@ -397,7 +414,11 @@ export class WalletPage {
     }, (dato) => {
       this.af.list('Fundings/' + firebase.auth().currentUser.uid).update(this.transaction_id, { 'token': dato.data.id, 'amount': parseInt(this.cash), 'session': deviceSessionId });
       this.watchConfirmation2();
-    }, (error) => console.log(error));
+    }, (error) => {
+      this.general_loader.dismiss();
+      this.alertCtrl.create({ title: 'Payment Error', message: error.message, buttons: ['Ok'] }).present();
+      console.log(error)
+    });
 
 
     // this.general_loader = this.loadingCtrl.create({

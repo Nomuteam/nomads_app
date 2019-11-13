@@ -334,6 +334,8 @@ export class HomePage {
    
     for(let key in a){
       
+     
+
       this.activities.push({
         'title': (a[key].title.length > 50 ? a[key].title.substring(0, 20) + '..' : a[key].title),
         'title_complete': a[key].title,
@@ -498,6 +500,7 @@ export class HomePage {
     //return aux;
   }
 
+
   //cycle
   //arte marcial y cultura
   //movement@FOW
@@ -553,27 +556,54 @@ export class HomePage {
   convertStudios(){
     let s = this.responses$;
     for(let key in s){
-      this.studios.push({
-        'amenities': s[key].amenities,
-        'closing': s[key].closing,
-        'creator': s[key].creator,
-        'description': s[key].description,
-        'index': s[key].index,
-        'location': s[key].location,
-        'logo': s[key].logo,
-        'phone': this.getPhone(s[key].creator),
-        'membership_cost': s[key].membership_cost,
-        'title': s[key].name,
-        'opening': s[key].opening,
-        'schedule': s[key].schedule,
-        'useful_notes': s[key].useful_notes,
-        'isStudio': true,
-        'activities': (s[key].activities ? s[key].activities : [])
-      });
-    console.log('3',this.studios);
+
+
+      let distancia1 = '';
+      let distancia2 = '';
+
+      console.log('location!',s[key].location);
+      this.getDistance(s[key].location, (data1, data2)=>{
+        distancia1 = data1;
+        distancia2 = data2;
+
+        this.studios.push({
+          'amenities': s[key].amenities,
+          'closing': s[key].closing,
+          'creator': s[key].creator,
+          'description': s[key].description,
+          'index': s[key].index,
+          'location': s[key].location,
+          'logo': s[key].logo,
+          'phone': this.getPhone(s[key].creator),
+          'membership_cost': s[key].membership_cost,
+          'title': s[key].name,
+          'opening': s[key].opening,
+          'schedule': s[key].schedule,
+          'useful_notes': s[key].useful_notes,
+          'isStudio': true,
+          'activities': (s[key].activities ? s[key].activities : []),
+          'distancia1':distancia1,
+          'distancia2':distancia2
+        });
+        this.studios = this.sortByKey(this.studios, 'distancia2');
+        //this.studios = this.studios.sort((a, b) => a.distancia - b.distancia);
+        console.log('Studios!',this.studios);
+      })
+
+      
+    
   }
+
+  //this.getUpcomingStudios();
 }
 
+
+sortByKey(array, key) {
+  return array.sort(function(a, b) {
+      var x = a[key]; var y = b[key];
+      return ((x < y) ? -1 : ((x > y) ? 1 : 0));
+  });
+  }
 
   getActivities(){
     this.af.object('Activities').snapshotChanges().subscribe(action => {

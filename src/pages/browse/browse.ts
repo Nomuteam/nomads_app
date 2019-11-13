@@ -286,11 +286,19 @@ public experiences: any = [];
   }
 
   getRealA(){
-    return this.activities.filter( act => act.main == 'all' || this.isSelected(act.main));
+    return this.sortByKey(this.activities.filter( act => act.main == 'all' || this.isSelected(act.main)), 'type')
+    //return this.activities.filter( act => act.main == 'all' || this.isSelected(act.main));
   }
 
   change(indice){
     this.categorias[indice].selected ? this.categorias[indice].selected = false : this.categorias[indice].selected = true;
   }
+
+  sortByKey(array, key) {
+    return array.sort(function(a, b) {
+        var x = a[key]; var y = b[key];
+        return ((x < y) ? -1 : ((x > y) ? 1 : 0));
+    });
+    }
 
 }

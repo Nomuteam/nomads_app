@@ -150,6 +150,8 @@ export class NewactPage {
 
 
   ];
+
+  
   public example_forms: any = [
     {
       'title': 'Aerobic',
@@ -270,10 +272,22 @@ export class NewactPage {
     public camera: Camera,
     public sanitizer: DomSanitizer,
     public modalCtrl: ModalController) {
+
+
+      this.example_activities = this.sortByKey(this.example_activities, 'title');
+
      this.activity_data.studio = localStorage.getItem('studio-index');
      console.log(this.activity_data.studio);
      if(this.navParams.get('location')) this.activity_data.location = this.navParams.get('location');
   }
+
+  sortByKey(array, key) {
+    return array.sort(function(a, b) {
+        var x = a[key]; var y = b[key];
+        return ((x < y) ? -1 : ((x > y) ? 1 : 0));
+    });
+    }
+    
 
   goOut(){
     this.alertCtrl.create({

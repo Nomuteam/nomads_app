@@ -24,54 +24,56 @@ import { SocialSharing } from '@ionic-native/social-sharing';
 })
 export class StudioPage {
 
+  public actArray:any[]=[];
   public general_loader: any;
   public studio_data: any = [];
   public segment: any = 'classes';
 
   public response$: any;
   public activities: any = [];
+  public activitiesSelected: any = [];
   public days: any = [
     {
       'day': 'Monday',
       'ab': 'Mon',
       'selected': true,
-      'number': 0
+      'number': 1
     },
     {
       'day': 'Tuesday',
       'ab': 'Tue',
       'selected': false,
-      'number': 1
+      'number': 2
     },
     {
       'day': 'Wednesday',
       'ab': 'Wed',
       'selected': false,
-      'number': 2
+      'number': 3
     },
     {
       'day': 'Thursday',
       'ab': 'Thu',
       'selected': false,
-      'number': 3
+      'number': 4
     },
     {
       'day': 'Friday',
       'ab': 'Fri',
       'selected': false,
-      'number': 4
+      'number': 5
     },
     {
       'day': 'Saturday',
       'ab': 'Sat',
       'selected': false,
-      'number': 5
+      'number': 6
     },
     {
       'day': 'Sunday',
       'ab': 'Sun',
       'selected': false,
-      'number': 6
+      'number': 7
     },
   ];
   public selected: any = 0;
@@ -101,6 +103,27 @@ export class StudioPage {
   }
 
   changeSelected(element){
+
+    
+    this.activitiesSelected = [];
+    this.actArray = [];
+    this.activities.forEach(act => {
+      
+      
+
+      act.schedule.forEach(schedule => {
+
+
+        console.log(schedule.day, element, this.activitiesSelected.indexOf(act))
+        if(schedule.day == element.day && this.actArray.indexOf(act.title) == -1 ){
+          this.activitiesSelected.push(act);
+          this.actArray.push(act.title)
+          console.log('actividades seleccionadas', this.activitiesSelected);
+        }
+      });
+      
+    });
+
     this.selected = element;
   }
 
@@ -166,7 +189,7 @@ export class StudioPage {
         }
 
     if(this.general_loader) this.general_loader.dismiss();
-    console.log(this.activities);
+    console.log('Actividades',this.activities);
   }
 
   isDespues(fecha){
@@ -276,6 +299,9 @@ export class StudioPage {
   }
 
   presentActionSheet(e){
+
+    this.seeDetails(e);
+
     const actionSheet = this.actionSheetCtrl.create({
   title: 'Choose an Option',
   buttons: [
@@ -299,7 +325,7 @@ export class StudioPage {
     }
   ]
 });
-actionSheet.present();
+//actionSheet.present();
 }
 
   seeDetails(a){
