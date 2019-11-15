@@ -72,7 +72,7 @@
   </div> -->
 
   <div class="category-container">
-   <div (click)="openAll('Nearby and Upcoming')" class="category-title blue">Today's Activities
+   <div (click)="openAll('Nearby and Upcoming')" class="category-title blue">Today's Upcoming Activities
       <button style="border-color: white; color:white; width: 70px" ion-button small round outline >View all</button>
      <!--<small>View all</small>-->
     </div>
@@ -84,13 +84,13 @@
       <p class="act-title">{{a.title}}</p>
         <p class="act-creator">By: {{this.getName(a.creator)}}</p>
       <p class="act-distance">{{a.class_price}} noms</p>
-      <p class="act-rating">{{a.review}} <ion-icon name="star" color="white"></ion-icon> / ({{getReviewsLength(a.reviews)}})</p>
+      <p class="act-rating">{{a.review}} <ion-icon name="star" color="white"></ion-icon> ({{getReviewsLength(a.reviews)}})</p>
     </ion-slide>
   </ion-slides>
   </div>
 
   <div class="category-container">
-   <div (click)="viewSchedule()" class="category-title best">Clan Schedule
+   <div (click)="viewSchedule()" class="category-title best">Your Clans
       <button style="border-color: white; color:white; width: 70px" ion-button small round outline >View all</button>
      <!--<small>View all</small>-->
     </div>
@@ -107,7 +107,7 @@
   </div>
 
   <div class="category-container">
-   <div  (click)="openAll('Studios')" class="category-title sug">Studios 
+   <div  (click)="openAll('Studios')" class="category-title sug">Studios near you
       <button style="border-color: white; color:white; width: 70px" ion-button small round outline >View all</button>
       <!--<small>View all</small>-->
     </div>

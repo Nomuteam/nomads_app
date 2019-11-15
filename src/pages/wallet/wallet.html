@@ -74,8 +74,17 @@
    </ion-slides>
 
 
-   <div class="buy-hint">Or select any amount</div>
+   <div class="buy-hint">Or choose any amount</div>
    <div class="amounts-container">
+
+    <div class="amount-container">
+      <div class="input-group">
+        <p class="input-title">Amount of Cash</p>
+        <input (click)="cash = ''" placeholder="$" type="text" class="input-field" [(ngModel)]="cash" (ngModelChange)="noms = cash/20">
+      </div>
+      <!-- <div class="amount-hint">Amount of cash</div>
+      <div class="amount-text" contenteditable="true">$0</div> -->
+    </div>
 
      <div class="amount-container" style="margin-left: 3%;">
        <div class="input-group">
@@ -86,15 +95,6 @@
        <div class="amount-text">{{95}}</div> -->
      </div>
 
-
-     <div class="amount-container">
-       <div class="input-group">
-         <p class="input-title">Amount of Cash</p>
-         <input (click)="cash = ''" placeholder="$" type="text" class="input-field" [(ngModel)]="cash" (ngModelChange)="noms = cash/20">
-       </div>
-       <!-- <div class="amount-hint">Amount of cash</div>
-       <div class="amount-text" contenteditable="true">$0</div> -->
-     </div>
    </div>
    <div class="booking-avg"><b>{{this.getMenor()}}</b> to <b>{{this.getMayor()}}</b> bookings</div>
 

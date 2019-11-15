@@ -184,8 +184,8 @@ export class WalletPage {
 
       this.alertCtrl.create({
         title: 'Transaction Succesful!',
-        subTitle: 'You paid ' + this.cash + ' for ' + this.noms + ' noms',
-        message: 'Enjoy your noms!',
+        subTitle: 'You paid ' + this.cash + ' MXN pesos for ' + this.noms + ' NOMs',
+        message: 'Enjoy!',
         buttons: ['Ok']
       }).present();
 
@@ -575,8 +575,8 @@ export class WalletPage {
 
       this.alertCtrl.create({
         title: 'Transaction Succesful!',
-        subTitle: 'You paid ' + this.cash + ' for ' + this.noms + ' noms',
-        message: 'Enjoy your noms!',
+        subTitle: 'You paid ' + this.cash + 'MXN pesos for ' + this.noms + ' NOMs',
+        message: 'Enjoy!',
         buttons: ['Ok']
       }).present();
 

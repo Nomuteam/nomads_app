@@ -101,7 +101,35 @@ public user_data: any = {
       'selected': false
     },
     {
-      'title': 'Hiking',
+      'title': 'Functional Training',
+      'selected': false
+    },
+    {
+      'title': 'Cardio',
+      'selected': false
+    },
+    {
+      'title': 'Spinning',
+      'selected': false
+    },
+    {
+      'title': 'Movement',
+      'selected': false
+    },
+    {
+      'title': 'Rock Climbing',
+      'selected': false
+    },
+    {
+      'title': 'Trekking',
+      'selected': false
+    },
+    {
+      'title': 'Pilates',
+      'selected': false
+    },
+    {
+      'title': 'Many more...',
       'selected': false
     },
   ];
@@ -137,23 +165,23 @@ public user_data: any = {
   ];
   public example_days: any = [
     {
-      'day': 'L',
-      'selected': false
-    },
-    {
       'day': 'M',
       'selected': false
     },
     {
-      'day': 'M',
+      'day': 'T',
       'selected': false
     },
     {
-      'day': 'J',
+      'day': 'W',
       'selected': false
     },
     {
-      'day': 'V',
+      'day': 'T',
+      'selected': false
+    },
+    {
+      'day': 'F',
       'selected': false
     },
     {
@@ -161,7 +189,7 @@ public user_data: any = {
       'selected': false
     },
     {
-      'day': 'D',
+      'day': 'S',
       'selected': false
     },
   ];

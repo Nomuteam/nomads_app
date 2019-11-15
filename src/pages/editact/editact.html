@@ -24,7 +24,7 @@
 
     <div class="card-container">
       <div class="input-group">
-        <p class="input-title">Title</p>
+        <p class="input-title">Service Title</p>
         <input type="text" class="input-field" [(ngModel)]="activity_data.title">
       </div>
 
@@ -41,7 +41,7 @@
       </div>
 
       <div class="input-group">
-        <p class="input-title">Description</p>
+        <p class="input-title">Description of service</p>
         <textarea rows="4" type="text" class="input-field" [(ngModel)]="activity_data.description"></textarea>
       </div>
 
@@ -57,7 +57,7 @@
       </div>
 
       <div class="input-group">
-        <p class="input-title">Single Class Price in MXN</p>
+        <p class="input-title">Single Class Price in MXN = Membership / 20</p>
         <input type="tel" class="input-field" [(ngModel)]="activity_data.fee"
           (ngModelChange)="activity_data.class_price = activity_data.fee/20">
       </div>
@@ -142,7 +142,7 @@
           </tr>
           <tr>
             <td> 
-                <div class="title-option">Duration (minutes)</div>
+                <div class="title-option">+ minutes</div>
             </td>
             <td>
                 <input type="tel" class="input-field" [(ngModel)]="schedule.duration2" style="width: 100%;">
