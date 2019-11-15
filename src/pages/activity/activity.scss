@@ -10,7 +10,7 @@ page-activity {
 
   .main-card{
     //height: 50vh;
-    background-color: rgba(74, 74, 74, .3);
+    background-color: rgb(0, 0, 0);
     //border-radius: 15px;
     font-family: 'Custom';
     color: white;
@@ -110,7 +110,7 @@ page-activity {
         width: 40%;
 
         background-color: #8141CB;
-        box-shadow: 0px 0px 15px #0C0C0C;
+        box-shadow: 0px 0px 15px rgb(0, 0, 0);
         .noms-qty{
           text-align: center;
           font-weight: 700;
@@ -178,7 +178,7 @@ page-activity {
     //border-bottom: 1px solid rgba(255, 255, 255, .3);
     font-weight: 700;
     //margin-bottom: 2%;
-    background-color: rgba(74, 74, 74, .3);
+    background-color: rgba(0, 0, 0, 0.3);
     padding: 3%;
     padding-left: 6%;
   }
@@ -190,7 +190,7 @@ page-activity {
     max-height: 25%;
     overflow: hidden;
     margin-bottom: 5%;
-    background-color: rgba(74, 74, 74, .3);
+    background-color: rgba(0, 0, 0, 0.3);
     //border: 1px solid red;
     padding: 3%;
     padding-left: 5%;
@@ -202,7 +202,7 @@ page-activity {
     flex-wrap: wrap;
     align-items: center;
     margin-bottom: 5%;
-    background-color: rgba(74, 74, 74, .3);
+    background-color: rgba(0, 0, 0, 0.3);
 
     .friend{
       display: flex;
@@ -215,7 +215,7 @@ page-activity {
         height: 10vh;
         border-radius: 50%;
         //background-image: url('../../assets/img/imanol.png');
-        background-color: #00B0FF;
+        background-color: rgb(255, 255, 255);
         background-repeat: no-repeat;
         background-size: cover;
         background-position: center;
@@ -244,7 +244,7 @@ page-activity {
     color: white;
     padding: 3%;
     padding-left: 5%;
-    background-color: rgba(74, 74, 74, .3);
+    background-color: rgba(0, 0, 0, 0.3);
     //border: 1px solid red;
     .row-day{
       font-weight: 700;
@@ -294,7 +294,7 @@ page-activity {
 
   .location-hint{
     font-family: 'Custom';
-    color: rgba(255, 255, 255, .6);
+    color: rgba(255, 255, 255, 0.753);
     font-weight: 90%;
     font-weight: 400;
     //width: 60%;

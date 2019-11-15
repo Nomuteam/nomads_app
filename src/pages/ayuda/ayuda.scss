@@ -77,7 +77,7 @@ page-ayuda {
                width: 100%;
                z-index: 100;
                border-radius: 6px;
-               background-image: linear-gradient(-179deg, rgba(0,244,174,0.00) 7%, #00E676 100%);
+               background-image: linear-gradient(-179deg, rgba(0,244,174,0.00) 7%, rgb(0, 0, 0) 100%);
              }
              .cover-gradient2{
                position: absolute;
@@ -86,7 +86,7 @@ page-ayuda {
                width: 100%;
                z-index: 99;
                border-radius: 6px;
-               background-image: linear-gradient(0deg, rgba(0,0,0,0.00) 48%, rgba(0,0,0,0.66) 100%);
+               background-image: linear-gradient(0deg, rgba(0,0,0,0.00) 48%, rgba(0, 0, 0, 0.692) 100%);
              }
              .class-img{
               z-index: 90;
@@ -114,8 +114,8 @@ page-ayuda {
                font-size: 80%;
              }
              .class-distance{
-               font-size: 70%;
-               color: #229B86;
+               font-size: 90%;
+               color: rgb(255, 238, 2);
              }
            }
          }
@@ -246,7 +246,7 @@ page-ayuda {
          font-size: 100%;
          color: white;
          text-transform: uppercase;
-         background-color: #229B86;
+         background-color: rgb(38, 231, 173);
          width: 70%;
          margin-left: 15%;
          height: 50px;

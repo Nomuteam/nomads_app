@@ -178,7 +178,7 @@ public search: any = '';
       aux = 'Received noms from referred friend!';
     }
     else if(tit == 'activity'){
-      aux = tit2.sender_name+' reserved a spot';
+      aux = tit2.sender_name+'';
     }
     else if(tit == 'noms'){
       aux = 'Bought Noms';

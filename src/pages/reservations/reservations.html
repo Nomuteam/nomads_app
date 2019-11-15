@@ -39,7 +39,7 @@
       <div class="event-texts">
        <div class="event-sender" style="text-transform: capitalize">{{this.getTitle(c)}}</div>
        <div *ngIf="c.type == 'noms-referral'" class="event-hint" style="text-decoration: line-through">Amount: ${{c.amount}} mxn</div>
-       <div *ngIf="c.type == 'activity'" class="event-hint">Class: {{c.activity_name}}</div>
+       <div *ngIf="c.type == 'activity'" class="event-hint">Service: {{c.activity_name}}</div>
        <div *ngIf="c.type == 'noms'" class="event-hint">Amount: ${{c.amount}} mxn</div>
        <div *ngIf="c.type != 'activity'" class="event-hint">Noms: {{this.getNoms(c.amount)}}</div>
        <div *ngIf="c.type == 'activity'" class="event-hint">Noms: {{c.amount}}</div>

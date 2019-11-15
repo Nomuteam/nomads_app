@@ -33,7 +33,7 @@ page-book {
        }
        .top-cancel{
          font-size: 80%;
-         color: #FF6B84;
+         color: #ff002b;
        }
      }
 
@@ -90,8 +90,8 @@ page-book {
            font-size: 80%;
          }
          .class-distance{
-           font-size: 80%;
-           color: #229B86;
+           font-size: 100%;
+           color: rgb(226, 22, 8);
          }
        }
      }
@@ -180,7 +180,7 @@ page-book {
        .left-text{
          font-size: 90%;
          color: rgba(0, 0, 0, .7);
-         width: 80%;
+         width: 100%;
        }
        .last{
          font-weight: 700;
@@ -192,7 +192,7 @@ page-book {
          align-items: center;
          width: 20%;
          .noms-qty{
-           font-size: 80%;
+           font-size: 100%;
            color: rgba(0, 0, 0, .7);
          }
          .last{
@@ -240,7 +240,7 @@ page-book {
      width: 70%;
      border-radius: 30px;
      padding: .3%;
-     background-color: #229B86;
+     background-color: rgb(26, 211, 186);
      margin-bottom: 3%;
      .pay-container{
        display: flex;

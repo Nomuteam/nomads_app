@@ -57,13 +57,14 @@
       </div>
 
       <div class="input-group">
-        <p class="input-title">Single Class Price in MXN = Membership / 20</p>
+        <p class="input-title">Single class Price (MXN)</p> 
+        <p class="input-title">Formula = Membership / 20</p>
         <input type="tel" class="input-field" [(ngModel)]="activity_data.fee"
           (ngModelChange)="activity_data.class_price = activity_data.fee/20">
       </div>
 
       <div class="input-group">
-        <p class="input-title">Single Class Price (Noms)</p>
+        <p class="input-title">Single Class Price (NOMs)</p>
         <input disabled type="tel" class="input-field" [(ngModel)]="activity_data.class_price">
       </div>
 
