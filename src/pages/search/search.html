@@ -40,7 +40,7 @@
       <p class="act-title">{{a.title}}</p>
         <p class="act-title">By: {{this.getName(a.creator)}}</p>
       <p class="act-distance">{{a.class_price}} noms</p>
-      <p class="act-rating">{{a.review}} <ion-icon name="star" color="white"></ion-icon> / ({{getReviewsLength(a.reviews)}})</p>
+      <p class="act-rating">{{a.review}} <ion-icon name="star" color="white"></ion-icon> ({{getReviewsLength(a.reviews)}})</p>
       </ion-col>
     </ion-row>
   </ion-grid>
@@ -53,7 +53,7 @@
         <p class="act-first">{{a.type}}  - {{a.distance}}</p>
        <p class="act-title">{{a.title}}</p>
        <p class="act-distance">{{a.cost}} noms</p>
-       <p class="act-rating">{{a.review}} <ion-icon name="star" color="white"></ion-icon> / ({{a.reviews.length}})</p>
+       <p class="act-rating">{{a.review}} <ion-icon name="star" color="white"></ion-icon> ({{a.reviews.length}})</p>
       </ion-col>
     </ion-row>
   </ion-grid>

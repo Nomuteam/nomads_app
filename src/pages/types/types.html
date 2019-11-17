@@ -8,24 +8,24 @@
 <ion-content padding>
 
   <div class="justify-row">
-    <div class="title-page">Type of service</div>
+    <div class="title-page">Add service</div>
   </div>
 
-  <div class="pick-hint">Pick One</div>
+  <div class="pick-hint">Choose One, click next</div>
 
   <div (click)="selectThis('2')" class="{{getClass('2')}}">
     <div class="service-title">Step 1: Create Studio/Name</div>
-    <div class="service-description">Add your studio/Instructor name. Then add all your services to it.</div>
+    <div class="service-description">Create your studios or Instructor name. Then add all your services to it (Step 2).</div>
   </div>
 
   <div (click)="selectThis('1')" class="{{getClass('1')}}">
-    <div class="service-title">Create: Service/Class</div>
-    <div class="service-description">Create your individual classes or services.</div>
+    <div class="service-title">Step 2: Create your Services or Class one by one</div>
+    <div class="service-description">Create individualy each service or class.</div>
   </div>
 
   <div (click)="selectThis('3')" class="{{getClass('3')}}">
     <div class="service-title">Create: Experiences/Events/Activities</div>
-    <div class="service-description">Create a One time service that offers an unforgettable experience.</div>
+    <div class="service-description">Create a one time service that offers an unforgettable experience.</div>
   </div>
 
   <!-- <div (click)="selectThis('3')" class="{{getClass('3')}}">

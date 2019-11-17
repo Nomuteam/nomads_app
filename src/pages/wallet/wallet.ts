@@ -32,25 +32,25 @@ export class WalletPage {
   public user_type: any = '';
   public example_packages: any = [
     {
-      'noms': 20,
+      'noms': 25,
       'bookings_avg': 10,
-      'price': 400,
+      'price': 500,
       'selected': false
     },
     {
-      'noms': 50,
+      'noms': 52,
       'bookings_avg': 10,
       'price': 1000,
       'selected': false
     },
     {
-      'noms': 75,
+      'noms': 79,
       'bookings_avg': 12,
       'price': 1500,
       'selected': false
     },
     {
-      'noms': 100,
+      'noms': 105,
       'bookings_avg': 14,
       'price': 2000,
       'selected': false
